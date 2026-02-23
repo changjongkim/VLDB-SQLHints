@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Data files (large binary, regenerable via pipeline)
+data/*.parquet
+data/*.json
+results/*.parquet
+results/*.pkl
+results/*.json
+
+# Keep figures
+!results/figures/
+
+# OS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
