@@ -20,7 +20,7 @@ import math
 import pickle
 import logging
 from sklearn.model_selection import LeaveOneGroupOut, GridSearchCV
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, precision_score, recall_score, f1_score
 from sklearn.preprocessing import LabelEncoder
 import warnings
 warnings.filterwarnings('ignore')
@@ -29,10 +29,10 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 
 ENV_MAP = {
-    'A_NVMe': {'server': 'A', 'storage': 'NVMe', 'cpu': 'i9'},
-    'A_SATA': {'server': 'A', 'storage': 'SATA', 'cpu': 'i9'},
-    'B_NVMe': {'server': 'B', 'storage': 'NVMe', 'cpu': 'EPYC'},
-    'B_SATA': {'server': 'B', 'storage': 'SATA', 'cpu': 'EPYC'},
+    'A_NVMe': {'server': 'A', 'storage': 'NVMe', 'cpu': 'i9-12900K'},
+    'A_SATA': {'server': 'A', 'storage': 'SATA', 'cpu': 'i9-12900K'},
+    'B_NVMe': {'server': 'B', 'storage': 'NVMe', 'cpu': 'EPYC-7713'},
+    'B_SATA': {'server': 'B', 'storage': 'SATA', 'cpu': 'EPYC-7713'},
 }
 
 ENV_PAIRS = []
@@ -352,6 +352,13 @@ def train_sigma_v2(df_samples, output_dir='/root/halo/results'):
                 rank_correct += 1
     ranking_acc = (rank_correct / max(rank_total, 1)) * 100
 
+    # High-Risk Classification Metrics (|delta| > 0.5)
+    y_high = np.abs(y) > 0.5
+    y_pred_high = np.abs(y_pred_cv) > 0.5
+    high_prec = precision_score(y_high, y_pred_high) if y_pred_high.any() else 0.0
+    high_rec = recall_score(y_high, y_pred_high) if y_high.any() else 0.0
+    high_f1 = f1_score(y_high, y_pred_high) if y_high.any() else 0.0
+
     logger.info(f"\n{'='*60}")
     logger.info(f"IMPROVED Sigma Model Results:")
     logger.info(f"  RMSE:             {overall_rmse:.3f}")
@@ -359,6 +366,10 @@ def train_sigma_v2(df_samples, output_dir='/root/halo/results'):
     logger.info(f"  Pearson r:        {overall_corr:.3f}")
     logger.info(f"  Direction Acc:    {overall_dir_acc:.1f}%")
     logger.info(f"  Ranking Acc:      {ranking_acc:.1f}%")
+    logger.info(f"  High-Risk (abs>0.5) Detection:")
+    logger.info(f"    Precision:      {high_prec:.3f}")
+    logger.info(f"    Recall:         {high_rec:.3f}")
+    logger.info(f"    F1-Score:       {high_f1:.3f}")
 
     # Train final model on all data
     model.fit(X, y, sample_weight=weights)
@@ -418,6 +429,11 @@ def train_sigma_v2(df_samples, output_dir='/root/halo/results'):
         'pearson_r': float(overall_corr),
         'direction_accuracy': float(overall_dir_acc),
         'ranking_accuracy': float(ranking_acc),
+        'high_risk_metrics': {
+            'precision': float(high_prec),
+            'recall': float(high_rec),
+            'f1': float(high_f1)
+        },
         'fold_results': fold_results,
         'feature_importance': {k: float(v) for k, v in feat_imp[:20]},
         'operator_sigma': op_stats,

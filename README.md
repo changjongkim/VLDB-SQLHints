@@ -24,26 +24,32 @@ HALO provides **two selection policies** under a single API:
 ```
   Metric                               HALO-G       HALO-R
   =======================================================
-  Total Regressions (16 xfers)             13            6
-  Avg Speedup (all xfers)              1.751x       1.344x
-  Rescue Cases (G failed, R saved)          —            7
-  Regression Reduction                      —          54%
+  Total Regressions (16 xfers)             13            5
+  Avg Speedup (all xfers)              1.453x       1.436x
+  Rescue Cases (G failed, R saved)          —            8
+  Regression Reduction                      —          62%
   =======================================================
 ```
 
-**HALO-R reduces regressions by 54% while retaining speedup, and rescues 7 queries
-where HALO-G would have caused performance degradation.**
+**HALO-R reduces regressions by 62% while retaining 98% of the greedy speedup, and rescues 8 queries where HALO-G caused performance degradation.**
+
+### Environment-Type Breakdown
+
+| Category | HALO-G Reg | HALO-R Reg | Reduction | Rescues |
+|:---|:---:|:---:|:---:|:---:|
+| **Storage-only** | 7 | 2 | **71.4%** | 5 |
+| CPU-only | 2 | 1 | 50.0% | 1 |
+| Both (Storage+CPU)| 4 | 2 | 50.0% | 2 |
 
 ### Notable Rescue Cases
 
 | Transfer | Query | HALO-G Result | HALO-R Result |
 |:---|:---:|:---:|:---:|
 | A_NVMe → A_SATA | `tpch_q9` | 0.37x (**catastrophic**) | 1.00x (native, safe) |
-| A_SATA → B_NVMe | `tpch_q4` | 0.91x (slower) | 1.00x (native, safe) |
+| A_SATA → B_SATA | `tpch_q3` | 0.92x (slower) | 4.11x (**huge win**) |
 | A_SATA → B_NVMe | `tpch_q20` | 0.90x (slower) | 1.00x (native, safe) |
 | B_NVMe → B_SATA | `13b` | 0.94x (slower) | 1.00x (native, safe) |
-| B_NVMe → B_SATA | `4b` | 0.94x (slower) | 1.00x (native, safe) |
-| B_SATA → B_NVMe | `tpch_q10` | 0.69x (slower) | 1.06x (**faster**, different hint) |
+| B_SATA → B_NVMe | `tpch_q10` | 0.69x (slower) | 1.06x (**faster**) |
 
 ---
 
@@ -210,17 +216,17 @@ halo/
 
 | ID | Server | CPU | Storage | OS |
 |:---:|:---:|:---:|:---:|:---:|
-| A_NVMe | Server A | Intel i9-13900K | Samsung 990 Pro NVMe | Ubuntu 22.04 |
-| A_SATA | Server A | Intel i9-13900K | WD Blue SATA SSD | Ubuntu 22.04 |
-| B_NVMe | Server B | AMD EPYC 7453 | Samsung PM9A3 NVMe | Ubuntu 22.04 |
-| B_SATA | Server B | AMD EPYC 7453 | Seagate Barracuda SATA HDD | Ubuntu 22.04 |
+| A_NVMe | Server A | Intel i9-12900K | Samsung 990 Pro NVMe | Ubuntu 22.04 |
+| A_SATA | Server A | Intel i9-12900K | WD Blue SATA SSD | Ubuntu 22.04 |
+| B_NVMe | Server B | AMD EPYC 7713 | Samsung PM9A3 NVMe | Ubuntu 22.04 |
+| B_SATA | Server B | AMD EPYC 7713 | WD Blue SATA SSD | Ubuntu 22.04 |
 
 ### Benchmarks
 
 | Benchmark | Queries | Hint Sets | Database |
 |:---:|:---:|:---:|:---:|
-| JOB (Join Order Benchmark) | 113 queries (33 templates) | hint01–hint05 | IMDB (3.6GB) |
-| TPC-H (SF30) | 22 queries | hint01–hint05 | TPC-H SF30 (30GB) |
+| JOB (Join Order Benchmark) | 113 queries (33 templates) | hint01, hint02, hint04, hint05 | IMDB (3.6GB) |
+| TPC-H (SF30) | 22 queries | hint01, hint02, hint04, hint05 | TPC-H SF30 (30GB) |
 
 ### Hint Strategies
 
@@ -230,6 +236,7 @@ halo/
 | hint02 | Index usage control | Force index scans vs table scans |
 | hint04 | Combined approach | Join methods + index hints together |
 | hint05 | Aggressive optimizer | Full optimizer directive override |
+| hint03 | - | (N/A - Excluded from evaluation) |
 
 ---
 
