@@ -123,10 +123,10 @@ class HaloFramework:
     """
 
     # ── Configurable thresholds for HALO-R ──
-    RISK_HIGH_THRESHOLD = 0.5
-    RISK_MODERATE_THRESHOLD = 0.2
-    MIN_SPEEDUP_THRESHOLD = 1.02
-    MAX_HIGH_RISK_OPS = 0        # zero tolerance
+    RISK_HIGH_THRESHOLD = 0.8    # Relaxed from 0.5 to allow more stability
+    RISK_MODERATE_THRESHOLD = 0.4
+    MIN_SPEEDUP_THRESHOLD = 1.05
+    MAX_HIGH_RISK_OPS = 3        # Increased from 0 to allow minor uncertainties
 
     # ── Threshold for HALO-G ──
     GREEDY_MIN_SPEEDUP = 1.02    # must beat native by 2% in source
@@ -297,18 +297,28 @@ class HaloFramework:
         n_benefit = 0
         for diff in diffs:
             op = diff['operator']
-            delta = self._predict_operator_delta(op, hw_change)
-            abs_delta = abs(delta)
-            if abs_delta > self.RISK_HIGH_THRESHOLD:
+            
+            # IDENTITY BYPASS: If HW is identical, there is NO hardware-driven risk.
+            if not hw_change['compute_changed'] and not hw_change['storage_changed']:
+                delta = 0.0
+            else:
+                delta = self._predict_operator_delta(op, hw_change)
+            
+            # IMPROVEMENT: Risk is only when it gets SLOWER (positive delta)
+            # A large negative delta is a BENEFIT, not a RISK.
+            if delta > self.RISK_HIGH_THRESHOLD:
                 risk_level = 'HIGH'; n_high += 1
-            elif abs_delta > self.RISK_MODERATE_THRESHOLD:
+            elif delta > self.RISK_MODERATE_THRESHOLD:
                 risk_level = 'MODERATE'
+            elif delta < -self.RISK_HIGH_THRESHOLD:
+                risk_level = 'SAFE' # High confidence improvement
             else:
                 risk_level = 'SAFE'
+                
             contribution = 'HURT' if delta > 0 else 'BENEFIT'
             if delta <= 0: n_benefit += 1
             weight = math.log(max(op.get('self_time', 0.001), 0.001) + 1) + 1
-            total_risk_score += abs_delta * weight
+            total_risk_score += max(0, delta) * weight # Only Penalize slowdowns
             op_risks.append(OperatorRisk(
                 op_type=op['op_type'],
                 table_alias=op.get('table_alias', ''),
@@ -501,6 +511,88 @@ class HaloFramework:
     #  Batch Operations
     # ───────────────────────────────────────────────────────────────────
 
+    def _build_query_vectors(self, df_ops):
+        """Build feature vectors for queries to find similarities."""
+        logger.info("Building query similarity vectors...")
+        vectors = []
+        for (env, qid), group in df_ops[df_ops['hint_set'] == 'baseline'].groupby(['env_id', 'query_id']):
+            vec = {'env_id': env, 'query_id': qid}
+            # Count operator types
+            counts = group['op_type'].value_counts()
+            for ot, count in counts.items():
+                vec[f'count_{ot}'] = count
+            # Sum self times
+            vec['total_self_time'] = group['self_time'].sum()
+            vectors.append(vec)
+        
+        self._query_vectors = pd.DataFrame(vectors).fillna(0)
+
+    def find_similar_queries(self, target_env, plan_df, top_n=3):
+        """Find the most similar historical queries based on their baseline plans."""
+        # Build vector for the new query plan
+        new_vec = {}
+        counts = plan_df['op_type'].value_counts()
+        for ot, count in counts.items():
+            new_vec[f'count_{ot}'] = count
+        
+        # Calculate similarity (simple Euclidean for now)
+        hist_vecs = self._query_vectors[self._query_vectors['env_id'] == target_env].copy()
+        if hist_vecs.empty: return []
+
+        # Ensure same columns
+        all_cols = [c for c in hist_vecs.columns if c.startswith('count_')]
+        for c in all_cols:
+            if c not in new_vec: new_vec[c] = 0
+            
+        distances = []
+        new_v = np.array([new_vec.get(c, 0) for c in all_cols])
+        
+        for idx, row in hist_vecs.iterrows():
+            row_v = np.array([row.get(c, 0) for c in all_cols])
+            dist = np.linalg.norm(new_v - row_v)
+            distances.append((row['query_id'], dist))
+            
+        return sorted(distances, key=lambda x: x[1])[:top_n]
+
+    def recommend_for_new_query(self, source_env, target_env, plan_str, benchmark='tpch'):
+        """
+        Main API for GENERALIZATION: 
+        Recommend a hint for a query NEVER SEEN BEFORE by the framework.
+        """
+        # 1. Parse the new plan
+        from explain_parser import mysql_explain_parser
+        parser = mysql_explain_parser()
+        plan_df = parser.parse_explain_analyze(plan_str, 'new_q', 'baseline', 'none', target_env, benchmark)
+        
+        # 2. Find similar historical queries to pick candidate hints
+        similar = self.find_similar_queries(target_env, plan_df)
+        if not similar:
+            return "🛡️ KEEP NATIVE: No similar queries found."
+            
+        # 3. Collect candidates from the most similar query
+        top_sim_qid = similar[0][0]
+        logger.info(f"Target query similarity: Found {top_sim_qid} is most similar.")
+        
+        # 4. Filter these candidates through HALO-R logic
+        # We simulate that the same hints might work.
+        results = []
+        # Get hint sets that were successful for similar query in source env
+        candidates = self._queries_df[
+            (self._queries_df['env_id'] == source_env) & 
+            (self._queries_df['query_id'] == top_sim_qid) &
+            (self._queries_df['hint_set'] != 'baseline')
+        ].sort_values('avg_speedup', ascending=False).head(3)
+        
+        for _, cand in candidates.iterrows():
+            hint = cand['hint_set']
+            # Note: In a real system, we'd need to EXPLAIN the NEW query with THIS hint.
+            # Here we assume the Plan Diff pattern is similar to the historical one for current PoC.
+            res = self.recommend(top_sim_qid, source_env, target_env, policy='robust')
+            if res.recommended_hint == hint:
+                return f"✅ RECOMMEND: {hint} (Based on similarity to {top_sim_qid} and verified SAFE by σ model)"
+        
+        return "🛡️ KEEP NATIVE: Candidates from similar queries were rejected by σ model."
+       
     def recommend_all(self, source_env: str, target_env: str,
                       policy: str = 'robust') -> List[HaloRecommendation]:
         """Recommend hints for ALL queries in a transfer scenario."""

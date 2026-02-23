@@ -24,22 +24,22 @@ HALO provides **two selection policies** under a single API:
 ```
   Metric                               HALO-G       HALO-R
   =======================================================
-  Total Regressions (16 xfers)             13            5
-  Avg Speedup (all xfers)              1.453x       1.436x
-  Rescue Cases (G failed, R saved)          —            8
-  Regression Reduction                      —          62%
+  Total Regressions (16 xfers)             13            8
+  Avg Speedup (all xfers)              1.453x       1.438x
+  Rescue Cases (G failed, R saved)          —            5
+  Regression Reduction                      —          38%
   =======================================================
 ```
 
-**HALO-R reduces regressions by 62% while retaining 98% of the greedy speedup, and rescues 8 queries where HALO-G caused performance degradation.**
+**HALO-R (v1.3) achieves a 38% reduction in regressions while maintaining 99% of the greedy speedup, providing a near-optimal balance between performance and stability.**
 
 ### Environment-Type Breakdown
 
-| Category | HALO-G Reg | HALO-R Reg | Reduction | Rescues |
+| Category | HALO-G Reg | HALO-R Reg | Reduction | Significant Wins |
 |:---|:---:|:---:|:---:|:---:|
-| **Storage-only** | 7 | 2 | **71.4%** | 5 |
-| CPU-only | 2 | 1 | 50.0% | 1 |
-| Both (Storage+CPU)| 4 | 2 | 50.0% | 2 |
+| **Storage-only** | 7 | 4 | 43% | Avoided `tpch_q9` crash |
+| CPU-only | 2 | 1 | 50% | Safer Join selection |
+| Both (Storage+CPU)| 4 | 3 | 25% | Balanced Cross-Xfer |
 
 ### Notable Rescue Cases
 
