@@ -51,33 +51,33 @@ HALO provides **two selection policies** under a single API:
 | B_NVMe → B_SATA | `13b` | 0.94x (slower) | 1.00x (native, safe) |
 | B_SATA → B_NVMe | `tpch_q10` | 0.69x (slower) | 1.06x (**faster**) |
 
-### Top 10 Performance Accelerations (TPC-H)
-| Rank | Query | Environment | Best Hint | Speedup |
-|:---:|:---:|:---:|:---:|:---:|
-| 1 | `tpch_q2` | B_NVMe | `hint02` | **4.41x** |
-| 2 | `tpch_q3` | A_NVMe | `hint05` | **4.15x** |
-| 3 | `tpch_q17` | B_NVMe | `hint02` | **2.91x** |
-| 4 | `tpch_q13` | A_NVMe | `hint05` | **2.88x** |
-| 5 | `tpch_q11` | A_SATA | `hint01` | **2.81x** |
-| 6 | `tpch_q8` | A_NVMe | `hint05` | **2.39x** |
-| 7 | `tpch_q5` | A_NVMe | `hint04` | **2.16x** |
-| 8 | `tpch_q12` | B_NVMe | `hint02` | **1.90x** |
-| 9 | `tpch_q9` | A_NVMe | `hint05` | **1.59x** |
-| 10 | `tpch_q7` | A_SATA | `hint05` | **1.55x** |
+### Top 10 Cross-Environment Accelerations (TPC-H)
+| Rank | Transfer | Query | Hint | Predicted Trend (Source) | Actual Target Speedup |
+|:---:|:---|:---:|:---:|:---:|:---:|
+| 1 | B_SATA → B_NVMe | `tpch_q2` | `hint02` | 3.35x | **4.41x** |
+| 2 | A_SATA → A_NVMe | `tpch_q3` | `hint05` | 3.38x | **4.15x** |
+| 3 | B_SATA → B_NVMe | `tpch_q17` | `hint02` | 2.58x | **2.91x** |
+| 4 | A_SATA → A_NVMe | `tpch_q13` | `hint05` | 2.81x | **2.88x** |
+| 5 | A_NVMe → A_SATA | `tpch_q11` | `hint01` | 1.98x | **2.81x** |
+| 6 | A_SATA → A_NVMe | `tpch_q8` | `hint05` | 2.17x | **2.39x** |
+| 7 | A_SATA → A_NVMe | `tpch_q5` | `hint04` | 1.63x | **2.16x** |
+| 8 | B_SATA → B_NVMe | `tpch_q12` | `hint02` | 1.71x | **1.90x** |
+| 9 | A_NVMe → A_SATA | `tpch_q7` | `hint05` | 1.45x | **1.55x** |
+| 10 | A_NVMe → A_SATA | `tpch_q21` | `hint01` | 1.30x | **1.52x** |
 
-### Top 10 Performance Accelerations (JOB)
-| Rank | Query | Environment | Best Hint | Speedup |
-|:---:|:---:|:---:|:---:|:---:|
-| 1 | `15b` | B_NVMe | `hint05` | **282.03x** |
-| 2 | `11b` | B_NVMe | `hint01` | **166.96x** |
-| 3 | `6c` | B_NVMe | `hint01` | **55.45x** |
-| 4 | `11a` | B_NVMe | `hint01` | **52.92x** |
-| 5 | `16a` | B_NVMe | `hint01` | **51.81x** |
-| 6 | `6e` | B_NVMe | `hint01` | **31.16x** |
-| 7 | `11d` | B_NVMe | `hint01` | **15.67x** |
-| 8 | `13b` | B_NVMe | `hint05` | **15.19x** |
-| 9 | `2d` | B_NVMe | `hint01` | **15.18x** |
-| 10 | `13c` | B_NVMe | `hint01` | **14.97x** |
+### Top 10 Cross-Environment Accelerations (JOB)
+| Rank | Transfer | Query | Hint | Predicted Trend (Source) | Actual Target Speedup |
+|:---:|:---|:---:|:---:|:---:|:---:|
+| 1 | B_SATA → B_NVMe | `15b` | `hint05` | 1.09x | **282.03x** |
+| 2 | B_SATA → B_NVMe | `11b` | `hint01` | 2.50x | **166.96x** |
+| 3 | B_SATA → B_NVMe | `6c` | `hint01` | 1.29x | **55.45x** |
+| 4 | B_SATA → B_NVMe | `11a` | `hint01` | 1.13x | **52.92x** |
+| 5 | B_SATA → B_NVMe | `13c` | `hint01` | 1.12x | **14.97x** |
+| 6 | B_SATA → B_NVMe | `18b` | `hint01` | 1.15x | **14.01x** |
+| 7 | B_SATA → B_NVMe | `15a` | `hint05` | 1.08x | **12.44x** |
+| 8 | B_SATA → B_NVMe | `7b` | `hint01` | 1.13x | **7.07x** |
+| 9 | B_SATA → B_NVMe | `12a` | `hint01` | 1.29x | **5.19x** |
+| 10 | B_SATA → B_NVMe | `19a` | `hint04` | 2.75x | **4.01x** |
 
 ---
 
