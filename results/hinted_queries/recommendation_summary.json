@@ -1,0 +1,2206 @@
+[
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q1",
+    "hint": "hint05",
+    "src_baseline_s": 178.207,
+    "reason": "HALO-R: 'hint05' selected (src=1.02x, risk_ops=0/12, risk_ratio=0%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q1_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q10",
+    "hint": "hint04",
+    "src_baseline_s": 134.74,
+    "reason": "HALO-R: 'hint04' selected (src=1.00x, risk_ops=6/38, risk_ratio=16%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q10_hint04.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q11",
+    "hint": "hint02",
+    "src_baseline_s": 38.844,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.01x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q11_hint02.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q12",
+    "hint": "hint05",
+    "src_baseline_s": 72.467,
+    "reason": "HALO-R: 'hint05' selected (src=1.01x, risk_ops=5/30, risk_ratio=17%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q12_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q13",
+    "hint": "hint05",
+    "src_baseline_s": 145.078,
+    "reason": "HALO-R: 'hint05' selected (src=2.88x, risk_ops=1/28, risk_ratio=4%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q13_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q14",
+    "hint": "hint05",
+    "src_baseline_s": 46.735,
+    "reason": "HALO-R: 'hint05' selected (src=1.01x, risk_ops=2/8, risk_ratio=25%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q14_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q15",
+    "hint": "hint05",
+    "src_baseline_s": 41.581,
+    "reason": "HALO-R: 'hint05' selected (src=1.00x, risk_ops=9/39, risk_ratio=23%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q15_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q16",
+    "hint": "hint02",
+    "src_baseline_s": 39.984,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.03x, risk_ratio=40% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q16_hint02.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q17",
+    "hint": "hint01",
+    "src_baseline_s": 27.619,
+    "reason": "HALO-R: 'hint01' selected (src=1.01x, risk_ops=14/48, risk_ratio=29%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q17_hint01.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q18",
+    "hint": "hint05",
+    "src_baseline_s": 68.986,
+    "reason": "HALO-R: 'hint05' selected (src=1.01x, risk_ops=26/160, risk_ratio=16%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q18_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q19",
+    "hint": "hint01",
+    "src_baseline_s": 55.808,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.01x, risk_ratio=40% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q19_hint01.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q2",
+    "hint": "NATIVE",
+    "src_baseline_s": 5.626,
+    "reason": "HALO-R: All hints too risky. hint01(65%), hint02(70%), hint04(56%), hint05(65%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q2_native.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q20",
+    "hint": "hint02",
+    "src_baseline_s": 185.008,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.07x, risk_ratio=38% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q20_hint02.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q21",
+    "hint": "hint01",
+    "src_baseline_s": 245.734,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.30x, risk_ratio=43% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q21_hint01.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q22",
+    "hint": "hint05",
+    "src_baseline_s": 4.056,
+    "reason": "HALO-R: 'hint05' selected cautiously (src=1.01x, risk_ratio=31% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q22_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q3",
+    "hint": "hint05",
+    "src_baseline_s": 372.182,
+    "reason": "HALO-R: 'hint05' selected (src=4.15x, risk_ops=6/77, risk_ratio=8%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q3_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q4",
+    "hint": "NATIVE",
+    "src_baseline_s": 106.628,
+    "reason": "HALO-R: All hints too risky. hint01(16%), hint02(14%), hint04(20%), hint05(19%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q4_native.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q5",
+    "hint": "hint04",
+    "src_baseline_s": 208.865,
+    "reason": "HALO-R: 'hint04' selected cautiously (src=2.16x, risk_ratio=38% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q5_hint04.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q6",
+    "hint": "hint02",
+    "src_baseline_s": 37.481,
+    "reason": "HALO-R: 'hint02' selected (src=1.01x, risk_ops=0/6, risk_ratio=0%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q6_hint02.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q7",
+    "hint": "hint01",
+    "src_baseline_s": 239.859,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.41x, risk_ratio=39% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q7_hint01.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q8",
+    "hint": "hint05",
+    "src_baseline_s": 337.668,
+    "reason": "HALO-R: 'hint05' selected cautiously (src=2.39x, risk_ratio=43% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q8_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q9",
+    "hint": "hint05",
+    "src_baseline_s": 881.701,
+    "reason": "HALO-R: 'hint05' selected (src=1.59x, risk_ops=28/98, risk_ratio=29%)",
+    "sql_file": "/root/halo/results/hinted_queries/NVMe/TPCH/tpch_q9_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q1",
+    "hint": "hint05",
+    "src_baseline_s": 178.207,
+    "reason": "HALO-R: 'hint05' selected (src=1.02x, risk_ops=0/12, risk_ratio=0%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q1_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q10",
+    "hint": "hint04",
+    "src_baseline_s": 134.74,
+    "reason": "HALO-R: 'hint04' selected (src=1.00x, risk_ops=7/38, risk_ratio=18%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q10_hint04.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q11",
+    "hint": "hint02",
+    "src_baseline_s": 38.844,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.01x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q11_hint02.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q12",
+    "hint": "hint05",
+    "src_baseline_s": 72.467,
+    "reason": "HALO-R: 'hint05' selected (src=1.01x, risk_ops=5/30, risk_ratio=17%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q12_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q13",
+    "hint": "hint05",
+    "src_baseline_s": 145.078,
+    "reason": "HALO-R: 'hint05' selected (src=2.88x, risk_ops=1/28, risk_ratio=4%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q13_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q14",
+    "hint": "hint05",
+    "src_baseline_s": 46.735,
+    "reason": "HALO-R: 'hint05' selected (src=1.01x, risk_ops=2/8, risk_ratio=25%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q14_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q15",
+    "hint": "hint05",
+    "src_baseline_s": 41.581,
+    "reason": "HALO-R: 'hint05' selected (src=1.00x, risk_ops=9/39, risk_ratio=23%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q15_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q16",
+    "hint": "hint01",
+    "src_baseline_s": 39.984,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.41x, risk_ratio=38% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q16_hint01.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q17",
+    "hint": "hint05",
+    "src_baseline_s": 27.619,
+    "reason": "HALO-R: 'hint05' selected (src=1.05x, risk_ops=14/47, risk_ratio=30%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q17_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q18",
+    "hint": "hint05",
+    "src_baseline_s": 68.986,
+    "reason": "HALO-R: 'hint05' selected (src=1.01x, risk_ops=21/160, risk_ratio=13%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q18_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q19",
+    "hint": "hint01",
+    "src_baseline_s": 55.808,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.01x, risk_ratio=40% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q19_hint01.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q2",
+    "hint": "NATIVE",
+    "src_baseline_s": 5.626,
+    "reason": "HALO-R: All hints too risky. hint01(62%), hint02(68%), hint04(56%), hint05(63%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q2_native.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q20",
+    "hint": "hint01",
+    "src_baseline_s": 185.008,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.04x, risk_ratio=43% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q20_hint01.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q21",
+    "hint": "hint01",
+    "src_baseline_s": 245.734,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.30x, risk_ratio=43% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q21_hint01.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q22",
+    "hint": "hint05",
+    "src_baseline_s": 4.056,
+    "reason": "HALO-R: 'hint05' selected cautiously (src=1.01x, risk_ratio=42% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q22_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q3",
+    "hint": "hint05",
+    "src_baseline_s": 372.182,
+    "reason": "HALO-R: 'hint05' selected (src=4.15x, risk_ops=6/77, risk_ratio=8%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q3_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q4",
+    "hint": "NATIVE",
+    "src_baseline_s": 106.628,
+    "reason": "HALO-R: All hints too risky. hint01(16%), hint02(14%), hint04(20%), hint05(19%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q4_native.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q5",
+    "hint": "hint02",
+    "src_baseline_s": 208.865,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.02x, risk_ratio=38% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q5_hint02.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q6",
+    "hint": "hint02",
+    "src_baseline_s": 37.481,
+    "reason": "HALO-R: 'hint02' selected (src=1.01x, risk_ops=0/6, risk_ratio=0%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q6_hint02.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q7",
+    "hint": "hint01",
+    "src_baseline_s": 239.859,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.41x, risk_ratio=39% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q7_hint01.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q8",
+    "hint": "hint05",
+    "src_baseline_s": 337.668,
+    "reason": "HALO-R: 'hint05' selected cautiously (src=2.39x, risk_ratio=43% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q8_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q9",
+    "hint": "hint05",
+    "src_baseline_s": 881.701,
+    "reason": "HALO-R: 'hint05' selected (src=1.59x, risk_ops=28/98, risk_ratio=29%)",
+    "sql_file": "/root/halo/results/hinted_queries/SATA/TPCH/tpch_q9_hint05.sql"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "10a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(53%), hint02(53%), hint05(53%)]",
+    "baseline_s": 22.396
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "10b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(69%), hint02(69%), hint05(69%)]",
+    "baseline_s": 20.485
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "10c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.11x, ratio=38%)",
+    "baseline_s": 125.41
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(81%), hint02(81%), hint05(81%)]",
+    "baseline_s": 0.209
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(88%), hint02(88%), hint05(88%)]",
+    "baseline_s": 0.11
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(60%), hint02(60%), hint05(60%)]",
+    "baseline_s": 1.637
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(65%), hint02(65%), hint05(65%)]",
+    "baseline_s": 4.755
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "12a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(52%), hint02(52%), hint05(52%)]",
+    "baseline_s": 11.45
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "12b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(76%), hint02(76%), hint05(76%)]",
+    "baseline_s": 7.886
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "12c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(61%), hint02(61%), hint05(61%)]",
+    "baseline_s": 19.496
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.08x, ratio=39%)",
+    "baseline_s": 9.486
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(83%), hint02(83%), hint05(83%)]",
+    "baseline_s": 6.104
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(88%), hint02(88%), hint05(88%)]",
+    "baseline_s": 6.988
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(52%), hint02(52%), hint05(52%)]",
+    "baseline_s": 33.2
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "14a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.12x, ratio=32%)",
+    "baseline_s": 9.191
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "14b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(82%), hint02(82%), hint05(82%)]",
+    "baseline_s": 1.655
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "14c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.18x, ratio=32%)",
+    "baseline_s": 22.36
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(77%), hint02(77%), hint05(77%)]",
+    "baseline_s": 12.447
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(95%), hint02(95%), hint05(95%)]",
+    "baseline_s": 0.648
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(52%), hint02(52%), hint05(52%)]",
+    "baseline_s": 21.296
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15d",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.07x, ratio=38%)",
+    "baseline_s": 19.885
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(72%), hint02(72%), hint05(72%)]",
+    "baseline_s": 2.167
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16b",
+    "hint": "hint05",
+    "reason": "HALO-R: 'hint05' (src=1.21x, risk=5/17, ratio=29%)",
+    "baseline_s": 69.689
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.06x, ratio=50%)",
+    "baseline_s": 8.379
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(78%), hint02(78%), hint05(78%)]",
+    "baseline_s": 10.989
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(62%), hint02(62%), hint05(62%)]",
+    "baseline_s": 58.559
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(53%), hint02(53%), hint05(53%)]",
+    "baseline_s": 24.313
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(53%), hint02(53%), hint05(53%)]",
+    "baseline_s": 23.253
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17d",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.05x, ratio=40%)",
+    "baseline_s": 25.515
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17e",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(73%), hint02(73%), hint05(73%)]",
+    "baseline_s": 45.97
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17f",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(53%), hint02(53%), hint05(53%)]",
+    "baseline_s": 28.443
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "18a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(80%), hint02(80%), hint05(80%)]",
+    "baseline_s": 8.13
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "18b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(79%), hint02(79%), hint05(79%)]",
+    "baseline_s": 6.597
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "18c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.14x, ratio=33%)",
+    "baseline_s": 167.707
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(70%), hint02(70%), hint04(70%), hint05(70%)]",
+    "baseline_s": 15.706
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(72%), hint02(72%), hint05(72%)]",
+    "baseline_s": 11.87
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(54%), hint02(54%), hint04(54%), hint05(54%)]",
+    "baseline_s": 26.05
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19d",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.08x, ratio=44%)",
+    "baseline_s": 39.575
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(67%), hint02(67%), hint05(67%)]",
+    "baseline_s": 1.731
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(77%), hint02(77%), hint05(77%)]",
+    "baseline_s": 1.518
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(62%), hint02(62%), hint05(62%)]",
+    "baseline_s": 2.901
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(77%), hint02(77%), hint05(77%)]",
+    "baseline_s": 1.569
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "20a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(59%), hint02(59%), hint05(59%)]",
+    "baseline_s": 35.619
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "20b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(96%), hint02(96%), hint05(96%)]",
+    "baseline_s": 14.865
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "20c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(74%), hint02(74%), hint05(74%)]",
+    "baseline_s": 20.881
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "21a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(76%), hint02(76%), hint05(76%)]",
+    "baseline_s": 0.205
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "21b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(76%), hint02(76%), hint05(76%)]",
+    "baseline_s": 0.213
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "21c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(76%), hint02(76%), hint05(76%)]",
+    "baseline_s": 0.271
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.35x, ratio=40%)",
+    "baseline_s": 11.501
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(57%), hint02(57%), hint05(57%)]",
+    "baseline_s": 4.863
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.13x, ratio=33%)",
+    "baseline_s": 26.011
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22d",
+    "hint": "hint05",
+    "reason": "HALO-R: 'hint05' (src=1.13x, risk=7/29, ratio=24%)",
+    "baseline_s": 21.846
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "23a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(57%), hint02(57%), hint05(57%)]",
+    "baseline_s": 3.9
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "23b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(59%), hint02(59%), hint05(59%)]",
+    "baseline_s": 4.401
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "23c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(61%), hint02(61%), hint05(61%)]",
+    "baseline_s": 6.472
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "24a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(61%), hint02(61%), hint04(61%), hint05(61%)]",
+    "baseline_s": 17.671
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "24b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 11.748
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "25a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.26x, ratio=43%)",
+    "baseline_s": 49.663
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "25b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(100%), hint02(100%), hint05(100%)]",
+    "baseline_s": 4.005
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "25c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.11x, ratio=30%)",
+    "baseline_s": 183.367
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "26a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(61%), hint02(61%), hint05(61%)]",
+    "baseline_s": 8.014
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "26b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(85%), hint02(85%), hint05(85%)]",
+    "baseline_s": 3.711
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "26c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(66%), hint02(66%), hint05(66%)]",
+    "baseline_s": 25.672
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "27a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(79%), hint02(79%), hint05(79%)]",
+    "baseline_s": 0.161
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "27b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(83%), hint02(83%), hint05(83%)]",
+    "baseline_s": 0.158
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "27c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(81%), hint02(81%), hint05(81%)]",
+    "baseline_s": 0.212
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "28a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(59%), hint02(59%), hint05(59%)]",
+    "baseline_s": 7.941
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "28b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(64%), hint02(64%), hint05(64%)]",
+    "baseline_s": 3.006
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "28c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.13x, ratio=49%)",
+    "baseline_s": 10.105
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "29a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(83%), hint02(83%), hint05(83%)]",
+    "baseline_s": 12.234
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "29b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(83%), hint02(83%), hint05(83%)]",
+    "baseline_s": 11.513
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "29c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(81%), hint02(81%), hint05(81%)]",
+    "baseline_s": 27.765
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' (src=1.32x, risk=3/11, ratio=27%)",
+    "baseline_s": 3.95
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(82%), hint02(82%), hint05(82%)]",
+    "baseline_s": 3.001
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(73%), hint02(73%), hint05(73%)]",
+    "baseline_s": 2.986
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(82%), hint02(82%), hint05(82%)]",
+    "baseline_s": 2.991
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "30a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(73%), hint02(73%), hint05(73%)]",
+    "baseline_s": 9.683
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "30b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(93%), hint02(93%), hint05(93%)]",
+    "baseline_s": 1.031
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "30c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.43x, ratio=41%)",
+    "baseline_s": 29.727
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "31a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(44%), hint02(44%), hint05(44%)]",
+    "baseline_s": 4.662
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "31b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(96%), hint02(96%), hint05(96%)]",
+    "baseline_s": 0.801
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "31c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.20x, ratio=37%)",
+    "baseline_s": 18.366
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "32a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(58%), hint02(58%), hint05(58%)]",
+    "baseline_s": 1.468
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "32b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(58%), hint02(58%), hint05(58%)]",
+    "baseline_s": 2.328
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "33a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(92%), hint02(92%), hint05(92%)]",
+    "baseline_s": 0.267
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "33b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(92%), hint02(92%), hint05(92%)]",
+    "baseline_s": 0.253
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "33c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 0.313
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "3a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.15x, ratio=50%)",
+    "baseline_s": 3.572
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "3b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(80%), hint02(80%), hint05(80%)]",
+    "baseline_s": 2.033
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "3c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(60%), hint02(60%), hint05(60%)]",
+    "baseline_s": 5.354
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "4a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(92%), hint02(92%), hint05(92%)]",
+    "baseline_s": 7.145
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "4b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(69%), hint02(69%), hint05(69%)]",
+    "baseline_s": 0.692
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "4c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(77%), hint02(77%), hint05(77%)]",
+    "baseline_s": 11.492
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "5a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 1.423
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "5b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 1.371
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "5c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(54%), hint02(54%), hint05(54%)]",
+    "baseline_s": 2.914
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 0.56
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 4.684
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(92%), hint02(92%), hint05(92%)]",
+    "baseline_s": 0.171
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(58%), hint02(58%), hint05(58%)]",
+    "baseline_s": 4.546
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6e",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(92%), hint02(92%), hint05(92%)]",
+    "baseline_s": 0.448
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6f",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(55%), hint02(55%), hint05(55%)]",
+    "baseline_s": 31.997
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "7a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(79%), hint02(79%), hint05(79%)]",
+    "baseline_s": 7.904
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "7b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(87%), hint02(87%), hint05(87%)]",
+    "baseline_s": 4.487
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "7c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(57%), hint02(57%), hint05(57%)]",
+    "baseline_s": 40.591
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(61%), hint02(61%), hint05(61%)]",
+    "baseline_s": 9.731
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(79%), hint02(79%), hint05(79%)]",
+    "baseline_s": 9.577
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(53%), hint02(53%), hint05(53%)]",
+    "baseline_s": 39.531
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(67%), hint02(67%), hint05(67%)]",
+    "baseline_s": 7.732
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(67%), hint02(67%), hint05(67%)]",
+    "baseline_s": 15.68
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(69%), hint02(69%), hint05(69%)]",
+    "baseline_s": 13.146
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(53%), hint02(53%), hint05(53%)]",
+    "baseline_s": 18.702
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9d",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.06x, ratio=47%)",
+    "baseline_s": 21.315
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "10a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.03x, ratio=47%)",
+    "baseline_s": 22.396
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "10b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(69%), hint02(69%), hint05(69%)]",
+    "baseline_s": 20.485
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "10c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.11x, ratio=38%)",
+    "baseline_s": 125.41
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "11a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 0.209
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "11b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(88%), hint02(88%), hint05(88%)]",
+    "baseline_s": 0.11
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "11c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(55%), hint02(55%), hint05(55%)]",
+    "baseline_s": 1.637
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "11d",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.04x, ratio=50%)",
+    "baseline_s": 4.755
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "12a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(52%), hint02(52%), hint05(52%)]",
+    "baseline_s": 11.45
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "12b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(76%), hint02(76%), hint05(76%)]",
+    "baseline_s": 7.886
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "12c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(57%), hint02(57%), hint05(57%)]",
+    "baseline_s": 19.496
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "13a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.08x, ratio=39%)",
+    "baseline_s": 9.486
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "13b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(79%), hint02(79%), hint05(79%)]",
+    "baseline_s": 6.104
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "13c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(79%), hint02(79%), hint05(79%)]",
+    "baseline_s": 6.988
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "13d",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.11x, ratio=43%)",
+    "baseline_s": 33.2
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "14a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.12x, ratio=36%)",
+    "baseline_s": 9.191
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "14b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(55%), hint02(55%), hint05(55%)]",
+    "baseline_s": 1.655
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "14c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.18x, ratio=32%)",
+    "baseline_s": 22.36
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "15a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(68%), hint02(68%), hint05(68%)]",
+    "baseline_s": 12.447
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "15b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(95%), hint02(95%), hint05(95%)]",
+    "baseline_s": 0.648
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "15c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.22x, ratio=48%)",
+    "baseline_s": 21.296
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "15d",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.07x, ratio=38%)",
+    "baseline_s": 19.885
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "16a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.01x, ratio=44%)",
+    "baseline_s": 2.167
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "16b",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.19x, ratio=35%)",
+    "baseline_s": 69.689
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "16c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.06x, ratio=44%)",
+    "baseline_s": 8.379
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "16d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(72%), hint02(72%), hint05(72%)]",
+    "baseline_s": 10.989
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(62%), hint02(62%), hint05(62%)]",
+    "baseline_s": 58.559
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17b",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.03x, ratio=47%)",
+    "baseline_s": 24.313
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(53%), hint02(53%), hint05(53%)]",
+    "baseline_s": 23.253
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17d",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.05x, ratio=47%)",
+    "baseline_s": 25.515
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17e",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(73%), hint02(73%), hint05(73%)]",
+    "baseline_s": 45.97
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17f",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(60%), hint02(60%), hint05(60%)]",
+    "baseline_s": 28.443
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "18a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(80%), hint02(80%), hint05(80%)]",
+    "baseline_s": 8.13
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "18b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(71%), hint02(71%), hint05(71%)]",
+    "baseline_s": 6.597
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "18c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.14x, ratio=33%)",
+    "baseline_s": 167.707
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "19a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(70%), hint02(70%), hint04(70%), hint05(70%)]",
+    "baseline_s": 15.706
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "19b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(72%), hint02(72%), hint05(72%)]",
+    "baseline_s": 11.87
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "19c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(54%), hint02(54%), hint04(54%), hint05(54%)]",
+    "baseline_s": 26.05
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "19d",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.08x, ratio=40%)",
+    "baseline_s": 39.575
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "1a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(67%), hint02(67%), hint05(67%)]",
+    "baseline_s": 1.731
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "1b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(69%), hint02(69%), hint05(69%)]",
+    "baseline_s": 1.518
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "1c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(69%), hint02(69%), hint05(69%)]",
+    "baseline_s": 2.901
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "1d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(77%), hint02(77%), hint05(77%)]",
+    "baseline_s": 1.569
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "20a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(59%), hint02(59%), hint05(59%)]",
+    "baseline_s": 35.619
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "20b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(96%), hint02(96%), hint05(96%)]",
+    "baseline_s": 14.865
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "20c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(78%), hint02(78%), hint05(78%)]",
+    "baseline_s": 20.881
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "21a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(76%), hint02(76%), hint05(76%)]",
+    "baseline_s": 0.205
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "21b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(76%), hint02(76%), hint05(76%)]",
+    "baseline_s": 0.213
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "21c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(76%), hint02(76%), hint05(76%)]",
+    "baseline_s": 0.271
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "22a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.35x, ratio=40%)",
+    "baseline_s": 11.501
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "22b",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.02x, ratio=50%)",
+    "baseline_s": 4.863
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "22c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.13x, ratio=33%)",
+    "baseline_s": 26.011
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "22d",
+    "hint": "hint05",
+    "reason": "HALO-R: 'hint05' (src=1.13x, risk=7/29, ratio=24%)",
+    "baseline_s": 21.846
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "23a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(57%), hint02(57%), hint05(57%)]",
+    "baseline_s": 3.9
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "23b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(59%), hint02(59%), hint05(59%)]",
+    "baseline_s": 4.401
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "23c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(64%), hint02(64%), hint05(64%)]",
+    "baseline_s": 6.472
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "24a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(58%), hint02(58%), hint04(58%), hint05(58%)]",
+    "baseline_s": 17.671
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "24b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 11.748
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "25a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.26x, ratio=39%)",
+    "baseline_s": 49.663
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "25b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(90%), hint02(90%), hint05(90%)]",
+    "baseline_s": 4.005
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "25c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.11x, ratio=35%)",
+    "baseline_s": 183.367
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "26a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(58%), hint02(58%), hint05(58%)]",
+    "baseline_s": 8.014
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "26b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(88%), hint02(88%), hint05(88%)]",
+    "baseline_s": 3.711
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "26c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(62%), hint02(62%), hint05(62%)]",
+    "baseline_s": 25.672
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "27a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(79%), hint02(79%), hint05(79%)]",
+    "baseline_s": 0.161
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "27b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(83%), hint02(83%), hint05(83%)]",
+    "baseline_s": 0.158
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "27c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(81%), hint02(81%), hint05(81%)]",
+    "baseline_s": 0.212
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "28a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(64%), hint02(64%), hint05(64%)]",
+    "baseline_s": 7.941
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "28b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(77%), hint02(77%), hint05(77%)]",
+    "baseline_s": 3.006
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "28c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(51%), hint02(51%), hint05(51%)]",
+    "baseline_s": 10.105
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "29a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(83%), hint02(83%), hint05(83%)]",
+    "baseline_s": 12.234
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "29b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(83%), hint02(83%), hint05(83%)]",
+    "baseline_s": 11.513
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "29c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(81%), hint02(81%), hint05(81%)]",
+    "baseline_s": 27.765
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "2a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' (src=1.32x, risk=3/11, ratio=27%)",
+    "baseline_s": 3.95
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "2b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(73%), hint02(73%), hint05(73%)]",
+    "baseline_s": 3.001
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "2c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(73%), hint02(73%), hint05(73%)]",
+    "baseline_s": 2.986
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "2d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(73%), hint02(73%), hint05(73%)]",
+    "baseline_s": 2.991
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "30a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(70%), hint02(70%), hint05(70%)]",
+    "baseline_s": 9.683
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "30b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(90%), hint02(90%), hint05(90%)]",
+    "baseline_s": 1.031
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "30c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.43x, ratio=41%)",
+    "baseline_s": 29.727
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "31a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(40%), hint02(40%), hint05(40%)]",
+    "baseline_s": 4.662
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "31b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(93%), hint02(93%), hint05(93%)]",
+    "baseline_s": 0.801
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "31c",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' (src=1.20x, risk=7/27, ratio=26%)",
+    "baseline_s": 18.366
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "32a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(58%), hint02(58%), hint05(58%)]",
+    "baseline_s": 1.468
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "32b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 2.328
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "33a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(94%), hint02(94%), hint05(94%)]",
+    "baseline_s": 0.267
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "33b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(94%), hint02(94%), hint05(94%)]",
+    "baseline_s": 0.253
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "33c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(81%), hint02(81%), hint05(81%)]",
+    "baseline_s": 0.313
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "3a",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.15x, ratio=50%)",
+    "baseline_s": 3.572
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "3b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(80%), hint02(80%), hint05(80%)]",
+    "baseline_s": 2.033
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "3c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(60%), hint02(60%), hint05(60%)]",
+    "baseline_s": 5.354
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "4a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(85%), hint02(85%), hint05(85%)]",
+    "baseline_s": 7.145
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "4b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(69%), hint02(69%), hint05(69%)]",
+    "baseline_s": 0.692
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "4c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(77%), hint02(77%), hint05(77%)]",
+    "baseline_s": 11.492
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "5a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 1.423
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "5b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(75%), hint02(75%), hint05(75%)]",
+    "baseline_s": 1.371
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "5c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(54%), hint02(54%), hint05(54%)]",
+    "baseline_s": 2.914
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(92%), hint02(92%), hint05(92%)]",
+    "baseline_s": 0.56
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(83%), hint02(83%), hint05(83%)]",
+    "baseline_s": 4.684
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(100%), hint02(100%), hint05(100%)]",
+    "baseline_s": 0.171
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(67%), hint02(67%), hint05(67%)]",
+    "baseline_s": 4.546
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6e",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(100%), hint02(100%), hint05(100%)]",
+    "baseline_s": 0.448
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6f",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(64%), hint02(64%), hint05(64%)]",
+    "baseline_s": 31.997
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "7a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(79%), hint02(79%), hint05(79%)]",
+    "baseline_s": 7.904
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "7b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(87%), hint02(87%), hint05(87%)]",
+    "baseline_s": 4.487
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "7c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(52%), hint02(52%), hint05(52%)]",
+    "baseline_s": 40.591
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "8a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(56%), hint02(56%), hint05(56%)]",
+    "baseline_s": 9.731
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "8b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(63%), hint02(63%), hint05(63%)]",
+    "baseline_s": 9.577
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "8c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(53%), hint02(53%), hint05(53%)]",
+    "baseline_s": 39.531
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "8d",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(73%), hint02(73%), hint05(73%)]",
+    "baseline_s": 7.732
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "9a",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(67%), hint02(67%), hint05(67%)]",
+    "baseline_s": 15.68
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "9b",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(69%), hint02(69%), hint05(69%)]",
+    "baseline_s": 13.146
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "9c",
+    "hint": "NATIVE",
+    "reason": "HALO-R: all too risky → NATIVE [hint01(53%), hint02(53%), hint05(53%)]",
+    "baseline_s": 18.702
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "9d",
+    "hint": "hint01",
+    "reason": "HALO-R: 'hint01' CAUTIOUS (src=1.06x, ratio=47%)",
+    "baseline_s": 21.315
+  }
+]
