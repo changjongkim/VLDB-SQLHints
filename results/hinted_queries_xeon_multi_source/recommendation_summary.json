@@ -3,10 +3,10 @@
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q1",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_SATA (src_speedup=1.32x, risk=0%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q1_hint05.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q1_native.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -14,35 +14,35 @@
     "query_id": "tpch_q10",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.19x, risk=15%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.19x, risk=8%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q10_hint02.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q11",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.81x, risk=26%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q11_hint01.sql"
+    "recommended_hint": "hint02",
+    "hint": "hint02",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.19x, risk=20%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q11_hint02.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q12",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=1.90x, risk=8%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q12_hint02.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q12_native.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q13",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_NVMe (src_speedup=2.88x, risk=0%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q13_hint05.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.08x, risk=30%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q13_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -50,7 +50,7 @@
     "query_id": "tpch_q14",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.31x, risk=0%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.31x, risk=12%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q14_hint02.sql"
   },
   {
@@ -68,7 +68,7 @@
     "query_id": "tpch_q16",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.15x, risk=17%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.15x, risk=18%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q16_hint01.sql"
   },
   {
@@ -77,7 +77,7 @@
     "query_id": "tpch_q17",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=2.91x, risk=8%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=2.91x, risk=15%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q17_hint02.sql"
   },
   {
@@ -104,17 +104,17 @@
     "query_id": "tpch_q2",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=4.41x, risk=20%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=4.41x, risk=4%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q2_hint02.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q20",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=1.07x, risk=28%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q20_hint02.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q20_native.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -122,17 +122,17 @@
     "query_id": "tpch_q21",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.52x, risk=26%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.52x, risk=17%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q21_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q22",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.11x, risk=0%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q22_hint05.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q22_native.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -140,26 +140,26 @@
     "query_id": "tpch_q3",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_NVMe (src_speedup=4.15x, risk=6%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_NVMe (src_speedup=4.15x, risk=29%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q3_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q4",
-    "recommended_hint": "hint04",
-    "hint": "hint04",
-    "reason": "HALO-R (Multi-Source): 'hint04' selected from A_SATA (src_speedup=1.13x, risk=13%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q4_hint04.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q4_native.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q5",
-    "recommended_hint": "hint04",
-    "hint": "hint04",
-    "reason": "HALO-R (Multi-Source): 'hint04' selected from A_NVMe (src_speedup=2.16x, risk=25%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q5_hint04.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.07x, risk=12%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q5_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -174,28 +174,28 @@
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q7",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_SATA (src_speedup=1.55x, risk=14%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q7_hint05.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q7_native.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q8",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_NVMe (src_speedup=2.39x, risk=20%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q8_hint05.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q8_native.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q9",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_NVMe (src_speedup=1.59x, risk=2%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q9_hint05.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/TPCH/tpch_q9_native.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -203,17 +203,17 @@
     "query_id": "10a",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=1.49x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=1.49x, risk=29%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/10a_hint02.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "10b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/10b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.09x, risk=8%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/10b_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -221,26 +221,26 @@
     "query_id": "10c",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=1.24x, risk=12%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=1.24x, risk=28%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/10c_hint02.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "11a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/11a_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=52.92x, risk=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/11a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "11b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/11b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=166.96x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/11b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -248,7 +248,7 @@
     "query_id": "11c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.61x, risk=20%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.61x, risk=5%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/11c_hint01.sql"
   },
   {
@@ -257,7 +257,7 @@
     "query_id": "11d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=15.67x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=15.67x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/11d_hint01.sql"
   },
   {
@@ -266,7 +266,7 @@
     "query_id": "12a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=5.19x, risk=26%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=5.19x, risk=9%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/12a_hint01.sql"
   },
   {
@@ -275,7 +275,7 @@
     "query_id": "12b",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=13.97x, risk=24%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=13.97x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/12b_hint02.sql"
   },
   {
@@ -284,17 +284,17 @@
     "query_id": "12c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.15x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.15x, risk=4%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/12c_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "13a",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=1.77x, risk=29%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/13a_hint02.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=2.59x, risk=22%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/13a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -302,17 +302,17 @@
     "query_id": "13b",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=15.19x, risk=28%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=15.19x, risk=8%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/13b_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "13c",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=14.77x, risk=29%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/13c_hint05.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=14.97x, risk=7%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/13c_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -320,7 +320,7 @@
     "query_id": "13d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.99x, risk=28%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=2.38x, risk=20%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/13d_hint01.sql"
   },
   {
@@ -329,17 +329,17 @@
     "query_id": "14a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=3.73x, risk=20%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=3.73x, risk=14%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/14a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "14b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/14b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=8.55x, risk=9%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/14b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -347,7 +347,7 @@
     "query_id": "14c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=3.01x, risk=21%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=3.01x, risk=19%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/14c_hint01.sql"
   },
   {
@@ -356,17 +356,17 @@
     "query_id": "15a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=12.76x, risk=13%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=12.76x, risk=9%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/15a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "15b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/15b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=282.03x, risk=18%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/15b_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -374,7 +374,7 @@
     "query_id": "15c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.34x, risk=19%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.34x, risk=14%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/15c_hint01.sql"
   },
   {
@@ -383,7 +383,7 @@
     "query_id": "15d",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=3.50x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=3.50x, risk=12%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/15d_hint05.sql"
   },
   {
@@ -392,17 +392,17 @@
     "query_id": "16a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=51.81x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=51.81x, risk=6%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/16a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "16b",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=6.04x, risk=20%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/16b_hint01.sql"
+    "recommended_hint": "hint02",
+    "hint": "hint02",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=1.50x, risk=29%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/16b_hint02.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -410,7 +410,7 @@
     "query_id": "16c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=3.82x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=2.62x, risk=6%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/16c_hint01.sql"
   },
   {
@@ -419,7 +419,7 @@
     "query_id": "16d",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=6.68x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=6.68x, risk=28%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/16d_hint02.sql"
   },
   {
@@ -428,17 +428,17 @@
     "query_id": "17a",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=4.45x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=4.45x, risk=28%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/17a_hint02.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "17b",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=3.33x, risk=26%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/17b_hint01.sql"
+    "recommended_hint": "hint02",
+    "hint": "hint02",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=2.79x, risk=30%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/17b_hint02.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -446,7 +446,7 @@
     "query_id": "17c",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=3.56x, risk=7%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=3.56x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/17c_hint05.sql"
   },
   {
@@ -455,26 +455,26 @@
     "query_id": "17d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.62x, risk=26%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.89x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/17d_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "17e",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=2.48x, risk=30%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/17e_hint02.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.05x, risk=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/17e_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "17f",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.24x, risk=27%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/17f_hint01.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=2.00x, risk=0%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/17f_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -482,7 +482,7 @@
     "query_id": "18a",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=8.95x, risk=12%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=8.95x, risk=6%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/18a_hint05.sql"
   },
   {
@@ -491,7 +491,7 @@
     "query_id": "18b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=14.01x, risk=30%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=14.01x, risk=10%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/18b_hint01.sql"
   },
   {
@@ -500,7 +500,7 @@
     "query_id": "18c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=3.48x, risk=20%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=3.48x, risk=14%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/18c_hint01.sql"
   },
   {
@@ -509,7 +509,7 @@
     "query_id": "19a",
     "recommended_hint": "hint04",
     "hint": "hint04",
-    "reason": "HALO-R (Multi-Source): 'hint04' selected from B_NVMe (src_speedup=4.01x, risk=28%)",
+    "reason": "HALO-R (Multi-Source): 'hint04' selected from B_NVMe (src_speedup=4.01x, risk=13%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/19a_hint04.sql"
   },
   {
@@ -518,7 +518,7 @@
     "query_id": "19b",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.74x, risk=30%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.74x, risk=15%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/19b_hint05.sql"
   },
   {
@@ -536,7 +536,7 @@
     "query_id": "19d",
     "recommended_hint": "hint04",
     "hint": "hint04",
-    "reason": "HALO-R (Multi-Source): 'hint04' selected from A_NVMe (src_speedup=1.54x, risk=30%)",
+    "reason": "HALO-R (Multi-Source): 'hint04' selected from A_NVMe (src_speedup=1.54x, risk=24%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/19d_hint04.sql"
   },
   {
@@ -552,55 +552,55 @@
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "1b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/1b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.34x, risk=8%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/1b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "1c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/1c_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.74x, risk=23%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/1c_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "1d",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/1d_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.34x, risk=8%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/1d_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "20a",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=1.14x, risk=30%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/20a_hint02.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.30x, risk=18%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/20a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "20b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/20b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.10x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/20b_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "20c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/20c_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.10x, risk=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/20c_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -615,19 +615,19 @@
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "21b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/21b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.50x, risk=18%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/21b_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "21c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/21c_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.44x, risk=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/21c_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -635,17 +635,17 @@
     "query_id": "22a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=3.87x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.35x, risk=20%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/22a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "22b",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.18x, risk=27%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/22b_hint01.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/22b_native.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -653,7 +653,7 @@
     "query_id": "22c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=5.19x, risk=21%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=2.40x, risk=26%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/22c_hint01.sql"
   },
   {
@@ -662,7 +662,7 @@
     "query_id": "22d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=6.75x, risk=20%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=6.75x, risk=29%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/22d_hint01.sql"
   },
   {
@@ -671,17 +671,17 @@
     "query_id": "23a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.06x, risk=29%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=1.30x, risk=30%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/23a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "23b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/23b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.23x, risk=20%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/23b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -689,7 +689,7 @@
     "query_id": "23c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=6.25x, risk=30%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.27x, risk=23%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/23c_hint01.sql"
   },
   {
@@ -698,7 +698,7 @@
     "query_id": "24a",
     "recommended_hint": "hint04",
     "hint": "hint04",
-    "reason": "HALO-R (Multi-Source): 'hint04' selected from B_NVMe (src_speedup=3.27x, risk=23%)",
+    "reason": "HALO-R (Multi-Source): 'hint04' selected from B_NVMe (src_speedup=3.27x, risk=3%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/24a_hint04.sql"
   },
   {
@@ -707,7 +707,7 @@
     "query_id": "24b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.06x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.06x, risk=13%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/24b_hint01.sql"
   },
   {
@@ -716,26 +716,26 @@
     "query_id": "25a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=4.96x, risk=21%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=4.96x, risk=22%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/25a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "25b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/25b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.06x, risk=10%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/25b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "25c",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=3.14x, risk=28%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/25c_hint01.sql"
+    "recommended_hint": "hint04",
+    "hint": "hint04",
+    "reason": "HALO-R (Multi-Source): 'hint04' selected from A_NVMe (src_speedup=2.54x, risk=20%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/25c_hint04.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -750,46 +750,46 @@
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "26b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/26b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.28x, risk=16%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/26b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "26c",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.27x, risk=29%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/26c_hint05.sql"
+    "recommended_hint": "hint02",
+    "hint": "hint02",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.35x, risk=12%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/26c_hint02.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "27a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/27a_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.16x, risk=20%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/27a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "27b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/27b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=2.37x, risk=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/27b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "27c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/27c_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.82x, risk=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/27c_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -797,7 +797,7 @@
     "query_id": "28a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=3.20x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=3.20x, risk=22%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/28a_hint01.sql"
   },
   {
@@ -815,26 +815,26 @@
     "query_id": "28c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.67x, risk=29%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.67x, risk=24%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/28c_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "29a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/29a_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.09x, risk=13%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/29a_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "29b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/29b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.06x, risk=18%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/29b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -849,10 +849,10 @@
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "2a",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=6.60x, risk=23%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/2a_hint02.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.74x, risk=0%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/2a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -860,7 +860,7 @@
     "query_id": "2b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.34x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.34x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/2b_hint01.sql"
   },
   {
@@ -869,7 +869,7 @@
     "query_id": "2c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.15x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.15x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/2c_hint01.sql"
   },
   {
@@ -878,17 +878,17 @@
     "query_id": "2d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=15.18x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=15.18x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/2d_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "30a",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.15x, risk=24%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/30a_hint05.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.17x, risk=5%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/30a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -903,10 +903,10 @@
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "30c",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.45x, risk=28%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/30c_hint02.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=2.01x, risk=29%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/30c_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -921,10 +921,10 @@
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "31b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/31b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.13x, risk=7%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/31b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -932,44 +932,44 @@
     "query_id": "31c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.34x, risk=15%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_NVMe (src_speedup=2.00x, risk=22%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/31c_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "32a",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.98x, risk=17%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/32a_hint01.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/32a_native.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "32b",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.34x, risk=8%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/32b_hint01.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.12x, risk=0%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/32b_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "33a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/33a_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.43x, risk=25%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/33a_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "33b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/33b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.50x, risk=25%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/33b_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -977,17 +977,17 @@
     "query_id": "33c",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.40x, risk=28%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.40x, risk=17%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/33c_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "3a",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.15x, risk=20%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/3a_hint05.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=2.03x, risk=10%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/3a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -995,7 +995,7 @@
     "query_id": "3b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.09x, risk=20%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.08x, risk=10%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/3b_hint01.sql"
   },
   {
@@ -1004,7 +1004,7 @@
     "query_id": "3c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.34x, risk=30%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.34x, risk=10%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/3c_hint01.sql"
   },
   {
@@ -1013,7 +1013,7 @@
     "query_id": "4a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.41x, risk=23%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.41x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/4a_hint01.sql"
   },
   {
@@ -1038,19 +1038,19 @@
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "5a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/5a_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.29x, risk=8%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/5a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "5b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/5b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.24x, risk=8%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/5b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -1058,7 +1058,7 @@
     "query_id": "5c",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=2.05x, risk=27%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=1.56x, risk=27%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/5c_hint02.sql"
   },
   {
@@ -1076,17 +1076,17 @@
     "query_id": "6b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.31x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.31x, risk=17%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/6b_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "6c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/6c_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=55.45x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/6c_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -1094,17 +1094,17 @@
     "query_id": "6d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.11x, risk=17%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.11x, risk=15%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/6d_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "6e",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/6e_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=31.16x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/6e_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -1112,17 +1112,17 @@
     "query_id": "6f",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.52x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.52x, risk=20%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/6f_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "7a",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=2.94x, risk=29%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/7a_hint05.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.28x, risk=10%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/7a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -1130,7 +1130,7 @@
     "query_id": "7b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=7.07x, risk=29%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=7.07x, risk=10%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/7b_hint01.sql"
   },
   {
@@ -1139,7 +1139,7 @@
     "query_id": "7c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.84x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.84x, risk=28%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/7c_hint01.sql"
   },
   {
@@ -1148,17 +1148,17 @@
     "query_id": "8a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=5.47x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=5.47x, risk=6%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/8a_hint01.sql"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "8b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/8b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.32x, risk=11%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/8b_hint05.sql"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -1166,7 +1166,7 @@
     "query_id": "8c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.68x, risk=13%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.68x, risk=29%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/8c_hint01.sql"
   },
   {
@@ -1175,7 +1175,7 @@
     "query_id": "8d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.71x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.71x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/8d_hint01.sql"
   },
   {
@@ -1184,7 +1184,7 @@
     "query_id": "9a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.38x, risk=28%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.38x, risk=5%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/9a_hint01.sql"
   },
   {
@@ -1202,7 +1202,7 @@
     "query_id": "9c",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=1.31x, risk=21%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=1.31x, risk=26%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/9c_hint02.sql"
   },
   {
@@ -1211,17 +1211,17 @@
     "query_id": "9d",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=1.15x, risk=21%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=1.15x, risk=26%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/NVMe/JOB/9d_hint02.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q1",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_SATA (src_speedup=1.32x, risk=0%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q1_hint05.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q1_native.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1229,7 +1229,7 @@
     "query_id": "tpch_q10",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.19x, risk=15%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.19x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q10_hint02.sql"
   },
   {
@@ -1238,26 +1238,26 @@
     "query_id": "tpch_q11",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.19x, risk=22%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.19x, risk=18%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q11_hint02.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q12",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=1.90x, risk=8%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q12_hint02.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q12_native.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q13",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_NVMe (src_speedup=2.88x, risk=0%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q13_hint05.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.08x, risk=20%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q13_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1283,7 +1283,7 @@
     "query_id": "tpch_q16",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.15x, risk=17%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.15x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q16_hint01.sql"
   },
   {
@@ -1292,7 +1292,7 @@
     "query_id": "tpch_q17",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=2.91x, risk=8%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=2.91x, risk=23%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q17_hint02.sql"
   },
   {
@@ -1319,7 +1319,7 @@
     "query_id": "tpch_q2",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=4.41x, risk=20%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=4.41x, risk=16%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q2_hint02.sql"
   },
   {
@@ -1337,44 +1337,44 @@
     "query_id": "tpch_q21",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.52x, risk=21%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.52x, risk=11%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q21_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q22",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.11x, risk=0%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q22_hint05.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q22_native.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q3",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_NVMe (src_speedup=4.15x, risk=8%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q3_hint05.sql"
+    "recommended_hint": "hint02",
+    "hint": "hint02",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=4.11x, risk=27%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q3_hint02.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q4",
-    "recommended_hint": "hint04",
-    "hint": "hint04",
-    "reason": "HALO-R (Multi-Source): 'hint04' selected from A_SATA (src_speedup=1.13x, risk=13%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q4_hint04.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q4_native.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q5",
-    "recommended_hint": "hint04",
-    "hint": "hint04",
-    "reason": "HALO-R (Multi-Source): 'hint04' selected from A_SATA (src_speedup=1.63x, risk=27%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q5_hint04.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q5_native.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1389,28 +1389,28 @@
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q7",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_SATA (src_speedup=1.55x, risk=18%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q7_hint05.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q7_native.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q8",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_SATA (src_speedup=2.17x, risk=21%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q8_hint05.sql"
+    "recommended_hint": "hint02",
+    "hint": "hint02",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.07x, risk=10%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q8_hint02.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q9",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from A_NVMe (src_speedup=1.59x, risk=23%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q9_hint05.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/TPCH/tpch_q9_native.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1418,44 +1418,44 @@
     "query_id": "10a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.09x, risk=24%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.09x, risk=28%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/10a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "10b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/10b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.09x, risk=15%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/10b_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "10c",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.11x, risk=12%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/10c_hint01.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/10c_native.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "11a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/11a_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=52.92x, risk=25%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/11a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "11b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/11b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=166.96x, risk=28%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/11b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1463,7 +1463,7 @@
     "query_id": "11c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.61x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.61x, risk=22%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/11c_hint01.sql"
   },
   {
@@ -1472,17 +1472,17 @@
     "query_id": "11d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=15.67x, risk=30%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=15.67x, risk=22%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/11d_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "12a",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=5.13x, risk=28%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/12a_hint02.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=5.19x, risk=16%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/12a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1490,7 +1490,7 @@
     "query_id": "12b",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=13.97x, risk=24%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=13.97x, risk=14%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/12b_hint02.sql"
   },
   {
@@ -1499,44 +1499,44 @@
     "query_id": "12c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.15x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.15x, risk=15%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/12c_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "13a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/13a_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.90x, risk=20%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/13a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "13b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/13b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=15.19x, risk=15%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/13b_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "13c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/13c_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=14.97x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/13c_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "13d",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/13d_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.99x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/13d_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1544,26 +1544,26 @@
     "query_id": "14a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=2.19x, risk=27%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=2.19x, risk=17%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/14a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "14b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/14b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=8.55x, risk=18%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/14b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "14c",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=2.38x, risk=30%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/14c_hint02.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.55x, risk=21%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/14c_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1578,10 +1578,10 @@
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "15b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/15b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.09x, risk=18%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/15b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1589,7 +1589,7 @@
     "query_id": "15c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.34x, risk=19%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.34x, risk=24%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/15c_hint01.sql"
   },
   {
@@ -1598,7 +1598,7 @@
     "query_id": "15d",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=3.50x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=3.50x, risk=24%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/15d_hint05.sql"
   },
   {
@@ -1607,17 +1607,17 @@
     "query_id": "16a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=4.39x, risk=27%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=51.81x, risk=17%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/16a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "16b",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=4.39x, risk=18%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/16b_hint01.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.21x, risk=6%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/16b_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1625,26 +1625,26 @@
     "query_id": "16c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=3.82x, risk=23%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=2.62x, risk=16%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/16c_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "16d",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=6.68x, risk=22%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/16d_hint02.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.25x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/16d_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "17a",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=4.45x, risk=25%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/17a_hint02.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.73x, risk=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/17a_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1652,7 +1652,7 @@
     "query_id": "17b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=3.33x, risk=26%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.98x, risk=13%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/17b_hint01.sql"
   },
   {
@@ -1661,7 +1661,7 @@
     "query_id": "17c",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=3.56x, risk=7%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=3.56x, risk=13%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/17c_hint05.sql"
   },
   {
@@ -1670,7 +1670,7 @@
     "query_id": "17d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.62x, risk=26%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.89x, risk=13%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/17d_hint01.sql"
   },
   {
@@ -1679,17 +1679,17 @@
     "query_id": "17e",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.05x, risk=7%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.05x, risk=6%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/17e_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "17f",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.24x, risk=27%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/17f_hint01.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=2.00x, risk=13%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/17f_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1697,7 +1697,7 @@
     "query_id": "18a",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=8.95x, risk=17%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=8.95x, risk=6%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/18a_hint05.sql"
   },
   {
@@ -1706,17 +1706,17 @@
     "query_id": "18b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=14.01x, risk=30%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=14.01x, risk=20%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/18b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "18c",
-    "recommended_hint": "hint04",
-    "hint": "hint04",
-    "reason": "HALO-R (Multi-Source): 'hint04' selected from A_SATA (src_speedup=1.63x, risk=17%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/18c_hint04.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.16x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/18c_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1724,17 +1724,17 @@
     "query_id": "19a",
     "recommended_hint": "hint04",
     "hint": "hint04",
-    "reason": "HALO-R (Multi-Source): 'hint04' selected from B_SATA (src_speedup=2.75x, risk=30%)",
+    "reason": "HALO-R (Multi-Source): 'hint04' selected from B_NVMe (src_speedup=4.01x, risk=22%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/19a_hint04.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "19b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/19b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.74x, risk=25%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/19b_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1742,17 +1742,17 @@
     "query_id": "19c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.23x, risk=23%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.23x, risk=4%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/19c_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "19d",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.19x, risk=27%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/19d_hint01.sql"
+    "recommended_hint": "hint04",
+    "hint": "hint04",
+    "reason": "HALO-R (Multi-Source): 'hint04' selected from A_SATA (src_speedup=1.21x, risk=28%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/19d_hint04.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1767,55 +1767,55 @@
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "1b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/1b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.34x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/1b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "1c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/1c_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.34x, risk=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/1c_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "1d",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/1d_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.34x, risk=18%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/1d_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "20a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/20a_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.30x, risk=9%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/20a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "20b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/20b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.10x, risk=11%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/20b_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "20c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/20c_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.10x, risk=11%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/20c_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1830,19 +1830,19 @@
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "21b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/21b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.50x, risk=16%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/21b_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "21c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/21c_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.44x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/21c_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1850,17 +1850,17 @@
     "query_id": "22a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.93x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.35x, risk=13%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/22a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "22b",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.18x, risk=29%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/22b_hint01.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/22b_native.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1868,7 +1868,7 @@
     "query_id": "22c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=5.19x, risk=22%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.13x, risk=10%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/22c_hint01.sql"
   },
   {
@@ -1877,26 +1877,26 @@
     "query_id": "22d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=6.75x, risk=21%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=6.75x, risk=22%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/22d_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "23a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/23a_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.06x, risk=26%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/23a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "23b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/23b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.23x, risk=20%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/23b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1904,7 +1904,7 @@
     "query_id": "23c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.27x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.27x, risk=21%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/23c_hint01.sql"
   },
   {
@@ -1913,7 +1913,7 @@
     "query_id": "24a",
     "recommended_hint": "hint04",
     "hint": "hint04",
-    "reason": "HALO-R (Multi-Source): 'hint04' selected from B_SATA (src_speedup=2.71x, risk=26%)",
+    "reason": "HALO-R (Multi-Source): 'hint04' selected from B_NVMe (src_speedup=3.27x, risk=11%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/24a_hint04.sql"
   },
   {
@@ -1922,7 +1922,7 @@
     "query_id": "24b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.06x, risk=29%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.06x, risk=19%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/24b_hint01.sql"
   },
   {
@@ -1931,26 +1931,26 @@
     "query_id": "25a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=4.96x, risk=22%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=4.96x, risk=25%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/25a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "25b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/25b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.06x, risk=8%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/25b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "25c",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.27x, risk=17%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/25c_hint01.sql"
+    "recommended_hint": "hint02",
+    "hint": "hint02",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=1.15x, risk=28%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/25c_hint02.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1965,46 +1965,46 @@
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "26b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/26b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.28x, risk=13%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/26b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "26c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/26c_native.sql"
+    "recommended_hint": "hint02",
+    "hint": "hint02",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.35x, risk=9%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/26c_hint02.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "27a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/27a_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.16x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/27a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "27b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/27b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=2.37x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/27b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "27c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/27c_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.82x, risk=18%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/27c_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2012,44 +2012,44 @@
     "query_id": "28a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=3.20x, risk=26%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=3.20x, risk=25%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/28a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "28b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/28b_native.sql"
+    "recommended_hint": "hint02",
+    "hint": "hint02",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=1.22x, risk=28%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/28b_hint02.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "28c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/28c_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.67x, risk=26%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/28c_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "29a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/29a_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.09x, risk=22%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/29a_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "29b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/29b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.06x, risk=27%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/29b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2064,10 +2064,10 @@
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "2a",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=6.60x, risk=27%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/2a_hint02.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.74x, risk=18%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/2a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2084,7 +2084,7 @@
     "query_id": "2c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.15x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.15x, risk=17%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/2c_hint01.sql"
   },
   {
@@ -2100,10 +2100,10 @@
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "30a",
-    "recommended_hint": "hint05",
-    "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.15x, risk=27%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/30a_hint05.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.17x, risk=12%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/30a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2120,7 +2120,7 @@
     "query_id": "30c",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.45x, risk=28%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.45x, risk=6%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/30c_hint02.sql"
   },
   {
@@ -2138,7 +2138,7 @@
     "query_id": "31b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.13x, risk=30%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.13x, risk=7%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/31b_hint01.sql"
   },
   {
@@ -2147,62 +2147,62 @@
     "query_id": "31c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.34x, risk=22%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=2.34x, risk=27%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/31c_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "32a",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.98x, risk=24%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/32a_hint01.sql"
+    "recommended_hint": null,
+    "hint": "NATIVE",
+    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/32a_native.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "32b",
-    "recommended_hint": "hint01",
-    "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.34x, risk=17%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/32b_hint01.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.15x, risk=25%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/32b_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "33a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/33a_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.43x, risk=25%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/33a_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "33b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/33b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.50x, risk=23%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/33b_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "33c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/33c_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.40x, risk=14%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/33c_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "3a",
-    "recommended_hint": "hint02",
-    "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=1.81x, risk=30%)",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/3a_hint02.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=2.03x, risk=10%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/3a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2210,7 +2210,7 @@
     "query_id": "3b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.09x, risk=30%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.08x, risk=10%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/3b_hint01.sql"
   },
   {
@@ -2219,7 +2219,7 @@
     "query_id": "3c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.34x, risk=20%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.34x, risk=10%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/3c_hint01.sql"
   },
   {
@@ -2246,26 +2246,26 @@
     "query_id": "4c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.20x, risk=23%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.20x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/4c_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "5a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/5a_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.29x, risk=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/5a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "5b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/5b_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.24x, risk=15%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/5b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2273,7 +2273,7 @@
     "query_id": "5c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.79x, risk=29%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.36x, risk=19%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/5c_hint01.sql"
   },
   {
@@ -2291,17 +2291,17 @@
     "query_id": "6b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.31x, risk=25%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.31x, risk=17%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/6b_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "6c",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/6c_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=55.45x, risk=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/6c_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2309,17 +2309,17 @@
     "query_id": "6d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.11x, risk=17%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.11x, risk=15%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/6d_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "6e",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/6e_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=27.40x, risk=24%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/6e_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2327,17 +2327,17 @@
     "query_id": "6f",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.52x, risk=18%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.52x, risk=9%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/6f_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "7a",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/7a_native.sql"
+    "recommended_hint": "hint01",
+    "hint": "hint01",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=3.28x, risk=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/7a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2345,7 +2345,7 @@
     "query_id": "7b",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.13x, risk=29%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=7.07x, risk=19%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/7b_hint01.sql"
   },
   {
@@ -2354,7 +2354,7 @@
     "query_id": "7c",
     "recommended_hint": "hint05",
     "hint": "hint05",
-    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.28x, risk=24%)",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.28x, risk=10%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/7c_hint05.sql"
   },
   {
@@ -2363,17 +2363,17 @@
     "query_id": "8a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=5.47x, risk=28%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=5.47x, risk=22%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/8a_hint01.sql"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "8b",
-    "recommended_hint": null,
-    "hint": "NATIVE",
-    "reason": "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE",
-    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/8b_native.sql"
+    "recommended_hint": "hint05",
+    "hint": "hint05",
+    "reason": "HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=1.32x, risk=20%)",
+    "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/8b_hint05.sql"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2381,7 +2381,7 @@
     "query_id": "8c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.68x, risk=19%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.68x, risk=27%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/8c_hint01.sql"
   },
   {
@@ -2390,7 +2390,7 @@
     "query_id": "8d",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.71x, risk=20%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.71x, risk=27%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/8d_hint01.sql"
   },
   {
@@ -2399,7 +2399,7 @@
     "query_id": "9a",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.38x, risk=29%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from B_NVMe (src_speedup=1.38x, risk=24%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/9a_hint01.sql"
   },
   {
@@ -2417,7 +2417,7 @@
     "query_id": "9c",
     "recommended_hint": "hint01",
     "hint": "hint01",
-    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.21x, risk=28%)",
+    "reason": "HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=1.21x, risk=26%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/9c_hint01.sql"
   },
   {
@@ -2426,7 +2426,7 @@
     "query_id": "9d",
     "recommended_hint": "hint02",
     "hint": "hint02",
-    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.06x, risk=21%)",
+    "reason": "HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.06x, risk=0%)",
     "sql_file": "/root/halo/results/hinted_queries_xeon_multi_source/SATA/JOB/9d_hint02.sql"
   }
 ]

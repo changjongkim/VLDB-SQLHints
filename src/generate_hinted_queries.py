@@ -166,22 +166,57 @@ def engineer_features(op: dict, hw: dict) -> dict:
     features['buffer_miss_x_iops']          = (1 - features['fits_in_buffer']) * iops_r
     features['dataset_x_ram']               = features['log_dataset_gb'] * hw.get('ram_ratio', 0.0)
 
+    # Worst-case features (from worst-case experiments)
+    features['has_worst_case']          = op.get('has_worst_case', 0)
+    features['worst_regression_ratio']  = op.get('worst_regression_ratio', 0)
+    features['log_worst_regression']    = op.get('log_worst_regression', 0)
+    features['worst_bp_reads_ratio']    = op.get('worst_bp_reads_ratio', 0)
+    features['worst_hint_matches']      = op.get('worst_hint_matches', 0)
+
     return features
 
 
-def predict_sigma_batch(model, feature_cols: list, ops: list, hw: dict) -> np.ndarray:
-    """Batch predict sigma for a list of operators (much faster than per-op calls)."""
+def predict_sigma_batch(regressor, classifier, feature_cols: list, ops: list, hw: dict, adaptive_thresholds: dict):
+    """
+    Batch predict sigma using Dual-Head architecture:
+    1. Regressor predicts actual δ (log-ratio)
+    2. Classifier predicts binary HIGH_RISK label
+    3. Adaptive thresholds provide a secondary safety check per op_type
+    """
     rows = []
+    op_types = []
     for op in ops:
         feats = engineer_features(op, hw)
         rows.append([feats.get(c, 0.0) for c in feature_cols])
+        op_types.append(op.get('op_type', 'UNKNOWN'))
+    
     X = np.array(rows, dtype=np.float32)
-    return model.predict(X)
+    sigmas = regressor.predict(X)
+    
+    # Head 1: Binary Classifier (tuned for high recall)
+    if classifier:
+        is_high_risk_clf = classifier.predict(X)
+    else:
+        is_high_risk_clf = np.zeros(len(ops), dtype=int)
+        
+    # Head 2: Adaptive Threshold on Regressor
+    is_high_risk_thresh = np.zeros(len(ops), dtype=int)
+    for i, sig in enumerate(sigmas):
+        thresh = adaptive_thresholds.get(op_types[i], 0.8)
+        if abs(sig) > thresh:
+            is_high_risk_thresh[i] = 1
+            
+    # Ensemble (Safety-First): If EITHER head flags risk, mark as high risk
+    is_high_risk = (is_high_risk_clf == 1) | (is_high_risk_thresh == 1)
+    
+    return sigmas, is_high_risk
 
+# HALO-R (Robust) Settings
+MAX_HIGH_RISK_RATIO = 0.5  # Increased from 0.3 to allow more opportunistic speedups in JOB
+SIGMA_RISK_THRESHOLD = 0.8 # Prediction delta threshold for HIGH_RISK
 
 def halo_r_recommend(query_ops: dict, source_baseline_time: float,
-                     query_hint_times: dict, model, feat_cols: list, hw: dict,
-                     HIGH_RISK_THRESHOLD=0.8, MAX_HIGH_RISK_RATIO=0.3):
+                     query_hint_times: dict, model, feat_cols: list, hw: dict):
     """
     HALO-R recommendation (batch prediction).
     For a new/unknown server, we use ratio-based risk threshold:
@@ -261,7 +296,13 @@ def main():
         saved = pickle.load(f)
     sig_model  = saved['model']
     feat_cols  = saved['feature_cols']
-    logger.info(f"σ model loaded: {len(feat_cols)} features")
+    risk_clf   = saved.get('risk_classifier')
+    adaptive_thresholds = saved.get('adaptive_thresholds', {})
+    
+    logger.info(f"σ Dual-Head model loaded: {len(feat_cols)} features")
+    logger.info(f"  - Regressor: Random Forest")
+    logger.info(f"  - Classifier: {'Loaded' if risk_clf else 'N/A'}")
+    logger.info(f"  - Adaptive Thresholds: {len(adaptive_thresholds)} op_types")
 
     # We will test generic recommendation to Target B (EPYC)
     # Target Server: Intel Xeon Silver 4310
@@ -332,9 +373,12 @@ def main():
                         
                         if not ops_list: continue
                         
-                        # Predict Risk
-                        sigmas = predict_sigma_batch(sig_model, feat_cols, ops_list, hw_features)
-                        n_high = int((sigmas > 0.8).sum())
+                        # Predict Risk using Dual-Head
+                        sigmas, is_high_risk = predict_sigma_batch(
+                            sig_model, risk_clf, feat_cols, ops_list, 
+                            hw_features, adaptive_thresholds
+                        )
+                        n_high = int(is_high_risk.sum())
                         risk_r = n_high / len(sigmas)
                         
                         # Store as a global candidate if it's better than what we found so far

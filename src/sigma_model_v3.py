@@ -32,6 +32,7 @@ logger = logging.getLogger(__name__)
 
 from hw_registry import HW_REGISTRY, compute_hw_features, get_env_pairs
 from workload_metadata import enrich_operator
+from worst_case_integration import load_worst_case_data, enrich_operators_with_worst_case
 
 # Backward compatibility aliases
 ENV_MAP = HW_REGISTRY
@@ -178,6 +179,14 @@ def engineer_features_v3(row1, row2, pair):
     features['buffer_miss_x_iops'] = (1 - features['fits_in_buffer']) * iops_r
     features['dataset_x_ram'] = features['log_dataset_gb'] * pair.get('ram_ratio', 0.0)
 
+    # ── 16. Worst-case features ──
+    #   Captures known regression patterns from worst-case experiments
+    features['has_worst_case'] = row1.get('has_worst_case', 0)
+    features['worst_regression_ratio'] = row1.get('worst_regression_ratio', 0)
+    features['log_worst_regression'] = row1.get('log_worst_regression', 0)
+    features['worst_bp_reads_ratio'] = row1.get('worst_bp_reads_ratio', 0)
+    features['worst_hint_matches'] = row1.get('worst_hint_matches', 0)
+
     return features
 
 
@@ -200,6 +209,12 @@ def build_env_pairs_v3(df_ops):
                      'dataset_total_gb', 'n_tables_in_dataset', 'fits_in_buffer']:
             df_ops.at[idx, col] = enriched[col]
     logger.info(f"  Enrichment complete: {len(df_ops):,} operators")
+
+    # ── Enrich with worst-case data ──
+    logger.info("  Loading worst-case experiment data...")
+    df_worst = load_worst_case_data()
+    df_ops = enrich_operators_with_worst_case(df_ops, df_worst)
+    logger.info(f"  Worst-case enrichment complete")
 
     df_ops['match_key_alias'] = (
         df_ops['query_id'] + '|' +
@@ -291,8 +306,14 @@ def build_env_pairs_v3(df_ops):
 
 
 def train_sigma_v3(df_samples, output_dir='/root/halo/results'):
-    """Train v3 sigma model using Random Forest + comprehensive evaluation."""
-    from sklearn.ensemble import RandomForestRegressor
+    """Train v3 sigma model using Random Forest + comprehensive evaluation.
+    
+    Improvements:
+      1. Per-operator adaptive risk thresholds (replace global |σ| > 0.8)
+      2. Asymmetric recall-focused sample weighting
+      3. Dual-head: RF Regressor + RF Classifier for HIGH_RISK detection
+    """
+    from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
     from sklearn.model_selection import LeaveOneGroupOut
 
     os.makedirs(output_dir, exist_ok=True)
@@ -318,7 +339,25 @@ def train_sigma_v3(df_samples, output_dir='/root/halo/results'):
     # Weighted samples for env pair balance
     pair_counts = df_clean['pair_label'].value_counts()
     max_count = pair_counts.max()
-    weights = df_clean['pair_label'].map(lambda p: max_count / pair_counts.get(p, 1)).values
+    env_weights = df_clean['pair_label'].map(lambda p: max_count / pair_counts.get(p, 1)).values
+
+    # ── [Strategy 2] Regression Sensitivity Weighting ──
+    # Prioritize learning from worst-case experiments and actual regressions.
+    # Academic insight: Over-weighting rare but critical failure cases (tail risk).
+    risk_weights = np.ones_like(env_weights)
+    risk_weights[df_clean['has_worst_case'] == 1] *= 2.0  # Moderate priority for known worst-case
+    risk_weights[y > 0.8] *= 2.0   # Moderate priority for large regressions
+
+    # ── [Improvement 2] Asymmetric recall-focused weighting ──
+    # Penalize missed high-risk operators MORE than false alarms.
+    # This directly targets the low High-Risk Recall (0.55 → 0.70+)
+    high_risk_mask = np.abs(y) > 0.5  # Broader definition for learning
+    risk_weights[high_risk_mask] *= 3.0  # 3x penalty for missing dangerous ops
+    logger.info(f"  High-risk samples (|δ|>0.5): {high_risk_mask.sum():,} "
+                f"({high_risk_mask.mean()*100:.1f}% of total)")
+
+    final_weights = env_weights * risk_weights
+    logger.info(f"  Sample weighting: Env-balance × Risk-aware × Recall-focus")
 
     # ── Quick HP search for RF ──
     best_params = None
@@ -326,16 +365,16 @@ def train_sigma_v3(df_samples, output_dir='/root/halo/results'):
     n_search = min(10000, len(X))
     idx = np.random.RandomState(42).choice(len(X), n_search, replace=False)
 
-    logger.info("  Hyperparameter search...")
-    for n_est in [200, 500]:
-        for depth in [8, 12, 16, None]:
-            for msl in [2, 5, 10]:
+    logger.info("  Hyperparameter search (optimized for robust detection)... ")
+    for n_est in [500]: # Stick to high-quality forest
+        for depth in [12, 16, None]:
+            for msl in [1, 2, 5]: # Allow msl=1 for capturing specific worst-case leaf patterns
                 m = RandomForestRegressor(
                     n_estimators=n_est, max_depth=depth,
                     min_samples_leaf=msl, max_features='sqrt',
                     n_jobs=-1, random_state=42)
                 m.fit(X[idx[:7000]], y[idx[:7000]],
-                      sample_weight=weights[idx[:7000]])
+                      sample_weight=final_weights[idx[:7000]])
                 score = r2_score(y[idx[7000:]], m.predict(X[idx[7000:]]))
                 if score > best_score:
                     best_score = score
@@ -358,7 +397,7 @@ def train_sigma_v3(df_samples, output_dir='/root/halo/results'):
 
     for fold_idx, (train_idx, test_idx) in enumerate(logo.split(X, y, groups)):
         rf = RandomForestRegressor(**best_params)
-        rf.fit(X[train_idx], y[train_idx], sample_weight=weights[train_idx])
+        rf.fit(X[train_idx], y[train_idx], sample_weight=final_weights[train_idx])
         y_pred = rf.predict(X[test_idx])
         y_pred_cv[test_idx] = y_pred
 
@@ -397,14 +436,80 @@ def train_sigma_v3(df_samples, output_dir='/root/halo/results'):
                 rank_correct += 1
     ranking_acc = (rank_correct / max(rank_total, 1)) * 100
 
-    # High-Risk Classification
+    # ── [Improvement 1] Per-Operator Adaptive Thresholds ──
+    # Instead of global |σ| > 0.8, compute threshold per op_type
+    # based on the actual δ distribution: threshold = mean(|δ|) + 0.5 * std(|δ|)
+    adaptive_thresholds = {}
+    logger.info(f"\n  Per-Operator Adaptive Thresholds:")
+    logger.info(f"  {'Op Type':<22} {'Mean|δ|':>8} {'Std|δ|':>8} {'Threshold':>10} {'N':>6}")
+    logger.info(f"  {'-'*56}")
+    for op_type, group in df_clean.groupby('op_type'):
+        if len(group) < 10:
+            adaptive_thresholds[op_type] = 0.8  # Default for rare types
+            continue
+        abs_delta = np.abs(group['delta_time'].values)
+        mean_d = abs_delta.mean()
+        std_d = abs_delta.std()
+        # Threshold = mean + 0.5*std (captures top ~30% as HIGH_RISK)
+        threshold = mean_d + 0.5 * std_d
+        # Clamp between 0.3 and 2.0 for safety
+        threshold = max(0.3, min(2.0, threshold))
+        adaptive_thresholds[op_type] = round(threshold, 3)
+        logger.info(f"  {op_type:<22} {mean_d:>8.3f} {std_d:>8.3f} {threshold:>10.3f} {len(group):>6,}")
+
+    # ── [Improvement 3] Dual-Head: Train HIGH_RISK binary classifier ──
+    # Uses per-operator adaptive thresholds for labeling
+    logger.info(f"\n  Training HIGH_RISK Classifier (Dual-Head)...")
+    y_risk_labels = np.zeros(len(y), dtype=int)
+    for i, (_, row) in enumerate(df_clean.iterrows()):
+        if i >= len(y):
+            break
+        op_t = row.get('op_type', 'OTHER')
+        thresh = adaptive_thresholds.get(op_t, 0.8)
+        if abs(y[i]) > thresh:
+            y_risk_labels[i] = 1
+
+    n_positive = y_risk_labels.sum()
+    n_negative = len(y_risk_labels) - n_positive
+    logger.info(f"  HIGH_RISK labels: {n_positive:,} positive ({n_positive/len(y)*100:.1f}%), "
+                f"{n_negative:,} negative")
+
+    risk_clf = RandomForestClassifier(
+        n_estimators=300, max_depth=16, min_samples_leaf=2,
+        max_features='sqrt', class_weight='balanced_subsample',
+        n_jobs=-1, random_state=42
+    )
+    risk_clf.fit(X, y_risk_labels, sample_weight=final_weights)
+
+    # Evaluate classifier with CV predictions
+    y_risk_pred_cv = np.zeros_like(y_risk_labels)
+    for fold_idx, (train_idx, test_idx) in enumerate(logo.split(X, y, groups)):
+        clf_fold = RandomForestClassifier(
+            n_estimators=300, max_depth=16, min_samples_leaf=2,
+            max_features='sqrt', class_weight='balanced_subsample',
+            n_jobs=-1, random_state=42
+        )
+        clf_fold.fit(X[train_idx], y_risk_labels[train_idx],
+                     sample_weight=final_weights[train_idx])
+        y_risk_pred_cv[test_idx] = clf_fold.predict(X[test_idx])
+
+    clf_prec = precision_score(y_risk_labels, y_risk_pred_cv) if y_risk_pred_cv.any() else 0.0
+    clf_rec = recall_score(y_risk_labels, y_risk_pred_cv) if y_risk_labels.any() else 0.0
+    clf_f1 = f1_score(y_risk_labels, y_risk_pred_cv) if y_risk_labels.any() else 0.0
+
+    logger.info(f"  Classifier Results (Adaptive Thresholds):")
+    logger.info(f"    Precision:      {clf_prec:.3f}")
+    logger.info(f"    Recall:         {clf_rec:.3f}")
+    logger.info(f"    F1-Score:       {clf_f1:.3f}")
+
+    # High-Risk from regressor (legacy comparison)
     for threshold, label in [(0.5, '0.5'), (0.8, '0.8')]:
         y_high = np.abs(y) > threshold
         y_pred_high = np.abs(y_pred_cv) > threshold
         prec = precision_score(y_high, y_pred_high) if y_pred_high.any() else 0.0
         rec = recall_score(y_high, y_pred_high) if y_high.any() else 0.0
         f1 = f1_score(y_high, y_pred_high) if y_high.any() else 0.0
-        logger.info(f"  High-Risk (|δ|>{label}): Prec={prec:.3f}, Rec={rec:.3f}, F1={f1:.3f}")
+        logger.info(f"  Regressor High-Risk (|δ|>{label}): Prec={prec:.3f}, Rec={rec:.3f}, F1={f1:.3f}")
 
     y_high_final = np.abs(y) > 0.8
     y_pred_high_final = np.abs(y_pred_cv) > 0.8
@@ -413,17 +518,21 @@ def train_sigma_v3(df_samples, output_dir='/root/halo/results'):
     high_f1 = f1_score(y_high_final, y_pred_high_final) if y_high_final.any() else 0.0
 
     logger.info(f"\n{'='*60}")
-    logger.info("σ Model v3 Results (Random Forest):")
+    logger.info("σ Model v3 Results (Random Forest + Dual-Head):")
     logger.info(f"  RMSE:             {overall_rmse:.3f}")
     logger.info(f"  MAE:              {overall_mae:.3f}")
     logger.info(f"  R²:               {overall_r2:.3f}")
     logger.info(f"  Pearson r:        {overall_corr:.3f}")
     logger.info(f"  Direction Acc:    {overall_dir_acc:.1f}%")
     logger.info(f"  Ranking Acc:      {ranking_acc:.1f}%")
-    logger.info(f"  High-Risk Detection (|δ|>0.8):")
+    logger.info(f"  --- Regressor High-Risk (|δ|>0.8) ---")
     logger.info(f"    Precision:      {high_prec:.3f}")
     logger.info(f"    Recall:         {high_rec:.3f}")
     logger.info(f"    F1-Score:       {high_f1:.3f}")
+    logger.info(f"  --- Classifier High-Risk (Adaptive Threshold) ---")
+    logger.info(f"    Precision:      {clf_prec:.3f}")
+    logger.info(f"    Recall:         {clf_rec:.3f}")
+    logger.info(f"    F1-Score:       {clf_f1:.3f}")
 
     # ══════════════════════════════════════════════════════════
     #   VISUALIZATION (Using REAL CV predictions)
@@ -497,14 +606,14 @@ def train_sigma_v3(df_samples, output_dir='/root/halo/results'):
     plt.tight_layout(pad=2.0)
     fig_path = os.path.join(output_dir, 'figures', 'sigma_model_v3_evaluation.png')
     plt.savefig(fig_path, dpi=300, bbox_inches='tight')
-    logger.info(f"\nSaved evaluation plot: {fig_path}")
-    plt.close()
-
-    # ── Feature Importance Plot ──
+    logger.info(f"\n{'='*60}")
+    logger.info(f"σ Model v3 Results (Random Forest):")
+    # Final fit on all data
     model = RandomForestRegressor(**best_params)
-    model.fit(X, y, sample_weight=weights)
-    imp = model.feature_importances_
-    feat_imp = sorted(zip(feature_cols, imp), key=lambda x: x[1], reverse=True)
+    model.fit(X, y, sample_weight=final_weights)
+    
+    feature_importance = pd.Series(model.feature_importances_, index=feature_cols).sort_values(ascending=False)
+    feat_imp = sorted(zip(feature_cols, feature_importance), key=lambda x: x[1], reverse=True)
 
     fig2, ax2 = plt.subplots(figsize=(10, 8))
     top_n = 20
@@ -560,10 +669,12 @@ def train_sigma_v3(df_samples, output_dir='/root/halo/results'):
     # ── Save results ──
     results = {
         'model_type': 'RandomForest',
-        'model_version': 'v3_rf',
+        'model_version': 'v3_rf_dualhead',
         'improvements': [
             'random_forest', 'interaction_features', 'ratio_features',
-            'real_cv_visualization', 'weighted_sampling'
+            'real_cv_visualization', 'weighted_sampling',
+            'worst_case_integration', 'adaptive_thresholds',
+            'recall_focused_weighting', 'dual_head_classifier'
         ],
         'n_samples': int(len(X)),
         'n_features': len(feature_cols),
@@ -579,6 +690,12 @@ def train_sigma_v3(df_samples, output_dir='/root/halo/results'):
             'recall': float(high_rec),
             'f1': float(high_f1)
         },
+        'classifier_metrics': {
+            'precision': float(clf_prec),
+            'recall': float(clf_rec),
+            'f1': float(clf_f1)
+        },
+        'adaptive_thresholds': adaptive_thresholds,
         'fold_results': fold_results,
         'feature_importance': {k: float(v) for k, v in feat_imp[:25]},
         'operator_sigma': op_stats,
@@ -589,7 +706,12 @@ def train_sigma_v3(df_samples, output_dir='/root/halo/results'):
         json.dump(results, f, indent=2, default=str)
 
     with open(os.path.join(output_dir, 'sigma_model_v3.pkl'), 'wb') as f:
-        pickle.dump({'model': model, 'feature_cols': feature_cols}, f)
+        pickle.dump({
+            'model': model,
+            'feature_cols': feature_cols,
+            'risk_classifier': risk_clf,
+            'adaptive_thresholds': adaptive_thresholds,
+        }, f)
 
     df_clean.to_parquet(os.path.join(output_dir, 'sigma_predictions_v3.parquet'), index=False)
 

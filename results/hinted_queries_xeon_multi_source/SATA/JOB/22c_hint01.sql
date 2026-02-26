@@ -3,8 +3,8 @@
 -- Target HW : Xeon_SATA
 -- Mode      : Multi-Source Global Selection
 -- Hint      : hint01
--- From Src  : A_SATA
--- Reason    : HALO-R (Multi-Source): 'hint01' selected from A_SATA (src_speedup=5.19x, risk=22%)
+-- From Src  : B_SATA
+-- Reason    : HALO-R (Multi-Source): 'hint01' selected from B_SATA (src_speedup=1.13x, risk=10%)
 -- Generated : 2026-02-26
 ======================================================================
 

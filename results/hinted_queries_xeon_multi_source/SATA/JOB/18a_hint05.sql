@@ -4,7 +4,7 @@
 -- Mode      : Multi-Source Global Selection
 -- Hint      : hint05
 -- From Src  : B_NVMe
--- Reason    : HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=8.95x, risk=17%)
+-- Reason    : HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=8.95x, risk=6%)
 -- Generated : 2026-02-26
 ======================================================================
 

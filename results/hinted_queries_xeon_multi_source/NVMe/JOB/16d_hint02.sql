@@ -4,7 +4,7 @@
 -- Mode      : Multi-Source Global Selection
 -- Hint      : hint02
 -- From Src  : A_SATA
--- Reason    : HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=6.68x, risk=25%)
+-- Reason    : HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=6.68x, risk=28%)
 -- Generated : 2026-02-26
 ======================================================================
 

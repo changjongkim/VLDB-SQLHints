@@ -4,7 +4,7 @@
 -- Mode      : Multi-Source Global Selection
 -- Hint      : hint05
 -- From Src  : B_SATA
--- Reason    : HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.05x, risk=7%)
+-- Reason    : HALO-R (Multi-Source): 'hint05' selected from B_SATA (src_speedup=1.05x, risk=6%)
 -- Generated : 2026-02-26
 ======================================================================
 

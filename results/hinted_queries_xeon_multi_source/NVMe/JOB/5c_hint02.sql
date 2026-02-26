@@ -3,8 +3,8 @@
 -- Target HW : Xeon_NVMe
 -- Mode      : Multi-Source Global Selection
 -- Hint      : hint02
--- From Src  : A_NVMe
--- Reason    : HALO-R (Multi-Source): 'hint02' selected from A_NVMe (src_speedup=2.05x, risk=27%)
+-- From Src  : A_SATA
+-- Reason    : HALO-R (Multi-Source): 'hint02' selected from A_SATA (src_speedup=1.56x, risk=27%)
 -- Generated : 2026-02-26
 ======================================================================
 
