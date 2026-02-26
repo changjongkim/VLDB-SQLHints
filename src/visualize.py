@@ -234,7 +234,7 @@ def fig3_head_to_head():
 
     bars1 = ax.bar(x - width/2, b1_vals, width, label='B1: Native Optimizer',
                    color=COLORS['gray'], alpha=0.8, edgecolor='white')
-    bars2 = ax.bar(x + width/2, b4_vals, width, label='B4: Best Hint Set (Per-Env Oracle)',
+    bars2 = ax.bar(x + width/2, b4_vals, width, label='B4: Best Hint Set (Per-Env Optimal)',
                    color=COLORS['green'], alpha=0.8, edgecolor='white')
 
     # Add speedup labels
@@ -608,7 +608,7 @@ def fig7_summary_dashboard():
            bbox=dict(boxstyle='round', facecolor='lightyellow',
                     edgecolor=COLORS['orange'], alpha=0.9))
 
-    fig.suptitle('Halo: Operator-Level Hardware Sensitivity (OLHS) — Results Summary',
+    fig.suptitle('Halo: Hardware-Aware Learned Optimizer (HALO) — Results Summary',
                 fontsize=18, fontweight='bold', y=1.01)
 
     fig.savefig(f'{OUTPUT_DIR}/fig7_summary_dashboard.png')

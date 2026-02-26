@@ -53,16 +53,11 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 logger = logging.getLogger('halo')
 
 
-# ═══════════════════════════════════════════════════════════════════════
-#  Hardware Environment Registry
-# ═══════════════════════════════════════════════════════════════════════
+from hw_registry import HW_REGISTRY, compute_hw_features
+from workload_metadata import enrich_operator
 
-ENV_PROFILES = {
-    'A_NVMe': {'server': 'A', 'storage': 'NVMe', 'cpu': 'i9-13900K'},
-    'A_SATA': {'server': 'A', 'storage': 'SATA', 'cpu': 'i9-13900K'},
-    'B_NVMe': {'server': 'B', 'storage': 'NVMe', 'cpu': 'EPYC-7453'},
-    'B_SATA': {'server': 'B', 'storage': 'SATA', 'cpu': 'EPYC-7453'},
-}
+# Backward compatibility
+ENV_PROFILES = HW_REGISTRY
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -91,6 +86,8 @@ class HintCandidate:
     n_benefit: int
     total_risk_score: float
     operator_details: List[OperatorRisk] = field(default_factory=list)
+    expected_gain: float = 1.0          # Risk-Reward expected value
+    risk_probability: float = 0.0       # Estimated regression probability
 
 
 @dataclass
@@ -123,10 +120,38 @@ class HaloFramework:
     """
 
     # ── Configurable thresholds for HALO-R ──
-    RISK_HIGH_THRESHOLD = 0.8    # Relaxed from 0.5 to allow more stability
+    RISK_HIGH_THRESHOLD = 0.8    # Default; overridden by adaptive thresholds
     RISK_MODERATE_THRESHOLD = 0.4
     MIN_SPEEDUP_THRESHOLD = 1.05
     MAX_HIGH_RISK_OPS = 3        # Increased from 0 to allow minor uncertainties
+
+    # ── Adaptive per-operator risk thresholds ──
+    # Operators with naturally high variance get relaxed thresholds;
+    # stable operators get tighter thresholds.
+    ADAPTIVE_RISK_THRESHOLDS = {
+        # I/O-heavy ops: storage change causes large natural σ
+        'TABLE_SCAN':       1.2,
+        'INDEX_SCAN':       1.0,
+        'INDEX_LOOKUP':     1.0,
+        'TEMP_TABLE_SCAN':  1.0,
+        # CPU-heavy ops: sensitive to compute change
+        'HASH_JOIN':        0.7,
+        'NL_INNER_JOIN':    0.7,
+        'NL_SEMIJOIN':      0.7,
+        'NL_ANTIJOIN':      0.7,
+        'NL_LEFT_JOIN':     0.7,
+        # Lightweight ops: even small delta is suspicious
+        'FILTER':           0.5,
+        'AGGREGATE':        0.5,
+        'GROUP_AGGREGATE':  0.5,
+        'SORT':             0.6,
+        'STREAM':           0.5,
+        'MATERIALIZE':      0.6,
+    }
+
+    # ── Risk-Reward tradeoff constants ──
+    HIGH_CONFIDENCE_SPEEDUP = 2.0   # Source speedup above this = high-value hint
+    RISK_REWARD_MIN_EV = 1.10       # Minimum expected value to accept risky hint
 
     # ── Threshold for HALO-G ──
     GREEDY_MIN_SPEEDUP = 1.02    # must beat native by 2% in source
@@ -145,19 +170,31 @@ class HaloFramework:
     # ───────────────────────────────────────────────────────────────────
 
     def train(self, df_operators: pd.DataFrame, df_queries: pd.DataFrame,
-              model_path: str = '/root/halo/results/sigma_model_v2.pkl'):
+              model_path: str = '/root/halo/results/sigma_model_v3.pkl'):
         """
         Load profiling data and the pre-trained σ model.
 
         Args:
             df_operators: unified_operators.parquet
             df_queries:   unified_queries.parquet
-            model_path:   path to σ model pickle (from sigma_model_v2.py)
+            model_path:   path to σ model pickle (from sigma_model_v3.py)
         """
         logger.info("═══ HALO Framework: Initializing ═══")
 
         self.df_operators = df_operators.copy()
         self.df_queries = df_queries.copy()
+
+        # Enrich operators with workload metadata
+        logger.info("  Enriching operators with workload metadata...")
+        for idx, row in self.df_operators.iterrows():
+            enriched = enrich_operator(
+                row.to_dict(),
+                benchmark=row.get('benchmark', ''),
+                env_id=row.get('env_id', None)
+            )
+            for col in ['table_rows', 'table_size_mb', 'n_indexes',
+                         'dataset_total_gb', 'n_tables_in_dataset', 'fits_in_buffer']:
+                self.df_operators.at[idx, col] = enriched[col]
 
         # Load σ model
         if os.path.exists(model_path):
@@ -168,7 +205,7 @@ class HaloFramework:
             logger.info(f"  σ model loaded: {len(self.feature_cols)} features")
         else:
             logger.warning(f"  σ model not found at {model_path}. "
-                           "HALO-R will be unavailable. Run sigma_model_v2.py first.")
+                           "HALO-R will be unavailable. Run sigma_model_v3.py first.")
 
         self._build_operator_index()
         self._build_baseline_index()
@@ -198,12 +235,8 @@ class HaloFramework:
     # ───────────────────────────────────────────────────────────────────
 
     def _get_hw_change_flags(self, source_env: str, target_env: str) -> dict:
-        src = ENV_PROFILES.get(source_env, {})
-        tgt = ENV_PROFILES.get(target_env, {})
-        return {
-            'storage_changed': int(src.get('storage') != tgt.get('storage')),
-            'compute_changed': int(src.get('cpu') != tgt.get('cpu')),
-        }
+        """Compute quantitative HW transition features using the registry."""
+        return compute_hw_features(source_env, target_env)
 
     def _engineer_features_for_prediction(self, op: dict, hw_change: dict) -> dict:
         features = {}
@@ -232,12 +265,86 @@ class HaloFramework:
         features['log_self_time'] = math.log(max(op.get('self_time', 0.001), 0.001))
         features['log_total_work'] = math.log(max(op.get('total_work', 0.001), 0.001))
 
+        # Ratio features
+        est_rows = max(op.get('est_rows', 1), 1)
+        est_cost = max(op.get('est_cost', 0.01), 0.01)
+        actual_rows = max(op.get('actual_rows', 1), 1)
+        self_time = max(op.get('self_time', 0.001), 0.001)
+        features['cost_per_row'] = math.log(est_cost / est_rows + 0.001)
+        features['time_per_row'] = math.log(self_time / actual_rows + 0.0001)
+        features['selectivity'] = math.log(actual_rows / est_rows + 0.001)
+
         features['depth'] = op.get('depth', 0)
         features['num_children'] = op.get('num_children', 0)
 
-        features['storage_changed'] = hw_change['storage_changed']
-        features['compute_changed'] = hw_change['compute_changed']
-        features['both_changed'] = hw_change['storage_changed'] * hw_change['compute_changed']
+        # Binary HW flags
+        sc = hw_change['storage_changed']
+        cc = hw_change['compute_changed']
+        features['storage_changed'] = sc
+        features['compute_changed'] = cc
+        features['both_changed'] = hw_change.get('both_changed', sc * cc)
+
+        # Quantitative HW ratios
+        features['storage_speed_ratio'] = hw_change.get('storage_speed_ratio', 0.0)
+        features['iops_ratio'] = hw_change.get('iops_ratio', 0.0)
+        features['write_speed_ratio'] = hw_change.get('write_speed_ratio', 0.0)
+        features['cpu_core_ratio'] = hw_change.get('cpu_core_ratio', 0.0)
+        features['cpu_thread_ratio'] = hw_change.get('cpu_thread_ratio', 0.0)
+        features['cpu_clock_ratio'] = hw_change.get('cpu_clock_ratio', 0.0)
+        features['cpu_base_clock_ratio'] = hw_change.get('cpu_base_clock_ratio', 0.0)
+        features['l3_cache_ratio'] = hw_change.get('l3_cache_ratio', 0.0)
+        features['ram_ratio'] = hw_change.get('ram_ratio', 0.0)
+        features['buffer_pool_ratio'] = hw_change.get('buffer_pool_ratio', 0.0)
+        features['is_storage_downgrade'] = hw_change.get('is_storage_downgrade', 0)
+        features['is_cpu_downgrade'] = hw_change.get('is_cpu_downgrade', 0)
+        features['is_ram_downgrade'] = hw_change.get('is_ram_downgrade', 0)
+
+        # Workload metadata
+        features['log_table_rows'] = math.log(max(op.get('table_rows', 1), 1))
+        features['log_table_size_mb'] = math.log(max(op.get('table_size_mb', 1), 1))
+        features['n_indexes'] = op.get('n_indexes', 0)
+        features['log_dataset_gb'] = math.log(max(op.get('dataset_total_gb', 0.1), 0.1))
+        features['fits_in_buffer'] = op.get('fits_in_buffer', 0)
+
+        # Operator × Binary HW interaction
+        features['scan_x_storage'] = features['is_scan'] * sc
+        features['scan_x_compute'] = features['is_scan'] * cc
+        features['join_x_storage'] = features['is_join'] * sc
+        features['join_x_compute'] = features['is_join'] * cc
+        features['index_x_storage'] = features['is_index_op'] * sc
+        features['index_x_compute'] = features['is_index_op'] * cc
+        features['agg_x_storage'] = features['is_agg_sort'] * sc
+        features['agg_x_compute'] = features['is_agg_sort'] * cc
+
+        # Work × Binary HW interaction
+        features['work_x_storage'] = features['log_total_work'] * sc
+        features['work_x_compute'] = features['log_total_work'] * cc
+        features['rows_x_storage'] = features['log_actual_rows'] * sc
+        features['rows_x_compute'] = features['log_actual_rows'] * cc
+
+        # Operator × Quantitative HW interaction
+        iops_r = hw_change.get('iops_ratio', 0.0)
+        clock_r = hw_change.get('cpu_clock_ratio', 0.0)
+        core_r = hw_change.get('cpu_core_ratio', 0.0)
+        features['scan_x_iops'] = features['is_scan'] * iops_r
+        features['scan_x_storage_speed'] = features['is_scan'] * hw_change.get('storage_speed_ratio', 0.0)
+        features['join_x_cpu_clock'] = features['is_join'] * clock_r
+        features['join_x_cpu_cores'] = features['is_join'] * core_r
+        features['agg_x_cpu_clock'] = features['is_agg_sort'] * clock_r
+        features['index_x_iops'] = features['is_index_op'] * iops_r
+
+        # Work × Quantitative HW interaction
+        features['rows_x_iops'] = features['log_actual_rows'] * iops_r
+        features['work_x_cpu_clock'] = features['log_total_work'] * clock_r
+        features['cost_x_iops'] = features['log_est_cost'] * iops_r
+
+        # Workload × HW cross-terms
+        features['table_size_x_iops'] = features['log_table_size_mb'] * iops_r
+        features['table_size_x_storage_speed'] = features['log_table_size_mb'] * hw_change.get('storage_speed_ratio', 0.0)
+        features['table_rows_x_iops'] = features['log_table_rows'] * iops_r
+        features['buffer_miss_x_iops'] = (1 - features['fits_in_buffer']) * iops_r
+        features['dataset_x_ram'] = features['log_dataset_gb'] * hw_change.get('ram_ratio', 0.0)
+
         return features
 
     def _predict_operator_delta(self, op: dict, hw_change: dict) -> float:
@@ -267,9 +374,23 @@ class HaloFramework:
                 changed.append({'type': 'removed', 'operator': bl_op})
         return changed
 
+    def _get_adaptive_threshold(self, op_type: str) -> float:
+        """Get per-operator risk threshold. Operators with naturally
+        high variance (I/O ops) get relaxed thresholds; stable ops
+        (FILTER, AGGREGATE) get tighter ones."""
+        return self.ADAPTIVE_RISK_THRESHOLDS.get(
+            op_type, self.RISK_HIGH_THRESHOLD
+        )
+
     def _assess_hint_risk(self, query_id: str, hint_set: str,
                           source_env: str, target_env: str) -> Optional[HintCandidate]:
-        """Core OLHS logic: assess operator-level risk of a hint on target HW."""
+        """Core HALO logic: assess operator-level risk of a hint on target HW.
+        
+        Improvements over baseline:
+          1. Adaptive per-operator thresholds (I/O ops tolerate higher σ)
+          2. Risk-Reward expected value calculation
+          3. Confidence tier assignment for downstream policy
+        """
         hw_change = self._get_hw_change_flags(source_env, target_env)
 
         baseline_ops = self._operator_index.get((source_env, query_id, 'baseline'), [])
@@ -304,21 +425,23 @@ class HaloFramework:
             else:
                 delta = self._predict_operator_delta(op, hw_change)
             
-            # IMPROVEMENT: Risk is only when it gets SLOWER (positive delta)
-            # A large negative delta is a BENEFIT, not a RISK.
-            if delta > self.RISK_HIGH_THRESHOLD:
+            # ── Adaptive threshold per operator type ──
+            op_threshold = self._get_adaptive_threshold(op['op_type'])
+            op_moderate_threshold = op_threshold * 0.5
+            
+            if delta > op_threshold:
                 risk_level = 'HIGH'; n_high += 1
-            elif delta > self.RISK_MODERATE_THRESHOLD:
+            elif delta > op_moderate_threshold:
                 risk_level = 'MODERATE'
-            elif delta < -self.RISK_HIGH_THRESHOLD:
-                risk_level = 'SAFE' # High confidence improvement
+            elif delta < -op_threshold:
+                risk_level = 'SAFE'  # High confidence improvement
             else:
                 risk_level = 'SAFE'
                 
             contribution = 'HURT' if delta > 0 else 'BENEFIT'
             if delta <= 0: n_benefit += 1
             weight = math.log(max(op.get('self_time', 0.001), 0.001) + 1) + 1
-            total_risk_score += max(0, delta) * weight # Only Penalize slowdowns
+            total_risk_score += max(0, delta) * weight  # Only penalize slowdowns
             op_risks.append(OperatorRisk(
                 op_type=op['op_type'],
                 table_alias=op.get('table_alias', ''),
@@ -332,6 +455,11 @@ class HaloFramework:
         adjustment_factor = math.exp(-avg_delta)
         predicted_target_speedup = 1.0 + (source_speedup - 1.0) * adjustment_factor
 
+        # ── Risk-Reward Expected Value ──
+        # Estimate probability of regression based on risk score
+        risk_probability = min(1.0, total_risk_score / max(len(diffs), 1))
+        expected_gain = source_speedup * (1.0 - risk_probability)
+
         return HintCandidate(
             hint_set=hint_set,
             source_speedup=source_speedup,
@@ -341,6 +469,8 @@ class HaloFramework:
             n_benefit=n_benefit,
             total_risk_score=total_risk_score,
             operator_details=op_risks,
+            expected_gain=expected_gain,
+            risk_probability=risk_probability,
         )
 
     # ───────────────────────────────────────────────────────────────────
@@ -441,7 +571,12 @@ class HaloFramework:
     def _recommend_robust(self, query_id, source_env, target_env,
                           available_hints) -> HaloRecommendation:
         """
-        HALO-R: Evaluate every hint using σ model, reject high-risk ones.
+        HALO-R (v2): 3-Tier Confidence + Risk-Reward Policy.
+
+        Improvement over v1:
+          - Tier 1 (GREEN):  High-confidence safe → always apply
+          - Tier 2 (YELLOW): Uncertain → apply only if Risk-Reward EV > threshold
+          - Tier 3 (RED):    High-risk → reject (native fallback)
         """
         if self.sigma_model is None:
             logger.warning("σ model not loaded. Falling back to HALO-G.")
@@ -463,13 +598,58 @@ class HaloFramework:
                 native_fallback=True,
             )
 
-        # Filter: reject high-risk candidates
-        safe = [c for c in candidates
-                if c.n_high_risk <= self.MAX_HIGH_RISK_OPS
-                and c.predicted_target_speedup >= self.MIN_SPEEDUP_THRESHOLD]
+        # ── 3-Tier Classification ──
+        tier1_green = []   # High confidence: safe AND good speedup
+        tier2_yellow = []  # Uncertain: some risk but potentially rewarding
+        tier3_red = []     # Dangerous: too many high-risk ops
 
-        if safe:
-            best = max(safe, key=lambda c: c.predicted_target_speedup)
+        for c in candidates:
+            if c.n_high_risk == 0 and c.predicted_target_speedup >= self.MIN_SPEEDUP_THRESHOLD:
+                # TIER 1 (GREEN): No high-risk ops, clear speedup
+                tier1_green.append(c)
+            elif c.n_high_risk > self.MAX_HIGH_RISK_OPS:
+                # TIER 3 (RED): Too many dangerous operators
+                tier3_red.append(c)
+            else:
+                # TIER 2 (YELLOW): Some risk, needs Risk-Reward evaluation
+                tier2_yellow.append(c)
+
+        # ── Selection Logic ──
+        best = None
+        tier_used = None
+
+        # Priority 1: Pick from GREEN tier
+        if tier1_green:
+            best = max(tier1_green, key=lambda c: c.predicted_target_speedup)
+            tier_used = 'GREEN'
+
+        # Priority 2: Evaluate YELLOW tier via Risk-Reward EV
+        if not best and tier2_yellow:
+            # Accept yellow candidates only if expected gain justifies the risk
+            rewarding = []
+            for c in tier2_yellow:
+                # High-value hints (source speedup > 2x) get special consideration
+                if c.source_speedup >= self.HIGH_CONFIDENCE_SPEEDUP:
+                    # For high-value hints: accept if EV still beats native
+                    if c.expected_gain >= self.RISK_REWARD_MIN_EV:
+                        rewarding.append(c)
+                else:
+                    # For moderate hints: stricter — need predicted target speedup
+                    if (c.predicted_target_speedup >= self.MIN_SPEEDUP_THRESHOLD
+                            and c.expected_gain >= self.RISK_REWARD_MIN_EV):
+                        rewarding.append(c)
+
+            if rewarding:
+                best = max(rewarding, key=lambda c: c.expected_gain)
+                tier_used = 'YELLOW'
+
+        # Priority 3: Also check GREEN from initially-yellow if they pass
+        #   (candidates that were borderline could still be safe)
+        if not best and tier1_green:
+            best = max(tier1_green, key=lambda c: c.predicted_target_speedup)
+            tier_used = 'GREEN'
+
+        if best:
             if best.total_risk_score < 1.0:
                 risk = 'SAFE'
             elif best.total_risk_score < 3.0:
@@ -483,11 +663,12 @@ class HaloFramework:
                 recommended_hint=best.hint_set,
                 predicted_speedup=best.predicted_target_speedup,
                 risk_level=risk,
-                reason=(f"HALO-R selected {best.hint_set}: "
+                reason=(f"HALO-R [{tier_used}] selected {best.hint_set}: "
                         f"source {best.source_speedup:.2f}x → "
                         f"predicted target {best.predicted_target_speedup:.2f}x. "
                         f"{best.n_operators_affected} ops affected "
                         f"({best.n_benefit}↑, {best.n_high_risk}⚠). "
+                        f"EV={best.expected_gain:.2f}, "
                         f"Risk={best.total_risk_score:.2f}"),
                 all_candidates=candidates,
             )
@@ -500,7 +681,8 @@ class HaloFramework:
                 predicted_speedup=1.0,
                 risk_level='SAFE',
                 reason=(f"HALO-R rejected all hints for safety. "
-                        f"Best was {best_rej.hint_set} (src {best_rej.source_speedup:.2f}x) "
+                        f"Best was {best_rej.hint_set} (src {best_rej.source_speedup:.2f}x, "
+                        f"EV={best_rej.expected_gain:.2f}) "
                         f"but {best_rej.n_high_risk} high-risk ops detected. "
                         f"Keeping native to avoid regression."),
                 all_candidates=candidates,
@@ -556,41 +738,48 @@ class HaloFramework:
 
     def recommend_for_new_query(self, source_env, target_env, plan_str, benchmark='tpch'):
         """
-        Main API for GENERALIZATION: 
+        Main API for GENERALIZATION:
         Recommend a hint for a query NEVER SEEN BEFORE by the framework.
         """
         # 1. Parse the new plan
         from explain_parser import mysql_explain_parser
         parser = mysql_explain_parser()
         plan_df = parser.parse_explain_analyze(plan_str, 'new_q', 'baseline', 'none', target_env, benchmark)
-        
+
         # 2. Find similar historical queries to pick candidate hints
         similar = self.find_similar_queries(target_env, plan_df)
         if not similar:
             return "🛡️ KEEP NATIVE: No similar queries found."
-            
+
         # 3. Collect candidates from the most similar query
         top_sim_qid = similar[0][0]
         logger.info(f"Target query similarity: Found {top_sim_qid} is most similar.")
-        
-        # 4. Filter these candidates through HALO-R logic
-        # We simulate that the same hints might work.
-        results = []
-        # Get hint sets that were successful for similar query in source env
-        candidates = self._queries_df[
-            (self._queries_df['env_id'] == source_env) & 
-            (self._queries_df['query_id'] == top_sim_qid) &
-            (self._queries_df['hint_set'] != 'baseline')
-        ].sort_values('avg_speedup', ascending=False).head(3)
-        
+
+        # 4. Get hint sets that were successful for similar query in source env
+        src_baseline = self._query_baselines.get((source_env, top_sim_qid))
+        if src_baseline is None:
+            return "🛡️ KEEP NATIVE: No baseline data for similar query in source env."
+
+        candidates = self.df_queries[
+            (self.df_queries['env_id'] == source_env) &
+            (self.df_queries['query_id'] == top_sim_qid) &
+            (self.df_queries['hint_set'] != 'baseline')
+        ].copy()
+        if candidates.empty:
+            return "🛡️ KEEP NATIVE: No hint data for similar query in source env."
+
+        # Compute speedup and sort
+        candidates['speedup'] = src_baseline / candidates['execution_time_s'].clip(lower=0.001)
+        candidates = candidates.sort_values('speedup', ascending=False).head(3)
+
+        # 5. Filter these candidates through HALO-R logic
         for _, cand in candidates.iterrows():
             hint = cand['hint_set']
-            # Note: In a real system, we'd need to EXPLAIN the NEW query with THIS hint.
-            # Here we assume the Plan Diff pattern is similar to the historical one for current PoC.
             res = self.recommend(top_sim_qid, source_env, target_env, policy='robust')
             if res.recommended_hint == hint:
-                return f"✅ RECOMMEND: {hint} (Based on similarity to {top_sim_qid} and verified SAFE by σ model)"
-        
+                return (f"✅ RECOMMEND: {hint} "
+                        f"(Based on similarity to {top_sim_qid} and verified SAFE by σ model)")
+
         return "🛡️ KEEP NATIVE: Candidates from similar queries were rejected by σ model."
        
     def recommend_all(self, source_env: str, target_env: str,

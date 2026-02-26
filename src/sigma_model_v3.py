@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Halo Phase 4v3: Enhanced OLHS Sigma Model
+Halo Phase 4v3: Enhanced HALO Sigma Model
 
 Key improvements over v2:
   1. Interaction features: op_type × hw_change crossterms
@@ -30,23 +30,12 @@ warnings.filterwarnings('ignore')
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 
-ENV_MAP = {
-    'A_NVMe': {'server': 'A', 'storage': 'NVMe', 'cpu': 'i9-12900K'},
-    'A_SATA': {'server': 'A', 'storage': 'SATA', 'cpu': 'i9-12900K'},
-    'B_NVMe': {'server': 'B', 'storage': 'NVMe', 'cpu': 'EPYC-7713'},
-    'B_SATA': {'server': 'B', 'storage': 'SATA', 'cpu': 'EPYC-7713'},
-}
+from hw_registry import HW_REGISTRY, compute_hw_features, get_env_pairs
+from workload_metadata import enrich_operator
 
-ENV_PAIRS = []
-for e1 in sorted(ENV_MAP.keys()):
-    for e2 in sorted(ENV_MAP.keys()):
-        if e1 < e2:
-            ENV_PAIRS.append({
-                'env1': e1, 'env2': e2,
-                'storage_changed': int(ENV_MAP[e1]['storage'] != ENV_MAP[e2]['storage']),
-                'compute_changed': int(ENV_MAP[e1]['cpu'] != ENV_MAP[e2]['cpu']),
-                'pair_label': f"{e1}_vs_{e2}"
-            })
+# Backward compatibility aliases
+ENV_MAP = HW_REGISTRY
+ENV_PAIRS = get_env_pairs(include_target_envs=False)
 
 
 def filter_noisy_operators(df_ops, min_self_time=0.1):
@@ -63,7 +52,15 @@ def filter_noisy_operators(df_ops, min_self_time=0.1):
 
 def engineer_features_v3(row1, row2, pair):
     """
-    Enhanced feature engineering with interaction terms and ratio features.
+    Enhanced feature engineering with:
+      - Operator type one-hot + semantic groups
+      - Cardinality, estimation quality, work intensity
+      - Ratio features (cost_per_row, time_per_row, selectivity)
+      - Binary HW change flags (backward compatible)
+      - Quantitative HW ratios (storage speed, IOPS, CPU clock/cores, RAM)
+      - Workload metadata (table size, row count, indexes, buffer fit)
+      - Operator × HW interaction terms (binary AND quantitative)
+      - Workload × HW cross-terms
     """
     features = {}
 
@@ -102,25 +99,45 @@ def engineer_features_v3(row1, row2, pair):
     features['log_self_time'] = math.log(self_time)
     features['log_total_work'] = math.log(total_work)
 
-    # ── 6. NEW: Ratio features ──
+    # ── 6. Ratio features ──
     features['cost_per_row'] = math.log(est_cost / est_rows + 0.001)
     features['time_per_row'] = math.log(self_time / actual_rows + 0.0001)
-    features['selectivity'] = math.log(actual_rows / est_rows + 0.001)  # Over/under estimation
+    features['selectivity'] = math.log(actual_rows / est_rows + 0.001)
 
     # ── 7. Structure ──
     features['depth'] = row1['depth']
     features['num_children'] = row1.get('num_children', 0)
 
-    # ── 8. Environment factors ──
+    # ── 8. Binary HW change flags (backward compatible) ──
     sc = pair['storage_changed']
     cc = pair['compute_changed']
     features['storage_changed'] = sc
     features['compute_changed'] = cc
-    features['both_changed'] = sc * cc
+    features['both_changed'] = pair.get('both_changed', sc * cc)
 
-    # ── 9. NEW: Interaction features (op_type × hw_change) ──
-    # These teach the model: "a TABLE_SCAN + storage change is very different
-    # from a HASH_JOIN + storage change"
+    # ── 9. Quantitative HW ratios (positive = target is better) ──
+    features['storage_speed_ratio'] = pair.get('storage_speed_ratio', 0.0)
+    features['iops_ratio'] = pair.get('iops_ratio', 0.0)
+    features['write_speed_ratio'] = pair.get('write_speed_ratio', 0.0)
+    features['cpu_core_ratio'] = pair.get('cpu_core_ratio', 0.0)
+    features['cpu_thread_ratio'] = pair.get('cpu_thread_ratio', 0.0)
+    features['cpu_clock_ratio'] = pair.get('cpu_clock_ratio', 0.0)
+    features['cpu_base_clock_ratio'] = pair.get('cpu_base_clock_ratio', 0.0)
+    features['l3_cache_ratio'] = pair.get('l3_cache_ratio', 0.0)
+    features['ram_ratio'] = pair.get('ram_ratio', 0.0)
+    features['buffer_pool_ratio'] = pair.get('buffer_pool_ratio', 0.0)
+    features['is_storage_downgrade'] = pair.get('is_storage_downgrade', 0)
+    features['is_cpu_downgrade'] = pair.get('is_cpu_downgrade', 0)
+    features['is_ram_downgrade'] = pair.get('is_ram_downgrade', 0)
+
+    # ── 10. Workload metadata features ──
+    features['log_table_rows'] = math.log(max(row1.get('table_rows', 1), 1))
+    features['log_table_size_mb'] = math.log(max(row1.get('table_size_mb', 1), 1))
+    features['n_indexes'] = row1.get('n_indexes', 0)
+    features['log_dataset_gb'] = math.log(max(row1.get('dataset_total_gb', 0.1), 0.1))
+    features['fits_in_buffer'] = row1.get('fits_in_buffer', 0)
+
+    # ── 11. Operator × Binary HW interaction ──
     features['scan_x_storage'] = features['is_scan'] * sc
     features['scan_x_compute'] = features['is_scan'] * cc
     features['join_x_storage'] = features['is_join'] * sc
@@ -130,11 +147,36 @@ def engineer_features_v3(row1, row2, pair):
     features['agg_x_storage'] = features['is_agg_sort'] * sc
     features['agg_x_compute'] = features['is_agg_sort'] * cc
 
-    # ── 10. NEW: Work × HW interaction ──
+    # ── 12. Work × Binary HW interaction ──
     features['work_x_storage'] = features['log_total_work'] * sc
     features['work_x_compute'] = features['log_total_work'] * cc
     features['rows_x_storage'] = features['log_actual_rows'] * sc
     features['rows_x_compute'] = features['log_actual_rows'] * cc
+
+    # ── 13. Operator × Quantitative HW interaction ──
+    #   "TABLE_SCAN on 5000x slower storage" vs "TABLE_SCAN on 2x slower storage"
+    iops_r = pair.get('iops_ratio', 0.0)
+    clock_r = pair.get('cpu_clock_ratio', 0.0)
+    core_r = pair.get('cpu_core_ratio', 0.0)
+    features['scan_x_iops'] = features['is_scan'] * iops_r
+    features['scan_x_storage_speed'] = features['is_scan'] * pair.get('storage_speed_ratio', 0.0)
+    features['join_x_cpu_clock'] = features['is_join'] * clock_r
+    features['join_x_cpu_cores'] = features['is_join'] * core_r
+    features['agg_x_cpu_clock'] = features['is_agg_sort'] * clock_r
+    features['index_x_iops'] = features['is_index_op'] * iops_r
+
+    # ── 14. Work × Quantitative HW interaction ──
+    features['rows_x_iops'] = features['log_actual_rows'] * iops_r
+    features['work_x_cpu_clock'] = features['log_total_work'] * clock_r
+    features['cost_x_iops'] = features['log_est_cost'] * iops_r
+
+    # ── 15. Workload × HW cross-terms ──
+    #   "22GB table + IOPS downgrade" = very dangerous
+    features['table_size_x_iops'] = features['log_table_size_mb'] * iops_r
+    features['table_size_x_storage_speed'] = features['log_table_size_mb'] * pair.get('storage_speed_ratio', 0.0)
+    features['table_rows_x_iops'] = features['log_table_rows'] * iops_r
+    features['buffer_miss_x_iops'] = (1 - features['fits_in_buffer']) * iops_r
+    features['dataset_x_ram'] = features['log_dataset_gb'] * pair.get('ram_ratio', 0.0)
 
     return features
 
@@ -145,6 +187,20 @@ def build_env_pairs_v3(df_ops):
     df_ops = filter_noisy_operators(df_ops)
 
     df_ops = df_ops.copy()
+
+    # ── Enrich operators with workload metadata ──
+    logger.info("  Enriching operators with workload metadata...")
+    for idx, row in df_ops.iterrows():
+        enriched = enrich_operator(
+            row.to_dict(),
+            benchmark=row.get('benchmark', ''),
+            env_id=row.get('env_id', None)
+        )
+        for col in ['table_rows', 'table_size_mb', 'n_indexes',
+                     'dataset_total_gb', 'n_tables_in_dataset', 'fits_in_buffer']:
+            df_ops.at[idx, col] = enriched[col]
+    logger.info(f"  Enrichment complete: {len(df_ops):,} operators")
+
     df_ops['match_key_alias'] = (
         df_ops['query_id'] + '|' +
         df_ops['hint_variant'] + '|' +

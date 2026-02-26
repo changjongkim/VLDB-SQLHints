@@ -30,6 +30,7 @@ import logging
 import pandas as pd
 import numpy as np
 from pathlib import Path
+from hw_registry import compute_hw_features
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
@@ -63,7 +64,7 @@ def inject_hint(sql: str, hint_str: str) -> str:
 
 
 def engineer_features(op: dict, hw: dict) -> dict:
-    """Replicate v3 feature engineering for prediction."""
+    """Replicate v3 feature engineering for prediction (with quantitative HW + workload)."""
     features = {}
     op_types = ['NL_INNER_JOIN', 'FILTER', 'TABLE_SCAN', 'INDEX_LOOKUP',
                 'HASH_JOIN', 'AGGREGATE', 'SORT', 'NL_ANTIJOIN',
@@ -99,12 +100,36 @@ def engineer_features(op: dict, hw: dict) -> dict:
     features['depth']           = op.get('depth', 0)
     features['num_children']    = op.get('num_children', 0)
 
+    # Binary HW flags
     sc = hw['storage_changed']
     cc = hw['compute_changed']
     features['storage_changed'] = sc
     features['compute_changed'] = cc
-    features['both_changed']    = sc * cc
+    features['both_changed']    = hw.get('both_changed', sc * cc)
 
+    # Quantitative HW ratios
+    features['storage_speed_ratio']   = hw.get('storage_speed_ratio', 0.0)
+    features['iops_ratio']            = hw.get('iops_ratio', 0.0)
+    features['write_speed_ratio']     = hw.get('write_speed_ratio', 0.0)
+    features['cpu_core_ratio']        = hw.get('cpu_core_ratio', 0.0)
+    features['cpu_thread_ratio']      = hw.get('cpu_thread_ratio', 0.0)
+    features['cpu_clock_ratio']       = hw.get('cpu_clock_ratio', 0.0)
+    features['cpu_base_clock_ratio']  = hw.get('cpu_base_clock_ratio', 0.0)
+    features['l3_cache_ratio']        = hw.get('l3_cache_ratio', 0.0)
+    features['ram_ratio']             = hw.get('ram_ratio', 0.0)
+    features['buffer_pool_ratio']     = hw.get('buffer_pool_ratio', 0.0)
+    features['is_storage_downgrade']  = hw.get('is_storage_downgrade', 0)
+    features['is_cpu_downgrade']      = hw.get('is_cpu_downgrade', 0)
+    features['is_ram_downgrade']      = hw.get('is_ram_downgrade', 0)
+
+    # Workload metadata
+    features['log_table_rows']     = math.log(max(op.get('table_rows', 1), 1))
+    features['log_table_size_mb']  = math.log(max(op.get('table_size_mb', 1), 1))
+    features['n_indexes']          = op.get('n_indexes', 0)
+    features['log_dataset_gb']     = math.log(max(op.get('dataset_total_gb', 0.1), 0.1))
+    features['fits_in_buffer']     = op.get('fits_in_buffer', 0)
+
+    # Operator × Binary HW interaction
     features['scan_x_storage']   = features['is_scan'] * sc
     features['scan_x_compute']   = features['is_scan'] * cc
     features['join_x_storage']   = features['is_join'] * sc
@@ -117,6 +142,29 @@ def engineer_features(op: dict, hw: dict) -> dict:
     features['work_x_compute']   = features['log_total_work'] * cc
     features['rows_x_storage']   = features['log_actual_rows'] * sc
     features['rows_x_compute']   = features['log_actual_rows'] * cc
+
+    # Operator × Quantitative HW interaction
+    iops_r  = hw.get('iops_ratio', 0.0)
+    clock_r = hw.get('cpu_clock_ratio', 0.0)
+    core_r  = hw.get('cpu_core_ratio', 0.0)
+    features['scan_x_iops']           = features['is_scan'] * iops_r
+    features['scan_x_storage_speed']  = features['is_scan'] * hw.get('storage_speed_ratio', 0.0)
+    features['join_x_cpu_clock']      = features['is_join'] * clock_r
+    features['join_x_cpu_cores']      = features['is_join'] * core_r
+    features['agg_x_cpu_clock']       = features['is_agg_sort'] * clock_r
+    features['index_x_iops']          = features['is_index_op'] * iops_r
+
+    # Work × Quantitative HW interaction
+    features['rows_x_iops']       = features['log_actual_rows'] * iops_r
+    features['work_x_cpu_clock']  = features['log_total_work'] * clock_r
+    features['cost_x_iops']       = features['log_est_cost'] * iops_r
+
+    # Workload × HW cross-terms
+    features['table_size_x_iops']           = features['log_table_size_mb'] * iops_r
+    features['table_size_x_storage_speed']  = features['log_table_size_mb'] * hw.get('storage_speed_ratio', 0.0)
+    features['table_rows_x_iops']           = features['log_table_rows'] * iops_r
+    features['buffer_miss_x_iops']          = (1 - features['fits_in_buffer']) * iops_r
+    features['dataset_x_ram']               = features['log_dataset_gb'] * hw.get('ram_ratio', 0.0)
 
     return features
 
@@ -215,25 +263,26 @@ def main():
     feat_cols  = saved['feature_cols']
     logger.info(f"σ model loaded: {len(feat_cols)} features")
 
-    SOURCE_ENV = 'A_NVMe'
-
-    # Target scenarios: Intel Xeon Silver 4310 is a different CPU from both servers
-    # → compute_changed=1 for both NVMe and SATA
-    TARGET_SCENARIOS = {
-        'Xeon_NVMe': {'storage_changed': 0, 'compute_changed': 1, 'storage': 'NVMe'},
-        'Xeon_SATA': {'storage_changed': 1, 'compute_changed': 1, 'storage': 'SATA'},
-    }
+    # We will test generic recommendation to Target B (EPYC)
+    # User requested to fix the target server to EPYC (Server B) for testing
+    TARGET_SCENARIOS = ['B_NVMe', 'B_SATA']
 
     BENCHMARKS = ['TPCH', 'JOB']
     results_summary = []
 
-    for scenario_name, hw in TARGET_SCENARIOS.items():
-        storage_label = hw['storage']
-        logger.info(f"\n{'='*60}")
-        logger.info(f"Scenario: {SOURCE_ENV} → {scenario_name}  "
-                    f"(storage_changed={hw['storage_changed']}, compute_changed={hw['compute_changed']})")
-
+    for scenario_name in TARGET_SCENARIOS:
+        
         for benchmark in BENCHMARKS:
+            # Dynamically select SOURCE_ENV based on where we have hint data
+            SOURCE_ENV = 'A_NVMe' if benchmark == 'TPCH' else 'B_NVMe'
+            
+            # Use quantitative HW registry to dynamically calculate hardware transition
+            hw = compute_hw_features(SOURCE_ENV, scenario_name)
+            storage_label = 'NVMe' if 'NVMe' in scenario_name else 'SATA'
+            
+            logger.info(f"\n{'='*60}")
+            logger.info(f"Scenario: {SOURCE_ENV} → {scenario_name} (EPYC Server) | {benchmark}")
+
             out_dir = os.path.join(OUTPUT_DIR, storage_label, benchmark)
             os.makedirs(out_dir, exist_ok=True)
 
@@ -309,7 +358,7 @@ def main():
                 header    = (
                     f"-- HALO Recommended SQL\n"
                     f"-- Query     : {qid} ({benchmark})\n"
-                    f"-- Scenario  : {SOURCE_ENV} → {scenario_name} (Intel Xeon Silver 4310)\n"
+                    f"-- Scenario  : {SOURCE_ENV} → {scenario_name} (AMD EPYC Target)\n"
                     f"-- Hint      : {best_hint or 'NATIVE (no hint)'}\n"
                     f"-- Reason    : {reason}\n"
                     f"-- Hint Str  : {hint_str or 'N/A'}\n"
@@ -337,7 +386,7 @@ def main():
     # ── Print final table ──
     df_sum = pd.DataFrame(results_summary)
     print(f"\n{'='*70}")
-    print("HALO Recommendation Summary (Intel Xeon Silver 4310 Target)")
+    print("HALO Recommendation Summary (Target: AMD EPYC 7713)")
     print(f"{'='*70}")
     for scen in df_sum['scenario'].unique():
         for bm in df_sum['benchmark'].unique():

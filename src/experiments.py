@@ -8,7 +8,7 @@ Named "BAO-inspired" (not BAO reimplementation) for fairness.
 Experiments:
   E1: HPP existence proof
   E2: BAO transfer failure
-  E3: OLHS sigma accuracy (already done in sigma_model.py)
+  E3: HALO sigma accuracy (already done in sigma_model.py)
   E4: Cross-HW prediction
   E5: Head-to-head comparison
   E6: Selective intervention
@@ -145,7 +145,7 @@ class BAOInspiredBaseline:
                 hint_rows = qgroup[qgroup['hint_set'] == selected_hint]
 
                 if len(hint_rows) > 0:
-                    # Take the best variant (oracle within hint set)
+                    # Take the best variant (optimal within hint set)
                     best_time = hint_rows['execution_time_s'].min()
                 else:
                     best_time = baseline_time
@@ -338,7 +338,7 @@ def experiment_e2_bao_transfer(df_queries):
 def experiment_e5_head_to_head(df_queries):
     """
     E5: Compare total walltime across strategies.
-    B1 = Native (no hint), B2 = Best-Single-Hint (oracle), B4 = Per-HW Oracle
+    B1 = Native (no hint), B2 = Best-Single-Hint (optimal), B4 = Per-HW Optimal
     """
     logger.info("\n" + "="*60)
     logger.info("E5: Head-to-Head Comparison")
@@ -354,11 +354,11 @@ def experiment_e5_head_to_head(df_queries):
         baseline = env_data[env_data['hint_set'] == 'baseline']
         b1_total = baseline['execution_time_s'].sum()
 
-        # B2: Best-Single-Hint (oracle - best hint per query)
+        # B2: Best-Single-Hint (optimal - best hint per query)
         best_per_query = env_data.groupby('query_id')['execution_time_s'].min()
         b2_total = best_per_query.sum()
 
-        # B4: Per-HW Oracle (best hint set overall for this env)
+        # B4: Per-HW Optimal (best hint set overall for this env)
         hint_totals = {}
         for hs, hg in env_data[env_data['hint_set'] != 'baseline'].groupby('hint_set'):
             best_variant = hg.groupby('query_id')['execution_time_s'].min()
@@ -379,8 +379,8 @@ def experiment_e5_head_to_head(df_queries):
 
         results[env] = {
             'B1_native_total': float(b1_total),
-            'B2_oracle_total': float(b2_total),
-            'B2_oracle_speedup': float(b1_total / max(b2_total, 0.001)),
+            'B2_optimal_total': float(b2_total),
+            'B2_optimal_speedup': float(b1_total / max(b2_total, 0.001)),
             'B4_best_hint_set': b4_best_hint,
             'B4_total': float(b4_total),
             'B4_speedup': float(b1_total / max(b4_total, 0.001)),
@@ -389,7 +389,7 @@ def experiment_e5_head_to_head(df_queries):
 
         logger.info(f"\n  {env}:")
         logger.info(f"    B1 (Native):     {b1_total:.1f}s")
-        logger.info(f"    B2 (Oracle):     {b2_total:.1f}s (speedup {b1_total/max(b2_total,0.001):.2f}x)")
+        logger.info(f"    B2 (Optimal):     {b2_total:.1f}s (speedup {b1_total/max(b2_total,0.001):.2f}x)")
         logger.info(f"    B4 (Best set={b4_best_hint}): {b4_total:.1f}s (speedup {b1_total/max(b4_total,0.001):.2f}x)")
 
     return results
@@ -603,7 +603,7 @@ def run_all_experiments(data_dir='/root/halo/data', output_dir='/root/halo/resul
     if 'E5_head_to_head' in all_results:
         for env, data in all_results['E5_head_to_head'].items():
             logger.info(f"E5 {env}: B1={data['B1_native_total']:.0f}s, "
-                       f"B2(oracle)={data['B2_oracle_total']:.0f}s ({data['B2_oracle_speedup']:.2f}x)")
+                       f"B2(optimal)={data['B2_optimal_total']:.0f}s ({data['B2_optimal_speedup']:.2f}x)")
 
     if 'E6_selective' in all_results:
         for env, data in all_results['E6_selective'].items():
