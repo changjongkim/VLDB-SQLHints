@@ -1,9 +1,9 @@
--- HALO Recommended SQL (JOB)
--- Query     : 6e
--- Target    : Intel Xeon Silver 4310 (SATA)
--- Hint      : NATIVE
--- Reason    : HALO-R: all too risky → NATIVE [hint01(100%), hint02(100%), hint05(100%)]
--- Src spdup : 1.00x (best available hint)
+-- HALO Recommended SQL
+-- Query     : 6e (JOB)
+-- Scenario  : A_NVMe → Xeon_SATA (AMD EPYC Target)
+-- Hint      : NATIVE (no hint)
+-- Reason    : HALO-R: All hints too risky. hint01(92%), hint02(92%) → NATIVE
+-- Hint Str  : N/A
 --
 
 SELECT MIN(k.keyword) AS movie_keyword, MIN(n.name) AS actor_name, MIN(t.title) AS marvel_movie FROM cast_info AS ci, keyword AS k, movie_keyword AS mk, name AS n, title AS t WHERE k.keyword = 'marvel-cinematic-universe' AND n.name LIKE '%Downey%Robert%' AND t.production_year > 2000 AND k.id = mk.keyword_id AND t.id = mk.movie_id AND t.id = ci.movie_id AND ci.movie_id = mk.movie_id AND n.id = ci.person_id;;

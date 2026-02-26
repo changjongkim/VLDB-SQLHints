@@ -1,0 +1,2432 @@
+[
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q1",
+    "hint": "hint05",
+    "src_baseline_s": 178.207,
+    "reason": "HALO-R: 'hint05' selected (src=1.02x, risk_ops=3/12, risk_ratio=25%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q1_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q10",
+    "hint": "hint05",
+    "src_baseline_s": 134.74,
+    "reason": "HALO-R: 'hint05' selected (src=1.04x, risk_ops=18/108, risk_ratio=17%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q10_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q11",
+    "hint": "hint02",
+    "src_baseline_s": 38.844,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.01x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q11_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q12",
+    "hint": "hint01",
+    "src_baseline_s": 72.467,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.00x, risk_ratio=33% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q12_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q13",
+    "hint": "hint05",
+    "src_baseline_s": 145.078,
+    "reason": "HALO-R: 'hint05' selected (src=2.88x, risk_ops=0/28, risk_ratio=0%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q13_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q14",
+    "hint": "hint05",
+    "src_baseline_s": 46.735,
+    "reason": "HALO-R: 'hint05' selected (src=1.01x, risk_ops=2/8, risk_ratio=25%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q14_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q15",
+    "hint": "hint05",
+    "src_baseline_s": 41.581,
+    "reason": "HALO-R: 'hint05' selected cautiously (src=1.00x, risk_ratio=46% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q15_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q16",
+    "hint": "hint02",
+    "src_baseline_s": 39.984,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.03x, risk_ratio=38% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q16_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q17",
+    "hint": "hint02",
+    "src_baseline_s": 27.619,
+    "reason": "HALO-R: 'hint02' selected (src=1.01x, risk_ops=12/42, risk_ratio=29%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q17_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q18",
+    "hint": "hint05",
+    "src_baseline_s": 68.986,
+    "reason": "HALO-R: 'hint05' selected (src=1.01x, risk_ops=45/160, risk_ratio=28%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q18_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q19",
+    "hint": "hint05",
+    "src_baseline_s": 55.808,
+    "reason": "HALO-R: 'hint05' selected (src=1.02x, risk_ops=4/20, risk_ratio=20%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q19_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q2",
+    "hint": "hint01",
+    "src_baseline_s": 5.626,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.01x, risk_ratio=46% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q2_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q20",
+    "hint": "hint02",
+    "src_baseline_s": 185.008,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.07x, risk_ratio=38% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q20_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q21",
+    "hint": "hint04",
+    "src_baseline_s": 245.734,
+    "reason": "HALO-R: 'hint04' selected cautiously (src=1.00x, risk_ratio=35% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q21_hint04.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q22",
+    "hint": "hint05",
+    "src_baseline_s": 4.056,
+    "reason": "HALO-R: 'hint05' selected cautiously (src=1.01x, risk_ratio=37% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q22_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q3",
+    "hint": "hint05",
+    "src_baseline_s": 372.182,
+    "reason": "HALO-R: 'hint05' selected (src=4.15x, risk_ops=6/77, risk_ratio=8%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q3_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q4",
+    "hint": "NATIVE",
+    "src_baseline_s": 106.628,
+    "reason": "HALO-R: All hints too risky. hint01(47%), hint02(43%), hint04(47%), hint05(48%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q4_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q5",
+    "hint": "hint02",
+    "src_baseline_s": 208.865,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.02x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q5_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q6",
+    "hint": "hint02",
+    "src_baseline_s": 37.481,
+    "reason": "HALO-R: 'hint02' selected (src=1.01x, risk_ops=0/6, risk_ratio=0%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q6_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q7",
+    "hint": "hint01",
+    "src_baseline_s": 239.859,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.41x, risk_ratio=42% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q7_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q8",
+    "hint": "hint05",
+    "src_baseline_s": 337.668,
+    "reason": "HALO-R: 'hint05' selected cautiously (src=2.39x, risk_ratio=44% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q8_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q9",
+    "hint": "hint05",
+    "src_baseline_s": 881.701,
+    "reason": "HALO-R: 'hint05' selected (src=1.59x, risk_ops=23/98, risk_ratio=23%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/TPCH/tpch_q9_hint05.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "10a",
+    "hint": "hint01",
+    "src_baseline_s": 47.285,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.45x, risk_ratio=47% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/10a_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "10b",
+    "hint": "NATIVE",
+    "src_baseline_s": 33.952,
+    "reason": "HALO-R: All hints too risky. hint01(69%), hint02(69%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/10b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "10c",
+    "hint": "hint02",
+    "src_baseline_s": 128.133,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.24x, risk_ratio=41% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/10c_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.09,
+    "reason": "HALO-R: All hints too risky. hint01(78%), hint02(78%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/11a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.059,
+    "reason": "HALO-R: All hints too risky. hint01(81%), hint02(81%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/11b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11c",
+    "hint": "hint01",
+    "src_baseline_s": 2.268,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.50x, risk_ratio=45% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/11c_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11d",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.17,
+    "reason": "HALO-R: All hints too risky. hint01(54%), hint02(55%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/11d_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "12a",
+    "hint": "NATIVE",
+    "src_baseline_s": 19.237,
+    "reason": "HALO-R: All hints too risky. hint01(54%), hint02(52%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/12a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "12b",
+    "hint": "NATIVE",
+    "src_baseline_s": 4.94,
+    "reason": "HALO-R: All hints too risky. hint01(50%), hint02(52%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/12b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "12c",
+    "hint": "NATIVE",
+    "src_baseline_s": 53.463,
+    "reason": "HALO-R: All hints too risky. hint01(52%), hint02(52%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/12c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13a",
+    "hint": "hint01",
+    "src_baseline_s": 26.741,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=2.59x, risk_ratio=43% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/13a_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13b",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.979,
+    "reason": "HALO-R: All hints too risky. hint01(75%), hint02(75%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/13b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13c",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.699,
+    "reason": "HALO-R: All hints too risky. hint01(80%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/13c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13d",
+    "hint": "hint02",
+    "src_baseline_s": 55.702,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=2.17x, risk_ratio=43% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/13d_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "14a",
+    "hint": "hint01",
+    "src_baseline_s": 13.607,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=3.73x, risk_ratio=41% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/14a_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "14b",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.262,
+    "reason": "HALO-R: All hints too risky. hint01(59%), hint02(59%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/14b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "14c",
+    "hint": "hint02",
+    "src_baseline_s": 52.711,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=2.38x, risk_ratio=34% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/14c_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15a",
+    "hint": "hint01",
+    "src_baseline_s": 5.352,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.05x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/15a_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.115,
+    "reason": "HALO-R: All hints too risky. hint01(93%), hint02(91%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/15b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15c",
+    "hint": "hint02",
+    "src_baseline_s": 20.654,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.22x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/15c_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15d",
+    "hint": "hint02",
+    "src_baseline_s": 22.093,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.28x, risk_ratio=45% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/15d_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16a",
+    "hint": "hint02",
+    "src_baseline_s": 3.73,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=3.23x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/16a_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16b",
+    "hint": "hint02",
+    "src_baseline_s": 139.334,
+    "reason": "HALO-R: 'hint02' selected (src=1.48x, risk_ops=5/17, risk_ratio=29%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/16b_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16c",
+    "hint": "hint02",
+    "src_baseline_s": 42.127,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.56x, risk_ratio=39% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/16c_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16d",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.65,
+    "reason": "HALO-R: All hints too risky. hint01(78%), hint02(64%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/16d_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17a",
+    "hint": "NATIVE",
+    "src_baseline_s": 19.797,
+    "reason": "HALO-R: All hints too risky. hint01(75%), hint02(59%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/17a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17b",
+    "hint": "hint02",
+    "src_baseline_s": 24.428,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=2.79x, risk_ratio=33% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/17b_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17c",
+    "hint": "NATIVE",
+    "src_baseline_s": 11.938,
+    "reason": "HALO-R: All hints too risky. hint01(73%), hint02(60%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/17c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17d",
+    "hint": "hint02",
+    "src_baseline_s": 11.35,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.51x, risk_ratio=43% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/17d_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17e",
+    "hint": "NATIVE",
+    "src_baseline_s": 11.992,
+    "reason": "HALO-R: All hints too risky. hint01(80%), hint02(63%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/17e_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17f",
+    "hint": "NATIVE",
+    "src_baseline_s": 10.737,
+    "reason": "HALO-R: All hints too risky. hint01(73%), hint02(60%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/17f_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "18a",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.638,
+    "reason": "HALO-R: All hints too risky. hint01(100%), hint02(90%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/18a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "18b",
+    "hint": "NATIVE",
+    "src_baseline_s": 8.057,
+    "reason": "HALO-R: All hints too risky. hint01(64%), hint02(64%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/18b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "18c",
+    "hint": "hint02",
+    "src_baseline_s": 141.424,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.91x, risk_ratio=42% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/18c_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19a",
+    "hint": "NATIVE",
+    "src_baseline_s": 46.665,
+    "reason": "HALO-R: All hints too risky. hint01(70%), hint02(70%), hint04(68%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/19a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19b",
+    "hint": "NATIVE",
+    "src_baseline_s": 25.06,
+    "reason": "HALO-R: All hints too risky. hint01(72%), hint02(72%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/19b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19c",
+    "hint": "NATIVE",
+    "src_baseline_s": 29.715,
+    "reason": "HALO-R: All hints too risky. hint01(53%), hint02(52%), hint04(69%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/19c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19d",
+    "hint": "hint01",
+    "src_baseline_s": 27.229,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.42x, risk_ratio=44% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/19d_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1a",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.767,
+    "reason": "HALO-R: All hints too risky. hint01(58%), hint02(58%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/1a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1b",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.529,
+    "reason": "HALO-R: All hints too risky. hint01(68%), hint02(69%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/1b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1c",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.475,
+    "reason": "HALO-R: All hints too risky. hint01(74%), hint02(73%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/1c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1d",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.554,
+    "reason": "HALO-R: All hints too risky. hint01(68%), hint02(69%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/1d_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "20a",
+    "hint": "NATIVE",
+    "src_baseline_s": 26.768,
+    "reason": "HALO-R: All hints too risky. hint01(78%), hint02(72%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/20a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "20b",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.462,
+    "reason": "HALO-R: All hints too risky. hint01(91%), hint02(92%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/20b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "20c",
+    "hint": "NATIVE",
+    "src_baseline_s": 19.2,
+    "reason": "HALO-R: All hints too risky. hint01(76%), hint02(78%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/20c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "21a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.603,
+    "reason": "HALO-R: All hints too risky. hint01(76%), hint02(74%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/21a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "21b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.166,
+    "reason": "HALO-R: All hints too risky. hint01(76%), hint02(76%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/21b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "21c",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.16,
+    "reason": "HALO-R: All hints too risky. hint01(76%), hint02(76%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/21c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22a",
+    "hint": "hint02",
+    "src_baseline_s": 51.256,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=3.48x, risk_ratio=40% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/22a_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22b",
+    "hint": "NATIVE",
+    "src_baseline_s": 9.899,
+    "reason": "HALO-R: All hints too risky. hint01(50%), hint02(48%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/22b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22c",
+    "hint": "hint01",
+    "src_baseline_s": 69.083,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=2.40x, risk_ratio=39% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/22c_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22d",
+    "hint": "hint02",
+    "src_baseline_s": 52.581,
+    "reason": "HALO-R: 'hint02' selected (src=2.11x, risk_ops=17/58, risk_ratio=29%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/22d_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "23a",
+    "hint": "NATIVE",
+    "src_baseline_s": 4.054,
+    "reason": "HALO-R: All hints too risky. hint01(54%), hint02(54%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/23a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "23b",
+    "hint": "NATIVE",
+    "src_baseline_s": 3.302,
+    "reason": "HALO-R: All hints too risky. hint01(55%), hint02(55%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/23b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "23c",
+    "hint": "NATIVE",
+    "src_baseline_s": 5.46,
+    "reason": "HALO-R: All hints too risky. hint01(61%), hint02(61%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/23c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "24a",
+    "hint": "NATIVE",
+    "src_baseline_s": 52.693,
+    "reason": "HALO-R: All hints too risky. hint01(61%), hint02(58%), hint04(52%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/24a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "24b",
+    "hint": "NATIVE",
+    "src_baseline_s": 23.141,
+    "reason": "HALO-R: All hints too risky. hint01(75%), hint02(75%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/24b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "25a",
+    "hint": "hint01",
+    "src_baseline_s": 86.525,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=2.92x, risk_ratio=39% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/25a_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "25b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.422,
+    "reason": "HALO-R: All hints too risky. hint01(92%), hint02(93%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/25b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "25c",
+    "hint": "hint04",
+    "src_baseline_s": 103.991,
+    "reason": "HALO-R: 'hint04' selected cautiously (src=2.54x, risk_ratio=41% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/25c_hint04.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "26a",
+    "hint": "NATIVE",
+    "src_baseline_s": 11.933,
+    "reason": "HALO-R: All hints too risky. hint01(79%), hint02(71%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/26a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "26b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.436,
+    "reason": "HALO-R: All hints too risky. hint01(84%), hint02(85%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/26b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "26c",
+    "hint": "NATIVE",
+    "src_baseline_s": 17.512,
+    "reason": "HALO-R: All hints too risky. hint01(66%), hint02(66%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/26c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "27a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.371,
+    "reason": "HALO-R: All hints too risky. hint01(78%), hint02(79%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/27a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "27b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.1,
+    "reason": "HALO-R: All hints too risky. hint01(82%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/27b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "27c",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.216,
+    "reason": "HALO-R: All hints too risky. hint01(81%), hint02(81%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/27c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "28a",
+    "hint": "NATIVE",
+    "src_baseline_s": 8.817,
+    "reason": "HALO-R: All hints too risky. hint01(53%), hint02(54%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/28a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "28b",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.054,
+    "reason": "HALO-R: All hints too risky. hint01(65%), hint02(65%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/28b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "28c",
+    "hint": "NATIVE",
+    "src_baseline_s": 8.235,
+    "reason": "HALO-R: All hints too risky. hint01(54%), hint02(51%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/28c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "29a",
+    "hint": "NATIVE",
+    "src_baseline_s": 29.807,
+    "reason": "HALO-R: All hints too risky. hint01(83%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/29a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "29b",
+    "hint": "NATIVE",
+    "src_baseline_s": 18.435,
+    "reason": "HALO-R: All hints too risky. hint01(83%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/29b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "29c",
+    "hint": "NATIVE",
+    "src_baseline_s": 19.822,
+    "reason": "HALO-R: All hints too risky. hint01(81%), hint02(81%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/29c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2a",
+    "hint": "hint01",
+    "src_baseline_s": 2.19,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.19x, risk_ratio=45% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/2a_hint01.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.79,
+    "reason": "HALO-R: All hints too risky. hint01(50%), hint02(45%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/2b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2c",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.031,
+    "reason": "HALO-R: All hints too risky. hint01(62%), hint02(55%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/2c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2d",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.887,
+    "reason": "HALO-R: All hints too risky. hint01(55%), hint02(45%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/2d_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "30a",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.332,
+    "reason": "HALO-R: All hints too risky. hint01(71%), hint02(72%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/30a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "30b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.141,
+    "reason": "HALO-R: All hints too risky. hint01(84%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/30b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "30c",
+    "hint": "hint02",
+    "src_baseline_s": 12.117,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.99x, risk_ratio=48% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/30c_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "31a",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.139,
+    "reason": "HALO-R: All hints too risky. hint01(79%), hint02(66%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/31a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "31b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.122,
+    "reason": "HALO-R: All hints too risky. hint01(88%), hint02(89%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/31b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "31c",
+    "hint": "hint02",
+    "src_baseline_s": 27.286,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.95x, risk_ratio=37% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/31c_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "32a",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.339,
+    "reason": "HALO-R: All hints too risky. hint01(64%), hint02(58%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/32a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "32b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.842,
+    "reason": "HALO-R: All hints too risky. hint01(57%), hint02(58%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/32b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "33a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.093,
+    "reason": "HALO-R: All hints too risky. hint01(88%), hint02(78%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/33a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "33b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.086,
+    "reason": "HALO-R: All hints too risky. hint01(81%), hint02(92%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/33b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "33c",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.122,
+    "reason": "HALO-R: All hints too risky. hint01(56%), hint02(56%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/33c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "3a",
+    "hint": "NATIVE",
+    "src_baseline_s": 4.395,
+    "reason": "HALO-R: All hints too risky. hint01(65%), hint02(55%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/3a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "3b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.488,
+    "reason": "HALO-R: All hints too risky. hint01(72%), hint02(55%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/3b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "3c",
+    "hint": "hint02",
+    "src_baseline_s": 7.292,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=5.45x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/3c_hint02.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "4a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.409,
+    "reason": "HALO-R: All hints too risky. hint01(85%), hint02(77%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/4a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "4b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.395,
+    "reason": "HALO-R: All hints too risky. hint01(88%), hint02(92%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/4b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "4c",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.741,
+    "reason": "HALO-R: All hints too risky. hint01(82%), hint02(77%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/4c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "5a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.837,
+    "reason": "HALO-R: All hints too risky. hint01(79%), hint02(75%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/5a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "5b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.787,
+    "reason": "HALO-R: All hints too risky. hint01(79%), hint02(75%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/5b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "5c",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.035,
+    "reason": "HALO-R: All hints too risky. hint01(64%), hint02(58%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/5c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.266,
+    "reason": "HALO-R: All hints too risky. hint01(100%), hint02(100%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/6a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.809,
+    "reason": "HALO-R: All hints too risky. hint01(90%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/6b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6c",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.044,
+    "reason": "HALO-R: All hints too risky. hint01(100%), hint02(100%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/6c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6d",
+    "hint": "NATIVE",
+    "src_baseline_s": 24.559,
+    "reason": "HALO-R: All hints too risky. hint01(75%), hint02(75%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/6d_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6e",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.06,
+    "reason": "HALO-R: All hints too risky. hint01(100%), hint02(100%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/6e_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6f",
+    "hint": "NATIVE",
+    "src_baseline_s": 9.864,
+    "reason": "HALO-R: All hints too risky. hint01(67%), hint02(59%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/6f_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "7a",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.201,
+    "reason": "HALO-R: All hints too risky. hint01(82%), hint02(79%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/7a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "7b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.294,
+    "reason": "HALO-R: All hints too risky. hint01(87%), hint02(87%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/7b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "7c",
+    "hint": "NATIVE",
+    "src_baseline_s": 11.599,
+    "reason": "HALO-R: All hints too risky. hint01(67%), hint02(60%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/7c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8a",
+    "hint": "NATIVE",
+    "src_baseline_s": 14.213,
+    "reason": "HALO-R: All hints too risky. hint01(48%), hint02(50%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/8a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8b",
+    "hint": "NATIVE",
+    "src_baseline_s": 16.827,
+    "reason": "HALO-R: All hints too risky. hint01(58%), hint02(58%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/8b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8c",
+    "hint": "NATIVE",
+    "src_baseline_s": 33.848,
+    "reason": "HALO-R: All hints too risky. hint01(47%), hint02(43%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/8c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8d",
+    "hint": "NATIVE",
+    "src_baseline_s": 3.326,
+    "reason": "HALO-R: All hints too risky. hint01(46%), hint02(47%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/8d_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9a",
+    "hint": "NATIVE",
+    "src_baseline_s": 23.163,
+    "reason": "HALO-R: All hints too risky. hint01(67%), hint02(67%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/9a_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9b",
+    "hint": "NATIVE",
+    "src_baseline_s": 19.264,
+    "reason": "HALO-R: All hints too risky. hint01(69%), hint02(69%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/9b_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9c",
+    "hint": "NATIVE",
+    "src_baseline_s": 21.023,
+    "reason": "HALO-R: All hints too risky. hint01(51%), hint02(53%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/9c_native.sql"
+  },
+  {
+    "scenario": "B_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9d",
+    "hint": "hint01",
+    "src_baseline_s": 18.575,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.07x, risk_ratio=47% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/NVMe/JOB/9d_hint01.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q1",
+    "hint": "hint01",
+    "src_baseline_s": 178.207,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.01x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q1_hint01.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q10",
+    "hint": "hint05",
+    "src_baseline_s": 134.74,
+    "reason": "HALO-R: 'hint05' selected (src=1.04x, risk_ops=21/108, risk_ratio=19%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q10_hint05.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q11",
+    "hint": "NATIVE",
+    "src_baseline_s": 38.844,
+    "reason": "HALO-R: All hints too risky. hint01(57%), hint02(56%), hint04(59%), hint05(57%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q11_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q12",
+    "hint": "hint01",
+    "src_baseline_s": 72.467,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.00x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q12_hint01.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q13",
+    "hint": "hint05",
+    "src_baseline_s": 145.078,
+    "reason": "HALO-R: 'hint05' selected (src=2.88x, risk_ops=3/28, risk_ratio=11%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q13_hint05.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q14",
+    "hint": "hint05",
+    "src_baseline_s": 46.735,
+    "reason": "HALO-R: 'hint05' selected (src=1.01x, risk_ops=2/8, risk_ratio=25%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q14_hint05.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q15",
+    "hint": "NATIVE",
+    "src_baseline_s": 41.581,
+    "reason": "HALO-R: All hints too risky. hint01(69%), hint02(69%), hint04(69%), hint05(69%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q15_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q16",
+    "hint": "hint02",
+    "src_baseline_s": 39.984,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.03x, risk_ratio=38% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q16_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q17",
+    "hint": "hint05",
+    "src_baseline_s": 27.619,
+    "reason": "HALO-R: 'hint05' selected cautiously (src=1.05x, risk_ratio=38% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q17_hint05.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q18",
+    "hint": "hint05",
+    "src_baseline_s": 68.986,
+    "reason": "HALO-R: 'hint05' selected (src=1.01x, risk_ops=46/160, risk_ratio=29%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q18_hint05.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q19",
+    "hint": "hint05",
+    "src_baseline_s": 55.808,
+    "reason": "HALO-R: 'hint05' selected (src=1.02x, risk_ops=2/20, risk_ratio=10%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q19_hint05.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q2",
+    "hint": "NATIVE",
+    "src_baseline_s": 5.626,
+    "reason": "HALO-R: All hints too risky. hint01(61%), hint02(66%), hint04(62%), hint05(62%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q2_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q20",
+    "hint": "hint02",
+    "src_baseline_s": 185.008,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.07x, risk_ratio=38% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q20_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q21",
+    "hint": "hint01",
+    "src_baseline_s": 245.734,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.30x, risk_ratio=39% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q21_hint01.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q22",
+    "hint": "NATIVE",
+    "src_baseline_s": 4.056,
+    "reason": "HALO-R: All hints too risky. hint01(57%), hint02(56%), hint04(56%), hint05(63%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q22_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q3",
+    "hint": "hint05",
+    "src_baseline_s": 372.182,
+    "reason": "HALO-R: 'hint05' selected (src=4.15x, risk_ops=6/77, risk_ratio=8%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q3_hint05.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q4",
+    "hint": "NATIVE",
+    "src_baseline_s": 106.628,
+    "reason": "HALO-R: All hints too risky. hint01(53%), hint02(52%), hint04(53%), hint05(55%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q4_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q5",
+    "hint": "hint02",
+    "src_baseline_s": 208.865,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.02x, risk_ratio=50% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q5_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q6",
+    "hint": "hint02",
+    "src_baseline_s": 37.481,
+    "reason": "HALO-R: 'hint02' selected (src=1.01x, risk_ops=0/6, risk_ratio=0%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q6_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q7",
+    "hint": "hint01",
+    "src_baseline_s": 239.859,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.41x, risk_ratio=48% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q7_hint01.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q8",
+    "hint": "hint02",
+    "src_baseline_s": 337.668,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.01x, risk_ratio=49% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q8_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q9",
+    "hint": "hint05",
+    "src_baseline_s": 881.701,
+    "reason": "HALO-R: 'hint05' selected (src=1.59x, risk_ops=23/98, risk_ratio=23%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/TPCH/tpch_q9_hint05.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "10a",
+    "hint": "hint01",
+    "src_baseline_s": 47.285,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=1.45x, risk_ratio=47% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/10a_hint01.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "10b",
+    "hint": "NATIVE",
+    "src_baseline_s": 33.952,
+    "reason": "HALO-R: All hints too risky. hint01(69%), hint02(69%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/10b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "10c",
+    "hint": "hint02",
+    "src_baseline_s": 128.133,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.24x, risk_ratio=41% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/10c_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "11a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.09,
+    "reason": "HALO-R: All hints too risky. hint01(88%), hint02(88%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/11a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "11b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.059,
+    "reason": "HALO-R: All hints too risky. hint01(84%), hint02(84%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/11b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "11c",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.268,
+    "reason": "HALO-R: All hints too risky. hint01(51%), hint02(55%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/11c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "11d",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.17,
+    "reason": "HALO-R: All hints too risky. hint01(59%), hint02(60%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/11d_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "12a",
+    "hint": "NATIVE",
+    "src_baseline_s": 19.237,
+    "reason": "HALO-R: All hints too risky. hint01(56%), hint02(54%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/12a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "12b",
+    "hint": "NATIVE",
+    "src_baseline_s": 4.94,
+    "reason": "HALO-R: All hints too risky. hint01(52%), hint02(52%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/12b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "12c",
+    "hint": "NATIVE",
+    "src_baseline_s": 53.463,
+    "reason": "HALO-R: All hints too risky. hint01(52%), hint02(52%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/12c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "13a",
+    "hint": "hint01",
+    "src_baseline_s": 26.741,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=2.59x, risk_ratio=43% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/13a_hint01.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "13b",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.979,
+    "reason": "HALO-R: All hints too risky. hint01(76%), hint02(75%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/13b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "13c",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.699,
+    "reason": "HALO-R: All hints too risky. hint01(83%), hint02(85%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/13c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "13d",
+    "hint": "hint02",
+    "src_baseline_s": 55.702,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=2.17x, risk_ratio=43% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/13d_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "14a",
+    "hint": "hint01",
+    "src_baseline_s": 13.607,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=3.73x, risk_ratio=41% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/14a_hint01.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "14b",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.262,
+    "reason": "HALO-R: All hints too risky. hint01(59%), hint02(59%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/14b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "14c",
+    "hint": "hint02",
+    "src_baseline_s": 52.711,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=2.38x, risk_ratio=34% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/14c_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "15a",
+    "hint": "NATIVE",
+    "src_baseline_s": 5.352,
+    "reason": "HALO-R: All hints too risky. hint01(51%), hint02(50%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/15a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "15b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.115,
+    "reason": "HALO-R: All hints too risky. hint01(99%), hint02(98%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/15b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "15c",
+    "hint": "NATIVE",
+    "src_baseline_s": 20.654,
+    "reason": "HALO-R: All hints too risky. hint01(54%), hint02(52%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/15c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "15d",
+    "hint": "NATIVE",
+    "src_baseline_s": 22.093,
+    "reason": "HALO-R: All hints too risky. hint01(60%), hint02(57%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/15d_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "16a",
+    "hint": "NATIVE",
+    "src_baseline_s": 3.73,
+    "reason": "HALO-R: All hints too risky. hint01(79%), hint02(64%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/16a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "16b",
+    "hint": "hint02",
+    "src_baseline_s": 139.334,
+    "reason": "HALO-R: 'hint02' selected (src=1.48x, risk_ops=5/17, risk_ratio=29%)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/16b_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "16c",
+    "hint": "hint02",
+    "src_baseline_s": 42.127,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.56x, risk_ratio=44% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/16c_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "16d",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.65,
+    "reason": "HALO-R: All hints too risky. hint01(89%), hint02(86%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/16d_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "17a",
+    "hint": "NATIVE",
+    "src_baseline_s": 19.797,
+    "reason": "HALO-R: All hints too risky. hint01(81%), hint02(78%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/17a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "17b",
+    "hint": "NATIVE",
+    "src_baseline_s": 24.428,
+    "reason": "HALO-R: All hints too risky. hint01(73%), hint02(60%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/17b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "17c",
+    "hint": "NATIVE",
+    "src_baseline_s": 11.938,
+    "reason": "HALO-R: All hints too risky. hint01(80%), hint02(77%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/17c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "17d",
+    "hint": "NATIVE",
+    "src_baseline_s": 11.35,
+    "reason": "HALO-R: All hints too risky. hint01(66%), hint02(70%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/17d_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "17e",
+    "hint": "NATIVE",
+    "src_baseline_s": 11.992,
+    "reason": "HALO-R: All hints too risky. hint01(80%), hint02(77%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/17e_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "17f",
+    "hint": "NATIVE",
+    "src_baseline_s": 10.737,
+    "reason": "HALO-R: All hints too risky. hint01(73%), hint02(70%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/17f_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "18a",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.638,
+    "reason": "HALO-R: All hints too risky. hint01(100%), hint02(90%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/18a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "18b",
+    "hint": "NATIVE",
+    "src_baseline_s": 8.057,
+    "reason": "HALO-R: All hints too risky. hint01(71%), hint02(71%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/18b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "18c",
+    "hint": "hint02",
+    "src_baseline_s": 141.424,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.91x, risk_ratio=42% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/18c_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "19a",
+    "hint": "NATIVE",
+    "src_baseline_s": 46.665,
+    "reason": "HALO-R: All hints too risky. hint01(74%), hint02(70%), hint04(68%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/19a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "19b",
+    "hint": "NATIVE",
+    "src_baseline_s": 25.06,
+    "reason": "HALO-R: All hints too risky. hint01(72%), hint02(72%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/19b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "19c",
+    "hint": "NATIVE",
+    "src_baseline_s": 29.715,
+    "reason": "HALO-R: All hints too risky. hint01(53%), hint02(54%), hint04(71%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/19c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "19d",
+    "hint": "hint02",
+    "src_baseline_s": 27.229,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.22x, risk_ratio=46% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/19d_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "1a",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.767,
+    "reason": "HALO-R: All hints too risky. hint01(83%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/1a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "1b",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.529,
+    "reason": "HALO-R: All hints too risky. hint01(79%), hint02(69%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/1b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "1c",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.475,
+    "reason": "HALO-R: All hints too risky. hint01(76%), hint02(77%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/1c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "1d",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.554,
+    "reason": "HALO-R: All hints too risky. hint01(86%), hint02(85%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/1d_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "20a",
+    "hint": "NATIVE",
+    "src_baseline_s": 26.768,
+    "reason": "HALO-R: All hints too risky. hint01(85%), hint02(78%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/20a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "20b",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.462,
+    "reason": "HALO-R: All hints too risky. hint01(97%), hint02(100%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/20b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "20c",
+    "hint": "NATIVE",
+    "src_baseline_s": 19.2,
+    "reason": "HALO-R: All hints too risky. hint01(88%), hint02(87%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/20c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "21a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.603,
+    "reason": "HALO-R: All hints too risky. hint01(83%), hint02(79%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/21a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "21b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.166,
+    "reason": "HALO-R: All hints too risky. hint01(82%), hint02(82%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/21b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "21c",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.16,
+    "reason": "HALO-R: All hints too risky. hint01(85%), hint02(85%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/21c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "22a",
+    "hint": "hint02",
+    "src_baseline_s": 51.256,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=3.48x, risk_ratio=40% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/22a_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "22b",
+    "hint": "NATIVE",
+    "src_baseline_s": 9.899,
+    "reason": "HALO-R: All hints too risky. hint01(50%), hint02(50%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/22b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "22c",
+    "hint": "hint01",
+    "src_baseline_s": 69.083,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=2.40x, risk_ratio=40% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/22c_hint01.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "22d",
+    "hint": "hint01",
+    "src_baseline_s": 52.581,
+    "reason": "HALO-R: 'hint01' selected cautiously (src=2.59x, risk_ratio=31% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/22d_hint01.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "23a",
+    "hint": "NATIVE",
+    "src_baseline_s": 4.054,
+    "reason": "HALO-R: All hints too risky. hint01(54%), hint02(54%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/23a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "23b",
+    "hint": "NATIVE",
+    "src_baseline_s": 3.302,
+    "reason": "HALO-R: All hints too risky. hint01(55%), hint02(55%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/23b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "23c",
+    "hint": "NATIVE",
+    "src_baseline_s": 5.46,
+    "reason": "HALO-R: All hints too risky. hint01(65%), hint02(66%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/23c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "24a",
+    "hint": "NATIVE",
+    "src_baseline_s": 52.693,
+    "reason": "HALO-R: All hints too risky. hint01(61%), hint02(60%), hint04(52%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/24a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "24b",
+    "hint": "NATIVE",
+    "src_baseline_s": 23.141,
+    "reason": "HALO-R: All hints too risky. hint01(75%), hint02(75%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/24b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "25a",
+    "hint": "hint02",
+    "src_baseline_s": 86.525,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=2.60x, risk_ratio=41% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/25a_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "25b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.422,
+    "reason": "HALO-R: All hints too risky. hint01(98%), hint02(100%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/25b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "25c",
+    "hint": "hint04",
+    "src_baseline_s": 103.991,
+    "reason": "HALO-R: 'hint04' selected cautiously (src=2.54x, risk_ratio=42% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/25c_hint04.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "26a",
+    "hint": "NATIVE",
+    "src_baseline_s": 11.933,
+    "reason": "HALO-R: All hints too risky. hint01(85%), hint02(80%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/26a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "26b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.436,
+    "reason": "HALO-R: All hints too risky. hint01(92%), hint02(94%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/26b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "26c",
+    "hint": "NATIVE",
+    "src_baseline_s": 17.512,
+    "reason": "HALO-R: All hints too risky. hint01(78%), hint02(78%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/26c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "27a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.371,
+    "reason": "HALO-R: All hints too risky. hint01(80%), hint02(79%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/27a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "27b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.1,
+    "reason": "HALO-R: All hints too risky. hint01(82%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/27b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "27c",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.216,
+    "reason": "HALO-R: All hints too risky. hint01(83%), hint02(81%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/27c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "28a",
+    "hint": "NATIVE",
+    "src_baseline_s": 8.817,
+    "reason": "HALO-R: All hints too risky. hint01(68%), hint02(65%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/28a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "28b",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.054,
+    "reason": "HALO-R: All hints too risky. hint01(85%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/28b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "28c",
+    "hint": "NATIVE",
+    "src_baseline_s": 8.235,
+    "reason": "HALO-R: All hints too risky. hint01(67%), hint02(63%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/28c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "29a",
+    "hint": "NATIVE",
+    "src_baseline_s": 29.807,
+    "reason": "HALO-R: All hints too risky. hint01(83%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/29a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "29b",
+    "hint": "NATIVE",
+    "src_baseline_s": 18.435,
+    "reason": "HALO-R: All hints too risky. hint01(83%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/29b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "29c",
+    "hint": "NATIVE",
+    "src_baseline_s": 19.822,
+    "reason": "HALO-R: All hints too risky. hint01(81%), hint02(81%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/29c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "2a",
+    "hint": "hint02",
+    "src_baseline_s": 2.19,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.00x, risk_ratio=45% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/2a_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "2b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.79,
+    "reason": "HALO-R: All hints too risky. hint01(55%), hint02(45%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/2b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "2c",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.031,
+    "reason": "HALO-R: All hints too risky. hint01(70%), hint02(59%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/2c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "2d",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.887,
+    "reason": "HALO-R: All hints too risky. hint01(65%), hint02(45%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/2d_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "30a",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.332,
+    "reason": "HALO-R: All hints too risky. hint01(82%), hint02(80%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/30a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "30b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.141,
+    "reason": "HALO-R: All hints too risky. hint01(92%), hint02(93%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/30b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "30c",
+    "hint": "NATIVE",
+    "src_baseline_s": 12.117,
+    "reason": "HALO-R: All hints too risky. hint01(66%), hint02(64%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/30c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "31a",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.139,
+    "reason": "HALO-R: All hints too risky. hint01(85%), hint02(72%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/31a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "31b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.122,
+    "reason": "HALO-R: All hints too risky. hint01(91%), hint02(91%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/31b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "31c",
+    "hint": "hint02",
+    "src_baseline_s": 27.286,
+    "reason": "HALO-R: 'hint02' selected cautiously (src=1.95x, risk_ratio=39% HIGH)",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/31c_hint02.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "32a",
+    "hint": "NATIVE",
+    "src_baseline_s": 1.339,
+    "reason": "HALO-R: All hints too risky. hint01(79%), hint02(71%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/32a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "32b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.842,
+    "reason": "HALO-R: All hints too risky. hint01(83%), hint02(83%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/32b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "33a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.093,
+    "reason": "HALO-R: All hints too risky. hint01(94%), hint02(94%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/33a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "33b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.086,
+    "reason": "HALO-R: All hints too risky. hint01(94%), hint02(94%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/33b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "33c",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.122,
+    "reason": "HALO-R: All hints too risky. hint01(90%), hint02(81%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/33c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "3a",
+    "hint": "NATIVE",
+    "src_baseline_s": 4.395,
+    "reason": "HALO-R: All hints too risky. hint01(73%), hint02(60%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/3a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "3b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.488,
+    "reason": "HALO-R: All hints too risky. hint01(80%), hint02(70%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/3b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "3c",
+    "hint": "NATIVE",
+    "src_baseline_s": 7.292,
+    "reason": "HALO-R: All hints too risky. hint01(83%), hint02(60%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/3c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "4a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.409,
+    "reason": "HALO-R: All hints too risky. hint01(100%), hint02(88%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/4a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "4b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.395,
+    "reason": "HALO-R: All hints too risky. hint01(97%), hint02(100%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/4b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "4c",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.741,
+    "reason": "HALO-R: All hints too risky. hint01(90%), hint02(81%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/4c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "5a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.837,
+    "reason": "HALO-R: All hints too risky. hint01(79%), hint02(75%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/5a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "5b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.787,
+    "reason": "HALO-R: All hints too risky. hint01(79%), hint02(75%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/5b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "5c",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.035,
+    "reason": "HALO-R: All hints too risky. hint01(69%), hint02(65%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/5c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "6a",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.266,
+    "reason": "HALO-R: All hints too risky. hint01(100%), hint02(100%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/6a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "6b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.809,
+    "reason": "HALO-R: All hints too risky. hint01(92%), hint02(92%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/6b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "6c",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.044,
+    "reason": "HALO-R: All hints too risky. hint01(100%), hint02(100%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/6c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "6d",
+    "hint": "NATIVE",
+    "src_baseline_s": 24.559,
+    "reason": "HALO-R: All hints too risky. hint01(75%), hint02(79%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/6d_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "6e",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.06,
+    "reason": "HALO-R: All hints too risky. hint01(100%), hint02(100%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/6e_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "6f",
+    "hint": "NATIVE",
+    "src_baseline_s": 9.864,
+    "reason": "HALO-R: All hints too risky. hint01(80%), hint02(68%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/6f_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "7a",
+    "hint": "NATIVE",
+    "src_baseline_s": 2.201,
+    "reason": "HALO-R: All hints too risky. hint01(82%), hint02(82%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/7a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "7b",
+    "hint": "NATIVE",
+    "src_baseline_s": 0.294,
+    "reason": "HALO-R: All hints too risky. hint01(87%), hint02(87%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/7b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "7c",
+    "hint": "NATIVE",
+    "src_baseline_s": 11.599,
+    "reason": "HALO-R: All hints too risky. hint01(76%), hint02(67%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/7c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "8a",
+    "hint": "NATIVE",
+    "src_baseline_s": 14.213,
+    "reason": "HALO-R: All hints too risky. hint01(54%), hint02(56%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/8a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "8b",
+    "hint": "NATIVE",
+    "src_baseline_s": 16.827,
+    "reason": "HALO-R: All hints too risky. hint01(58%), hint02(58%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/8b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "8c",
+    "hint": "NATIVE",
+    "src_baseline_s": 33.848,
+    "reason": "HALO-R: All hints too risky. hint01(47%), hint02(43%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/8c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "8d",
+    "hint": "NATIVE",
+    "src_baseline_s": 3.326,
+    "reason": "HALO-R: All hints too risky. hint01(54%), hint02(50%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/8d_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "9a",
+    "hint": "NATIVE",
+    "src_baseline_s": 23.163,
+    "reason": "HALO-R: All hints too risky. hint01(71%), hint02(67%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/9a_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "9b",
+    "hint": "NATIVE",
+    "src_baseline_s": 19.264,
+    "reason": "HALO-R: All hints too risky. hint01(69%), hint02(69%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/9b_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "9c",
+    "hint": "NATIVE",
+    "src_baseline_s": 21.023,
+    "reason": "HALO-R: All hints too risky. hint01(51%), hint02(53%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/9c_native.sql"
+  },
+  {
+    "scenario": "B_SATA",
+    "benchmark": "JOB",
+    "query_id": "9d",
+    "hint": "NATIVE",
+    "src_baseline_s": 18.575,
+    "reason": "HALO-R: All hints too risky. hint01(53%), hint02(53%) → NATIVE",
+    "sql_file": "/root/halo/results/hinted_queries_epyc_v2/SATA/JOB/9d_native.sql"
+  }
+]

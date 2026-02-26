@@ -1,6 +1,6 @@
 -- HALO Recommended SQL
 -- Query     : tpch_q15 (TPCH)
--- Scenario  : A_NVMe → Xeon_SATA (Intel Xeon Silver 4310)
+-- Scenario  : A_NVMe → Xeon_SATA (AMD EPYC Target)
 -- Hint      : hint05
 -- Reason    : HALO-R: 'hint05' selected (src=1.00x, risk_ops=9/39, risk_ratio=23%)
 -- Hint Str  : SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY)

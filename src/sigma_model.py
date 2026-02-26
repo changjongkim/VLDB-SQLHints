@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Halo Phase 4: OLHS Sigma Model Learning
+Halo Phase 4: HALO Sigma Model Learning
 
 Learns operator-level hardware sensitivity vectors:
   sigma = [sigma_storage, sigma_compute]

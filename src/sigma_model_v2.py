@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Halo Phase 4v2: Improved OLHS Sigma Model
+Halo Phase 4v2: Improved HALO Sigma Model
 
 Improvements over v1 (WITHOUT requiring repeated runs):
   1. Filter out noise: remove operators with self_time < 0.1ms

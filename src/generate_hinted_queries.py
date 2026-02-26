@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 # ── Paths ──
 DATA_DIR      = '/root/halo/data'
 MODEL_PATH    = '/root/halo/results/sigma_model_v3.pkl'
-OUTPUT_DIR    = '/root/halo/results/hinted_queries'
+OUTPUT_DIR    = '/root/halo/results/hinted_queries_xeon_multi_source'
 TPCH_SQL_DIR  = '/root/tpch-dbgen/queries_mysql'
 JOB_SQL_DIR   = '/root/join-order-benchmark/queries'
 
@@ -264,8 +264,8 @@ def main():
     logger.info(f"σ model loaded: {len(feat_cols)} features")
 
     # We will test generic recommendation to Target B (EPYC)
-    # User requested to fix the target server to EPYC (Server B) for testing
-    TARGET_SCENARIOS = ['B_NVMe', 'B_SATA']
+    # Target Server: Intel Xeon Silver 4310
+    TARGET_SCENARIOS = ['Xeon_NVMe', 'Xeon_SATA']
 
     BENCHMARKS = ['TPCH', 'JOB']
     results_summary = []
@@ -273,68 +273,91 @@ def main():
     for scenario_name in TARGET_SCENARIOS:
         
         for benchmark in BENCHMARKS:
-            # Dynamically select SOURCE_ENV based on where we have hint data
-            SOURCE_ENV = 'A_NVMe' if benchmark == 'TPCH' else 'B_NVMe'
-            
-            # Use quantitative HW registry to dynamically calculate hardware transition
-            hw = compute_hw_features(SOURCE_ENV, scenario_name)
             storage_label = 'NVMe' if 'NVMe' in scenario_name else 'SATA'
             
             logger.info(f"\n{'='*60}")
-            logger.info(f"Scenario: {SOURCE_ENV} → {scenario_name} (EPYC Server) | {benchmark}")
+            logger.info(f"Scenario: Multi-Source → {scenario_name} | {benchmark}")
 
             out_dir = os.path.join(OUTPUT_DIR, storage_label, benchmark)
+            if os.path.exists(out_dir):
+                import shutil
+                shutil.rmtree(out_dir)
             os.makedirs(out_dir, exist_ok=True)
 
-            # Get baseline times from source env
-            src_base = df_q[
-                (df_q['env_id'] == SOURCE_ENV) &
-                (df_q['benchmark'] == benchmark) &
-                (df_q['hint_set'] == 'baseline')
-            ].groupby('query_id')['execution_time_s'].min().to_dict()
+            # Get all query IDs for the current benchmark
+            query_ids = sorted(df_q[df_q['benchmark'] == benchmark]['query_id'].unique())
 
-            # Get hint times from source env
-            src_hint_times = df_q[
-                (df_q['env_id'] == SOURCE_ENV) &
-                (df_q['benchmark'] == benchmark) &
-                (df_q['hint_set'] != 'baseline')
-            ].groupby(['query_id', 'hint_set'])['execution_time_s'].min()
-
-            # Get operators per query per hint set
-            src_ops = df_ops[
-                (df_ops['env_id'] == SOURCE_ENV) &
-                (df_ops['benchmark'] == benchmark)
-            ]
-
-            query_ids = sorted(src_base.keys())
-            logger.info(f"  [{benchmark}] Processing {len(query_ids)} queries...")
-
+            # --- New Multi-Source Strategy ---
+            # Instead of a single SOURCE_ENV, we look at ALL available experiences
+            # and pick the best safe one for the target.
+            all_envs = df_q['env_id'].unique()
+            
+            # Group hint data across all environments
+            logger.info(f"  [{benchmark}] Processing {len(query_ids)} queries using Multi-Source Knowledge...")
+            
             for qid in query_ids:
-                base_time = src_base.get(qid, 1.0)
+                global_candidates = {} # (hint_set) -> {risk, src_speedup, from_env}
+                
+                for src_env in all_envs:
+                    # Skip if source is same as target (not a transfer) or no data
+                    if src_env == scenario_name: continue
+                    
+                    # 1. Get baseline and hint times for this specific source
+                    src_q = df_q[(df_q['env_id'] == src_env) & (df_q['query_id'] == qid)]
+                    if src_q.empty: continue
+                    
+                    base_time = src_q[src_q['hint_set'] == 'baseline']['execution_time_s'].min()
+                    if pd.isna(base_time): continue
+                    
+                    hint_data = src_q[src_q['hint_set'] != 'baseline']
+                    if hint_data.empty: continue
+                    
+                    # 2. Extract operator trees for these hints
+                    src_ops_df = df_ops[(df_ops['env_id'] == src_env) & (df_ops['query_id'] == qid)]
+                    
+                    # Get hardware features for THIS specific transition (src_env -> target)
+                    hw_features = compute_hw_features(src_env, scenario_name)
+                    
+                    for hset in hint_data['hint_set'].unique():
+                        h_time = hint_data[hint_data['hint_set'] == hset]['execution_time_s'].min()
+                        h_speedup = base_time / max(h_time, 0.001)
+                        if h_speedup < 1.05: continue # Only consider improving hints
+                        
+                        # Prepare ops for risk prediction
+                        ops_list = []
+                        h_ops_df = src_ops_df[src_ops_df['hint_set'] == hset].sort_values('tree_position')
+                        for _, row in h_ops_df.iterrows():
+                            # Use dict directly from dataframe row
+                            ops_list.append(row.to_dict())
+                        
+                        if not ops_list: continue
+                        
+                        # Predict Risk
+                        sigmas = predict_sigma_batch(sig_model, feat_cols, ops_list, hw_features)
+                        n_high = int((sigmas > 0.8).sum())
+                        risk_r = n_high / len(sigmas)
+                        
+                        # Store as a global candidate if it's better than what we found so far
+                        if risk_r <= 0.3: # HALO-R Safety check
+                            if hset not in global_candidates or h_speedup > global_candidates[hset]['src_speedup']:
+                                global_candidates[hset] = {
+                                    'src_speedup': h_speedup,
+                                    'risk_ratio': risk_r,
+                                    'from_env': src_env,
+                                    'n_high': n_high,
+                                    'n_total': len(sigmas)
+                                }
 
-                # Collect operators per hint set
-                hint_ops = {}
-                hint_times_for_q = {}
-                for hs in ['hint01', 'hint02', 'hint04', 'hint05']:
-                    ops = src_ops[
-                        (src_ops['query_id'] == qid) &
-                        (src_ops['hint_set'] == hs)
-                    ].to_dict('records')
-                    if ops:
-                        hint_ops[hs] = ops
-                    t = src_hint_times.get((qid, hs), None)
-                    if t is not None:
-                        hint_times_for_q[hs] = t
-
-                if not hint_ops:
-                    # No hint data available, skip
-                    continue
-
-                # HALO-R recommendation
-                best_hint, reason = halo_r_recommend(
-                    hint_ops, base_time, hint_times_for_q,
-                    sig_model, feat_cols, hw
-                )
+                # 3. Decision Making: Pick best from safe global candidates
+                if global_candidates:
+                    best_h = max(global_candidates, key=lambda k: global_candidates[k]['src_speedup'])
+                    v = global_candidates[best_h]
+                    rec_hint = best_h
+                    reason = (f"HALO-R (Multi-Source): '{best_h}' selected from {v['from_env']} "
+                              f"(src_speedup={v['src_speedup']:.2f}x, risk={v['risk_ratio']:.0%})")
+                else:
+                    rec_hint = None
+                    reason = "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE"
 
                 # Load original SQL
                 sql = load_sql(benchmark, qid)
@@ -343,40 +366,44 @@ def main():
                     continue
 
                 # Generate output SQL
-                if best_hint and best_hint in HINT_DEFINITIONS:
-                    hint_str = HINT_DEFINITIONS[best_hint]
+                if rec_hint and rec_hint in HINT_DEFINITIONS:
+                    hint_str = HINT_DEFINITIONS[rec_hint]
                     hinted_sql = inject_hint(sql, hint_str)
-                    status = f"✅ {best_hint}"
+                    status = f"✅ {rec_hint}"
                 else:
                     hinted_sql = sql  # native, no hint
                     hint_str   = None
                     status = "🛡️  NATIVE"
 
                 # Write SQL file
-                sql_fname = f"{qid}_{'_'.join(filter(None,[best_hint]))}.sql" if best_hint else f"{qid}_native.sql"
+                sql_fname = f"{qid}_{rec_hint}.sql" if rec_hint else f"{qid}_native.sql"
                 out_path  = os.path.join(out_dir, sql_fname)
                 header    = (
                     f"-- HALO Recommended SQL\n"
                     f"-- Query     : {qid} ({benchmark})\n"
-                    f"-- Scenario  : {SOURCE_ENV} → {scenario_name} (AMD EPYC Target)\n"
-                    f"-- Hint      : {best_hint or 'NATIVE (no hint)'}\n"
+                    f"-- Target HW : {scenario_name}\n"
+                    f"-- Mode      : Multi-Source Global Selection\n"
+                    f"-- Hint      : {rec_hint or 'NATIVE (no hint)'}\n"
+                    f"-- From Src  : {v['from_env'] if rec_hint else 'N/A'}\n"
                     f"-- Reason    : {reason}\n"
-                    f"-- Hint Str  : {hint_str or 'N/A'}\n"
-                    f"--\n\n"
+                    f"-- Generated : 2026-02-26\n"
+                    f"{'='*70}\n\n"
                 )
                 with open(out_path, 'w') as f:
                     f.write(header + hinted_sql + ';\n')
 
+                # Save results for summary
                 results_summary.append({
-                    'scenario':   scenario_name,
-                    'benchmark':  benchmark,
-                    'query_id':   qid,
-                    'hint':       best_hint or 'NATIVE',
-                    'src_baseline_s': round(base_time, 3),
-                    'reason':     reason,
-                    'sql_file':   out_path,
+                    'scenario': scenario_name,
+                    'benchmark': benchmark,
+                    'query_id': qid,
+                    'recommended_hint': rec_hint,
+                    'hint': rec_hint if rec_hint else 'NATIVE',
+                    'reason': reason,
+                    'sql_file': out_path
                 })
-                logger.info(f"    {qid:10s} → {status:12s} | {reason[:70]}")
+                
+                logger.info(f"    {qid:<10} → {status:<10} | {reason}")
 
     # ── Save summary ──
     summary_path = os.path.join(OUTPUT_DIR, 'recommendation_summary.json')
@@ -386,7 +413,7 @@ def main():
     # ── Print final table ──
     df_sum = pd.DataFrame(results_summary)
     print(f"\n{'='*70}")
-    print("HALO Recommendation Summary (Target: AMD EPYC 7713)")
+    print(f"HALO Multi-Source Recommendation Summary")
     print(f"{'='*70}")
     for scen in df_sum['scenario'].unique():
         for bm in df_sum['benchmark'].unique():

@@ -3,7 +3,7 @@
 Halo Phase 1: MySQL EXPLAIN ANALYZE Parser + Data ETL
 
 Parses MySQL 8.0 EXPLAIN ANALYZE output from collected experiment logs.
-Extracts operator instances with all features needed for OLHS sigma learning.
+Extracts operator instances with all features needed for HALO sigma learning.
 
 Key data formats handled:
   1. Single-line with literal \\n (Server B JOB/TPCH, Server A NVMe JOB)
@@ -17,6 +17,7 @@ import re
 import os
 import json
 import logging
+import glob
 from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Optional, Tuple
 from pathlib import Path
@@ -496,6 +497,29 @@ def discover_data_sources(base_dir: str = '/root/kcj_sqlhint') -> List[DataSourc
         ]:
             _add_if_exists(sources, 'B', 'SATA', benchmark, hint_id,
                            f"{b_sata}/{hdir}/hint_results_explain_analyze.txt")
+
+    # ── [NEW] Server A JOB Hints (found in ~/join-order-benchmark) ──
+    for storage_dir, storage_label in [
+        ('/root/join-order-benchmark/NVMe_result/results', 'NVMe'),
+        ('/root/join-order-benchmark/SSD_result/results', 'SATA')
+    ]:
+        for hint_id, hdir in [
+            ('hint01', 'Hint_01_single_hints'),
+            ('hint02', 'Hint_02_table_specific'),
+            ('hint04', 'Hint_04_join_order_index'),
+            ('hint05', 'Hint_05_index_strategy')
+        ]:
+            dir_path = f"{storage_dir}/{hdir}"
+            if os.path.exists(dir_path):
+                txt_files = glob.glob(os.path.join(dir_path, "*.txt"))
+                logger.info(f"Found {len(txt_files)} files in {dir_path}")
+                for fpath in txt_files:
+                    sources.append(DataSource(
+                        server='A', storage=storage_label, benchmark='JOB',
+                        hint_id=hint_id, filepath=fpath
+                    ))
+            else:
+                logger.debug(f"Not found: {dir_path}")
 
     return sources
 

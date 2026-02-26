@@ -1,9 +1,9 @@
--- HALO Recommended SQL (JOB)
--- Query     : 9c
--- Target    : Intel Xeon Silver 4310 (SATA)
--- Hint      : NATIVE
--- Reason    : HALO-R: all too risky → NATIVE [hint01(53%), hint02(53%), hint05(53%)]
--- Src spdup : 1.11x (best available hint)
+-- HALO Recommended SQL
+-- Query     : 9c (JOB)
+-- Scenario  : A_NVMe → Xeon_SATA (AMD EPYC Target)
+-- Hint      : NATIVE (no hint)
+-- Reason    : HALO-R: All hints too risky. hint01(51%), hint02(53%) → NATIVE
+-- Hint Str  : N/A
 --
 
 SELECT MIN(an.name) AS alternative_name, MIN(chn.name) AS voiced_character_name, MIN(n.name) AS voicing_actress, MIN(t.title) AS american_movie FROM aka_name AS an, char_name AS chn, cast_info AS ci, company_name AS cn, movie_companies AS mc, name AS n, role_type AS rt, title AS t WHERE ci.note  in ('(voice)', '(voice: Japanese version)', '(voice) (uncredited)', '(voice: English version)') AND cn.country_code ='[us]' AND n.gender ='f' and n.name like '%An%' AND rt.role ='actress' AND ci.movie_id = t.id AND t.id = mc.movie_id AND ci.movie_id = mc.movie_id AND mc.company_id = cn.id AND ci.role_id = rt.id AND n.id = ci.person_id AND chn.id = ci.person_role_id AND an.person_id = n.id AND an.person_id = ci.person_id;;

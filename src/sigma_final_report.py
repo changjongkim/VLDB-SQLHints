@@ -73,9 +73,10 @@ def generate_final_report_plots():
     #   PRODUCING THE PLATE
     # ══════════════════════════════════════════════════════════
     sns.set_theme(style="whitegrid", font_scale=1.1)
-    fig = plt.figure(figsize=(18, 12))
+    fig = plt.figure(figsize=(18, 14))
     
-    grid = plt.GridSpec(2, 2, hspace=0.3, wspace=0.3)
+    # Increase hspace to prevent title overlap between rows
+    grid = plt.GridSpec(2, 2, hspace=0.45, wspace=0.3)
     
     # --- PANEL A: Why "Direction" matters more than "R2" ---
     ax1 = fig.add_subplot(grid[0, 0])
@@ -97,40 +98,49 @@ def generate_final_report_plots():
     ax1_twin.tick_params(axis='y', labelcolor='#27ae60')
     
     ax1.set_xticks(x)
-    ax1.set_xticklabels(df_folds['Env Pair'], rotation=45, ha='right')
-    ax1.set_title('(A) Prediction Quality: Magnitude vs. Trend\nStable Storage-Only has low R\u00b2 but HIGH Directional Accuracy (\u224880%)', fontsize=14, fontweight='bold')
+    ax1.set_xticklabels(df_folds['Env Pair'], rotation=35, ha='right')
+    ax1.set_title('(A) Prediction Quality: Magnitude vs. Trend\nStable Storage-Only has low R\u00b2 but HIGH Directional Accuracy (\u224880%)', 
+                  fontsize=15, fontweight='bold', pad=20)
     
     # Unified Legend
     lines, labels = ax1.get_legend_handles_labels()
     lines2, labels2 = ax1_twin.get_legend_handles_labels()
-    ax1.legend(lines + lines2, labels + labels2, loc='upper left', frameon=True)
+    ax1.legend(lines + lines2, labels + labels2, loc='upper left', frameon=True, fontsize=10)
 
     # --- PANEL B: Robust Decision Support (Risk Control) ---
     ax2 = fig.add_subplot(grid[0, 1])
     
     df_risk_melted = df_risk.melt(id_vars='Env Pair', var_name='Metric', value_name='Value')
     sns.barplot(data=df_risk_melted, x='Env Pair', y='Value', hue='Metric', palette=['#e67e22', '#f1c40f'], ax=ax2)
-    ax2.set_title('(B) HALO-R Decision Reliability\nHigh Precision (\u22480.7+) Prevents Major Performance Regressions', fontsize=14, fontweight='bold')
-    ax2.set_ylabel('Score (0.0 to 1.0)')
+    ax2.set_title('(B) HALO-R Decision Reliability\nHigh Precision (\u22480.7+) Prevents Major Performance Regressions', 
+                  fontsize=15, fontweight='bold', pad=20)
+    ax2.set_ylabel('Score (0.0 to 1.0)', fontweight='bold')
     ax2.set_ylim(0, 1.1)
-    ax2.set_xticklabels(ax2.get_xticklabels(), rotation=45, ha='right')
-    ax2.legend(title=None, loc='lower right')
+    
+    # Fix tick labels warning
+    ax2.set_xticks(range(len(df_risk['Env Pair'])))
+    ax2.set_xticklabels(df_risk['Env Pair'], rotation=35, ha='right')
+    ax2.legend(title=None, loc='lower right', fontsize=10)
 
     # --- PANEL C: Performance Benefit Comparison ---
     ax3 = fig.add_subplot(grid[1, :])
     
     sns.barplot(data=df_impact, x='Transfer', y='Speedup', palette='viridis', ax=ax3)
     ax3.axhline(1.0, color='red', linestyle='--', linewidth=1.5, label='Native Baseline')
-    ax3.set_title('(C) End-to-End Performance Gain: HALO Portability Benefit\nOverall Workload Avg. Speedup Factor across 16 Transfer Scenarios', fontsize=14, fontweight='bold')
-    ax3.set_ylabel('Speedup Factor (x Baseline)')
-    ax3.set_xlabel('Environment Transfer Path')
+    ax3.set_title('(C) End-to-End Performance Gain: HALO Portability Benefit\nOverall Workload Avg. Speedup Factor across 16 Transfer Scenarios', 
+                  fontsize=16, fontweight='bold', pad=25)
+    ax3.set_ylabel('Speedup Factor (x Baseline)', fontweight='bold')
+    ax3.set_xlabel('Environment Transfer Path', fontweight='bold')
     
     # Annotate bars
     for i, p in enumerate(ax3.patches):
-        ax3.annotate(f"{p.get_height():.2f}x", (p.get_x() + p.get_width() / 2., p.get_height()),
-                    ha='center', va='center', xytext=(0, 9), textcoords='offset points', fontweight='bold')
+        if p.get_height() > 0:
+            ax3.annotate(f"{p.get_height():.2f}x", (p.get_x() + p.get_width() / 2., p.get_height()),
+                        ha='center', va='center', xytext=(0, 10), textcoords='offset points', 
+                        fontweight='bold', fontsize=12)
 
-    plt.tight_layout()
+    # Adjust layout with extra padding
+    plt.tight_layout(rect=[0, 0.03, 1, 0.97])
     final_path = '/root/halo/results/figures/halo_sigma_final_logic.png'
     plt.savefig(final_path, dpi=300, bbox_inches='tight')
     plt.close()

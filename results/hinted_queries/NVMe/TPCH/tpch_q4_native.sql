@@ -1,8 +1,8 @@
 -- HALO Recommended SQL
 -- Query     : tpch_q4 (TPCH)
--- Scenario  : A_NVMe → Xeon_NVMe (Intel Xeon Silver 4310)
+-- Scenario  : A_NVMe → Xeon_NVMe (AMD EPYC Target)
 -- Hint      : NATIVE (no hint)
--- Reason    : HALO-R: All hints too risky. hint01(16%), hint02(14%), hint04(20%), hint05(19%) → NATIVE
+-- Reason    : HALO-R: All hints too risky. hint01(16%), hint02(14%), hint04(13%), hint05(14%) → NATIVE
 -- Hint Str  : N/A
 --
 

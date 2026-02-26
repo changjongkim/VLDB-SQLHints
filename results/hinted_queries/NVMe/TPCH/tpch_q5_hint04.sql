@@ -1,8 +1,8 @@
 -- HALO Recommended SQL
 -- Query     : tpch_q5 (TPCH)
--- Scenario  : A_NVMe → Xeon_NVMe (Intel Xeon Silver 4310)
+-- Scenario  : A_NVMe → Xeon_NVMe (AMD EPYC Target)
 -- Hint      : hint04
--- Reason    : HALO-R: 'hint04' selected cautiously (src=2.16x, risk_ratio=38% HIGH)
+-- Reason    : HALO-R: 'hint04' selected (src=2.16x, risk_ops=12/48, risk_ratio=25%)
 -- Hint Str  : SET_VAR(optimizer_switch="block_nested_loop=off,hash_join=on")
 --
 

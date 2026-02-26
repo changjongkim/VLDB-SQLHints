@@ -1,8 +1,8 @@
 -- HALO Recommended SQL
 -- Query     : tpch_q11 (TPCH)
--- Scenario  : A_NVMe → Xeon_SATA (Intel Xeon Silver 4310)
+-- Scenario  : A_NVMe → Xeon_SATA (AMD EPYC Target)
 -- Hint      : hint02
--- Reason    : HALO-R: 'hint02' selected cautiously (src=1.01x, risk_ratio=50% HIGH)
+-- Reason    : HALO-R: 'hint02' selected cautiously (src=1.01x, risk_ratio=46% HIGH)
 -- Hint Str  : SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on") SET_VAR(optimizer_switch="mrr=on,mrr_cost_based=off")
 --
 
