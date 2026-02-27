@@ -178,10 +178,11 @@ def engineer_features(op: dict, hw: dict) -> dict:
 
 def predict_sigma_batch(regressor, classifier, feature_cols: list, ops: list, hw: dict, adaptive_thresholds: dict):
     """
-    Batch predict sigma using Dual-Head architecture:
-    1. Regressor predicts actual δ (log-ratio)
-    2. Classifier predicts binary HIGH_RISK label
-    3. Adaptive thresholds provide a secondary safety check per op_type
+    Batch predict sigma using Dual-Head + Uncertainty (from RF estimators):
+    1. Regressor predicts mean δ (log-ratio)
+    2. Regressor calculates σ_std (uncertainty) across trees
+    3. Classifier predicts binary HIGH_RISK label
+    4. Adaptive thresholds provide a secondary safety check per op_type
     """
     rows = []
     op_types = []
@@ -191,7 +192,15 @@ def predict_sigma_batch(regressor, classifier, feature_cols: list, ops: list, hw
         op_types.append(op.get('op_type', 'UNKNOWN'))
     
     X = np.array(rows, dtype=np.float32)
-    sigmas = regressor.predict(X)
+    
+    # Optimized Uncertainty Calculation: Sub-sample trees (e.g., every 5th tree)
+    # for speed while maintaining a stable variance estimate.
+    # regressor.estimators_ is a list of 500 DecisionTreeRegressors.
+    subset_estimators = regressor.estimators_[::5] 
+    tree_preds = np.array([tree.predict(X) for tree in subset_estimators])
+    
+    sigmas_mean = np.mean(tree_preds, axis=0) 
+    sigmas_std  = np.std(tree_preds, axis=0)
     
     # Head 1: Binary Classifier (tuned for high recall)
     if classifier:
@@ -199,21 +208,36 @@ def predict_sigma_batch(regressor, classifier, feature_cols: list, ops: list, hw
     else:
         is_high_risk_clf = np.zeros(len(ops), dtype=int)
         
-    # Head 2: Adaptive Threshold on Regressor
+    # Ensemble (Safety-First): 
+    # Safety Check should be based on the EXPECTED (mean) behavior to avoid 
+    # filtering out potentially good hints where uncertainty is slightly high.
     is_high_risk_thresh = np.zeros(len(ops), dtype=int)
-    for i, sig in enumerate(sigmas):
+    for i, sig in enumerate(sigmas_mean):
         thresh = adaptive_thresholds.get(op_types[i], 0.8)
         if abs(sig) > thresh:
             is_high_risk_thresh[i] = 1
             
-    # Ensemble (Safety-First): If EITHER head flags risk, mark as high risk
     is_high_risk = (is_high_risk_clf == 1) | (is_high_risk_thresh == 1)
     
-    return sigmas, is_high_risk
+    return sigmas_mean, sigmas_std, is_high_risk
 
-# HALO-R (Robust) Settings
-MAX_HIGH_RISK_RATIO = 0.5  # Increased from 0.3 to allow more opportunistic speedups in JOB
+# HALO-U (Uncertainty-Aware) Settings
+# No hardcoded strategy affinity. Logic is now 100% data-driven.
 SIGMA_RISK_THRESHOLD = 0.8 # Prediction delta threshold for HIGH_RISK
+
+def calculate_uncertainty_aware_score(src_speedup, means, stds):
+    """
+    Score = src_speedup * exp(-Pessimistic_Risk)
+    Pessimistic_Risk = sum( max(0, mean + 1.0 * std) )
+    Multiplier 1.0 is more balanced for cross-hardware transfer.
+    """
+    pessimistic_risks = means + 1.0 * stds
+    total_penalty = float(pessimistic_risks[pessimistic_risks > 0].sum())
+    
+    # Calibration factor
+    calibration = math.exp(-0.4 * total_penalty) # Slightly gentler decay
+    
+    return src_speedup * calibration
 
 def halo_r_recommend(query_ops: dict, source_baseline_time: float,
                      query_hint_times: dict, model, feat_cols: list, hw: dict):
@@ -310,6 +334,8 @@ def main():
 
     BENCHMARKS = ['TPCH', 'JOB']
     results_summary = []
+    
+    all_envs = df_q['env_id'].unique()
 
     for scenario_name in TARGET_SCENARIOS:
         
@@ -328,16 +354,19 @@ def main():
             # Get all query IDs for the current benchmark
             query_ids = sorted(df_q[df_q['benchmark'] == benchmark]['query_id'].unique())
 
-            # --- New Multi-Source Strategy ---
-            # Instead of a single SOURCE_ENV, we look at ALL available experiences
-            # and pick the best safe one for the target.
-            all_envs = df_q['env_id'].unique()
+            # --- New Multi-Source + HAPS Strategy ---
+            # Increase safety for low-end SATA
+            is_sata = (storage_label == 'SATA')
+            env_max_risk = 0.15 if is_sata else 0.35 # SATA is much more sensitive
             
             # Group hint data across all environments
-            logger.info(f"  [{benchmark}] Processing {len(query_ids)} queries using Multi-Source Knowledge...")
+            logger.info(f"  [{benchmark}] Processing {len(query_ids)} queries using HAPS Strategy (SATA-Safe={is_sata})...")
             
             for qid in query_ids:
-                global_candidates = {} # (hint_set) -> {risk, src_speedup, from_env}
+                global_candidates = {} 
+                # Faster Progress logging
+                if query_ids.index(qid) % 10 == 0:
+                    logger.info(f"    [{benchmark}] Processing {qid} ({query_ids.index(qid)}/{len(query_ids)})...")
                 
                 for src_env in all_envs:
                     # Skip if source is same as target (not a transfer) or no data
@@ -373,35 +402,39 @@ def main():
                         
                         if not ops_list: continue
                         
-                        # Predict Risk using Dual-Head
-                        sigmas, is_high_risk = predict_sigma_batch(
+                        # Predict Risk & Uncertainty using Dual-Head + Tree Variance
+                        means, stds, is_high_risk = predict_sigma_batch(
                             sig_model, risk_clf, feat_cols, ops_list, 
                             hw_features, adaptive_thresholds
                         )
                         n_high = int(is_high_risk.sum())
-                        risk_r = n_high / len(sigmas)
+                        risk_r = n_high / len(means)
                         
-                        # Store as a global candidate if it's better than what we found so far
-                        if risk_r <= 0.3: # HALO-R Safety check
-                            if hset not in global_candidates or h_speedup > global_candidates[hset]['src_speedup']:
+                        # 3. Uncertainty-Aware Scoring
+                        u_score = calculate_uncertainty_aware_score(h_speedup, means, stds)
+                        
+                        # Store as a global candidate if it passes the Dynamic Safety Gate
+                        if risk_r <= env_max_risk: 
+                            if hset not in global_candidates or u_score > global_candidates[hset]['u_score']:
                                 global_candidates[hset] = {
+                                    'u_score': u_score,
                                     'src_speedup': h_speedup,
                                     'risk_ratio': risk_r,
                                     'from_env': src_env,
                                     'n_high': n_high,
-                                    'n_total': len(sigmas)
+                                    'n_total': len(means)
                                 }
 
-                # 3. Decision Making: Pick best from safe global candidates
+                # 3. Decision Making: Pick best from safe candidates
                 if global_candidates:
-                    best_h = max(global_candidates, key=lambda k: global_candidates[k]['src_speedup'])
+                    best_h = max(global_candidates, key=lambda k: global_candidates[k]['u_score'])
                     v = global_candidates[best_h]
                     rec_hint = best_h
-                    reason = (f"HALO-R (Multi-Source): '{best_h}' selected from {v['from_env']} "
-                              f"(src_speedup={v['src_speedup']:.2f}x, risk={v['risk_ratio']:.0%})")
+                    reason = (f"HALO-U (Novelty): '{best_h}' selected (score={v['u_score']:.2f}, "
+                              f"src_sp={v['src_speedup']:.2f}x, risk={v['risk_ratio']:.0%})")
                 else:
                     rec_hint = None
-                    reason = "HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE"
+                    reason = f"HALO-U (Novelty): Risk/Uncertainty too high. -> NATIVE"
 
                 # Load original SQL
                 sql = load_sql(benchmark, qid)

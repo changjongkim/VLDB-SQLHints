@@ -1,12 +1,9 @@
--- HALO Recommended SQL
--- Query     : tpch_q22 (TPCH)
--- Target HW : Xeon_SATA
--- Mode      : Multi-Source Global Selection
--- Hint      : NATIVE (no hint)
--- From Src  : N/A
--- Reason    : HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE
--- Generated : 2026-02-26
-======================================================================
+-- HALO Optimized
+-- Query: tpch_q22
+-- Scenario: Xeon_SATA
+-- Reason: HALO-U: Uncertainty too high (Gate=15%)
+-- using default substitutions
+
 
 select
 	cntrycode,
@@ -44,4 +41,5 @@ from
 group by
 	cntrycode
 order by
-	cntrycode;;
+	cntrycode;
+

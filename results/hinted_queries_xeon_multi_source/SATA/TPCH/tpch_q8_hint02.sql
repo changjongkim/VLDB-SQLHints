@@ -1,12 +1,9 @@
--- HALO Recommended SQL
--- Query     : tpch_q8 (TPCH)
--- Target HW : Xeon_SATA
--- Mode      : Multi-Source Global Selection
--- Hint      : hint02
--- From Src  : B_SATA
--- Reason    : HALO-R (Multi-Source): 'hint02' selected from B_SATA (src_speedup=1.07x, risk=10%)
--- Generated : 2026-02-26
-======================================================================
+-- HALO Optimized
+-- Query: tpch_q8
+-- Scenario: Xeon_SATA
+-- Reason: HALO-U (Novelty): 'hint02' (score=0.00, src_sp=1.1x, risk=10%) from B_SATA
+-- using default substitutions
+
 
 select /*+ SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on") SET_VAR(optimizer_switch="mrr=on,mrr_cost_based=off") */
 	o_year,
@@ -44,4 +41,4 @@ from
 group by
 	o_year
 order by
-	o_year;;
+	o_year;

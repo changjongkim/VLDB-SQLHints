@@ -4,7 +4,7 @@
 -- Mode      : Multi-Source Global Selection
 -- Hint      : NATIVE (no hint)
 -- From Src  : N/A
--- Reason    : HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE
+-- Reason    : HALO-U (Novelty): Risk/Uncertainty too high. -> NATIVE
 -- Generated : 2026-02-26
 ======================================================================
 

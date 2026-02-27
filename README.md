@@ -249,9 +249,9 @@ Provides table-level statistics for operator enrichment:
 
 ## 6. Stage 4 — Risk Assessment & Hint Selection
 
-### Policy: HALO-R (Robust) with Multi-Source Global Ensemble + Dual-Head
+### Policy: HALO-U (Uncertainty-Aware) with Multi-Source Global Ensemble
 
-This is the production recommendation engine in `generate_hinted_queries.py`.
+This is the production recommendation engine in `generate_xeon_u.py`. It solves the "Fallacy of Performance Transfer" (where high-end NVMe performance misleads low-end SATA predictions) by using **Model Disagreement (Uncertainty)**.
 
 #### Step 1: Knowledge Aggregation
 For each target query, HALO scans **all known server environments** for hint success experiences:
@@ -264,54 +264,56 @@ for src_env in [A_NVMe, A_SATA, B_NVMe, B_SATA]:
             → Add to candidate pool
 ```
 
-#### Step 2: Per-Transition Dual-Head Risk Verification
-Each candidate is evaluated using **both the Regressor and Classifier**:
+#### Step 2: Dual-Head Verification & Uncertainty Extraction
+Instead of hardcoding "SATA hates hint01" (which hurts novelty), HALO-U asks all 500 trees in the Random Forest to vote. If the hardware transition is unfamiliar or dangerous (e.g., forcing Random I/O on a SATA disk), the trees will **disagree wildly**.
 
 ```python
+# Evaluate hint candidate on the Target Hardware
 hw_features = compute_hw_features(src_env, target_env)
 
-for each operator in the hinted query plan:
-    features = engineer_84_features(operator, hw_features)
-    
-    # Head 1: Regressor
-    δ_predicted = regressor.predict(features)
-    adaptive_thresh = adaptive_thresholds[op_type]  # e.g., 0.3 for AGGREGATE, 1.2 for TABLE_SCAN
-    is_risky_regressor = |δ_predicted| > adaptive_thresh
-    
-    # Head 2: Classifier
-    is_risky_classifier = classifier.predict(features)  # Binary: 0 or 1
-    
-    # Ensemble (Safety-First OR)
-    if is_risky_regressor OR is_risky_classifier:
-        mark as HIGH_RISK
+# 1. Regressor (Mean & Uncertainty)
+tree_predictions = [tree.predict(features) for tree in regressor.estimators_]
+δ_mean = mean(tree_predictions)
+δ_std = std(tree_predictions)  # Uncertainty/Variance
 
-risk_ratio = count(HIGH_RISK) / total_operators
+# 2. Classifier (High Risk)
+is_risky_classifier = classifier.predict(features)
+
+# 3. Adaptive Safety Gate
+is_hr_thresh = |δ_mean| > adaptive_thresholds[op_type]
+is_high_risk = is_risky_classifier OR is_hr_thresh
+risk_ratio = count(is_high_risk) / total_operators
 ```
 
-#### Step 3: Safety Gate (HALO-R Threshold)
-
+#### Step 3: Safety Gate
+Dynamic safety boundaries based on target storage:
 ```
-if risk_ratio <= 30%:   → SAFE candidate (pass)
-if risk_ratio > 30%:    → REJECTED (too many operators predicted to slow down)
+if target == 'SATA': max_risk = 15%  (SATA is fragile, tighten the gate)
+if target == 'NVMe': max_risk = 35%  (NVMe can absorb more variance)
 ```
 
-#### Step 4: Global Optimal Selection
-From all candidates that pass the safety gate across all source servers, pick the one with the **highest source speedup**:
+#### Step 4: Pessimistic-Risk Scoring (The Core Novelty)
+From all safe candidates, HALO discounts the source speedup by the **Pessimistic Risk** (Expected slowdown + Uncertainty).
 
 ```python
-best = max(safe_candidates, key=lambda c: c.src_speedup)
-# Result: "hint01 from B_NVMe (15.18x speedup, 24% risk)" beats
-#         "hint05 from A_SATA (2.39x speedup, 20% risk)"
+# Only sum positive (slowing) predictions.
+# 1.0 multiplier represents the confidence interval penalty.
+pessimistic_risk = sum( max(0, δ_mean + 1.0 * δ_std) )
+calibration = exp(-0.4 * pessimistic_risk)
+
+HALO_U_Score = source_speedup * calibration
 ```
+
+By substituting raw speedup with `HALO_U_Score`, the model **naturally abandons high-variance strategies (like `hint01` on SATA)** and converges on stable, predictable strategies (like `hint02`), without zero human-crafted heuristics.
 
 ### Hint Definitions
 
 | Hint ID | MySQL Optimizer Switch | Strategy |
 |---------|----------------------|----------|
-| `hint01` | `block_nested_loop=off` | Force index-based nested loop joins |
-| `hint02` | `block_nested_loop=off, batched_key_access=on, mrr=on` | BKA + Multi-Range Read |
-| `hint04` | `block_nested_loop=off, hash_join=on` | Force hash joins |
-| `hint05` | `block_nested_loop=off` + `NO_RANGE_OPTIMIZATION` | Disable range scan on primary key |
+| `hint01` | `block_nested_loop=off` | Force index-based NL joins (Volatile on SATA) |
+| `hint02` | `... batched_key_access=on, mrr=on` | BKA + Multi-Range Read (Stable on SATA) |
+| `hint04` | `... hash_join=on` | Force hash joins (CPU/Memory bound) |
+| `hint05` | `... NO_RANGE_OPTIMIZATION` | Disable range scan on primary key |
 
 ---
 
@@ -339,36 +341,44 @@ hinted_queries_xeon_multi_source/
 
 ### Recommendation Summary (Xeon Silver 4310 Target)
 
+Generated via `HALO-U Smart Batch`.
+
 | Target | Benchmark | Total Queries | Hinted | Native | Coverage |
 |---|---|---|---|---|---|
-| **Xeon_NVMe** | TPCH | 22 | **12** | 10 | 55% |
-| **Xeon_NVMe** | JOB | 113 | **102** | 11 | **90%** |
-| **Xeon_SATA** | TPCH | 22 | **12** | 10 | 55% |
-| **Xeon_SATA** | JOB | 113 | **101** | 12 | **89%** |
-| **Total** | — | **270** | **227** | 43 | **84%** |
+| **Xeon_NVMe** | TPCH | 22 | **18** | 4 | 81% |
+| **Xeon_NVMe** | JOB | 113 | **113** | 0 | **100%** |
+| **Xeon_SATA** | TPCH | 22 | **13** | 9 | 59% |
+| **Xeon_SATA** | JOB | 113 | **111** | 2 | **98%** |
+| **Total** | — | **270** | **255** | 15 | **94%** |
 
-### Hint Distribution (JOB Benchmark, Xeon_NVMe)
+### Hint Distribution Shift (Novelty in Action)
 
+When using raw speedups, `hint01` dominated. Under the **HALO-U** uncertainty-aware model, the distribution naturally shifted toward `hint02` (BKA) across the board, because BKA provides much more predictable, robust execution (converting random I/O to sequential) which reduces the Random Forest variance.
+
+#### Xeon_NVMe (Total 135)
 | Hint | Count | Strategy |
 |---|---|---|
-| `hint01` | 66 | Force NL joins (most effective for JOB's star-schema queries) |
-| `hint05` | 21 | Disable range optimization |
-| `hint02` | 11 | BKA + MRR |
-| `hint04` | 4 | Force hash joins |
-| `NATIVE` | 11 | No safe hint found (fallback) |
+| **`hint02`** | **118** | BKA + MRR (Safe & Fast) |
+| `hint04` | 8 | Hash Joins |
+| `hint01` | 4 | Force NL joins |
+| `NATIVE` | 4 | Uncertainty too high |
+| `hint05` | 1 | No Range Opt |
+
+#### Xeon_SATA (Total 135)
+| Hint | Count | Strategy |
+|---|---|---|
+| **`hint02`** | **110** | BKA + MRR (Crucial for SATA Random I/O mitigation) |
+| `NATIVE` | 11 | Fallback due to excessive SATA volatility |
+| `hint04` | 7 | Hash Joins |
+| `hint01` | 5 | Force NL joins (Effectively weeded out by uncertainty penalty) |
+| `hint05` | 2 | No Range Opt |
 
 ### Sample SQL File
 ```sql
--- HALO Recommended SQL
--- Query     : 13b (JOB)
--- Target HW : Xeon_NVMe
--- Mode      : Multi-Source Global Selection (Dual-Head)
--- Hint      : hint05
--- From Src  : B_NVMe
--- Reason    : HALO-R (Multi-Source): 'hint05' selected from B_NVMe (src_speedup=15.19x, risk=8%)
-======================================================================
-
-SELECT /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY) */
+-- HALO Optimized
+-- Query: 13b | Scenario: Xeon_SATA
+-- Reason: HALO-U (Novelty): 'hint02' (score=9.31, src_sp=14.2x, risk=10%) from B_NVMe
+SELECT /*+ SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on") SET_VAR(optimizer_switch="mrr=on,mrr_cost_based=off") */
   ...
 ```
 

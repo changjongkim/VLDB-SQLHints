@@ -1,12 +1,9 @@
--- HALO Recommended SQL
--- Query     : tpch_q1 (TPCH)
--- Target HW : Xeon_NVMe
--- Mode      : Multi-Source Global Selection
--- Hint      : NATIVE (no hint)
--- From Src  : N/A
--- Reason    : HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE
--- Generated : 2026-02-26
-======================================================================
+-- HALO Optimized
+-- Query: tpch_q1
+-- Scenario: Xeon_NVMe
+-- Reason: HALO-U: Uncertainty too high (Gate=35%)
+-- using default substitutions
+
 
 select
 	l_returnflag,
@@ -28,4 +25,5 @@ group by
 	l_linestatus
 order by
 	l_returnflag,
-	l_linestatus;;
+	l_linestatus;
+

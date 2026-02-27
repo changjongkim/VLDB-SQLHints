@@ -1,12 +1,9 @@
--- HALO Recommended SQL
--- Query     : tpch_q17 (TPCH)
--- Target HW : Xeon_NVMe
--- Mode      : Multi-Source Global Selection
--- Hint      : hint02
--- From Src  : B_NVMe
--- Reason    : HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=2.91x, risk=15%)
--- Generated : 2026-02-26
-======================================================================
+-- HALO Optimized
+-- Query: tpch_q17
+-- Scenario: Xeon_NVMe
+-- Reason: HALO-U (Novelty): 'hint02' (score=0.00, src_sp=2.6x, risk=15%) from B_SATA
+-- using default substitutions
+
 
 select /*+ SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on") SET_VAR(optimizer_switch="mrr=on,mrr_cost_based=off") */
 	sum(l_extendedprice) / 7.0 as avg_yearly
@@ -24,4 +21,4 @@ where
 			lineitem
 		where
 			l_partkey = p_partkey
-	);;
+	);

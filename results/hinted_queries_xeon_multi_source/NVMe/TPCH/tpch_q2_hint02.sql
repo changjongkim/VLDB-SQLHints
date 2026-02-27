@@ -1,12 +1,9 @@
--- HALO Recommended SQL
--- Query     : tpch_q2 (TPCH)
--- Target HW : Xeon_NVMe
--- Mode      : Multi-Source Global Selection
--- Hint      : hint02
--- From Src  : B_NVMe
--- Reason    : HALO-R (Multi-Source): 'hint02' selected from B_NVMe (src_speedup=4.41x, risk=4%)
--- Generated : 2026-02-26
-======================================================================
+-- HALO Optimized
+-- Query: tpch_q2
+-- Scenario: Xeon_NVMe
+-- Reason: HALO-U (Novelty): 'hint02' (score=0.00, src_sp=3.4x, risk=8%) from B_SATA
+-- using default substitutions
+
 
 select /*+ SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on") SET_VAR(optimizer_switch="mrr=on,mrr_cost_based=off") */
 	s_acctbal,
@@ -50,4 +47,4 @@ order by
 	s_acctbal desc,
 	n_name,
 	s_name,
-	p_partkey LIMIT 100;;
+	p_partkey LIMIT 100;

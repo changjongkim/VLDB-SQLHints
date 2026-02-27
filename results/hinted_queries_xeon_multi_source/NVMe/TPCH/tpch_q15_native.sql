@@ -1,13 +1,7 @@
--- HALO Recommended SQL
--- Query     : tpch_q15 (TPCH)
--- Target HW : Xeon_NVMe
--- Mode      : Multi-Source Global Selection
--- Hint      : NATIVE (no hint)
--- From Src  : N/A
--- Reason    : HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE
--- Generated : 2026-02-26
-======================================================================
-
+-- HALO Optimized
+-- Query: tpch_q15
+-- Scenario: Xeon_NVMe
+-- Reason: HALO-U: Uncertainty too high (Gate=35%)
 WITH revenue0 (supplier_no, total_revenue) AS (
 	select
 		l_suppkey,
@@ -38,4 +32,5 @@ where
 			revenue0
 	)
 order by
-	s_suppkey;;
+	s_suppkey;
+

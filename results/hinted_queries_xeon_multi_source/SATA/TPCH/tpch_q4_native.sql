@@ -1,12 +1,9 @@
--- HALO Recommended SQL
--- Query     : tpch_q4 (TPCH)
--- Target HW : Xeon_SATA
--- Mode      : Multi-Source Global Selection
--- Hint      : NATIVE (no hint)
--- From Src  : N/A
--- Reason    : HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE
--- Generated : 2026-02-26
-======================================================================
+-- HALO Optimized
+-- Query: tpch_q4
+-- Scenario: Xeon_SATA
+-- Reason: HALO-U: Uncertainty too high (Gate=15%)
+-- using default substitutions
+
 
 select
 	o_orderpriority,
@@ -28,4 +25,5 @@ where
 group by
 	o_orderpriority
 order by
-	o_orderpriority;;
+	o_orderpriority;
+

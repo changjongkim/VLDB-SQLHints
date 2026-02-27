@@ -1,12 +1,9 @@
--- HALO Recommended SQL
--- Query     : tpch_q12 (TPCH)
--- Target HW : Xeon_SATA
--- Mode      : Multi-Source Global Selection
--- Hint      : NATIVE (no hint)
--- From Src  : N/A
--- Reason    : HALO-R (Multi-Source): No safe improving hints found across all known servers. -> NATIVE
--- Generated : 2026-02-26
-======================================================================
+-- HALO Optimized
+-- Query: tpch_q12
+-- Scenario: Xeon_SATA
+-- Reason: HALO-U: Uncertainty too high (Gate=15%)
+-- using default substitutions
+
 
 select
 	l_shipmode,
@@ -35,4 +32,5 @@ where
 group by
 	l_shipmode
 order by
-	l_shipmode;;
+	l_shipmode;
+

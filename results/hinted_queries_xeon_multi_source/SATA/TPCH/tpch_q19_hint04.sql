@@ -1,12 +1,9 @@
--- HALO Recommended SQL
--- Query     : tpch_q19 (TPCH)
--- Target HW : Xeon_SATA
--- Mode      : Multi-Source Global Selection
--- Hint      : hint04
--- From Src  : B_SATA
--- Reason    : HALO-R (Multi-Source): 'hint04' selected from B_SATA (src_speedup=1.17x, risk=20%)
--- Generated : 2026-02-26
-======================================================================
+-- HALO Optimized
+-- Query: tpch_q19
+-- Scenario: Xeon_SATA
+-- Reason: HALO-U (Novelty): 'hint04' (score=0.00, src_sp=1.2x, risk=0%) from B_SATA
+-- using default substitutions
+
 
 select /*+ SET_VAR(optimizer_switch="block_nested_loop=off,hash_join=on") */
 	sum(l_extendedprice* (1 - l_discount)) as revenue
@@ -42,4 +39,4 @@ where
 		and p_size between 1 and 15
 		and l_shipmode in ('AIR', 'AIR REG')
 		and l_shipinstruct = 'DELIVER IN PERSON'
-	);;
+	);

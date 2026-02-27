@@ -1,0 +1,35 @@
+-- HALO Optimized
+-- Query: tpch_q12
+-- Scenario: Xeon_NVMe
+-- Reason: HALO-U (Novelty): 'hint02' (score=0.01, src_sp=1.7x, risk=33%) from B_SATA
+-- using default substitutions
+
+
+select /*+ SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on") SET_VAR(optimizer_switch="mrr=on,mrr_cost_based=off") */
+	l_shipmode,
+	sum(case
+		when o_orderpriority = '1-URGENT'
+			or o_orderpriority = '2-HIGH'
+			then 1
+		else 0
+	end) as high_line_count,
+	sum(case
+		when o_orderpriority <> '1-URGENT'
+			and o_orderpriority <> '2-HIGH'
+			then 1
+		else 0
+	end) as low_line_count
+from
+	orders,
+	lineitem
+where
+	o_orderkey = l_orderkey
+	and l_shipmode in ('MAIL', 'SHIP')
+	and l_commitdate < l_receiptdate
+	and l_shipdate < l_commitdate
+	and l_receiptdate >= date '1994-01-01'
+	and l_receiptdate < date '1994-01-01' + interval '1' year
+group by
+	l_shipmode
+order by
+	l_shipmode;
