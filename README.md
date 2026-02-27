@@ -15,7 +15,22 @@ Database optimizer hints (e.g., `/*+ SET_VAR(optimizer_switch=...) */`) can dram
 
 ---
 
-## 2. Core Architecture
+## 2. Novelty & Key Contributions
+
+Unlike traditional cost models or plan-based predictors, HALO introduces the following novelties designed specifically for **safe cross-hardware transfer learning**:
+
+1. **Operator-Level Hardware Interaction (Cross-Terms)** 
+   Instead of predicting query-level execution time, HALO extracts intrinsic operator behaviors and multiplies them by hardware deltas. (e.g., `scan_x_iops` = `is_scan` × `log(target_IOPS / source_IOPS)`). This allows HALO to predict exactly *where* a query will break on new hardware.
+2. **Dual-Head Architecture for Maximal Risk Recall** 
+   Predicting performance regressions on unseen hardware is highly imbalanced. HALO solves this with a Dual-Head design: a Regressor predicts the actual time difference (δ), while a parallel Classifier is heavily weighted toward recalling dangerous operators. This safety-first ensemble catches **73.6%** of regressions before they happen.
+3. **Adaptive Per-Operator Thresholds** 
+   A generic threshold is flawed; an I/O-bound `TABLE_SCAN` naturally fluctuates, but a CPU-bound `AGGREGATE` does not. HALO dynamically computes risk bounds based on the inherent stability of each operator type.
+4. **Uncertainty-Aware Recommendation (HALO-U)** 
+   To solve the "Fallacy of Performance Transfer" without relying on hardcoded heuristics (e.g., penalizing SATA arrays manually), HALO uses the **variance across its Random Forest estimators as a measure of Uncertainty**. If a fast hint on NVMe is evaluated on SATA, the model's trees will "disagree" wildly, resulting in high uncertainty. The recommendation engine discounts speedup by this uncertainty, allowing the system to **naturally converge on robust, stable execution strategies** (like BKA) over volatile ones.
+
+---
+
+## 3. Core Architecture
 
 HALO operates as a 5-stage pipeline:
 
@@ -33,7 +48,7 @@ HALO operates as a 5-stage pipeline:
 
 ---
 
-## 3. Stage 1 — Data Ingestion (`explain_parser.py`)
+## 4. Stage 1 — Data Ingestion (`explain_parser.py`)
 
 ### What it does
 Parses MySQL 8.0 `EXPLAIN ANALYZE` output from experiment log files and extracts a structured operator tree for every query execution.
@@ -67,7 +82,7 @@ Parses MySQL 8.0 `EXPLAIN ANALYZE` output from experiment log files and extracts
 
 ---
 
-## 4. Stage 2 — Feature Engineering (84 Features)
+## 5. Stage 2 — Feature Engineering (84 Features)
 
 ### Overview
 Each operator is described by **84 features** organized into 6 categories, enabling the σ model to understand both *what the operator does*, *how the hardware transition affects it*, and *whether this hint is known to cause regressions*.
@@ -99,7 +114,7 @@ The worst-case features act as **safety signals** derived from actual regression
 
 ---
 
-## 5. Stage 3 — σ (Sigma) Model (`sigma_model_v3.py`)
+## 6. Stage 3 — σ (Sigma) Model (`sigma_model_v3.py`)
 
 ### What it predicts
 For a given operator running under a specific hint, the model predicts **δ(time)** — the log-ratio of execution time change when the operator is moved from the source to target hardware:
@@ -247,7 +262,7 @@ Provides table-level statistics for operator enrichment:
 
 ---
 
-## 6. Stage 4 — Risk Assessment & Hint Selection
+## 7. Stage 4 — Risk Assessment & Hint Selection
 
 ### Policy: HALO-U (Uncertainty-Aware) with Multi-Source Global Ensemble
 
@@ -317,7 +332,7 @@ By substituting raw speedup with `HALO_U_Score`, the model **naturally abandons 
 
 ---
 
-## 7. Stage 5 — SQL Generation & Recommendation Results
+## 8. Stage 5 — SQL Generation & Recommendation Results
 
 ### Output Structure
 ```
@@ -384,7 +399,7 @@ SELECT /*+ SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on
 
 ---
 
-## 8. Top 20 Feature Importance
+## 9. Top 20 Feature Importance
 
 | Rank | Feature | Importance | Category |
 |---|---|---|---|
