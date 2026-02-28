@@ -1,48 +1,32 @@
 # -*- coding: utf-8 -*-
 """
-HALO Query Generator for Intel Xeon Silver 4310 Target Server
+HALO v4 Recommendation Generator for Intel Xeon Silver 4310
+===========================================================
 
-Target: Intel(R) Xeon(R) Silver 4310 CPU @ 2.10GHz
-  - Compared to Server A (i9-12900K): compute_changed=1
-  - Compared to Server B (EPYC-7713): compute_changed=1
+Uses the HALO v4 Probabilistic MLP with Conformal Safety Gating
+to recommend safe hints for both JOB and TPCH benchmarks.
 
-This script:
-  1. Loads unified_operators + unified_queries data
-  2. Uses the sigma model (RF v3) to evaluate hint risk for target HW
-  3. Applies HALO-R policy per query (Source: A_NVMe → Target: Xeon_NVMe or Xeon_SATA)
-  4. Generates hinted SQL files for JOB and TPCH benchmarks
-
-Output: /root/halo/results/hinted_queries/
-  └─ NVMe/
-  │   └─ JOB/  <query_id>.sql
-  │   └─ TPCH/ <query_id>.sql
-  └─ SATA/
-      └─ JOB/  <query_id>.sql
-      └─ TPCH/ <query_id>.sql
+Target Server: Intel(R) Xeon(R) Silver 4310
+  - Xeon_NVMe (500K IOPS, 3.3 GHz)
+  - Xeon_SATA (80K IOPS, 3.3 GHz)
 """
 
 import os
 import re
 import json
-import pickle
-import math
 import logging
 import pandas as pd
-import numpy as np
-from pathlib import Path
-from hw_registry import compute_hw_features
+from halo_framework import get_halo_v4
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('generate_xeon_v4')
 
 # ── Paths ──
-DATA_DIR      = '/root/halo/data'
-MODEL_PATH    = '/root/halo/results/sigma_model_v3.pkl'
-OUTPUT_DIR    = '/root/halo/results/hinted_queries_xeon_multi_source'
+OUTPUT_DIR    = '/root/halo/results/hinted_queries_xeon_v4'
 TPCH_SQL_DIR  = '/root/tpch-dbgen/queries_mysql'
 JOB_SQL_DIR   = '/root/join-order-benchmark/queries'
 
-# ── Hint definitions: MySQL optimizer_switch strings + join-order hints ──
+# ── Hint definitions ──
 HINT_DEFINITIONS = {
     'hint01': 'SET_VAR(optimizer_switch="block_nested_loop=off")',
     'hint02': 'SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on") SET_VAR(optimizer_switch="mrr=on,mrr_cost_based=off")',
@@ -50,461 +34,110 @@ HINT_DEFINITIONS = {
     'hint05': 'SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY)',
 }
 
-# ── Simple hint injection (INSERT after first SELECT keyword) ──
 def inject_hint(sql: str, hint_str: str) -> str:
-    """Insert /*+ HINT */ right after the first SELECT."""
-    # Remove existing hints if any
     sql = re.sub(r'/\*\+.*?\*/', '', sql, flags=re.DOTALL).strip()
-    # Find first SELECT (case-insensitive)
     match = re.search(r'\bSELECT\b', sql, flags=re.IGNORECASE)
-    if not match:
-        return sql
+    if not match: return sql
     pos = match.end()
     return sql[:pos] + f' /*+ {hint_str} */' + sql[pos:]
 
-
-def engineer_features(op: dict, hw: dict) -> dict:
-    """Replicate v3 feature engineering for prediction (with quantitative HW + workload)."""
-    features = {}
-    op_types = ['NL_INNER_JOIN', 'FILTER', 'TABLE_SCAN', 'INDEX_LOOKUP',
-                'HASH_JOIN', 'AGGREGATE', 'SORT', 'NL_ANTIJOIN',
-                'NL_SEMIJOIN', 'INDEX_SCAN', 'TEMP_TABLE_SCAN',
-                'STREAM', 'MATERIALIZE', 'GROUP_AGGREGATE', 'NL_LEFT_JOIN']
-    ot = op.get('op_type', 'UNKNOWN')
-    for o in op_types:
-        features[f'is_{o}'] = 1.0 if ot == o else 0.0
-
-    features['is_join']     = 1.0 if 'JOIN' in ot else 0.0
-    features['is_scan']     = 1.0 if 'SCAN' in ot else 0.0
-    features['is_index_op'] = 1.0 if 'INDEX' in ot else 0.0
-    features['is_agg_sort'] = 1.0 if ot in ('AGGREGATE','SORT','GROUP_AGGREGATE') else 0.0
-
-    actual_rows = max(op.get('actual_rows', 1), 1)
-    est_rows    = max(op.get('est_rows', 1), 1)
-    loops       = max(op.get('loops', 1), 1)
-    est_cost    = max(op.get('est_cost', 0.01), 0.01)
-    self_time   = max(op.get('self_time', 0.001), 0.001)
-    total_work  = max(op.get('total_work', 0.001), 0.001)
-
-    features['log_actual_rows'] = math.log(actual_rows)
-    features['log_est_rows']    = math.log(est_rows)
-    features['log_loops']       = math.log(loops)
-    features['log_est_cost']    = math.log(est_cost)
-    features['row_est_error']   = op.get('row_est_error', 1.0)
-    features['rows_per_loop']   = math.log(actual_rows / loops + 1)
-    features['log_self_time']   = math.log(self_time)
-    features['log_total_work']  = math.log(total_work)
-    features['cost_per_row']    = math.log(est_cost / est_rows + 0.001)
-    features['time_per_row']    = math.log(self_time / actual_rows + 0.0001)
-    features['selectivity']     = math.log(actual_rows / est_rows + 0.001)
-    features['depth']           = op.get('depth', 0)
-    features['num_children']    = op.get('num_children', 0)
-
-    # Binary HW flags
-    sc = hw['storage_changed']
-    cc = hw['compute_changed']
-    features['storage_changed'] = sc
-    features['compute_changed'] = cc
-    features['both_changed']    = hw.get('both_changed', sc * cc)
-
-    # Quantitative HW ratios
-    features['storage_speed_ratio']   = hw.get('storage_speed_ratio', 0.0)
-    features['iops_ratio']            = hw.get('iops_ratio', 0.0)
-    features['write_speed_ratio']     = hw.get('write_speed_ratio', 0.0)
-    features['cpu_core_ratio']        = hw.get('cpu_core_ratio', 0.0)
-    features['cpu_thread_ratio']      = hw.get('cpu_thread_ratio', 0.0)
-    features['cpu_clock_ratio']       = hw.get('cpu_clock_ratio', 0.0)
-    features['cpu_base_clock_ratio']  = hw.get('cpu_base_clock_ratio', 0.0)
-    features['l3_cache_ratio']        = hw.get('l3_cache_ratio', 0.0)
-    features['ram_ratio']             = hw.get('ram_ratio', 0.0)
-    features['buffer_pool_ratio']     = hw.get('buffer_pool_ratio', 0.0)
-    features['is_storage_downgrade']  = hw.get('is_storage_downgrade', 0)
-    features['is_cpu_downgrade']      = hw.get('is_cpu_downgrade', 0)
-    features['is_ram_downgrade']      = hw.get('is_ram_downgrade', 0)
-
-    # Workload metadata
-    features['log_table_rows']     = math.log(max(op.get('table_rows', 1), 1))
-    features['log_table_size_mb']  = math.log(max(op.get('table_size_mb', 1), 1))
-    features['n_indexes']          = op.get('n_indexes', 0)
-    features['log_dataset_gb']     = math.log(max(op.get('dataset_total_gb', 0.1), 0.1))
-    features['fits_in_buffer']     = op.get('fits_in_buffer', 0)
-
-    # Operator × Binary HW interaction
-    features['scan_x_storage']   = features['is_scan'] * sc
-    features['scan_x_compute']   = features['is_scan'] * cc
-    features['join_x_storage']   = features['is_join'] * sc
-    features['join_x_compute']   = features['is_join'] * cc
-    features['index_x_storage']  = features['is_index_op'] * sc
-    features['index_x_compute']  = features['is_index_op'] * cc
-    features['agg_x_storage']    = features['is_agg_sort'] * sc
-    features['agg_x_compute']    = features['is_agg_sort'] * cc
-    features['work_x_storage']   = features['log_total_work'] * sc
-    features['work_x_compute']   = features['log_total_work'] * cc
-    features['rows_x_storage']   = features['log_actual_rows'] * sc
-    features['rows_x_compute']   = features['log_actual_rows'] * cc
-
-    # Operator × Quantitative HW interaction
-    iops_r  = hw.get('iops_ratio', 0.0)
-    clock_r = hw.get('cpu_clock_ratio', 0.0)
-    core_r  = hw.get('cpu_core_ratio', 0.0)
-    features['scan_x_iops']           = features['is_scan'] * iops_r
-    features['scan_x_storage_speed']  = features['is_scan'] * hw.get('storage_speed_ratio', 0.0)
-    features['join_x_cpu_clock']      = features['is_join'] * clock_r
-    features['join_x_cpu_cores']      = features['is_join'] * core_r
-    features['agg_x_cpu_clock']       = features['is_agg_sort'] * clock_r
-    features['index_x_iops']          = features['is_index_op'] * iops_r
-
-    # Work × Quantitative HW interaction
-    features['rows_x_iops']       = features['log_actual_rows'] * iops_r
-    features['work_x_cpu_clock']  = features['log_total_work'] * clock_r
-    features['cost_x_iops']       = features['log_est_cost'] * iops_r
-
-    # Workload × HW cross-terms
-    features['table_size_x_iops']           = features['log_table_size_mb'] * iops_r
-    features['table_size_x_storage_speed']  = features['log_table_size_mb'] * hw.get('storage_speed_ratio', 0.0)
-    features['table_rows_x_iops']           = features['log_table_rows'] * iops_r
-    features['buffer_miss_x_iops']          = (1 - features['fits_in_buffer']) * iops_r
-    features['dataset_x_ram']               = features['log_dataset_gb'] * hw.get('ram_ratio', 0.0)
-
-    # Worst-case features (from worst-case experiments)
-    features['has_worst_case']          = op.get('has_worst_case', 0)
-    features['worst_regression_ratio']  = op.get('worst_regression_ratio', 0)
-    features['log_worst_regression']    = op.get('log_worst_regression', 0)
-    features['worst_bp_reads_ratio']    = op.get('worst_bp_reads_ratio', 0)
-    features['worst_hint_matches']      = op.get('worst_hint_matches', 0)
-
-    return features
-
-
-def predict_sigma_batch(regressor, classifier, feature_cols: list, ops: list, hw: dict, adaptive_thresholds: dict):
-    """
-    Batch predict sigma using Dual-Head + Uncertainty (from RF estimators):
-    1. Regressor predicts mean δ (log-ratio)
-    2. Regressor calculates σ_std (uncertainty) across trees
-    3. Classifier predicts binary HIGH_RISK label
-    4. Adaptive thresholds provide a secondary safety check per op_type
-    """
-    rows = []
-    op_types = []
-    for op in ops:
-        feats = engineer_features(op, hw)
-        rows.append([feats.get(c, 0.0) for c in feature_cols])
-        op_types.append(op.get('op_type', 'UNKNOWN'))
-    
-    X = np.array(rows, dtype=np.float32)
-    
-    # Optimized Uncertainty Calculation: Sub-sample trees (e.g., every 5th tree)
-    # for speed while maintaining a stable variance estimate.
-    # regressor.estimators_ is a list of 500 DecisionTreeRegressors.
-    subset_estimators = regressor.estimators_[::5] 
-    tree_preds = np.array([tree.predict(X) for tree in subset_estimators])
-    
-    sigmas_mean = np.mean(tree_preds, axis=0) 
-    sigmas_std  = np.std(tree_preds, axis=0)
-    
-    # Head 1: Binary Classifier (tuned for high recall)
-    if classifier:
-        is_high_risk_clf = classifier.predict(X)
-    else:
-        is_high_risk_clf = np.zeros(len(ops), dtype=int)
-        
-    # Ensemble (Safety-First): 
-    # Safety Check should be based on the EXPECTED (mean) behavior to avoid 
-    # filtering out potentially good hints where uncertainty is slightly high.
-    is_high_risk_thresh = np.zeros(len(ops), dtype=int)
-    for i, sig in enumerate(sigmas_mean):
-        thresh = adaptive_thresholds.get(op_types[i], 0.8)
-        if abs(sig) > thresh:
-            is_high_risk_thresh[i] = 1
-            
-    is_high_risk = (is_high_risk_clf == 1) | (is_high_risk_thresh == 1)
-    
-    return sigmas_mean, sigmas_std, is_high_risk
-
-# HALO-U (Uncertainty-Aware) Settings
-# No hardcoded strategy affinity. Logic is now 100% data-driven.
-SIGMA_RISK_THRESHOLD = 0.8 # Prediction delta threshold for HIGH_RISK
-
-def calculate_uncertainty_aware_score(src_speedup, means, stds):
-    """
-    Score = src_speedup * exp(-Pessimistic_Risk)
-    Pessimistic_Risk = sum( max(0, mean + 1.0 * std) )
-    Multiplier 1.0 is more balanced for cross-hardware transfer.
-    """
-    pessimistic_risks = means + 1.0 * stds
-    total_penalty = float(pessimistic_risks[pessimistic_risks > 0].sum())
-    
-    # Calibration factor
-    calibration = math.exp(-0.4 * total_penalty) # Slightly gentler decay
-    
-    return src_speedup * calibration
-
-def halo_r_recommend(query_ops: dict, source_baseline_time: float,
-                     query_hint_times: dict, model, feat_cols: list, hw: dict):
-    """
-    HALO-R recommendation (batch prediction).
-    For a new/unknown server, we use ratio-based risk threshold:
-      reject only if >30% of operators are predicted high-risk.
-    Returns (best_hint_set, reason) where best_hint_set may be None (native).
-    """
-    candidates = {}
-    for hint_set, hint_ops in query_ops.items():
-        if not hint_ops:
-            continue
-        sigmas      = predict_sigma_batch(model, feat_cols, hint_ops, hw)
-        n_total     = len(sigmas)
-        n_high_risk = int((sigmas > HIGH_RISK_THRESHOLD).sum())
-        risk_ratio  = n_high_risk / max(n_total, 1)
-        total_risk  = float(sigmas[sigmas > 0].sum())
-        src_time    = query_hint_times.get(hint_set, source_baseline_time)
-        src_speedup = source_baseline_time / max(src_time, 0.001)
-        candidates[hint_set] = {
-            'n_high_risk': n_high_risk,
-            'risk_ratio':  risk_ratio,
-            'total_risk':  total_risk,
-            'src_speedup': src_speedup,
-        }
-
-    # Filter: keep hints where risk_ratio <= threshold AND source speedup > 1
-    safe = {hs: v for hs, v in candidates.items()
-            if v['risk_ratio'] <= MAX_HIGH_RISK_RATIO and v['src_speedup'] >= 1.0}
-
-    if safe:
-        best = max(safe, key=lambda hs: safe[hs]['src_speedup'])
-        v = safe[best]
-        reason = (f"HALO-R: '{best}' selected "
-                  f"(src={v['src_speedup']:.2f}x, risk_ops={v['n_high_risk']}/{len(query_ops[best])}, "
-                  f"risk_ratio={v['risk_ratio']:.0%})")
-        return best, reason
-    else:
-        # Fallback: pick hint with lowest risk ratio and positive speedup
-        positive = {hs: v for hs, v in candidates.items() if v['src_speedup'] >= 1.0}
-        if positive:
-            safest = min(positive, key=lambda hs: positive[hs]['risk_ratio'])
-            v = positive[safest]
-            if v['risk_ratio'] <= 0.5:  # at most 50% risky ops → cautious apply
-                reason = (f"HALO-R: '{safest}' selected cautiously "
-                          f"(src={v['src_speedup']:.2f}x, risk_ratio={v['risk_ratio']:.0%} HIGH)")
-                return safest, reason
-        all_hints = ", ".join(
-            f"{hs}({v['risk_ratio']:.0%})" for hs, v in candidates.items())
-        return None, f"HALO-R: All hints too risky. {all_hints} → NATIVE"
-
-
 def load_sql(benchmark: str, query_id: str) -> str:
-    """Load original SQL for a given query."""
     if benchmark == 'TPCH':
-        # tpch_q9 → 9.sql
         num = query_id.replace('tpch_q', '')
         path = os.path.join(TPCH_SQL_DIR, f'{num}.sql')
-    else:  # JOB
-        # 10a → 10a.sql
+    else:
         path = os.path.join(JOB_SQL_DIR, f'{query_id}.sql')
-
-    if not os.path.exists(path):
-        return None
+    if not os.path.exists(path): return None
     with open(path, 'r') as f:
         content = f.read()
-    # Strip comments
     lines = [l for l in content.splitlines() if not l.strip().startswith('--')]
     return '\n'.join(lines).strip()
 
-
 def main():
-    # ── Load data ──
-    logger.info("Loading data...")
-    df_ops  = pd.read_parquet(os.path.join(DATA_DIR, 'unified_operators.parquet'))
-    df_q    = pd.read_parquet(os.path.join(DATA_DIR, 'unified_queries.parquet'))
-
-    with open(MODEL_PATH, 'rb') as f:
-        saved = pickle.load(f)
-    sig_model  = saved['model']
-    feat_cols  = saved['feature_cols']
-    risk_clf   = saved.get('risk_classifier')
-    adaptive_thresholds = saved.get('adaptive_thresholds', {})
+    logger.info("Initializing HALO v4 Framework...")
+    halo = get_halo_v4()
     
-    logger.info(f"σ Dual-Head model loaded: {len(feat_cols)} features")
-    logger.info(f"  - Regressor: Random Forest")
-    logger.info(f"  - Classifier: {'Loaded' if risk_clf else 'N/A'}")
-    logger.info(f"  - Adaptive Thresholds: {len(adaptive_thresholds)} op_types")
-
-    # We will test generic recommendation to Target B (EPYC)
-    # Target Server: Intel Xeon Silver 4310
     TARGET_SCENARIOS = ['Xeon_NVMe', 'Xeon_SATA']
-
     BENCHMARKS = ['TPCH', 'JOB']
+    
     results_summary = []
     
-    all_envs = df_q['env_id'].unique()
+    # Clear existing results to ensure a fresh, clean set of 113/22 files
+    if os.path.exists(OUTPUT_DIR):
+        import shutil
+        shutil.rmtree(OUTPUT_DIR)
+    os.makedirs(OUTPUT_DIR)
 
-    for scenario_name in TARGET_SCENARIOS:
-        
+    for scenario in TARGET_SCENARIOS:
         for benchmark in BENCHMARKS:
-            storage_label = 'NVMe' if 'NVMe' in scenario_name else 'SATA'
-            
-            logger.info(f"\n{'='*60}")
-            logger.info(f"Scenario: Multi-Source → {scenario_name} | {benchmark}")
-
+            logger.info(f"\nProcessing scenario: {scenario} | benchmark: {benchmark}")
+            storage_label = 'NVMe' if 'NVMe' in scenario else 'SATA'
             out_dir = os.path.join(OUTPUT_DIR, storage_label, benchmark)
-            if os.path.exists(out_dir):
-                import shutil
-                shutil.rmtree(out_dir)
             os.makedirs(out_dir, exist_ok=True)
-
-            # Get all query IDs for the current benchmark
-            query_ids = sorted(df_q[df_q['benchmark'] == benchmark]['query_id'].unique())
-
-            # --- New Multi-Source + HAPS Strategy ---
-            # Increase safety for low-end SATA
-            is_sata = (storage_label == 'SATA')
-            env_max_risk = 0.15 if is_sata else 0.35 # SATA is much more sensitive
             
-            # Group hint data across all environments
-            logger.info(f"  [{benchmark}] Processing {len(query_ids)} queries using HAPS Strategy (SATA-Safe={is_sata})...")
+            query_ids = sorted(halo.df_queries[halo.df_queries['benchmark'] == benchmark]['query_id'].unique())
             
             for qid in query_ids:
-                global_candidates = {} 
-                # Faster Progress logging
-                if query_ids.index(qid) % 10 == 0:
-                    logger.info(f"    [{benchmark}] Processing {qid} ({query_ids.index(qid)}/{len(query_ids)})...")
-                
-                for src_env in all_envs:
-                    # Skip if source is same as target (not a transfer) or no data
-                    if src_env == scenario_name: continue
-                    
-                    # 1. Get baseline and hint times for this specific source
-                    src_q = df_q[(df_q['env_id'] == src_env) & (df_q['query_id'] == qid)]
-                    if src_q.empty: continue
-                    
-                    base_time = src_q[src_q['hint_set'] == 'baseline']['execution_time_s'].min()
-                    if pd.isna(base_time): continue
-                    
-                    hint_data = src_q[src_q['hint_set'] != 'baseline']
-                    if hint_data.empty: continue
-                    
-                    # 2. Extract operator trees for these hints
-                    src_ops_df = df_ops[(df_ops['env_id'] == src_env) & (df_ops['query_id'] == qid)]
-                    
-                    # Get hardware features for THIS specific transition (src_env -> target)
-                    hw_features = compute_hw_features(src_env, scenario_name)
-                    
-                    for hset in hint_data['hint_set'].unique():
-                        h_time = hint_data[hint_data['hint_set'] == hset]['execution_time_s'].min()
-                        h_speedup = base_time / max(h_time, 0.001)
-                        if h_speedup < 1.05: continue # Only consider improving hints
-                        
-                        # Prepare ops for risk prediction
-                        ops_list = []
-                        h_ops_df = src_ops_df[src_ops_df['hint_set'] == hset].sort_values('tree_position')
-                        for _, row in h_ops_df.iterrows():
-                            # Use dict directly from dataframe row
-                            ops_list.append(row.to_dict())
-                        
-                        if not ops_list: continue
-                        
-                        # Predict Risk & Uncertainty using Dual-Head + Tree Variance
-                        means, stds, is_high_risk = predict_sigma_batch(
-                            sig_model, risk_clf, feat_cols, ops_list, 
-                            hw_features, adaptive_thresholds
-                        )
-                        n_high = int(is_high_risk.sum())
-                        risk_r = n_high / len(means)
-                        
-                        # 3. Uncertainty-Aware Scoring
-                        u_score = calculate_uncertainty_aware_score(h_speedup, means, stds)
-                        
-                        # Store as a global candidate if it passes the Dynamic Safety Gate
-                        if risk_r <= env_max_risk: 
-                            if hset not in global_candidates or u_score > global_candidates[hset]['u_score']:
-                                global_candidates[hset] = {
-                                    'u_score': u_score,
-                                    'src_speedup': h_speedup,
-                                    'risk_ratio': risk_r,
-                                    'from_env': src_env,
-                                    'n_high': n_high,
-                                    'n_total': len(means)
-                                }
-
-                # 3. Decision Making: Pick best from safe candidates
-                if global_candidates:
-                    best_h = max(global_candidates, key=lambda k: global_candidates[k]['u_score'])
-                    v = global_candidates[best_h]
-                    rec_hint = best_h
-                    reason = (f"HALO-U (Novelty): '{best_h}' selected (score={v['u_score']:.2f}, "
-                              f"src_sp={v['src_speedup']:.2f}x, risk={v['risk_ratio']:.0%})")
-                else:
-                    rec_hint = None
-                    reason = f"HALO-U (Novelty): Risk/Uncertainty too high. -> NATIVE"
-
-                # Load original SQL
+                rec = halo.recommend(qid, 'A_NVMe', scenario, policy='performance')
                 sql = load_sql(benchmark, qid)
-                if sql is None:
-                    logger.warning(f"    SQL not found for {qid}")
-                    continue
-
-                # Generate output SQL
-                if rec_hint and rec_hint in HINT_DEFINITIONS:
-                    hint_str = HINT_DEFINITIONS[rec_hint]
+                if not sql: continue
+                
+                if rec.recommended_hint:
+                    hint_str = HINT_DEFINITIONS.get(rec.recommended_hint)
                     hinted_sql = inject_hint(sql, hint_str)
-                    status = f"✅ {rec_hint}"
+                    status = f"✅ {rec.recommended_hint}"
                 else:
-                    hinted_sql = sql  # native, no hint
-                    hint_str   = None
+                    hinted_sql = sql
                     status = "🛡️  NATIVE"
-
-                # Write SQL file
-                sql_fname = f"{qid}_{rec_hint}.sql" if rec_hint else f"{qid}_native.sql"
-                out_path  = os.path.join(out_dir, sql_fname)
-                header    = (
-                    f"-- HALO Recommended SQL\n"
-                    f"-- Query     : {qid} ({benchmark})\n"
-                    f"-- Target HW : {scenario_name}\n"
-                    f"-- Mode      : Multi-Source Global Selection\n"
-                    f"-- Hint      : {rec_hint or 'NATIVE (no hint)'}\n"
-                    f"-- From Src  : {v['from_env'] if rec_hint else 'N/A'}\n"
-                    f"-- Reason    : {reason}\n"
-                    f"-- Generated : 2026-02-26\n"
+                
+                # Standardize to EXACTLY one file per query
+                out_path = os.path.join(out_dir, f"{qid}.sql")
+                
+                # Strip trailing semicolon and whitespace to prevent ';;'
+                clean_sql = hinted_sql.strip().rstrip(';')
+                
+                header = (
+                    f"-- HALO v4 Recommended SQL (Performance-Focused)\n"
+                    f"-- Query     : {qid}\n"
+                    f"-- Scenario  : {scenario}\n"
+                    f"-- Mode      : HALO-P v4 (Power/Performance Mode)\n"
+                    f"-- Hint      : {rec.recommended_hint or 'NATIVE'}\n"
+                    f"-- Risk Level : {rec.risk_level}\n"
+                    f"-- Reason    : {rec.reason}\n"
                     f"{'='*70}\n\n"
                 )
                 with open(out_path, 'w') as f:
-                    f.write(header + hinted_sql + ';\n')
-
-                # Save results for summary
+                    f.write(header + clean_sql + ';\n')
+                
                 results_summary.append({
-                    'scenario': scenario_name,
+                    'scenario': scenario,
                     'benchmark': benchmark,
                     'query_id': qid,
-                    'recommended_hint': rec_hint,
-                    'hint': rec_hint if rec_hint else 'NATIVE',
-                    'reason': reason,
-                    'sql_file': out_path
+                    'recommended_hint': rec.recommended_hint,
+                    'risk_level': rec.risk_level,
+                    'reason': rec.reason
                 })
                 
-                logger.info(f"    {qid:<10} → {status:<10} | {reason}")
+                logger.info(f"  {qid:<10} → {status:<10} | {rec.risk_level} | {rec.reason[:50]}...")
 
-    # ── Save summary ──
-    summary_path = os.path.join(OUTPUT_DIR, 'recommendation_summary.json')
-    with open(summary_path, 'w') as f:
-        json.dump(results_summary, f, indent=2, ensure_ascii=False)
-
-    # ── Print final table ──
+    # Summary table
     df_sum = pd.DataFrame(results_summary)
-    print(f"\n{'='*70}")
-    print(f"HALO Multi-Source Recommendation Summary")
-    print(f"{'='*70}")
-    for scen in df_sum['scenario'].unique():
-        for bm in df_sum['benchmark'].unique():
-            sub = df_sum[(df_sum['scenario']==scen) & (df_sum['benchmark']==bm)]
-            native_pct = (sub['hint']=='NATIVE').mean() * 100
-            print(f"\n  [{scen}] {bm}: {len(sub)} queries | "
-                  f"Hinted: {(sub['hint']!='NATIVE').sum()} | "
-                  f"Native: {(sub['hint']=='NATIVE').sum()} ({native_pct:.0f}%)")
-            hint_dist = sub['hint'].value_counts()
-            for h, cnt in hint_dist.items():
-                print(f"    {h:12s}: {cnt}")
-
-    print(f"\n✅ SQL files saved to: {OUTPUT_DIR}")
-    print(f"✅ Summary saved to:   {summary_path}")
+    print(f"\n{'='*80}")
+    print(f"HALO v4 XEON RECOMMENDATION SUMMARY")
+    print(f"{'='*80}")
+    for (scen, bm), sub in df_sum.groupby(['scenario', 'benchmark']):
+        native_count = (sub['recommended_hint'].isna()).sum()
+        hinted_count = len(sub) - native_count
+        print(f"[{scen}] {bm}: {len(sub)} queries | Hinted: {hinted_count} | Native: {native_count}")
+        if hinted_count > 0:
+            print(sub['recommended_hint'].value_counts().to_string())
+    
+    # Save to JSON for analysis
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    with open(os.path.join(OUTPUT_DIR, 'recommendation_summary.json'), 'w') as f:
+        json.dump(results_summary, f, indent=2)
+    
+    logger.info(f"\n✅ All v4 recommendations saved to: {OUTPUT_DIR}")
 
 if __name__ == '__main__':
     main()

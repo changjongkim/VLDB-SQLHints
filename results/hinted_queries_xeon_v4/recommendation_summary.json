@@ -1,0 +1,2162 @@
+[
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q1",
+    "recommended_hint": "hint05",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.02)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q10",
+    "recommended_hint": "hint05",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.04)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q11",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.98)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q12",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 1.01"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q13",
+    "recommended_hint": "hint05",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.88)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q14",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 1.01"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q15",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.97"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q16",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.40)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q17",
+    "recommended_hint": "hint05",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=1.05)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q18",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 1.01"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q19",
+    "recommended_hint": "hint05",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.02)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q2",
+    "recommended_hint": "hint05",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.01)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q20",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.05)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q21",
+    "recommended_hint": "hint05",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.31)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q22",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.97"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q3",
+    "recommended_hint": "hint05",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=4.15)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q4",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.91"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q5",
+    "recommended_hint": "hint04",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=2.16)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q6",
+    "recommended_hint": "hint02",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.01)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q7",
+    "recommended_hint": "hint05",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.45)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q8",
+    "recommended_hint": "hint05",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=2.39)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q9",
+    "recommended_hint": "hint05",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=1.59)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "10a",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.49)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "10b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.08)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "10c",
+    "recommended_hint": "hint02",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.24)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11a",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=1.35)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.43)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11c",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=1.50)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "11d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.99)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "12a",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=2.76)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "12b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.57"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "12c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.75)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.59)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.61)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13c",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.52)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "13d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.38)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "14a",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=3.73)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "14b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.24)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "14c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.01)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.04)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.02)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.49)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "15d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.52)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=5.92)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=5.93)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.12)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "16d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.97)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.00)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.26)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.68)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.60)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17e",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.50)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "17f",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.46)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "18a",
+    "recommended_hint": "hint01",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=2.64)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "18b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=6.56)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "18c",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=3.48)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.45)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.34)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19c",
+    "recommended_hint": "hint04",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=18.53)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "19d",
+    "recommended_hint": "hint04",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.54)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.75)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.66)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.85)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "1d",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=1.69)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "20a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=4.57)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "20b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.42)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "20c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.76)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "21a",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=5.93)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "21b",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=2.25)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "21c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.84)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.86)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 1.00"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22c",
+    "recommended_hint": "hint01",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=2.40)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "22d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.54)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "23a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.30)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "23b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.07)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "23c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.98)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "24a",
+    "recommended_hint": "hint04",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=7.34)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "24b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.26)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "25a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.92)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "25b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.03)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "25c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.11)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "26a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=5.57)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "26b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.95"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "26c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.60)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "27a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=4.16)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "27b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.47)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "27c",
+    "recommended_hint": "hint01",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=2.48)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "28a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.88)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "28b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.18)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "28c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.26)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "29a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.96)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "29b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.22)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "29c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.29)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.17)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.54"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2c",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.71"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "2d",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.62"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "30a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.41)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "30b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.96"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "30c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.01)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "31a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.62)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "31b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.06)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "31c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.00)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "32a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.70)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "32b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.08)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "33a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.17)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "33b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.20)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "33c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.27)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "3a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=9.04)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "3b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.01)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "3c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=7.63)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "4a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.14)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "4b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.15)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "4c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.07)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "5a",
+    "recommended_hint": "hint01",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.27)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "5b",
+    "recommended_hint": "hint01",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.21)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "5c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.75)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.67)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.14)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6c",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.89"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.06)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6e",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.04)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "6f",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=1.38)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "7a",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.51)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "7b",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=1.05)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "7c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.37)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8a",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.92"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.08)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8c",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.83"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "8d",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.66"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9a",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.45)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.24)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9c",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.31)"
+  },
+  {
+    "scenario": "Xeon_NVMe",
+    "benchmark": "JOB",
+    "query_id": "9d",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.15)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q1",
+    "recommended_hint": "hint05",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.02)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q10",
+    "recommended_hint": "hint05",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.04)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q11",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.96)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q12",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 1.01"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q13",
+    "recommended_hint": "hint05",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.85)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q14",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 1.01"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q15",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.94"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q16",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.38)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q17",
+    "recommended_hint": "hint05",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.05)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q18",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 1.01"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q19",
+    "recommended_hint": "hint05",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.02)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q2",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.99"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q20",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.98"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q21",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.29)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q22",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.93"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q3",
+    "recommended_hint": "hint05",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=4.12)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q4",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.91"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q5",
+    "recommended_hint": "hint04",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=2.16)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q6",
+    "recommended_hint": "hint02",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.01)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q7",
+    "recommended_hint": "hint05",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.45)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q8",
+    "recommended_hint": "hint05",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.33)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "TPCH",
+    "query_id": "tpch_q9",
+    "recommended_hint": "hint05",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.59)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "10a",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.49)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "10b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.04)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "10c",
+    "recommended_hint": "hint02",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=1.24)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "11a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.34)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "11b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.41)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "11c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.45)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "11d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.86)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "12a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.68)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "12b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.55"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "12c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.67)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "13a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.59)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "13b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.61)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "13c",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.47)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "13d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.38)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "14a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.73)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "14b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.09)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "14c",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=3.01)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "15a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.02)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "15b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.88"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "15c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.49)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "15d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.48)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "16a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=5.69)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "16b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=5.62)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "16c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.97)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "16d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.72)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.89)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.10)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.57)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.51)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17e",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.40)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "17f",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.40)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "18a",
+    "recommended_hint": "hint01",
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=2.55)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "18b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=6.51)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "18c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.48)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "19a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.44)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "19b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.31)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "19c",
+    "recommended_hint": "hint04",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=18.35)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "19d",
+    "recommended_hint": "hint04",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.54)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "1a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.58)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "1b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.58)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "1c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.73)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "1d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.62)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "20a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=4.50)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "20b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.41)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "20c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.70)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "21a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=5.68)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "21b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.19)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "21c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.80)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "22a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.78)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "22b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 1.00"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "22c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.40)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "22d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.59)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "23a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.22)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "23b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.06)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "23c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.88)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "24a",
+    "recommended_hint": "hint04",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=7.08)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "24b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.26)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "25a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.89)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "25b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.94"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "25c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.12)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "26a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=5.48)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "26b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.92"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "26c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.54)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "27a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.98)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "27b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.42)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "27c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.38)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "28a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.84)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "28b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.08)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "28c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.22)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "29a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.96)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "29b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.22)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "29c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.26)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "2a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.11)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "2b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.50"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "2c",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.65"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "2d",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.58"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "30a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.40)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "30b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.92"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "30c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.99)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "31a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=3.31)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "31b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.95"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "31c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.99)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "32a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.57)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "32b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.02)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "33a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.08)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "33b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.08)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "33c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.05)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "3a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=8.48)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "3b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.88)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "3c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=7.14)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "4a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.94)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "4b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.93)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "4c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.79)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "5a",
+    "recommended_hint": "hint01",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.27)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "5b",
+    "recommended_hint": "hint01",
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=1.21)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "5c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.54)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.53)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6b",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.99)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6c",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.83"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6d",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.90)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6e",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.93"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "6f",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.32)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "7a",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.48)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "7b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 1.00"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "7c",
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.35)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "8a",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.92"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "8b",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.97"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "8c",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.83"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "8d",
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 0.66"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "9a",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.45)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "9b",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.24)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "9c",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.31)"
+  },
+  {
+    "scenario": "Xeon_SATA",
+    "benchmark": "JOB",
+    "query_id": "9d",
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.15)"
+  }
+]
