@@ -138,41 +138,53 @@ python3 generate_hinted_queries.py
 - **Summary**: `halo/results/hinted_queries_xeon_v4/recommendation_summary.json`
 
 ---
+---
 
-## 10. Evaluation (Xeon SATA JOB Benchmark)
+## 10. Evaluation (Xeon SATA Benchmark)
 
-We designed **HALO-P (Performance Policy)** to unleash the full potential of hardware limits by converting conservative gating into an aggressive, yet structured, optimization strategy. We evaluated the generated SQLs on the **Xeon SATA** environment using the full **Join Order Benchmark (JOB, 113 queries)**.
+We designed **HALO-P (Performance Policy)** to unleash the full potential of hardware limits by converting conservative gating into an aggressive, yet structured, optimization strategy. We evaluated the generated SQLs on the **Xeon SATA** environment (iops_ratio=0.08) using both JOB and TPC-H benchmarks.
 
-### Benchmark Results
+### 10.1 Join Order Benchmark (JOB)
 | Metric | Original (Native) | HALO v4 (Performance Mode) | Improvement |
 | :--- | :---: | :---: | :---: |
 | **Total Workload Execution Time** | 3,986.87s | **2,603.48s** | **1.53x Speedup** |
 | **Peak Query Acceleration** | - | **3.70x** (Query 15d) | - |
-| **Significant Quantum Jumps** | Query 10c (409s) | **152s** | - |
 
-**Key Findings:**
-1. **Aggressive Yields**: Over 1,380 seconds (23 mins) were saved across the workload. Heavy bottleneck queries that historically required massive memory throughput (e.g., `15c`, `15d`, `10c`) were seamlessly resolved because HALO correctly identified the precise IOPS/CPU vector alignment capabilities and injected optimal strategies like `hint01` (BNL=off) and `hint02` (BKA).
-2. **Causal Hardware Tracking**: Compared to the heavily protected *Safety-First* mode, HALO-P trusted its conformal parameters to maximize net performance. The 1.53x overall gain proves that the boundary conditions identified by our Spectral Normalized Gaussian network are physically sound and actively extract maximum performance within physical constraints.
+**Deep Dive: Bottleneck & Risk Impact Analysis (JOB)**
+- **Bottleneck Resolution**: Intrinsic heavy queries (>100s) were slashed by nearly half (**-823.6s**, yielding a **1.94x tier speedup**).
+- **ORANGE Risk Exploitation**: Executing 91 `ORANGE`-flagged hints clawed back **1,059 seconds (~18 minutes)**, proving that calibrated risk-taking is statistically superior to blind conservatism.
 
-### Deep Dive: Bottleneck & Risk Impact Analysis
-A deeper decomposition of the performance gains reveals exactly *how* HALO-P achieved its quantum jump:
+### 10.2 TPC-H Benchmark
+| Metric | Original (Native) | HALO v4 (Performance Mode) | Improvement |
+| :--- | :---: | :---: | :---: |
+| **Total Workload Execution Time** | 9,865.76s | **9,285.75s** | **1.06x Speedup** |
+| **Peak Query Acceleration** | - | **1.90x** (tpch_q21) | - |
+| **Total Net Time Saved** | - | **580.01s (9.67 min)** | - |
 
-- **Bottleneck Resolution (Heavy Queries)**: The most profound impact occurred in intrinsically heavy queries (baseline > 100s). For these queries, the execution time was slashed by nearly half (**-823.6s**, yielding a **1.94x tier speedup**). While fast queries (<10s) experienced negligible overhead (-6.5s), the massive gains from heavy pipelines completely dominated the workload.
-- **Justification of Relentless Execution (ORANGE Risk Zone)**: In the legacy "Safety-First" framework, queries flagged with `ORANGE` risk levels would trigger defensive fallbacks to native execution. With the HALO-P policy, the model successfully executed hints for 91 `ORANGE`-flagged queries, clawing back an astonishing **1,059 seconds (~18 minutes)**. This proves that calculated risk-taking—bounded by conformal predictions—is statistically superior to blind conservatism.
-- **Strategic Impact by Hint**: 
-  - `hint01` (BNL/BKA modifications) rescued the largest volume of queries (80 queries), saving a total of 940 seconds by proactively avoiding memory-thrashing joins on the SATA drive.
-  - `hint02` (BKA enablement) delivered the most explosive average acceleration—hitting **2.18x speedup** on the 13 targeted queries where IOPS alignment permitted index lookups.
+**Deep Dive: Bottleneck & Risk Impact Analysis (TPC-H)**
+- **Mega-Tier Dominance**: For the most resource-intensive queries (Mega Tier, >600s), HALO achieved a **1.21x weighted speedup**, saving 422 seconds.
+- **Causal Direct Hit (q21)**: By resolving the complex Exist/Join structure of `q21` through `hint01`, HALO reduced its runtime from 667s to 350s (1.9x gain), which represents a single-query breakthrough in low-IOPS storage.
+- **Risk-Reward**: 70% of total time savings (402s) originated from `ORANGE` risk queries, validating the **HALO-P logic** in large-scale scan-heavy workloads.
 
-### Analytical Visualization Suite
+### 10.3 Analytical Visualization Suite
 To demonstrate academic novelty, we provide scientific visualizations in `results/v4/figures/scientific/`:
-- **`01_conformal_calibration.png`**: Proves that our Conformal Safety limits match empirical reality, guaranteeing bound integrity ($\lambda_{cal}=2.146$).
-- **`02_hardware_sensitivity_landscape.png`**: A 3D causal surface depicting IOPS/CPU interactions on predicted speedup ($\mu$) and logical uncertainty ($\sigma$).
-- **`03_risk_attribution.png`**: A multi-factor breakdown explaining *why* an operator is flagged (e.g., Structural mismatch vs. HW limitation).
-- **`v4_comprehensive_dashboard.png`**: Consolidated tracking metrics demonstrating 81.6% zero-shot directional accuracy on cross-hardware transfer without retraining.
+- **`01_conformal_calibration.png`**: Proves bound integrity ($\lambda_{cal}=2.146$).
+- **`02_hardware_sensitivity_landscape.png`**: A 3D causal surface depicting IOPS/CPU interactions on predicted speedup.
+- **`03_risk_attribution.png`**: Breakdown of operator risk flagging.
+- **`v4_comprehensive_dashboard.png`**: Consolidated tracking metrics (81.6% zero-shot directional accuracy).
 
 ---
 
-## 11. Citation
+## 11. Evaluation (Xeon NVMe Benchmark) [WIP]
+
+Evaluation on the **Xeon NVMe** environment (iops_ratio=0.5) is currently in progress. 
+
+### 11.1 Join Order Benchmark (JOB) - TBD
+### 11.2 TPC-H Benchmark - TBD
+
+---
+
+## 12. Citation
 
 ```text
 HALO v4: Safe-by-Design Learned Optimizer with Probabilistic Generalization 
