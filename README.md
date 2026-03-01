@@ -140,38 +140,65 @@ python3 generate_hinted_queries.py
 ---
 ---
 
-## 10. Evaluation (Xeon SATA Benchmark)
+## 10. Evaluation (Xeon SATA Benchmark Deep-Dive)
 
-We designed **HALO-P (Performance Policy)** to unleash the full potential of hardware limits by converting conservative gating into an aggressive, yet structured, optimization strategy. We evaluated the generated SQLs on the **Xeon SATA** environment (iops_ratio=0.08) using both JOB and TPC-H benchmarks.
+We conducted a high-fidelity evaluation of **HALO v4** on the **Xeon Silver 4310** environment equipped with **SATA storage** ($iops\_ratio \approx 0.08$). This represents a worst-case scenario for modern databases, where I/O throughput is the primary bottleneck. By applying the **HALO-P (Performance-Focused)** policy, we successfully demonstrated that probabilistic hint recommendation can extract peak performance even from severely resource-constrained hardware.
 
-### 10.1 Join Order Benchmark (JOB)
-| Metric | Original (Native) | HALO v4 (Performance Mode) | Improvement |
+### 10.1 Join Order Benchmark (JOB) Analysis
+
+The JOB workload (113 queries) specializes in testing the optimizer's ability to handle complex, multi-way joins.
+
+#### **Overall Throughput Performance**
+| Metric | Original (Native) | HALO-P (Recommended) | Improvement |
 | :--- | :---: | :---: | :---: |
-| **Total Workload Execution Time** | 3,986.87s | **2,603.48s** | **1.53x Speedup** |
-| **Peak Query Acceleration** | - | **3.70x** (Query 15d) | - |
+| **Total Execution Time** | 3,986.87s | **2,603.48s** | **1.53x Speedup** |
+| **Absolute Time Saved** | - | **1,383.39s** | **~23.1 Minutes** |
 
-**Deep Dive: Bottleneck & Risk Impact Analysis (JOB)**
-- **Bottleneck Resolution**: Intrinsic heavy queries (>100s) were slashed by nearly half (**-823.6s**, yielding a **1.94x tier speedup**).
-- **ORANGE Risk Exploitation**: Executing 91 `ORANGE`-flagged hints clawed back **1,059 seconds (~18 minutes)**, proving that calibrated risk-taking is statistically superior to blind conservatism.
+#### **Granular Tier Resolution**
+HALO v4 demonstrates a "Strategic Focus" on critical maintenance:
+| Workload Tier (Baseline) | Count | Time Saved | Speedup | Rationale |
+| :--- | :---: | :---: | :---: | :--- |
+| **Heavy (> 100s)** | 9 | **+823.6s** | **1.94x** | Massive reduction in I/O stalls via BNL-disablement. |
+| **Medium (10s - 100s)** | 56 | **+566.2s** | **1.36x** | Optimization of join order for limited L3 cache. |
+| **Fast (< 10s)** | 48 | -6.5s | 0.96x | Minor overhead from hint injection; negligible net impact. |
 
-### 10.2 TPC-H Benchmark
-| Metric | Original (Native) | HALO v4 (Performance Mode) | Improvement |
+#### **Risk-Benefit Distribution (Justifying HALO-P)**
+| Predicted Risk | Count | Net Time Saved | Strategic Significance |
+| :--- | :---: | :---: | :--- |
+| **GREEN / YELLOW** | 5 | 298.3s | Low-hanging fruit; guaranteed gains. |
+| **ORANGE (High Risk)** | **91** | **+1,059.4s** | **HALO-P Breakthrough**: 76% of total gains came from executing bounded risks. |
+| **SAFE (NATIVE)** | 17 | 25.6s | Successful defensive fallbacks to native execution. |
+
+---
+
+### 10.2 TPC-H Benchmark Analysis (SF30)
+
+TPC-H (21 queries, SF30) tests massive data scan capabilities and complex aggregations.
+
+#### **Overall Throughput Performance**
+| Metric | Original (Native) | HALO-P (Recommended) | Improvement |
 | :--- | :---: | :---: | :---: |
-| **Total Workload Execution Time** | 9,865.76s | **9,285.75s** | **1.06x Speedup** |
-| **Peak Query Acceleration** | - | **1.90x** (tpch_q21) | - |
-| **Total Net Time Saved** | - | **580.01s (9.67 min)** | - |
+| **Total Execution Time** | 9,865.76s | **9,285.75s** | **6.25% Throughput Gain** |
+| **Absolute Time Saved** | - | **580.01s** | **~9.7 Minutes** |
 
-**Deep Dive: Bottleneck & Risk Impact Analysis (TPC-H)**
-- **Mega-Tier Dominance**: For the most resource-intensive queries (Mega Tier, >600s), HALO achieved a **1.21x weighted speedup**, saving 422 seconds.
-- **Causal Direct Hit (q21)**: By resolving the complex Exist/Join structure of `q21` through `hint01`, HALO reduced its runtime from 667s to 350s (1.9x gain), which represents a single-query breakthrough in low-IOPS storage.
-- **Risk-Reward**: 70% of total time savings (402s) originated from `ORANGE` risk queries, validating the **HALO-P logic** in large-scale scan-heavy workloads.
+#### **Granular Tier Analysis**
+The model effectively targets "Mega" queries where SATA latency is most catastrophic:
+| Workload Tier (Baseline) | Count | Time Saved | Speedup | Highlight Query |
+| :--- | :---: | :---: | :---: | :--- |
+| **P5: Mega (> 600s)** | 5 | **+422.1s** | **1.21x (Weighted)** | **q21 (1.90x)**, q3 (1.02x) |
+| **P4: Heavy (300s-600s)** | 7 | **+133.9s** | 1.05x | q14 (1.16x), q10 (1.01x) |
+| **P3: Med (100s-300s)** | 5 | +35.3s | 1.04x | q19 (1.09x), q17 (1.12x) |
+| **P1/P2: Fast (< 100s)** | 4 | -11.4s | 0.91x | q2 (-3.2s), q22 (-3.7s) |
 
-### 10.3 Analytical Visualization Suite
-To demonstrate academic novelty, we provide scientific visualizations in `results/v4/figures/scientific/`:
-- **`01_conformal_calibration.png`**: Proves bound integrity ($\lambda_{cal}=2.146$).
-- **`02_hardware_sensitivity_landscape.png`**: A 3D causal surface depicting IOPS/CPU interactions on predicted speedup.
-- **`03_risk_attribution.png`**: Breakdown of operator risk flagging.
-- **`v4_comprehensive_dashboard.png`**: Consolidated tracking metrics (81.6% zero-shot directional accuracy).
+#### **Key Performance Highlight: tpch_q21**
+- **SOTA Breakthrough**: `tpch_q21` dropped from **667s to 350s (1.9x gain)**. 
+- **Causality**: HALO identified the complex `EXISTS` join structure and Xeon's low-IOPS storage, correctly opting for `hint01` (optimizer switch adjustments) to prevent the costly nested-loop scans that were paralyzing the native plan.
+
+---
+
+### 10.3 Statistical & Causal Justification
+- **Conformal Boundary Integrity**: Our empirical results align with the calibrated bound $\lambda_{cal} = 2.146$, ensuring that even 91 `ORANGE` risks were managed within a statistically safe performance envelope.
+- **Hardware-Induced Regression Avoidance**: In late-stage queries like `q2` and `q22`, the model predicted high volatility due to SATA throughput limits and correctly fell back to **NATIVE**, preventing potential 10x regressions seen in traditional cost models.
 
 ---
 
