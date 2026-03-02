@@ -4,11 +4,11 @@
 -- Mode      : HALO-P v4 (Power/Performance Mode)
 -- Hint      : hint01
 -- Risk Level : ORANGE
--- Reason    : Performance candidate selected (Gain=1.40)
+-- Reason    : Performance candidate selected (Gain=1.36)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") */
-	p_brand,
+select
+	/*+ JOIN_FIXED_ORDER() */ p_brand,
 	p_type,
 	p_size,
 	count(distinct ps_suppkey) as supplier_cnt

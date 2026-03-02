@@ -3,12 +3,12 @@
 -- Scenario  : Xeon_NVMe
 -- Mode      : HALO-P v4 (Power/Performance Mode)
 -- Hint      : hint02
--- Risk Level : ORANGE
+-- Risk Level : YELLOW
 -- Reason    : Performance candidate selected (Gain=1.05)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on") SET_VAR(optimizer_switch="mrr=on,mrr_cost_based=off") */
-	s_name,
+select
+	/*+ NO_BNL(partsupp) */ s_name,
 	s_address
 from
 	supplier,

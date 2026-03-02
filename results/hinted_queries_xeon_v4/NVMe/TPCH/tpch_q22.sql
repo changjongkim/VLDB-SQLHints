@@ -4,7 +4,7 @@
 -- Mode      : HALO-P v4 (Power/Performance Mode)
 -- Hint      : NATIVE
 -- Risk Level : SAFE
--- Reason    : Fallback: Low gain 0.97
+-- Reason    : Fallback: Low gain 0.99
 ======================================================================
 
 select

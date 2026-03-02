@@ -7,8 +7,8 @@
 -- Reason    : Performance candidate selected (Gain=2.16)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off,hash_join=on") */
-	n_name,
+select
+	/*+ JOIN_ORDER(orders, lineitem, supplier, nation, region) */ n_name,
 	sum(l_extendedprice * (1 - l_discount)) as revenue
 from
 	customer,

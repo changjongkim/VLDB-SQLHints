@@ -6,6 +6,13 @@ HALO v4 Recommendation Generator for Intel Xeon Silver 4310
 Uses the HALO v4 Probabilistic MLP with Conformal Safety Gating
 to recommend safe hints for both JOB and TPCH benchmarks.
 
+IMPORTANT: JOB and TPC-H use fundamentally different hint mechanisms.
+  - JOB: Hints are optimizer-switch comments injected as /*+ ... */
+  - TPC-H: Hints modify table-level SQL (FORCE INDEX, JOIN_ORDER, etc.)
+           These CANNOT be represented as simple comment injections.
+           Instead, we reference the actual best-performing variant SQL
+           from the experiment data directory.
+
 Target Server: Intel(R) Xeon(R) Silver 4310
   - Xeon_NVMe (500K IOPS, 3.3 GHz)
   - Xeon_SATA (80K IOPS, 3.3 GHz)
@@ -14,6 +21,7 @@ Target Server: Intel(R) Xeon(R) Silver 4310
 import os
 import re
 import json
+import glob
 import logging
 import pandas as pd
 from halo_framework import get_halo_v4
@@ -26,15 +34,34 @@ OUTPUT_DIR    = '/root/halo/results/hinted_queries_xeon_v4'
 TPCH_SQL_DIR  = '/root/tpch-dbgen/queries_mysql'
 JOB_SQL_DIR   = '/root/join-order-benchmark/queries'
 
-# ── Hint definitions ──
-HINT_DEFINITIONS = {
+# ── TPC-H experiment variant directories ──
+# These contain the actual SQL files used during training/evaluation.
+# Each hint set has a different directory with per-query, per-variant files.
+TPCH_HINT_DIRS = {
+    'hint01': '/root/tpch-dbgen/queries_with_hints/Hint_01_global',
+    'hint02': '/root/tpch-dbgen/queries_with_hints/Hint_02_table_specific',
+    'hint04': '/root/tpch-dbgen/queries_with_hints/Hint_04_join_order',
+    'hint05': '/root/tpch-dbgen/queries_with_hints/Hint_05_index',
+}
+
+# ── TPC-H experiment result directories (for finding best variant) ──
+TPCH_RESULT_DIRS = {
+    'hint01': '/root/tpch-dbgen/NVMe_result/results/hint01_cold/benchmark_progress.log',
+    'hint02': '/root/tpch-dbgen/NVMe_result/results/hint02_cold/benchmark_progress.log',
+    'hint04': '/root/tpch-dbgen/NVMe_result/results/hint04_cold/benchmark_progress.log',
+    'hint05': '/root/tpch-dbgen/NVMe_result/results/hint05_cold/benchmark_progress.log',
+}
+
+# ── JOB Hint definitions (optimizer-switch style, works via /*+ ... */) ──
+JOB_HINT_DEFINITIONS = {
     'hint01': 'SET_VAR(optimizer_switch="block_nested_loop=off")',
     'hint02': 'SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on") SET_VAR(optimizer_switch="mrr=on,mrr_cost_based=off")',
     'hint04': 'SET_VAR(optimizer_switch="block_nested_loop=off,hash_join=on")',
-    'hint05': 'SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY)',
+    'hint05': 'SET_VAR(optimizer_switch="block_nested_loop=off")',
 }
 
 def inject_hint(sql: str, hint_str: str) -> str:
+    """Inject optimizer hint comment for JOB queries."""
     sql = re.sub(r'/\*\+.*?\*/', '', sql, flags=re.DOTALL).strip()
     match = re.search(r'\bSELECT\b', sql, flags=re.IGNORECASE)
     if not match: return sql
@@ -42,6 +69,7 @@ def inject_hint(sql: str, hint_str: str) -> str:
     return sql[:pos] + f' /*+ {hint_str} */' + sql[pos:]
 
 def load_sql(benchmark: str, query_id: str) -> str:
+    """Load original (unhinted) SQL for a query."""
     if benchmark == 'TPCH':
         num = query_id.replace('tpch_q', '')
         path = os.path.join(TPCH_SQL_DIR, f'{num}.sql')
@@ -52,6 +80,64 @@ def load_sql(benchmark: str, query_id: str) -> str:
         content = f.read()
     lines = [l for l in content.splitlines() if not l.strip().startswith('--')]
     return '\n'.join(lines).strip()
+
+def parse_tpch_progress_log(log_path):
+    """Parse TPC-H benchmark progress log to find exec times per variant."""
+    results = {}
+    if not os.path.exists(log_path):
+        return results
+    with open(log_path, 'r') as f:
+        current_query = None
+        for line in f:
+            # Match: [1/154] Query 3_hint1_1 - ...
+            qm = re.search(r'Query (\S+)\s+-', line)
+            if qm:
+                current_query = qm.group(1)
+            # Match: ✓ SUCCESS - 353.893284489s
+            tm = re.search(r'SUCCESS - ([\d.]+)s', line)
+            if tm and current_query:
+                t = float(tm.group(1))
+                results[current_query] = t
+                current_query = None
+    return results
+
+def find_best_tpch_variant(query_num, hint_set):
+    """Find the best-performing variant SQL file for a TPC-H query and hint set.
+    
+    Returns the path to the best variant SQL file, or None if not found.
+    """
+    log_path = TPCH_RESULT_DIRS.get(hint_set)
+    hint_dir = TPCH_HINT_DIRS.get(hint_set)
+    
+    if not log_path or not hint_dir:
+        return None
+    
+    # Parse experiment results to find fastest variant
+    variant_times = parse_tpch_progress_log(log_path)
+    
+    # Filter to variants for this query number
+    # Variant names look like: 3_hint1_1, 3_hint1_2, etc.
+    hint_num = hint_set.replace('hint0', 'hint').replace('hint', 'hint')  # hint01 -> hint1
+    # Normalize: hint01 -> hint1, hint02 -> hint2, hint04 -> hint4, hint05 -> hint5
+    hint_suffix = hint_set.replace('hint0', 'hint')  # hint01 -> hint1
+    
+    prefix = f"{query_num}_{hint_suffix}_"
+    matching = {k: v for k, v in variant_times.items() if k.startswith(prefix)}
+    
+    if not matching:
+        return None
+    
+    # Find the fastest variant
+    best_variant = min(matching, key=matching.get)
+    best_time = matching[best_variant]
+    
+    # Find corresponding SQL file
+    sql_path = os.path.join(hint_dir, f"{best_variant}.sql")
+    if os.path.exists(sql_path):
+        logger.info(f"    Best variant for q{query_num}/{hint_set}: {best_variant} ({best_time:.1f}s)")
+        return sql_path
+    
+    return None
 
 def main():
     logger.info("Initializing HALO v4 Framework...")
@@ -82,10 +168,36 @@ def main():
                 sql = load_sql(benchmark, qid)
                 if not sql: continue
                 
+                hinted_sql = None
+                
                 if rec.recommended_hint:
-                    hint_str = HINT_DEFINITIONS.get(rec.recommended_hint)
-                    hinted_sql = inject_hint(sql, hint_str)
-                    status = f"✅ {rec.recommended_hint}"
+                    if benchmark == 'JOB':
+                        # ── JOB: Use optimizer-switch injection (/*+ ... */) ──
+                        hint_str = JOB_HINT_DEFINITIONS.get(rec.recommended_hint)
+                        if hint_str:
+                            hinted_sql = inject_hint(sql, hint_str)
+                        else:
+                            hinted_sql = sql
+                    elif benchmark == 'TPCH':
+                        # ── TPC-H: Use actual best-performing variant SQL from experiments ──
+                        query_num = qid.replace('tpch_q', '')
+                        variant_path = find_best_tpch_variant(query_num, rec.recommended_hint)
+                        if variant_path:
+                            with open(variant_path, 'r') as f:
+                                variant_content = f.read()
+                            # Strip comment lines from experiment files
+                            lines = [l for l in variant_content.splitlines() if not l.strip().startswith('--')]
+                            hinted_sql = '\n'.join(lines).strip()
+                            logger.info(f"    TPC-H q{query_num}: Using experiment variant from {os.path.basename(variant_path)}")
+                        else:
+                            # Fallback: If no experiment variant found, use original SQL
+                            logger.warning(f"    TPC-H q{query_num}: No experiment variant found for {rec.recommended_hint}, using NATIVE")
+                            hinted_sql = sql
+                            rec.recommended_hint = None
+                            rec.risk_level = 'SAFE'
+                            rec.reason = f"Fallback: No experiment variant available for {rec.recommended_hint}"
+                    
+                    status = f"✅ {rec.recommended_hint}" if rec.recommended_hint else "🛡️  NATIVE"
                 else:
                     hinted_sql = sql
                     status = "🛡️  NATIVE"

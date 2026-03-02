@@ -3,18 +3,18 @@
 -- Scenario  : Xeon_NVMe
 -- Mode      : HALO-P v4 (Power/Performance Mode)
 -- Hint      : hint05
--- Risk Level : ORANGE
+-- Risk Level : YELLOW
 -- Reason    : Performance candidate selected (Gain=4.15)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY) */
+select
 	l_orderkey,
 	sum(l_extendedprice * (1 - l_discount)) as revenue,
 	o_orderdate,
 	o_shippriority
 from
 	customer,
-	orders,
+	orders FORCE INDEX (PRIMARY),
 	lineitem
 where
 	c_mktsegment = 'BUILDING'

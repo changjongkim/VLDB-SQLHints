@@ -7,7 +7,7 @@
 -- Reason    : Performance candidate selected (Gain=2.88)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY) */
+select
 	c_count,
 	count(*) as custdist
 from
@@ -16,7 +16,7 @@ from
 			c_custkey,
 			count(o_orderkey)
 		from
-			customer left outer join orders on
+			customer left outer join orders FORCE INDEX (PRIMARY) on
 				c_custkey = o_custkey
 				and o_comment not like '%special%requests%'
 		group by

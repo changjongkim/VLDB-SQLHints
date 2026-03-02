@@ -7,7 +7,7 @@
 -- Reason    : Performance candidate selected (Gain=1.01)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY) */
+select
 	s_acctbal,
 	s_name,
 	n_name,
@@ -18,7 +18,7 @@ select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATI
 	s_comment
 from
 	part,
-	supplier,
+	supplier FORCE INDEX (PRIMARY),
 	partsupp,
 	nation,
 	region

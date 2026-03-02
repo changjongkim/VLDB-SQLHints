@@ -7,7 +7,7 @@
 -- Reason    : Performance candidate selected (Gain=1.02)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY) */
+select
 	l_returnflag,
 	l_linestatus,
 	sum(l_quantity) as sum_qty,
@@ -19,7 +19,7 @@ select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATI
 	avg(l_discount) as avg_disc,
 	count(*) as count_order
 from
-	lineitem
+	lineitem FORCE INDEX (PRIMARY)
 where
 	l_shipdate <= DATE '1998-12-01' - INTERVAL 90 DAY
 group by

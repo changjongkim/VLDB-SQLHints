@@ -3,11 +3,11 @@
 -- Scenario  : Xeon_NVMe
 -- Mode      : HALO-P v4 (Power/Performance Mode)
 -- Hint      : hint05
--- Risk Level : GREEN
+-- Risk Level : YELLOW
 -- Reason    : Performance candidate selected (Gain=2.39)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY) */
+select
 	o_year,
 	sum(case
 		when nation = 'BRAZIL' then volume
@@ -21,7 +21,7 @@ from
 			n2.n_name as nation
 		from
 			part,
-			supplier,
+			supplier IGNORE INDEX (PRIMARY),
 			lineitem,
 			orders,
 			customer,

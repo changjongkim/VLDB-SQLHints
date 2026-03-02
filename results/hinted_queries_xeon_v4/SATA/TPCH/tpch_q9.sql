@@ -3,11 +3,11 @@
 -- Scenario  : Xeon_SATA
 -- Mode      : HALO-P v4 (Power/Performance Mode)
 -- Hint      : hint05
--- Risk Level : GREEN
+-- Risk Level : YELLOW
 -- Reason    : Performance candidate selected (Gain=1.59)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY) */
+select
 	nation,
 	o_year,
 	sum(amount) as sum_profit
@@ -22,7 +22,7 @@ from
 			supplier,
 			lineitem,
 			partsupp,
-			orders,
+			orders IGNORE INDEX (PRIMARY),
 			nation
 		where
 			s_suppkey = l_suppkey

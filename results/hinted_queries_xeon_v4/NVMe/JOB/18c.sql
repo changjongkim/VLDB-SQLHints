@@ -3,7 +3,7 @@
 -- Scenario  : Xeon_NVMe
 -- Mode      : HALO-P v4 (Power/Performance Mode)
 -- Hint      : hint01
--- Risk Level : YELLOW
+-- Risk Level : GREEN
 -- Reason    : Performance candidate selected (Gain=3.48)
 ======================================================================
 

@@ -7,14 +7,14 @@
 -- Reason    : Performance candidate selected (Gain=1.31)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY) */
+select
 	s_name,
 	count(*) as numwait
 from
 	supplier,
 	lineitem l1,
 	orders,
-	nation
+	nation FORCE INDEX (PRIMARY)
 where
 	s_suppkey = l1.l_suppkey
 	and o_orderkey = l1.l_orderkey

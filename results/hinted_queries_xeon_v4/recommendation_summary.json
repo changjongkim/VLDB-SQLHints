@@ -12,7 +12,7 @@
     "benchmark": "TPCH",
     "query_id": "tpch_q10",
     "recommended_hint": "hint05",
-    "risk_level": "ORANGE",
+    "risk_level": "YELLOW",
     "reason": "Performance candidate selected (Gain=1.04)"
   },
   {
@@ -21,7 +21,7 @@
     "query_id": "tpch_q11",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.98)"
+    "reason": "Performance candidate selected (Gain=1.84)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -61,14 +61,14 @@
     "query_id": "tpch_q16",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.40)"
+    "reason": "Performance candidate selected (Gain=1.36)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q17",
     "recommended_hint": "hint05",
-    "risk_level": "YELLOW",
+    "risk_level": "GREEN",
     "reason": "Performance candidate selected (Gain=1.05)"
   },
   {
@@ -100,7 +100,7 @@
     "benchmark": "TPCH",
     "query_id": "tpch_q20",
     "recommended_hint": "hint02",
-    "risk_level": "ORANGE",
+    "risk_level": "YELLOW",
     "reason": "Performance candidate selected (Gain=1.05)"
   },
   {
@@ -117,14 +117,14 @@
     "query_id": "tpch_q22",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.97"
+    "reason": "Fallback: Low gain 0.99"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "TPCH",
     "query_id": "tpch_q3",
     "recommended_hint": "hint05",
-    "risk_level": "ORANGE",
+    "risk_level": "YELLOW",
     "reason": "Performance candidate selected (Gain=4.15)"
   },
   {
@@ -164,7 +164,7 @@
     "benchmark": "TPCH",
     "query_id": "tpch_q8",
     "recommended_hint": "hint05",
-    "risk_level": "GREEN",
+    "risk_level": "YELLOW",
     "reason": "Performance candidate selected (Gain=2.39)"
   },
   {
@@ -172,7 +172,7 @@
     "benchmark": "TPCH",
     "query_id": "tpch_q9",
     "recommended_hint": "hint05",
-    "risk_level": "YELLOW",
+    "risk_level": "GREEN",
     "reason": "Performance candidate selected (Gain=1.59)"
   },
   {
@@ -196,7 +196,7 @@
     "benchmark": "JOB",
     "query_id": "10c",
     "recommended_hint": "hint02",
-    "risk_level": "GREEN",
+    "risk_level": "ORANGE",
     "reason": "Performance candidate selected (Gain=1.24)"
   },
   {
@@ -204,7 +204,7 @@
     "benchmark": "JOB",
     "query_id": "11a",
     "recommended_hint": "hint01",
-    "risk_level": "YELLOW",
+    "risk_level": "ORANGE",
     "reason": "Performance candidate selected (Gain=1.35)"
   },
   {
@@ -212,15 +212,15 @@
     "benchmark": "JOB",
     "query_id": "11b",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.43)"
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=1.44)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "11c",
     "recommended_hint": "hint01",
-    "risk_level": "YELLOW",
+    "risk_level": "GREEN",
     "reason": "Performance candidate selected (Gain=1.50)"
   },
   {
@@ -229,15 +229,15 @@
     "query_id": "11d",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.99)"
+    "reason": "Performance candidate selected (Gain=1.96)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "12a",
     "recommended_hint": "hint01",
-    "risk_level": "YELLOW",
-    "reason": "Performance candidate selected (Gain=2.76)"
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=2.77)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -253,14 +253,14 @@
     "query_id": "12c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.75)"
+    "reason": "Performance candidate selected (Gain=3.77)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "13a",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
+    "risk_level": "YELLOW",
     "reason": "Performance candidate selected (Gain=2.59)"
   },
   {
@@ -284,7 +284,7 @@
     "benchmark": "JOB",
     "query_id": "13d",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
+    "risk_level": "YELLOW",
     "reason": "Performance candidate selected (Gain=2.38)"
   },
   {
@@ -292,7 +292,7 @@
     "benchmark": "JOB",
     "query_id": "14a",
     "recommended_hint": "hint01",
-    "risk_level": "YELLOW",
+    "risk_level": "GREEN",
     "reason": "Performance candidate selected (Gain=3.73)"
   },
   {
@@ -308,7 +308,7 @@
     "benchmark": "JOB",
     "query_id": "14c",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
+    "risk_level": "GREEN",
     "reason": "Performance candidate selected (Gain=3.01)"
   },
   {
@@ -340,7 +340,7 @@
     "benchmark": "JOB",
     "query_id": "15d",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
+    "risk_level": "GREEN",
     "reason": "Performance candidate selected (Gain=1.52)"
   },
   {
@@ -349,7 +349,7 @@
     "query_id": "16a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=5.92)"
+    "reason": "Performance candidate selected (Gain=6.01)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -365,7 +365,7 @@
     "query_id": "16c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.12)"
+    "reason": "Performance candidate selected (Gain=2.13)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -373,7 +373,7 @@
     "query_id": "16d",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.97)"
+    "reason": "Performance candidate selected (Gain=1.98)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -381,7 +381,7 @@
     "query_id": "17a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.00)"
+    "reason": "Performance candidate selected (Gain=2.01)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -389,7 +389,7 @@
     "query_id": "17b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.26)"
+    "reason": "Performance candidate selected (Gain=3.20)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -397,7 +397,7 @@
     "query_id": "17c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.68)"
+    "reason": "Performance candidate selected (Gain=1.67)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -405,7 +405,7 @@
     "query_id": "17d",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.60)"
+    "reason": "Performance candidate selected (Gain=1.62)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -413,7 +413,7 @@
     "query_id": "17e",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.50)"
+    "reason": "Performance candidate selected (Gain=1.49)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -436,15 +436,15 @@
     "benchmark": "JOB",
     "query_id": "18b",
     "recommended_hint": "hint02",
-    "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=6.56)"
+    "risk_level": "GREEN",
+    "reason": "Performance candidate selected (Gain=6.64)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "18c",
     "recommended_hint": "hint01",
-    "risk_level": "YELLOW",
+    "risk_level": "GREEN",
     "reason": "Performance candidate selected (Gain=3.48)"
   },
   {
@@ -469,14 +469,14 @@
     "query_id": "19c",
     "recommended_hint": "hint04",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=18.53)"
+    "reason": "Performance candidate selected (Gain=18.21)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "19d",
     "recommended_hint": "hint04",
-    "risk_level": "ORANGE",
+    "risk_level": "GREEN",
     "reason": "Performance candidate selected (Gain=1.54)"
   },
   {
@@ -485,7 +485,7 @@
     "query_id": "1a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.75)"
+    "reason": "Performance candidate selected (Gain=2.74)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -493,7 +493,7 @@
     "query_id": "1b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.66)"
+    "reason": "Performance candidate selected (Gain=1.65)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -501,7 +501,7 @@
     "query_id": "1c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.85)"
+    "reason": "Performance candidate selected (Gain=1.90)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -540,15 +540,15 @@
     "benchmark": "JOB",
     "query_id": "21a",
     "recommended_hint": "hint01",
-    "risk_level": "YELLOW",
-    "reason": "Performance candidate selected (Gain=5.93)"
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=5.95)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "21b",
     "recommended_hint": "hint01",
-    "risk_level": "YELLOW",
+    "risk_level": "ORANGE",
     "reason": "Performance candidate selected (Gain=2.25)"
   },
   {
@@ -556,8 +556,8 @@
     "benchmark": "JOB",
     "query_id": "21c",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.84)"
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=1.85)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -565,7 +565,7 @@
     "query_id": "22a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.86)"
+    "reason": "Performance candidate selected (Gain=3.87)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -580,7 +580,7 @@
     "benchmark": "JOB",
     "query_id": "22c",
     "recommended_hint": "hint01",
-    "risk_level": "GREEN",
+    "risk_level": "ORANGE",
     "reason": "Performance candidate selected (Gain=2.40)"
   },
   {
@@ -588,8 +588,8 @@
     "benchmark": "JOB",
     "query_id": "22d",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.54)"
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=2.59)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -613,7 +613,7 @@
     "query_id": "23c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.98)"
+    "reason": "Performance candidate selected (Gain=1.97)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -652,8 +652,8 @@
     "benchmark": "JOB",
     "query_id": "25c",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.11)"
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=3.14)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -661,7 +661,7 @@
     "query_id": "26a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=5.57)"
+    "reason": "Performance candidate selected (Gain=5.54)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -669,7 +669,7 @@
     "query_id": "26b",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.95"
+    "reason": "Fallback: Low gain 0.94"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -684,8 +684,8 @@
     "benchmark": "JOB",
     "query_id": "27a",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=4.16)"
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=4.17)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -693,15 +693,15 @@
     "query_id": "27b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.47)"
+    "reason": "Performance candidate selected (Gain=1.48)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "27c",
     "recommended_hint": "hint01",
-    "risk_level": "GREEN",
-    "reason": "Performance candidate selected (Gain=2.48)"
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=2.44)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -709,7 +709,7 @@
     "query_id": "28a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.88)"
+    "reason": "Performance candidate selected (Gain=1.89)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -717,7 +717,7 @@
     "query_id": "28b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.18)"
+    "reason": "Performance candidate selected (Gain=1.19)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -789,7 +789,7 @@
     "query_id": "30a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.41)"
+    "reason": "Performance candidate selected (Gain=1.42)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -797,7 +797,7 @@
     "query_id": "30b",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.96"
+    "reason": "Fallback: Low gain 0.97"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -821,14 +821,14 @@
     "query_id": "31b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.06)"
+    "reason": "Performance candidate selected (Gain=1.07)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "31c",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
+    "risk_level": "YELLOW",
     "reason": "Performance candidate selected (Gain=2.00)"
   },
   {
@@ -837,7 +837,7 @@
     "query_id": "32a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.70)"
+    "reason": "Performance candidate selected (Gain=1.69)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -845,7 +845,7 @@
     "query_id": "32b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.08)"
+    "reason": "Performance candidate selected (Gain=1.06)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -861,7 +861,7 @@
     "query_id": "33b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.20)"
+    "reason": "Performance candidate selected (Gain=1.21)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -869,7 +869,7 @@
     "query_id": "33c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.27)"
+    "reason": "Performance candidate selected (Gain=1.28)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -877,7 +877,7 @@
     "query_id": "3a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=9.04)"
+    "reason": "Performance candidate selected (Gain=9.09)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -885,7 +885,7 @@
     "query_id": "3b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.01)"
+    "reason": "Performance candidate selected (Gain=2.00)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -893,7 +893,7 @@
     "query_id": "3c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=7.63)"
+    "reason": "Performance candidate selected (Gain=7.73)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -901,7 +901,7 @@
     "query_id": "4a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.14)"
+    "reason": "Performance candidate selected (Gain=2.13)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -909,7 +909,7 @@
     "query_id": "4b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.15)"
+    "reason": "Performance candidate selected (Gain=2.12)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -941,7 +941,7 @@
     "query_id": "5c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.75)"
+    "reason": "Performance candidate selected (Gain=2.74)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -949,7 +949,7 @@
     "query_id": "6a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.67)"
+    "reason": "Performance candidate selected (Gain=2.66)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -957,7 +957,7 @@
     "query_id": "6b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.14)"
+    "reason": "Performance candidate selected (Gain=2.12)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -988,14 +988,14 @@
     "benchmark": "JOB",
     "query_id": "6f",
     "recommended_hint": "hint01",
-    "risk_level": "YELLOW",
-    "reason": "Performance candidate selected (Gain=1.38)"
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.39)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "7a",
-    "recommended_hint": "hint02",
+    "recommended_hint": "hint01",
     "risk_level": "ORANGE",
     "reason": "Performance candidate selected (Gain=2.51)"
   },
@@ -1004,15 +1004,15 @@
     "benchmark": "JOB",
     "query_id": "7b",
     "recommended_hint": "hint01",
-    "risk_level": "YELLOW",
-    "reason": "Performance candidate selected (Gain=1.05)"
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.04)"
   },
   {
     "scenario": "Xeon_NVMe",
     "benchmark": "JOB",
     "query_id": "7c",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
+    "risk_level": "GREEN",
     "reason": "Performance candidate selected (Gain=1.37)"
   },
   {
@@ -1029,7 +1029,7 @@
     "query_id": "8b",
     "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.08)"
+    "reason": "Performance candidate selected (Gain=1.09)"
   },
   {
     "scenario": "Xeon_NVMe",
@@ -1076,7 +1076,7 @@
     "benchmark": "JOB",
     "query_id": "9d",
     "recommended_hint": "hint02",
-    "risk_level": "ORANGE",
+    "risk_level": "YELLOW",
     "reason": "Performance candidate selected (Gain=1.15)"
   },
   {
@@ -1101,7 +1101,7 @@
     "query_id": "tpch_q11",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.96)"
+    "reason": "Performance candidate selected (Gain=1.94)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1141,7 +1141,7 @@
     "query_id": "tpch_q16",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.38)"
+    "reason": "Performance candidate selected (Gain=1.36)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1149,7 +1149,7 @@
     "query_id": "tpch_q17",
     "recommended_hint": "hint05",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.05)"
+    "reason": "Performance candidate selected (Gain=1.04)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1164,7 +1164,7 @@
     "benchmark": "TPCH",
     "query_id": "tpch_q19",
     "recommended_hint": "hint05",
-    "risk_level": "ORANGE",
+    "risk_level": "GREEN",
     "reason": "Performance candidate selected (Gain=1.02)"
   },
   {
@@ -1189,7 +1189,7 @@
     "query_id": "tpch_q21",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.29)"
+    "reason": "Performance candidate selected (Gain=1.30)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1197,7 +1197,7 @@
     "query_id": "tpch_q22",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.93"
+    "reason": "Fallback: Low gain 0.94"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1205,7 +1205,7 @@
     "query_id": "tpch_q3",
     "recommended_hint": "hint05",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=4.12)"
+    "reason": "Performance candidate selected (Gain=4.10)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1245,14 +1245,14 @@
     "query_id": "tpch_q8",
     "recommended_hint": "hint05",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.33)"
+    "reason": "Performance candidate selected (Gain=2.37)"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "TPCH",
     "query_id": "tpch_q9",
     "recommended_hint": "hint05",
-    "risk_level": "GREEN",
+    "risk_level": "YELLOW",
     "reason": "Performance candidate selected (Gain=1.59)"
   },
   {
@@ -1269,14 +1269,14 @@
     "query_id": "10b",
     "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.04)"
+    "reason": "Performance candidate selected (Gain=1.08)"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "10c",
     "recommended_hint": "hint02",
-    "risk_level": "YELLOW",
+    "risk_level": "ORANGE",
     "reason": "Performance candidate selected (Gain=1.24)"
   },
   {
@@ -1285,7 +1285,7 @@
     "query_id": "11a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.34)"
+    "reason": "Performance candidate selected (Gain=1.32)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1301,7 +1301,7 @@
     "query_id": "11c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.45)"
+    "reason": "Performance candidate selected (Gain=1.47)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1317,7 +1317,7 @@
     "query_id": "12a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.68)"
+    "reason": "Performance candidate selected (Gain=2.70)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1333,7 +1333,7 @@
     "query_id": "12c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.67)"
+    "reason": "Performance candidate selected (Gain=3.71)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1349,7 +1349,7 @@
     "query_id": "13b",
     "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.61)"
+    "reason": "Performance candidate selected (Gain=1.58)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1357,7 +1357,7 @@
     "query_id": "13c",
     "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.47)"
+    "reason": "Performance candidate selected (Gain=1.38)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1373,7 +1373,7 @@
     "query_id": "14a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.73)"
+    "reason": "Performance candidate selected (Gain=3.72)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1381,14 +1381,14 @@
     "query_id": "14b",
     "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.09)"
+    "reason": "Performance candidate selected (Gain=2.00)"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "14c",
     "recommended_hint": "hint01",
-    "risk_level": "YELLOW",
+    "risk_level": "ORANGE",
     "reason": "Performance candidate selected (Gain=3.01)"
   },
   {
@@ -1405,7 +1405,7 @@
     "query_id": "15b",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.88"
+    "reason": "Fallback: Low gain 0.93"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1413,7 +1413,7 @@
     "query_id": "15c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.49)"
+    "reason": "Performance candidate selected (Gain=1.47)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1421,7 +1421,7 @@
     "query_id": "15d",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.48)"
+    "reason": "Performance candidate selected (Gain=1.49)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1429,7 +1429,7 @@
     "query_id": "16a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=5.69)"
+    "reason": "Performance candidate selected (Gain=5.22)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1445,7 +1445,7 @@
     "query_id": "16c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.97)"
+    "reason": "Performance candidate selected (Gain=2.03)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1453,7 +1453,7 @@
     "query_id": "16d",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.72)"
+    "reason": "Performance candidate selected (Gain=1.73)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1461,7 +1461,7 @@
     "query_id": "17a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.89)"
+    "reason": "Performance candidate selected (Gain=1.90)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1469,7 +1469,7 @@
     "query_id": "17b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.10)"
+    "reason": "Performance candidate selected (Gain=3.03)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1477,7 +1477,7 @@
     "query_id": "17c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.57)"
+    "reason": "Performance candidate selected (Gain=1.58)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1493,7 +1493,7 @@
     "query_id": "17e",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.40)"
+    "reason": "Performance candidate selected (Gain=1.35)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1501,15 +1501,15 @@
     "query_id": "17f",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.40)"
+    "reason": "Performance candidate selected (Gain=1.36)"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "18a",
-    "recommended_hint": "hint01",
+    "recommended_hint": "hint02",
     "risk_level": "YELLOW",
-    "reason": "Performance candidate selected (Gain=2.55)"
+    "reason": "Performance candidate selected (Gain=2.43)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1517,7 +1517,7 @@
     "query_id": "18b",
     "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=6.51)"
+    "reason": "Performance candidate selected (Gain=6.41)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1533,7 +1533,7 @@
     "query_id": "19a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.44)"
+    "reason": "Performance candidate selected (Gain=2.45)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1541,7 +1541,7 @@
     "query_id": "19b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.31)"
+    "reason": "Performance candidate selected (Gain=1.34)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1549,7 +1549,7 @@
     "query_id": "19c",
     "recommended_hint": "hint04",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=18.35)"
+    "reason": "Performance candidate selected (Gain=17.40)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1565,7 +1565,7 @@
     "query_id": "1a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.58)"
+    "reason": "Performance candidate selected (Gain=2.60)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1573,7 +1573,7 @@
     "query_id": "1b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.58)"
+    "reason": "Performance candidate selected (Gain=1.59)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1581,7 +1581,7 @@
     "query_id": "1c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.73)"
+    "reason": "Performance candidate selected (Gain=1.69)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1597,7 +1597,7 @@
     "query_id": "20a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=4.50)"
+    "reason": "Performance candidate selected (Gain=4.54)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1605,7 +1605,7 @@
     "query_id": "20b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.41)"
+    "reason": "Performance candidate selected (Gain=1.40)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1613,7 +1613,7 @@
     "query_id": "20c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.70)"
+    "reason": "Performance candidate selected (Gain=2.74)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1621,7 +1621,7 @@
     "query_id": "21a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=5.68)"
+    "reason": "Performance candidate selected (Gain=5.81)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1629,7 +1629,7 @@
     "query_id": "21b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.19)"
+    "reason": "Performance candidate selected (Gain=2.15)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1637,7 +1637,7 @@
     "query_id": "21c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.80)"
+    "reason": "Performance candidate selected (Gain=1.73)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1645,7 +1645,7 @@
     "query_id": "22a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.78)"
+    "reason": "Performance candidate selected (Gain=3.87)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1677,15 +1677,15 @@
     "query_id": "23a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.22)"
+    "reason": "Performance candidate selected (Gain=1.29)"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "23b",
-    "recommended_hint": "hint02",
+    "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.06)"
+    "reason": "Performance candidate selected (Gain=1.05)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1693,7 +1693,7 @@
     "query_id": "23c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.88)"
+    "reason": "Performance candidate selected (Gain=1.89)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1701,7 +1701,7 @@
     "query_id": "24a",
     "recommended_hint": "hint04",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=7.08)"
+    "reason": "Performance candidate selected (Gain=7.09)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1717,7 +1717,7 @@
     "query_id": "25a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.89)"
+    "reason": "Performance candidate selected (Gain=2.84)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1725,15 +1725,15 @@
     "query_id": "25b",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.94"
+    "reason": "Fallback: Low gain 0.93"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "25c",
     "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.12)"
+    "risk_level": "YELLOW",
+    "reason": "Performance candidate selected (Gain=3.11)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1741,7 +1741,7 @@
     "query_id": "26a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=5.48)"
+    "reason": "Performance candidate selected (Gain=5.45)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1757,7 +1757,7 @@
     "query_id": "26c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.54)"
+    "reason": "Performance candidate selected (Gain=2.55)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1765,7 +1765,7 @@
     "query_id": "27a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.98)"
+    "reason": "Performance candidate selected (Gain=3.94)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1773,7 +1773,7 @@
     "query_id": "27b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.42)"
+    "reason": "Performance candidate selected (Gain=1.45)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1781,7 +1781,7 @@
     "query_id": "27c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.38)"
+    "reason": "Performance candidate selected (Gain=2.39)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1789,7 +1789,7 @@
     "query_id": "28a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.84)"
+    "reason": "Performance candidate selected (Gain=1.79)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1797,7 +1797,7 @@
     "query_id": "28b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.08)"
+    "reason": "Performance candidate selected (Gain=1.12)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1805,15 +1805,15 @@
     "query_id": "28c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.22)"
+    "reason": "Performance candidate selected (Gain=1.23)"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "29a",
-    "recommended_hint": "hint01",
+    "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.96)"
+    "reason": "Performance candidate selected (Gain=1.92)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1821,7 +1821,7 @@
     "query_id": "29b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.22)"
+    "reason": "Performance candidate selected (Gain=1.20)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1829,7 +1829,7 @@
     "query_id": "29c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.26)"
+    "reason": "Performance candidate selected (Gain=1.29)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1837,7 +1837,7 @@
     "query_id": "2a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.11)"
+    "reason": "Performance candidate selected (Gain=1.10)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1845,7 +1845,7 @@
     "query_id": "2b",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.50"
+    "reason": "Fallback: Low gain 0.51"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1853,7 +1853,7 @@
     "query_id": "2c",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.65"
+    "reason": "Fallback: Low gain 0.62"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1861,7 +1861,7 @@
     "query_id": "2d",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.58"
+    "reason": "Fallback: Low gain 0.59"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1883,9 +1883,9 @@
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "30c",
-    "recommended_hint": "hint01",
+    "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.99)"
+    "reason": "Performance candidate selected (Gain=1.97)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1893,7 +1893,7 @@
     "query_id": "31a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=3.31)"
+    "reason": "Performance candidate selected (Gain=3.29)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1909,7 +1909,7 @@
     "query_id": "31c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.99)"
+    "reason": "Performance candidate selected (Gain=1.98)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1917,15 +1917,15 @@
     "query_id": "32a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.57)"
+    "reason": "Performance candidate selected (Gain=1.60)"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "32b",
-    "recommended_hint": "hint01",
-    "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.02)"
+    "recommended_hint": null,
+    "risk_level": "SAFE",
+    "reason": "Fallback: Low gain 1.00"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1933,15 +1933,15 @@
     "query_id": "33a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.08)"
+    "reason": "Performance candidate selected (Gain=1.06)"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "33b",
-    "recommended_hint": "hint02",
+    "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.08)"
+    "reason": "Performance candidate selected (Gain=1.16)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1949,7 +1949,7 @@
     "query_id": "33c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.05)"
+    "reason": "Performance candidate selected (Gain=1.15)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1957,7 +1957,7 @@
     "query_id": "3a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=8.48)"
+    "reason": "Performance candidate selected (Gain=8.33)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1965,7 +1965,7 @@
     "query_id": "3b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.88)"
+    "reason": "Performance candidate selected (Gain=1.82)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1973,7 +1973,7 @@
     "query_id": "3c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=7.14)"
+    "reason": "Performance candidate selected (Gain=6.86)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1981,15 +1981,15 @@
     "query_id": "4a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.94)"
+    "reason": "Performance candidate selected (Gain=1.96)"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "4b",
-    "recommended_hint": "hint01",
+    "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.93)"
+    "reason": "Performance candidate selected (Gain=1.96)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -1997,7 +1997,7 @@
     "query_id": "4c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.79)"
+    "reason": "Performance candidate selected (Gain=2.78)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2021,7 +2021,7 @@
     "query_id": "5c",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.54)"
+    "reason": "Performance candidate selected (Gain=2.51)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2029,7 +2029,7 @@
     "query_id": "6a",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.53)"
+    "reason": "Performance candidate selected (Gain=2.51)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2037,7 +2037,7 @@
     "query_id": "6b",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.99)"
+    "reason": "Performance candidate selected (Gain=1.92)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2045,7 +2045,7 @@
     "query_id": "6c",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.83"
+    "reason": "Fallback: Low gain 0.84"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2053,7 +2053,7 @@
     "query_id": "6d",
     "recommended_hint": "hint01",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.90)"
+    "reason": "Performance candidate selected (Gain=2.91)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2061,7 +2061,7 @@
     "query_id": "6e",
     "recommended_hint": null,
     "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.93"
+    "reason": "Fallback: Low gain 0.95"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2075,17 +2075,17 @@
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "7a",
-    "recommended_hint": "hint01",
+    "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=2.48)"
+    "reason": "Performance candidate selected (Gain=2.47)"
   },
   {
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "7b",
-    "recommended_hint": null,
-    "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 1.00"
+    "recommended_hint": "hint01",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.02)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2107,9 +2107,9 @@
     "scenario": "Xeon_SATA",
     "benchmark": "JOB",
     "query_id": "8b",
-    "recommended_hint": null,
-    "risk_level": "SAFE",
-    "reason": "Fallback: Low gain 0.97"
+    "recommended_hint": "hint02",
+    "risk_level": "ORANGE",
+    "reason": "Performance candidate selected (Gain=1.04)"
   },
   {
     "scenario": "Xeon_SATA",
@@ -2157,6 +2157,6 @@
     "query_id": "9d",
     "recommended_hint": "hint02",
     "risk_level": "ORANGE",
-    "reason": "Performance candidate selected (Gain=1.15)"
+    "reason": "Performance candidate selected (Gain=1.09)"
   }
 ]

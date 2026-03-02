@@ -7,8 +7,8 @@
 -- Reason    : Performance candidate selected (Gain=1.01)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off,batched_key_access=on") SET_VAR(optimizer_switch="mrr=on,mrr_cost_based=off") */
-	sum(l_extendedprice * l_discount) as revenue
+select
+	/*+ NO_ICP(lineitem) */ sum(l_extendedprice * l_discount) as revenue
 from
 	lineitem
 where

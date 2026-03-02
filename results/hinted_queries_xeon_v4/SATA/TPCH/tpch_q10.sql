@@ -7,7 +7,7 @@
 -- Reason    : Performance candidate selected (Gain=1.04)
 ======================================================================
 
-select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATION(t1 PRIMARY) */
+select
 	c_custkey,
 	c_name,
 	sum(l_extendedprice * (1 - l_discount)) as revenue,
@@ -18,7 +18,7 @@ select /*+ SET_VAR(optimizer_switch="block_nested_loop=off") NO_RANGE_OPTIMIZATI
 	c_comment
 from
 	customer,
-	orders,
+	orders IGNORE INDEX (PRIMARY),
 	lineitem,
 	nation
 where
