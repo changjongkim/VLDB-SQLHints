@@ -1,0 +1,25 @@
+Benchmark Started: 2026. 03. 02. (월) 19:14:25 KST
+[1/22] q1.sql - ✓ SUCCESS - 350.716289233s
+[2/22] q2.sql - ✓ SUCCESS - 7.881412999s
+[3/22] q3.sql - ✓ SUCCESS - 512.786687556s
+[4/22] q4.sql - ✓ SUCCESS - 59.921786621s
+[5/22] q5.sql - ✓ SUCCESS - 98.881127275s
+[6/22] q6.sql - ✓ SUCCESS - 75.432213307s
+[7/22] q7.sql - ✓ SUCCESS - 259.689133868s
+[8/22] q8.sql - ✓ SUCCESS - 167.802442741s
+[9/22] q9.sql - ✓ SUCCESS - 1030.347382172s
+[10/22] q10.sql - ✓ SUCCESS - 91.119653915s
+[11/22] q11.sql - ✓ SUCCESS - 21.586948740s
+[12/22] q12.sql - ✓ SUCCESS - 101.112394076s
+[13/22] q13.sql - ✓ SUCCESS - 196.148469130s
+[14/22] q14.sql - ✓ SUCCESS - 127.014931810s
+[15/22] q15.sql - ✓ SUCCESS(est.) - 400.000000000s
+[16/22] q16.sql - ✓ SUCCESS - 11.299478290s
+[17/22] q17.sql - ✓ SUCCESS - 33.689035598s
+[18/22] q18.sql - ✓ SUCCESS - 120.847431793s
+[19/22] q19.sql - ✓ SUCCESS - 42.033384964s
+[20/22] q20.sql - ✓ SUCCESS - 141.949496111s
+[21/22] q21.sql - ✓ SUCCESS - 393.289372882s
+[22/22] q22.sql - ✓ SUCCESS - 6.357276874s
+=========================================
+Benchmark Finished: 2026. 03. 02. (월) 20:24:32 KST

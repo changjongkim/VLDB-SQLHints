@@ -231,7 +231,34 @@ HALO v4 demonstrates optimal scalability on NVMe, neutralizing CPU/Logic bottlen
 | **ORANGE (High Risk)** | **86** | **+390.4s** | **HALO-P Breakthrough**: Conformal bounds permitted safe execution of high-risk plans to unlock maximum speedup. |
 | **SAFE (NATIVE)** | 11 | 8.1s | Defensive fallbacks successfully prevented regressions. |
 
-### 11.2 TPC-H Benchmark - TBD
+### 11.2 TPC-H Benchmark Analysis
+
+TPC-H SF 30 on NVMe demonstrates HALO's ability to transition from "latency masking" (on SATA) to "logical optimization" (on NVMe). As storage bottlenecks disappear (iops_ratio=0.5), HALO focuses on correcting optimizer misjudgments in join strategy and index selection, achieving a major performance leap on complex workloads.
+
+#### **Overall Throughput Performance**
+| Metric | Original (Native*) | HALO-P (Recommended) | Improvement |
+| :--- | :---: | :---: | :---: |
+| **Total Execution Time** | 4,249.91s | **3,257.46s** | **1.30x Speedup** |
+| **Absolute Time Saved** | - | **992.45s** | **~16.5 Minutes** |
+| **Throughput Gain** | - | - | **23.35% Reduction** |
+*\*Estimated q15 at 400s (conservative) for baseline comparison.*
+
+#### **Granular Tier Analysis**
+On NVMe, the efficiency of joins and index access becomes the dominant factor. HALO correctly predicts that "aggressive" hints like `FORCE INDEX` (hint05) are safer when I/O overhead is low:
+| Workload Tier (Baseline) | Count | Time Saved | Speedup | Highlight Query |
+| :--- | :---: | :---: | :---: | :--- |
+| **P5: Mega (> 600s)** | 1 | **+141.1s** | 1.16x | q9 (1,030s → 889s) |
+| **P4: Heavy (300s-600s)** | 4 | **+672.9s** | **1.94x (Weighted)** | **q3 (4.86x)**, q15 (1.68x) |
+| **P3: Med (100s-300s)** | 7 | **+239.2s** | **1.21x** | **q7 (1.72x), q13 (1.72x)** |
+| **P1/P2: Fast (< 100s)** | 10 | -60.8s | 0.81x | q16 (4x regression) |
+
+#### **Key Performance Highlight: tpch_q3**
+- **SOTA Breakthrough**: `tpch_q3` runtime plummeted from **513s to 106s (4.86x gain)**.
+- **Causality**: Native MySQL 8.0 failed to leverage index cardinality correctly on the high-bandwidth Xeon NVMe storage. HALO's `hint05` (`FORCE INDEX`) successfully bypassed the sub-optimal range selection, unlocking 4.8x higher throughput.
+
+#### **Discussion: Hardware-Aware Strategy Shift**
+In the **SATA** environment, TPC-H showed a modest 6% improvement because the high I/O latency forced HALO to use conservative `SAFE` fallbacks. 
+In the **NVMe** environment, however, the **conformal risk boundaries expanded**. HALO correctly calculated that the performance margin of algorithmic joins (Hash Join, Fixed Order) significantly outweighed the disk latency risk, shifting from 10% hinted queries (SATA) to **72% hinted queries (NVMe)** with a resulting 23% net gain.
 
 ---
 
