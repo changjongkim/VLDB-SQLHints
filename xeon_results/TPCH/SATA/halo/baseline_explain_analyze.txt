@@ -1,0 +1,313 @@
+=========================================
+TPC-H SF30 HALO - EXPLAIN ANALYZE Results
+Started: 2026. 03. 01. (일) 10:30:02 KST
+=========================================
+
+=========================================
+Query: tpch_q1.sql [1/22]
+Timestamp: 2026. 03. 01. (일) 10:30:15 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: lineitem.L_RETURNFLAG, lineitem.L_LINESTATUS  (actual time=373238.167..373238.168 rows=4 loops=1)\n    -> Table scan on <temporary>  (actual time=0.001..0.001 rows=4 loops=1)\n        -> Aggregate using temporary table  (actual time=373231.938..373231.939 rows=4 loops=1)\n            -> Filter: (lineitem.L_SHIPDATE <= <cache>((DATE'1998-12-01' - interval 90 day)))  (cost=19702041.90 rows=88997570) (actual time=1.147..112220.502 rows=177467536 loops=1)\n                -> Table scan on lineitem  (cost=19702041.90 rows=177995139) (actual time=1.143..98196.152 rows=179998368 loops=1)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 373.297532444s
+
+
+=========================================
+Query: tpch_q2.sql [2/22]
+Timestamp: 2026. 03. 01. (일) 10:36:42 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Limit: 100 row(s)  (actual time=38915.395..38915.452 rows=100 loops=1)\n    -> Sort: supplier.S_ACCTBAL DESC, nation.N_NAME, supplier.S_NAME, part.P_PARTKEY, limit input to 100 row(s) per chunk  (actual time=38915.394..38915.439 rows=100 loops=1)\n        -> Stream results  (cost=1227535.87 rows=579) (actual time=10.123..38836.449 rows=14155 loops=1)\n            -> Nested loop inner join  (cost=1227535.87 rows=579) (actual time=10.118..38765.463 rows=14155 loops=1)\n                -> Nested loop inner join  (cost=966525.70 rows=2897) (actual time=10.115..38711.112 rows=14156 loops=1)\n                    -> Nested loop inner join  (cost=729449.48 rows=2897) (actual time=10.109..38650.091 rows=14156 loops=1)\n                        -> Inner hash join (no condition)  (cost=662893.97 rows=733) (actual time=3.454..9659.386 rows=23840 loops=1)\n                            -> Filter: ((part.P_SIZE = 15) and (part.P_TYPE like '%BRASS'))  (cost=662892.46 rows=65996) (actual time=2.648..9603.655 rows=23840 loops=1)\n                                -> Table scan on part  (cost=662892.46 rows=5940252) (actual time=1.918..8441.901 rows=6000000 loops=1)\n                            -> Hash\n                                -> Filter: (region.R_NAME = 'EUROPE')  (cost=1.50 rows=1) (actual time=0.793..0.795 rows=1 loops=1)\n                                    -> Table scan on region  (cost=1.50 rows=5) (actual time=0.788..0.791 rows=5 loops=1)\n                        -> Filter: (partsupp.PS_SUPPLYCOST = (select #2))  (cost=1.00 rows=4) (actual time=1.170..1.215 rows=1 loops=23840)\n                            -> Index lookup on partsupp using PRIMARY (PS_PARTKEY=part.P_PARTKEY)  (cost=1.00 rows=4) (actual time=0.952..0.954 rows=4 loops=23840)\n                            -> Select #2 (subquery in condition; dependent)\n                                -> Aggregate: min(partsupp.PS_SUPPLYCOST)  (actual time=0.061..0.061 rows=1 loops=95360)\n                                    -> Nested loop inner join  (cost=11.23 rows=1) (actual time=0.048..0.058 rows=1 loops=95360)\n                                        -> Nested loop inner join  (cost=6.88 rows=4) (actual time=0.027..0.046 rows=4 loops=95360)\n                                            -> Nested loop inner join  (cost=2.90 rows=4) (actual time=0.020..0.026 rows=4 loops=95360)\n                                                -> Filter: (region.R_NAME = 'EUROPE')  (cost=1.50 rows=1) (actual time=0.010..0.012 rows=1 loops=95360)\n                                                    -> Table scan on region  (cost=1.50 rows=5) (actual time=0.006..0.009 rows=5 loops=95360)\n                                                -> Index lookup on partsupp using PRIMARY (PS_PARTKEY=part.P_PARTKEY)  (cost=1.40 rows=4) (actual time=0.010..0.013 rows=4 loops=95360)\n                                            -> Single-row index lookup on supplier using PRIMARY (S_SUPPKEY=partsupp.PS_SUPPKEY)  (cost=0.93 rows=1) (actual time=0.004..0.004 rows=1 loops=381440)\n                                        -> Filter: (nation.N_REGIONKEY = region.R_REGIONKEY)  (cost=1.01 rows=0) (actual time=0.003..0.003 rows=0 loops=381440)\n                                            -> Single-row index lookup on nation using PRIMARY (N_NATIONKEY=supplier.S_NATIONKEY)  (cost=1.01 rows=1) (actual time=0.002..0.002 rows=1 loops=381440)\n                    -> Single-row index lookup on supplier using PRIMARY (S_SUPPKEY=partsupp.PS_SUPPKEY)  (cost=0.91 rows=1) (actual time=0.004..0.004 rows=1 loops=14156)\n                -> Filter: (nation.N_REGIONKEY = region.R_REGIONKEY)  (cost=1.00 rows=0) (actual time=0.003..0.003 rows=1 loops=14156)\n                    -> Single-row index lookup on nation using PRIMARY (N_NATIONKEY=supplier.S_NATIONKEY)  (cost=1.00 rows=1) (actual time=0.002..0.002 rows=1 loops=14156)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 38.937892692s
+
+
+=========================================
+Query: tpch_q3.sql [3/22]
+Timestamp: 2026. 03. 01. (일) 10:37:34 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Limit: 10 row(s)  (actual time=1619735.873..1619735.875 rows=10 loops=1)\n    -> Sort: revenue DESC, orders.O_ORDERDATE, limit input to 10 row(s) per chunk  (actual time=1619735.872..1619735.873 rows=10 loops=1)\n        -> Table scan on <temporary>  (actual time=0.226..96.890 rows=339695 loops=1)\n            -> Aggregate using temporary table  (actual time=1619515.239..1619632.800 rows=339695 loops=1)\n                -> Nested loop inner join  (cost=10823350.32 rows=4474131) (actual time=20.337..1614738.855 rows=899319 loops=1)\n                    -> Nested loop inner join  (cost=7719147.85 rows=2185867) (actual time=15.072..352512.740 rows=4379440 loops=1)\n                        -> Filter: (customer.C_MKTSEGMENT = 'BUILDING')  (cost=505064.50 rows=444138) (actual time=2.540..6697.469 rows=900509 loops=1)\n                            -> Table scan on customer  (cost=505064.50 rows=4441375) (actual time=2.537..5059.311 rows=4500000 loops=1)\n                        -> Filter: (orders.O_ORDERDATE < DATE'1995-03-15')  (cost=14.77 rows=5) (actual time=0.323..0.383 rows=5 loops=900509)\n                            -> Index lookup on orders using IDX_ORDERS_CUSTKEY (O_CUSTKEY=customer.C_CUSTKEY)  (cost=14.77 rows=15) (actual time=0.322..0.381 rows=10 loops=900509)\n                    -> Filter: (lineitem.L_SHIPDATE > DATE'1995-03-15')  (cost=1.01 rows=2) (actual time=0.287..0.288 rows=0 loops=4379440)\n                        -> Index lookup on lineitem using PRIMARY (L_ORDERKEY=orders.O_ORDERKEY)  (cost=1.01 rows=4) (actual time=0.284..0.287 rows=4 loops=4379440)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 1619.873115902s
+
+
+=========================================
+Query: tpch_q4.sql [4/22]
+Timestamp: 2026. 03. 01. (일) 11:04:49 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: orders.O_ORDERPRIORITY  (actual time=319062.600..319062.600 rows=5 loops=1)\n    -> Table scan on <temporary>  (actual time=0.002..0.003 rows=5 loops=1)\n        -> Aggregate using temporary table  (actual time=319053.355..319053.356 rows=5 loops=1)\n            -> Nested loop semijoin  (cost=11898084.40 rows=6749153) (actual time=1.834..315329.327 rows=1577742 loops=1)\n                -> Filter: ((orders.O_ORDERDATE >= DATE'1993-07-01') and (orders.O_ORDERDATE < <cache>((DATE'1993-07-01' + interval '3' month))))  (cost=4873424.21 rows=4946512) (actual time=0.088..73128.248 rows=1720611 loops=1)\n                    -> Table scan on orders  (cost=4873424.21 rows=44527516) (actual time=0.066..59842.994 rows=45000000 loops=1)\n                -> Filter: (lineitem.L_COMMITDATE < lineitem.L_RECEIPTDATE)  (cost=1.38 rows=1) (actual time=0.140..0.140 rows=1 loops=1720611)\n                    -> Index lookup on lineitem using PRIMARY (L_ORDERKEY=orders.O_ORDERKEY)  (cost=1.38 rows=4) (actual time=0.139..0.139 rows=1 loops=1720611)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 319.133419166s
+
+
+=========================================
+Query: tpch_q5.sql [5/22]
+Timestamp: 2026. 03. 01. (일) 11:10:22 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: revenue DESC  (actual time=396647.426..396647.429 rows=5 loops=1)\n    -> Table scan on <temporary>  (actual time=0.003..0.005 rows=5 loops=1)\n        -> Aggregate using temporary table  (actual time=396640.926..396640.928 rows=5 loops=1)\n            -> Nested loop inner join  (cost=25573646.62 rows=202495) (actual time=84.279..394921.417 rows=218784 loops=1)\n                -> Nested loop inner join  (cost=21118759.66 rows=4049897) (actual time=20.696..373879.189 rows=5450573 loops=1)\n                    -> Nested loop inner join  (cost=19713827.58 rows=989302) (actual time=18.640..146670.733 rows=1362236 loops=1)\n                        -> Nested loop inner join  (cost=14272664.49 rows=4946512) (actual time=2.495..129415.057 rows=6825548 loops=1)\n                            -> Nested loop inner join  (cost=8831501.41 rows=4946512) (actual time=0.926..63506.796 rows=6825548 loops=1)\n                                -> Filter: (region.R_NAME = 'ASIA')  (cost=1.50 rows=1) (actual time=0.839..5.919 rows=1 loops=1)\n                                    -> Table scan on region  (cost=1.50 rows=5) (actual time=0.833..0.874 rows=5 loops=1)\n                                -> Filter: ((orders.O_ORDERDATE >= DATE'1994-01-01') and (orders.O_ORDERDATE < <cache>((DATE'1994-01-01' + interval '1' year))))  (cost=4873399.32 rows=4946512) (actual time=0.086..62650.216 rows=6825548 loops=1)\n                                    -> Table scan on orders  (cost=4873399.32 rows=44527516) (actual time=0.077..50011.193 rows=45000000 loops=1)\n                            -> Single-row index lookup on customer using PRIMARY (C_CUSTKEY=orders.O_CUSTKEY)  (cost=1.00 rows=1) (actual time=0.009..0.009 rows=1 loops=6825548)\n                        -> Filter: (nation.N_REGIONKEY = region.R_REGIONKEY)  (cost=1.00 rows=0) (actual time=0.002..0.002 rows=0 loops=6825548)\n                            -> Single-row index lookup on nation using PRIMARY (N_NATIONKEY=customer.C_NATIONKEY)  (cost=1.00 rows=1) (actual time=0.002..0.002 rows=1 loops=6825548)\n                    -> Index lookup on lineitem using PRIMARY (L_ORDERKEY=orders.O_ORDERKEY)  (cost=1.01 rows=4) (actual time=0.162..0.166 rows=4 loops=1362236)\n                -> Filter: (supplier.S_NATIONKEY = customer.C_NATIONKEY)  (cost=1.00 rows=0) (actual time=0.004..0.004 rows=0 loops=5450573)\n                    -> Single-row index lookup on supplier using PRIMARY (S_SUPPKEY=lineitem.L_SUPPKEY)  (cost=1.00 rows=1) (actual time=0.003..0.003 rows=1 loops=5450573)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 396.724577940s
+
+
+=========================================
+Query: tpch_q6.sql [6/22]
+Timestamp: 2026. 03. 01. (일) 11:17:13 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Aggregate: sum((lineitem.L_EXTENDEDPRICE * lineitem.L_DISCOUNT))  (actual time=216771.333..216771.335 rows=1 loops=1)\n    -> Filter: ((lineitem.L_SHIPDATE >= DATE'1994-01-01') and (lineitem.L_SHIPDATE < <cache>((DATE'1994-01-01' + interval '1' year))) and (lineitem.L_DISCOUNT between <cache>((0.06 - 0.01)) and <cache>((0.06 + 0.01))) and (lineitem.L_QUANTITY < 24.00))  (cost=19702041.90 rows=1971155) (actual time=7.734..215310.315 rows=3423171 loops=1)\n        -> Table scan on lineitem  (cost=19702041.90 rows=177995139) (actual time=7.648..184104.269 rows=179998368 loops=1)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 216.890988946s
+
+
+=========================================
+Query: tpch_q7.sql [7/22]
+Timestamp: 2026. 03. 01. (일) 11:21:03 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: shipping.supp_nation, shipping.cust_nation, shipping.l_year  (actual time=877408.564..877408.567 rows=4 loops=1)\n    -> Table scan on <temporary>  (actual time=0.002..0.004 rows=4 loops=1)\n        -> Aggregate using temporary table  (actual time=877393.147..877393.149 rows=4 loops=1)\n            -> Nested loop inner join  (cost=73062552.18 rows=5047884) (actual time=18.849..875578.701 rows=175454 loops=1)\n                -> Nested loop inner join  (cost=43837959.18 rows=26567812) (actual time=8.239..865107.508 rows=4384004 loops=1)\n                    -> Nested loop inner join  (cost=20710630.22 rows=26567812) (actual time=7.579..852390.072 rows=4384004 loops=1)\n                        -> Nested loop inner join  (cost=2277584.39 rows=12979885) (actual time=6.488..8407.786 rows=3611797 loops=1)\n                            -> Nested loop inner join  (cost=88768.04 rows=879022) (actual time=4.526..349.974 rows=360480 loops=1)\n                                -> Filter: ((n2.N_NAME = 'GERMANY') or (n2.N_NAME = 'FRANCE'))  (cost=3.50 rows=5) (actual time=1.997..4.642 rows=2 loops=1)\n                                    -> Table scan on n2  (cost=3.50 rows=25) (actual time=1.988..3.559 rows=25 loops=1)\n                                -> Index lookup on customer using IDX_CUSTOMER_NATIONKEY (C_NATIONKEY=n2.N_NATIONKEY)  (cost=4077.49 rows=185057) (actual time=1.600..155.596 rows=180240 loops=2)\n                            -> Index lookup on orders using IDX_ORDERS_CUSTKEY (O_CUSTKEY=customer.C_CUSTKEY)  (cost=1.01 rows=15) (actual time=0.017..0.021 rows=10 loops=360480)\n                        -> Filter: (lineitem.L_SHIPDATE between DATE'1995-01-01' and DATE'1996-12-31')  (cost=1.01 rows=2) (actual time=0.232..0.233 rows=1 loops=3611797)\n                            -> Index lookup on lineitem using PRIMARY (L_ORDERKEY=orders.O_ORDERKEY)  (cost=1.01 rows=4) (actual time=0.229..0.232 rows=4 loops=3611797)\n                    -> Single-row index lookup on supplier using PRIMARY (S_SUPPKEY=lineitem.L_SUPPKEY)  (cost=0.77 rows=1) (actual time=0.003..0.003 rows=1 loops=4384004)\n                -> Filter: (((n1.N_NAME = 'FRANCE') and (n2.N_NAME = 'GERMANY')) or ((n1.N_NAME = 'GERMANY') and (n2.N_NAME = 'FRANCE')))  (cost=1.00 rows=0) (actual time=0.002..0.002 rows=0 loops=4384004)\n                    -> Single-row index lookup on n1 using PRIMARY (N_NATIONKEY=supplier.S_NATIONKEY)  (cost=1.00 rows=1) (actual time=0.001..0.001 rows=1 loops=4384004)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 877.502043612s
+
+
+=========================================
+Query: tpch_q8.sql [8/22]
+Timestamp: 2026. 03. 01. (일) 11:35:56 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: all_nations.o_year  (actual time=385682.159..385682.160 rows=2 loops=1)\n    -> Table scan on <temporary>  (actual time=0.002..0.002 rows=2 loops=1)\n        -> Aggregate using temporary table  (actual time=385674.813..385674.814 rows=2 loops=1)\n            -> Nested loop inner join  (cost=25916136.88 rows=405030) (actual time=543.964..384971.661 rows=73741 loops=1)\n                -> Nested loop inner join  (cost=21460804.13 rows=4050303) (actual time=4.896..315402.237 rows=10934712 loops=1)\n                    -> Nested loop inner join  (cost=20043198.26 rows=4050303) (actual time=4.892..302405.520 rows=10934712 loops=1)\n                        -> Nested loop inner join  (cost=17409758.00 rows=4050303) (actual time=4.885..280060.595 rows=10934712 loops=1)\n                            -> Nested loop inner join  (cost=16004955.09 rows=989401) (actual time=4.873..116950.297 rows=2733152 loops=1)\n                                -> Nested loop inner join  (cost=14273502.68 rows=4947007) (actual time=4.867..98605.530 rows=13674777 loops=1)\n                                    -> Nested loop inner join  (cost=8831795.11 rows=4947007) (actual time=2.833..36162.074 rows=13674777 loops=1)\n                                        -> Filter: (region.R_NAME = 'AMERICA')  (cost=1.50 rows=1) (actual time=1.098..1.118 rows=1 loops=1)\n                                            -> Table scan on region  (cost=1.50 rows=5) (actual time=1.093..1.112 rows=5 loops=1)\n                                        -> Filter: (orders.O_ORDERDATE between DATE'1995-01-01' and DATE'1996-12-31')  (cost=4873742.52 rows=4947007) (actual time=1.733..35165.030 rows=13674777 loops=1)\n                                            -> Table scan on orders  (cost=4873742.52 rows=44527516) (actual time=1.731..30778.975 rows=45000000 loops=1)\n                                    -> Single-row index lookup on customer using PRIMARY (C_CUSTKEY=orders.O_CUSTKEY)  (cost=1.00 rows=1) (actual time=0.004..0.004 rows=1 loops=13674777)\n                                -> Filter: (n1.N_REGIONKEY = region.R_REGIONKEY)  (cost=0.25 rows=0) (actual time=0.001..0.001 rows=0 loops=13674777)\n                                    -> Single-row index lookup on n1 using PRIMARY (N_NATIONKEY=customer.C_NATIONKEY)  (cost=0.25 rows=1) (actual time=0.001..0.001 rows=1 loops=13674777)\n                            -> Index lookup on lineitem using PRIMARY (L_ORDERKEY=orders.O_ORDERKEY)  (cost=1.01 rows=4) (actual time=0.057..0.059 rows=4 loops=2733152)\n                        -> Single-row index lookup on supplier using PRIMARY (S_SUPPKEY=lineitem.L_SUPPKEY)  (cost=0.55 rows=1) (actual time=0.002..0.002 rows=1 loops=10934712)\n                    -> Single-row index lookup on n2 using PRIMARY (N_NATIONKEY=supplier.S_NATIONKEY)  (cost=0.25 rows=1) (actual time=0.001..0.001 rows=1 loops=10934712)\n                -> Filter: (part.P_TYPE = 'ECONOMY ANODIZED STEEL')  (cost=1.00 rows=0) (actual time=0.006..0.006 rows=0 loops=10934712)\n                    -> Single-row index lookup on part using PRIMARY (P_PARTKEY=lineitem.L_PARTKEY)  (cost=1.00 rows=1) (actual time=0.006..0.006 rows=1 loops=10934712)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 385.740919267s
+
+
+=========================================
+Query: tpch_q9.sql [9/22]
+Timestamp: 2026. 03. 01. (일) 11:42:35 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: profit.nation, profit.o_year DESC  (actual time=1999994.142..1999994.142 rows=0 loops=1)\n    -> Table scan on <temporary>  (never executed)\n        -> Aggregate using temporary table  (actual time=1999991.706..1999991.706 rows=0 loops=1)\n            -> Nested loop inner join  (cost=49957145.17 rows=24291695) (actual time=18.805..1979763.019 rows=5493571 loops=1)\n                -> Nested loop inner join  (cost=46556307.80 rows=24291695) (actual time=16.420..1579513.953 rows=5493571 loops=1)\n                    -> Nested loop inner join  (cost=19835442.76 rows=3259006) (actual time=4.177..48281.049 rows=732691 loops=1)\n                        -> Nested loop inner join  (cost=10710224.82 rows=65180128) (actual time=3.028..32503.338 rows=18317252 loops=1)\n                            -> Nested loop inner join  (cost=1585006.88 rows=2607205) (actual time=1.995..21285.243 rows=732691 loops=1)\n                                -> Filter: (part.P_NAME like '%green%')  (cost=661627.85 rows=659962) (actual time=0.077..6708.648 rows=183173 loops=1)\n                                    -> Table scan on part  (cost=661627.85 rows=5940252) (actual time=0.071..4851.439 rows=3369740 loops=1)\n                                -> Index lookup on partsupp using PRIMARY (PS_PARTKEY=part.P_PARTKEY)  (cost=1.00 rows=4) (actual time=0.075..0.079 rows=4 loops=183173)\n                            -> Table scan on nation  (cost=1.00 rows=25) (actual time=0.007..0.013 rows=25 loops=732691)\n                        -> Filter: (supplier.S_NATIONKEY = nation.N_NATIONKEY)  (cost=0.04 rows=0) (actual time=0.001..0.001 rows=0 loops=18317252)\n                            -> Single-row index lookup on supplier using PRIMARY (S_SUPPKEY=partsupp.PS_SUPPKEY)  (cost=0.04 rows=1) (actual time=0.000..0.000 rows=1 loops=18317252)\n                    -> Index lookup on lineitem using IDX_LINEITEM_PART_SUPP (L_PARTKEY=part.P_PARTKEY, L_SUPPKEY=partsupp.PS_SUPPKEY)  (cost=7.45 rows=7) (actual time=1.950..2.089 rows=7 loops=732691)\n                -> Single-row index lookup on orders using PRIMARY (O_ORDERKEY=lineitem.L_ORDERKEY)  (cost=0.04 rows=1) (actual time=0.072..0.073 rows=1 loops=5493571)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 2000.114677048s
+
+
+=========================================
+Query: tpch_q10.sql [10/22]
+Timestamp: 2026. 03. 01. (일) 12:16:10 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Limit: 20 row(s)  (actual time=385070.783..385070.795 rows=20 loops=1)\n    -> Sort: revenue DESC, limit input to 20 row(s) per chunk  (actual time=385070.781..385070.792 rows=20 loops=1)\n        -> Table scan on <temporary>  (actual time=0.004..507.170 rows=1148325 loops=1)\n            -> Aggregate using temporary table  (actual time=384012.925..384593.271 rows=1148325 loops=1)\n                -> Nested loop inner join  (cost=14833901.25 rows=2024949) (actual time=9.154..345870.808 rows=3434459 loops=1)\n                    -> Nested loop inner join  (cost=14125169.23 rows=2024949) (actual time=9.145..340411.055 rows=3434459 loops=1)\n                        -> Nested loop inner join  (cost=11897725.76 rows=2024949) (actual time=3.399..281029.030 rows=3434459 loops=1)\n                            -> Filter: ((orders.O_ORDERDATE >= DATE'1993-10-01') and (orders.O_ORDERDATE < <cache>((DATE'1993-10-01' + interval '3' month))))  (cost=4873065.56 rows=4946512) (actual time=0.047..62377.661 rows=1718066 loops=1)\n                                -> Table scan on orders  (cost=4873065.56 rows=44527516) (actual time=0.037..50830.541 rows=45000000 loops=1)\n                            -> Filter: (lineitem.L_RETURNFLAG = 'R')  (cost=1.01 rows=0) (actual time=0.123..0.127 rows=2 loops=1718066)\n                                -> Index lookup on lineitem using PRIMARY (L_ORDERKEY=orders.O_ORDERKEY)  (cost=1.01 rows=4) (actual time=0.121..0.125 rows=4 loops=1718066)\n                        -> Single-row index lookup on customer using PRIMARY (C_CUSTKEY=orders.O_CUSTKEY)  (cost=1.00 rows=1) (actual time=0.017..0.017 rows=1 loops=3434459)\n                    -> Single-row index lookup on nation using PRIMARY (N_NATIONKEY=customer.C_NATIONKEY)  (cost=0.25 rows=1) (actual time=0.001..0.001 rows=1 loops=3434459)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 385.812878080s
+
+
+=========================================
+Query: tpch_q11.sql [11/22]
+Timestamp: 2026. 03. 01. (일) 12:22:50 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: `value` DESC  (actual time=74660.938..74660.938 rows=0 loops=1)\n    -> Filter: (sum((partsupp.PS_SUPPLYCOST * partsupp.PS_AVAILQTY)) > (select #2))  (actual time=74660.921..74660.921 rows=0 loops=1)\n        -> Table scan on <temporary>  (actual time=0.002..28.264 rows=910366 loops=1)\n            -> Aggregate using temporary table  (actual time=67873.350..67937.523 rows=910366 loops=1)\n                -> Nested loop inner join  (cost=2692001.35 rows=2444430) (actual time=67.490..65788.883 rows=967200 loops=1)\n                    -> Nested loop inner join  (cost=3128.85 rows=30927) (actual time=1.878..19.279 rows=12090 loops=1)\n                        -> Filter: (nation.N_NAME = 'GERMANY')  (cost=3.50 rows=3) (actual time=1.030..1.069 rows=1 loops=1)\n                            -> Table scan on nation  (cost=3.50 rows=25) (actual time=1.023..1.049 rows=25 loops=1)\n                        -> Index lookup on supplier using IDX_SUPPLIER_NATIONKEY (S_NATIONKEY=nation.N_NATIONKEY)  (cost=507.90 rows=12371) (actual time=0.847..16.800 rows=12090 loops=1)\n                    -> Index lookup on partsupp using IDX_PARTSUPP_SUPPKEY (PS_SUPPKEY=supplier.S_SUPPKEY)  (cost=79.04 rows=79) (actual time=5.418..5.432 rows=80 loops=12090)\n        -> Select #2 (subquery in condition; run only once)\n            -> Aggregate: sum((partsupp.PS_SUPPLYCOST * partsupp.PS_AVAILQTY))  (actual time=6642.959..6642.960 rows=1 loops=1)\n                -> Nested loop inner join  (cost=2692001.35 rows=2444430) (actual time=0.686..6501.608 rows=967200 loops=1)\n                    -> Nested loop inner join  (cost=3128.85 rows=30927) (actual time=0.098..5.408 rows=12090 loops=1)\n                        -> Filter: (nation.N_NAME = 'GERMANY')  (cost=3.50 rows=3) (actual time=0.044..0.056 rows=1 loops=1)\n                            -> Table scan on nation  (cost=3.50 rows=25) (actual time=0.040..0.047 rows=25 loops=1)\n                        -> Index lookup on supplier using IDX_SUPPLIER_NATIONKEY (S_NATIONKEY=nation.N_NATIONKEY)  (cost=507.90 rows=12371) (actual time=0.053..4.795 rows=12090 loops=1)\n                    -> Index lookup on partsupp using IDX_PARTSUPP_SUPPKEY (PS_SUPPKEY=supplier.S_SUPPKEY)  (cost=79.04 rows=79) (actual time=0.529..0.534 rows=80 loops=12090)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 74.753097927s
+
+
+=========================================
+Query: tpch_q12.sql [12/22]
+Timestamp: 2026. 03. 01. (일) 12:24:18 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: lineitem.L_SHIPMODE  (actual time=258944.960..258944.961 rows=2 loops=1)\n    -> Table scan on <temporary>  (actual time=0.002..0.003 rows=2 loops=1)\n        -> Aggregate using temporary table  (actual time=258936.724..258936.725 rows=2 loops=1)\n            -> Nested loop inner join  (cost=20185291.41 rows=439318) (actual time=3.928..256573.555 rows=933168 loops=1)\n                -> Filter: ((lineitem.L_SHIPMODE in ('MAIL','SHIP')) and (lineitem.L_COMMITDATE < lineitem.L_RECEIPTDATE) and (lineitem.L_SHIPDATE < lineitem.L_COMMITDATE) and (lineitem.L_RECEIPTDATE >= DATE'1994-01-01') and (lineitem.L_RECEIPTDATE < <cache>((DATE'1994-01-01' + interval '1' year))))  (cost=19702041.21 rows=439318) (actual time=2.124..230002.479 rows=933168 loops=1)\n                    -> Table scan on lineitem  (cost=19702041.21 rows=177995139) (actual time=1.748..195147.103 rows=179998368 loops=1)\n                -> Single-row index lookup on orders using PRIMARY (O_ORDERKEY=lineitem.L_ORDERKEY)  (cost=1.00 rows=1) (actual time=0.028..0.028 rows=1 loops=933168)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 259.012725759s
+
+
+=========================================
+Query: tpch_q13.sql [13/22]
+Timestamp: 2026. 03. 01. (일) 12:28:51 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: custdist DESC, c_orders.c_count DESC  (actual time=319811.650..319811.651 rows=45 loops=1)\n    -> Table scan on <temporary>  (actual time=0.001..0.003 rows=45 loops=1)\n        -> Aggregate using temporary table  (actual time=319811.559..319811.563 rows=45 loops=1)\n            -> Table scan on c_orders  (cost=2.50..2.50 rows=0) (actual time=0.001..138.774 rows=4500000 loops=1)\n                -> Materialize  (cost=2.50..2.50 rows=0) (actual time=318694.414..319007.868 rows=4500000 loops=1)\n                    -> Group aggregate: count(orders.O_ORDERKEY)  (actual time=34.038..317720.282 rows=4500000 loops=1)\n                        -> Nested loop left join  (cost=72645896.89 rows=65582575) (actual time=20.304..314642.410 rows=46014184 loops=1)\n                            -> Index scan on customer using PRIMARY  (cost=505064.50 rows=4441375) (actual time=2.617..2340.219 rows=4500000 loops=1)\n                            -> Filter: (not((orders.O_COMMENT like '%special%requests%')))  (cost=14.77 rows=15) (actual time=0.054..0.069 rows=10 loops=4500000)\n                                -> Index lookup on orders using IDX_ORDERS_CUSTKEY (O_CUSTKEY=customer.C_CUSTKEY)  (cost=14.77 rows=15) (actual time=0.053..0.064 rows=10 loops=4500000)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 319.845051950s
+
+
+=========================================
+Query: tpch_q14.sql [14/22]
+Timestamp: 2026. 03. 01. (일) 12:34:25 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Aggregate: sum((lineitem.L_EXTENDEDPRICE * (1 - lineitem.L_DISCOUNT))), sum((case when (part.P_TYPE like 'PROMO%') then (lineitem.L_EXTENDEDPRICE * (1 - lineitem.L_DISCOUNT)) else 0 end))  (actual time=444129.029..444129.031 rows=1 loops=1)\n    -> Nested loop inner join  (cost=10317373.21 rows=4485814) (actual time=29.876..442508.012 rows=2245483 loops=1)\n        -> Index range scan on lineitem using IDX_LINEITEM_SHIPDATE, with index condition: ((lineitem.L_SHIPDATE >= DATE'1995-09-01') and (lineitem.L_SHIPDATE < <cache>((DATE'1995-09-01' + interval '1' month))))  (cost=5382977.81 rows=4485814) (actual time=28.092..400512.426 rows=2245483 loops=1)\n        -> Single-row index lookup on part using PRIMARY (P_PARTKEY=lineitem.L_PARTKEY)  (cost=1.00 rows=1) (actual time=0.018..0.019 rows=1 loops=2245483)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 444.217468050s
+
+
+=========================================
+Query: tpch_q15.sql [15/22]
+Timestamp: 2026. 03. 01. (일) 12:42:03 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: supplier.S_SUPPKEY  (actual time=830112.281..830112.281 rows=1 loops=1)\n    -> Stream results  (cost=3069280.55 rows=1379451) (actual time=830094.785..830107.943 rows=1 loops=1)\n        -> Nested loop inner join  (cost=3069280.55 rows=1379451) (actual time=830094.623..830107.780 rows=1 loops=1)\n            -> Filter: (revenue0.total_revenue = (select #3))  (cost=1.13..1551884.65 rows=1379451) (actual time=830079.876..830093.032 rows=1 loops=1)\n                -> Table scan on revenue0  (cost=2.50..2.50 rows=0) (actual time=0.002..12.516 rows=300000 loops=1)\n                    -> Materialize CTE revenue0 if needed  (cost=2.50..2.50 rows=0) (actual time=829938.138..829968.838 rows=300000 loops=1)\n                        -> Table scan on <temporary>  (actual time=0.003..12.490 rows=300000 loops=1)\n                            -> Aggregate using temporary table  (actual time=829836.792..829867.548 rows=300000 loops=1)\n                                -> Index range scan on lineitem using IDX_LINEITEM_SHIPDATE, with index condition: ((lineitem.L_SHIPDATE >= DATE'1996-01-01') and (lineitem.L_SHIPDATE < <cache>((DATE'1996-01-01' + interval '3' month))))  (cost=16553410.61 rows=13794508) (actual time=71.504..816382.615 rows=6799585 loops=1)\n                -> Select #3 (subquery in condition; run only once)\n                    -> Aggregate: max(revenue0.total_revenue)  (actual time=74.079..74.080 rows=1 loops=1)\n                        -> Table scan on revenue0  (cost=2.50..2.50 rows=0) (actual time=0.002..12.223 rows=300000 loops=1)\n                            -> Materialize CTE revenue0 if needed (query plan printed elsewhere)  (cost=2.50..2.50 rows=0) (actual time=1.710..32.211 rows=300000 loops=1)\n            -> Single-row index lookup on supplier using PRIMARY (S_SUPPKEY=revenue0.supplier_no)  (cost=1.00 rows=1) (actual time=14.735..14.735 rows=1 loops=1)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 830.225142306s
+
+
+=========================================
+Query: tpch_q16.sql [16/22]
+Timestamp: 2026. 03. 01. (일) 12:56:07 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: supplier_cnt DESC, part.P_BRAND, part.P_TYPE, part.P_SIZE  (actual time=23001.242..23002.721 rows=27840 loops=1)\n    -> Stream results  (actual time=8568.437..22971.409 rows=27840 loops=1)\n        -> Group aggregate: count(distinct partsupp.PS_SUPPKEY)  (actual time=8568.433..22956.261 rows=27840 loops=1)\n            -> Nested loop antijoin  (cost=696921796999.74 rows=6969154616940) (actual time=8539.870..21527.900 rows=3560374 loops=1)\n                -> Nested loop inner join  (cost=5396361.75 rows=23473308) (actual time=8142.451..19716.523 rows=3562228 loops=1)\n                    -> Sort: part.P_BRAND, part.P_TYPE, part.P_SIZE  (cost=662632.20 rows=5940252) (actual time=8139.951..8231.289 rows=890557 loops=1)\n                        -> Filter: ((part.P_BRAND <> 'Brand#45') and (not((part.P_TYPE like 'MEDIUM POLISHED%'))) and (part.P_SIZE in (49,14,23,45,19,3,36,9)))  (cost=662632.20 rows=5940252) (actual time=1.556..7127.032 rows=890557 loops=1)\n                            -> Table scan on part  (cost=662632.20 rows=5940252) (actual time=1.547..5408.550 rows=6000000 loops=1)\n                    -> Index lookup on partsupp using IDX_PARTSUPP_PARTKEY (PS_PARTKEY=part.P_PARTKEY)  (cost=1.00 rows=4) (actual time=0.012..0.013 rows=4 loops=890557)\n                -> Single-row index lookup on <subquery2> using <auto_distinct_key> (s_suppkey=partsupp.PS_SUPPKEY)  (actual time=0.000..0.000 rows=0 loops=3562228)\n                    -> Materialize with deduplication  (cost=63127.40..63127.40 rows=296897) (actual time=0.000..0.000 rows=0 loops=3562228)\n                        -> Filter: (supplier.S_SUPPKEY is not null)  (cost=33437.70 rows=296897) (actual time=2.974..397.176 rows=155 loops=1)\n                            -> Filter: (supplier.S_COMMENT like '%Customer%Complaints%')  (cost=33437.70 rows=296897) (actual time=2.970..397.136 rows=155 loops=1)\n                                -> Table scan on supplier  (cost=33437.70 rows=296897) (actual time=1.610..185.308 rows=300000 loops=1)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 23.030057142s
+
+
+=========================================
+Query: tpch_q17.sql [17/22]
+Timestamp: 2026. 03. 01. (일) 12:56:43 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Aggregate: sum(lineitem.L_EXTENDEDPRICE)  (actual time=103321.379..103321.379 rows=1 loops=1)\n    -> Nested loop inner join  (cost=2615074.44 rows=1777289) (actual time=61.951..103313.567 rows=16349 loops=1)\n        -> Filter: ((part.P_BRAND = 'Brand#23') and (part.P_CONTAINER = 'MED BOX'))  (cost=660056.95 rows=59403) (actual time=2.380..3990.008 rows=6095 loops=1)\n            -> Table scan on part  (cost=660056.95 rows=5940252) (actual time=0.153..2987.949 rows=6000000 loops=1)\n        -> Filter: (lineitem.L_QUANTITY < (select #2))  (cost=29.92 rows=30) (actual time=14.845..16.294 rows=3 loops=6095)\n            -> Index lookup on lineitem using IDX_LINEITEM_PART_SUPP (L_PARTKEY=part.P_PARTKEY)  (cost=29.92 rows=30) (actual time=12.633..12.642 rows=30 loops=6095)\n            -> Select #2 (subquery in condition; dependent)\n                -> Aggregate: avg(lineitem.L_QUANTITY)  (actual time=0.120..0.120 rows=1 loops=182694)\n                    -> Index lookup on lineitem using IDX_LINEITEM_PART_SUPP (L_PARTKEY=part.P_PARTKEY)  (cost=32.91 rows=30) (actual time=0.084..0.115 rows=31 loops=182694)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 103.341965512s
+
+
+=========================================
+Query: tpch_q18.sql [18/22]
+Timestamp: 2026. 03. 01. (일) 12:58:39 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Limit: 100 row(s)  (actual time=279031.714..279031.725 rows=100 loops=1)\n    -> Sort: orders.O_TOTALPRICE DESC, orders.O_ORDERDATE, limit input to 100 row(s) per chunk  (actual time=279031.714..279031.720 rows=100 loops=1)\n        -> Table scan on <temporary>  (actual time=0.001..0.254 rows=1917 loops=1)\n            -> Aggregate using temporary table  (actual time=279030.971..279031.300 rows=1917 loops=1)\n                -> Nested loop inner join  (cost=117088603.92 rows=182281843) (actual time=223680.688..278993.143 rows=13419 loops=1)\n                    -> Nested loop inner join  (cost=53854010.20 rows=44527516) (actual time=223679.935..278350.299 rows=1917 loops=1)\n                        -> Filter: <in_optimizer>(orders.O_ORDERKEY,orders.O_ORDERKEY in (select #2))  (cost=4873742.60 rows=44527516) (actual time=223677.676..276932.099 rows=1917 loops=1)\n                            -> Table scan on orders  (cost=4873742.60 rows=44527516) (actual time=2.164..24167.067 rows=45000000 loops=1)\n                            -> Select #2 (subquery in condition; run only once)\n                                -> Filter: ((orders.O_ORDERKEY = `<materialized_subquery>`.l_orderkey))  (actual time=0.000..0.000 rows=0 loops=45000001)\n                                    -> Limit: 1 row(s)  (actual time=0.000..0.000 rows=0 loops=45000001)\n                                        -> Index lookup on <materialized_subquery> using <auto_distinct_key> (l_orderkey=orders.O_ORDERKEY)  (actual time=0.000..0.000 rows=0 loops=45000001)\n                                            -> Materialize with deduplication  (cost=0.00..0.00 rows=0) (actual time=0.005..0.005 rows=0 loops=45000001)\n                                                -> Filter: (sum(lineitem.L_QUANTITY) > 300)  (actual time=10.336..223654.459 rows=1917 loops=1)\n                                                    -> Group aggregate: sum(lineitem.L_QUANTITY)  (actual time=2.064..219030.449 rows=45000000 loops=1)\n                                                        -> Index scan on lineitem using PRIMARY  (cost=19702041.90 rows=177995139) (actual time=2.057..181447.626 rows=179998368 loops=1)\n                        -> Single-row index lookup on customer using PRIMARY (C_CUSTKEY=orders.O_CUSTKEY)  (cost=1.00 rows=1) (actual time=0.739..0.739 rows=1 loops=1917)\n                    -> Index lookup on lineitem using PRIMARY (L_ORDERKEY=orders.O_ORDERKEY)  (cost=1.01 rows=4) (actual time=0.329..0.334 rows=7 loops=1917)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 279.059961200s
+
+
+=========================================
+Query: tpch_q19.sql [19/22]
+Timestamp: 2026. 03. 01. (일) 13:03:32 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Aggregate: sum((lineitem.L_EXTENDEDPRICE * (1 - lineitem.L_DISCOUNT)))  (actual time=187005.576..187005.577 rows=1 loops=1)\n    -> Nested loop inner join  (cost=3256293.96 rows=15688) (actual time=235.282..186991.503 rows=3419 loops=1)\n        -> Filter: (((part.P_BRAND = 'Brand#12') and (part.P_CONTAINER in ('SM CASE','SM BOX','SM PACK','SM PKG')) and (part.P_SIZE between 1 and 5)) or ((part.P_BRAND = 'Brand#23') and (part.P_CONTAINER in ('MED BAG','MED BOX','MED PKG','MED PACK')) and (part.P_SIZE between 1 and 10)) or ((part.P_BRAND = 'Brand#34') and (part.P_CONTAINER in ('LG CASE','LG BOX','LG PACK','LG PKG')) and (part.P_SIZE between 1 and 15)))  (cost=661430.42 rows=78844) (actual time=0.187..7830.164 rows=14558 loops=1)\n            -> Table scan on part  (cost=661430.42 rows=5940252) (actual time=0.145..4968.966 rows=6000000 loops=1)\n        -> Filter: (((part.P_BRAND = 'Brand#12') and (part.P_CONTAINER in ('SM CASE','SM BOX','SM PACK','SM PKG')) and (lineitem.L_QUANTITY >= 1.00) and (lineitem.L_QUANTITY <= <cache>((1 + 10))) and (part.P_SIZE between 1 and 5) and (lineitem.L_SHIPMODE in ('AIR','AIR REG')) and (lineitem.L_SHIPINSTRUCT = 'DELIVER IN PERSON')) or ((part.P_BRAND = 'Brand#23') and (part.P_CONTAINER in ('MED BAG','MED BOX','MED PKG','MED PACK')) and (lineitem.L_QUANTITY >= 10.00) and (lineitem.L_QUANTITY <= <cache>((10 + 10))) and (part.P_SIZE between 1 and 10) and (lineitem.L_SHIPMODE in ('AIR','AIR REG')) and (lineitem.L_SHIPINSTRUCT = 'DELIVER IN PERSON')) or ((part.P_BRAND = 'Brand#34') and (part.P_CONTAINER in ('LG CASE','LG BOX','LG PACK','LG PKG')) and (lineitem.L_QUANTITY >= 20.00) and (lineitem.L_QUANTITY <= <cache>((20 + 10))) and (part.P_SIZE between 1 and 15) and (lineitem.L_SHIPMODE in ('AIR','AIR REG')) and (lineitem.L_SHIPINSTRUCT = 'DELIVER IN PERSON')))  (cost=29.92 rows=0) (actual time=12.148..12.305 rows=0 loops=14558)\n            -> Index lookup on lineitem using IDX_LINEITEM_PART_SUPP (L_PARTKEY=part.P_PARTKEY)  (cost=29.92 rows=30) (actual time=11.537..12.267 rows=30 loops=14558)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 187.026983067s
+
+
+=========================================
+Query: tpch_q20.sql [20/22]
+Timestamp: 2026. 03. 01. (일) 13:06:53 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: supplier.S_NAME  (actual time=613832.818..613833.330 rows=5404 loops=1)\n    -> Stream results  (cost=8063290123.31 rows=80632434538) (actual time=613527.774..613816.432 rows=5404 loops=1)\n        -> Nested loop inner join  (cost=8063290123.31 rows=80632434538) (actual time=613526.409..613812.804 rows=5404 loops=1)\n            -> Nested loop inner join  (cost=31206.18 rows=30927) (actual time=6.581..272.948 rows=12012 loops=1)\n                -> Filter: (nation.N_NAME = 'CANADA')  (cost=3.50 rows=3) (actual time=1.761..2.825 rows=1 loops=1)\n                    -> Table scan on nation  (cost=3.50 rows=25) (actual time=1.754..1.792 rows=25 loops=1)\n                -> Index lookup on supplier using IDX_SUPPLIER_NATIONKEY (S_NATIONKEY=nation.N_NATIONKEY)  (cost=11738.83 rows=12371) (actual time=4.818..268.947 rows=12012 loops=1)\n            -> Single-row index lookup on <subquery2> using <auto_distinct_key> (ps_suppkey=supplier.S_SUPPKEY)  (actual time=0.001..0.001 rows=0 loops=12012)\n                -> Materialize with deduplication  (cost=1846046.72..1846046.72 rows=2607205) (actual time=51.077..51.077 rows=0 loops=12012)\n                    -> Nested loop inner join  (cost=1585326.21 rows=2607205) (actual time=22.222..612796.100 rows=177883 loops=1)\n                        -> Filter: (part.P_NAME like 'forest%')  (cost=661947.18 rows=659962) (actual time=0.037..5537.503 rows=65430 loops=1)\n                            -> Table scan on part  (cost=661947.18 rows=5940252) (actual time=0.033..4810.404 rows=6000000 loops=1)\n                        -> Filter: (partsupp.PS_AVAILQTY > (select #4))  (cost=1.00 rows=4) (actual time=3.910..9.280 rows=3 loops=65430)\n                            -> Index lookup on partsupp using PRIMARY (PS_PARTKEY=part.P_PARTKEY)  (cost=1.00 rows=4) (actual time=0.440..0.444 rows=4 loops=65430)\n                            -> Select #4 (subquery in condition; dependent)\n                                -> Aggregate: sum(lineitem.L_QUANTITY)  (actual time=2.201..2.201 rows=1 loops=261720)\n                                    -> Filter: ((lineitem.L_SHIPDATE >= DATE'1994-01-01') and (lineitem.L_SHIPDATE < <cache>((DATE'1994-01-01' + interval '1' year))))  (cost=7.68 rows=2) (actual time=2.082..2.198 rows=1 loops=261720)\n                                        -> Index lookup on lineitem using IDX_LINEITEM_PART_SUPP (L_PARTKEY=partsupp.PS_PARTKEY, L_SUPPKEY=partsupp.PS_SUPPKEY)  (cost=7.68 rows=7) (actual time=2.043..2.193 rows=8 loops=261720)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 613.930835089s
+
+
+=========================================
+Query: tpch_q21.sql [21/22]
+Timestamp: 2026. 03. 01. (일) 13:17:22 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Limit: 100 row(s)  (actual time=350537.377..350537.387 rows=100 loops=1)\n    -> Sort: numwait DESC, supplier.S_NAME, limit input to 100 row(s) per chunk  (actual time=350537.377..350537.383 rows=100 loops=1)\n        -> Table scan on <temporary>  (actual time=0.001..0.374 rows=11957 loops=1)\n            -> Aggregate using temporary table  (actual time=350527.641..350528.476 rows=11957 loops=1)\n                -> Nested loop antijoin  (cost=22394975.46 rows=9163283) (actual time=223.062..350261.303 rows=118662 loops=1)\n                    -> Nested loop semijoin  (cost=20864936.08 rows=2238392) (actual time=34.575..342113.201 rows=2112379 loops=1)\n                        -> Nested loop inner join  (cost=20002514.75 rows=607545) (actual time=34.567..334055.199 rows=2192508 loops=1)\n                            -> Nested loop inner join  (cost=17876106.04 rows=6075453) (actual time=4.386..288235.389 rows=54954552 loops=1)\n                                -> Nested loop inner join  (cost=11194501.54 rows=6075453) (actual time=3.033..227958.839 rows=54954552 loops=1)\n                                    -> Filter: (orders.O_ORDERSTATUS = 'F')  (cost=4873742.49 rows=4452751) (actual time=3.003..27251.559 rows=21923040 loops=1)\n                                        -> Table scan on orders  (cost=4873742.49 rows=44527516) (actual time=2.998..23082.261 rows=45000000 loops=1)\n                                    -> Filter: (l1.L_RECEIPTDATE > l1.L_COMMITDATE)  (cost=1.01 rows=1) (actual time=0.008..0.009 rows=3 loops=21923041)\n                                        -> Index lookup on l1 using PRIMARY (L_ORDERKEY=orders.O_ORDERKEY)  (cost=1.01 rows=4) (actual time=0.008..0.009 rows=4 loops=21923041)\n                                -> Single-row index lookup on supplier using PRIMARY (S_SUPPKEY=l1.L_SUPPKEY)  (cost=1.00 rows=1) (actual time=0.001..0.001 rows=1 loops=54954550)\n                            -> Filter: (nation.N_NAME = 'SAUDI ARABIA')  (cost=0.25 rows=0) (actual time=0.001..0.001 rows=0 loops=54954550)\n                                -> Single-row index lookup on nation using PRIMARY (N_NATIONKEY=supplier.S_NATIONKEY)  (cost=0.25 rows=1) (actual time=0.001..0.001 rows=1 loops=54954550)\n                        -> Filter: (l2.L_SUPPKEY <> l1.L_SUPPKEY)  (cost=3.72 rows=4) (actual time=0.004..0.004 rows=1 loops=2192508)\n                            -> Index lookup on l2 using PRIMARY (L_ORDERKEY=orders.O_ORDERKEY)  (cost=3.72 rows=4) (actual time=0.003..0.003 rows=1 loops=2192508)\n                    -> Filter: ((l3.L_SUPPKEY <> l1.L_SUPPKEY) and (l3.L_RECEIPTDATE > l3.L_COMMITDATE))  (cost=4.14 rows=4) (actual time=0.004..0.004 rows=1 loops=2112379)\n                        -> Index lookup on l3 using PRIMARY (L_ORDERKEY=orders.O_ORDERKEY)  (cost=4.14 rows=4) (actual time=0.003..0.003 rows=2 loops=2112379)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 350.607977688s
+
+
+=========================================
+Query: tpch_q22.sql [22/22]
+Timestamp: 2026. 03. 01. (일) 13:23:27 KST
+=========================================
+
+[EXPLAIN ANALYZE]
+----------------------------------------
+EXPLAIN
+-> Sort: custsale.cntrycode  (actual time=16877.601..16877.602 rows=7 loops=1)\n    -> Table scan on <temporary>  (actual time=0.001..0.002 rows=7 loops=1)\n        -> Aggregate using temporary table  (actual time=16877.547..16877.548 rows=7 loops=1)\n            -> Nested loop antijoin  (cost=3895016.80 rows=21858672) (actual time=9294.305..16671.814 rows=191406 loops=1)\n                -> Filter: ((substr(customer.C_PHONE,1,2) in ('13','31','23','29','30','18','17')) and (customer.C_ACCTBAL > (select #3)))  (cost=208958.03 rows=1480310) (actual time=9292.494..11800.788 rows=573038 loops=1)\n                    -> Table scan on customer  (cost=208958.03 rows=4441375) (actual time=2.191..1375.366 rows=4500000 loops=1)\n                    -> Select #3 (subquery in condition; run only once)\n                        -> Aggregate: avg(customer.C_ACCTBAL)  (actual time=9290.244..9290.246 rows=1 loops=1)\n                            -> Filter: ((customer.C_ACCTBAL > 0.00) and (substr(customer.C_PHONE,1,2) in ('13','31','23','29','30','18','17')))  (cost=505064.50 rows=1480310) (actual time=0.023..9007.075 rows=1145497 loops=1)\n                                -> Table scan on customer  (cost=505064.50 rows=4441375) (actual time=0.022..7081.964 rows=4500000 loops=1)\n                -> Index lookup on orders using IDX_ORDERS_CUSTKEY (O_CUSTKEY=customer.C_CUSTKEY)  (cost=14.96 rows=15) (actual time=0.008..0.008 rows=1 loops=573038)\n
+----------------------------------------
+Status: SUCCESS
+Execution Time: 16.899869498s
+
+

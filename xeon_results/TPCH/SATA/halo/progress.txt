@@ -1,0 +1,25 @@
+Benchmark Started: 2026. 03. 01. (일) 10:30:02 KST
+[1/22] tpch_q1.sql - ✓ SUCCESS - 373.297532444s
+[2/22] tpch_q2.sql - ✓ SUCCESS - 38.937892692s
+[3/22] tpch_q3.sql - ✓ SUCCESS - 1619.873115902s
+[4/22] tpch_q4.sql - ✓ SUCCESS - 319.133419166s
+[5/22] tpch_q5.sql - ✓ SUCCESS - 396.724577940s
+[6/22] tpch_q6.sql - ✓ SUCCESS - 216.890988946s
+[7/22] tpch_q7.sql - ✓ SUCCESS - 877.502043612s
+[8/22] tpch_q8.sql - ✓ SUCCESS - 385.740919267s
+[9/22] tpch_q9.sql - ✓ SUCCESS - 2000.114677048s
+[10/22] tpch_q10.sql - ✓ SUCCESS - 385.812878080s
+[11/22] tpch_q11.sql - ✓ SUCCESS - 74.753097927s
+[12/22] tpch_q12.sql - ✓ SUCCESS - 259.012725759s
+[13/22] tpch_q13.sql - ✓ SUCCESS - 319.845051950s
+[14/22] tpch_q14.sql - ✓ SUCCESS - 444.217468050s
+[15/22] tpch_q15.sql - ✓ SUCCESS - 830.225142306s
+[16/22] tpch_q16.sql - ✓ SUCCESS - 23.030057142s
+[17/22] tpch_q17.sql - ✓ SUCCESS - 103.341965512s
+[18/22] tpch_q18.sql - ✓ SUCCESS - 279.059961200s
+[19/22] tpch_q19.sql - ✓ SUCCESS - 187.026983067s
+[20/22] tpch_q20.sql - ✓ SUCCESS - 613.930835089s
+[21/22] tpch_q21.sql - ✓ SUCCESS - 350.607977688s
+[22/22] tpch_q22.sql - ✓ SUCCESS - 16.899869498s
+=========================================
+Benchmark Finished: 2026. 03. 01. (일) 13:23:44 KST

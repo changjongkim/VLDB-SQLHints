@@ -202,11 +202,35 @@ The model effectively targets "Mega" queries where SATA latency is most catastro
 
 ---
 
-## 11. Evaluation (Xeon NVMe Benchmark) [WIP]
+## 11. Evaluation (Xeon NVMe Benchmark)
 
-Evaluation on the **Xeon NVMe** environment (iops_ratio=0.5) is currently in progress. 
+Evaluation on the **Xeon NVMe** environment (iops_ratio=0.5) demonstrates how HALO performs when storage I/O is no longer the primary bottleneck.
 
-### 11.1 Join Order Benchmark (JOB) - TBD
+### 11.1 Join Order Benchmark (JOB) Analysis
+
+The JOB workload (113 queries) on NVMe natively runs almost twice as fast as on SATA. However, HALO v4 still manages to drastically reduce the CPU/Logic bottlenecks on the remaining heavy queries, achieving a consistent speedup margin.
+
+#### **Overall Throughput Performance**
+| Metric | Original (Native) | HALO-P (Recommended) | Improvement |
+| :--- | :---: | :---: | :---: |
+| **Total Execution Time** | 2,073.73s | **1,345.50s** | **1.54x Speedup** |
+| **Absolute Time Saved** | - | **728.23s** | **~12.1 Minutes** |
+
+#### **Granular Tier Resolution**
+HALO v4 demonstrates optimal scalability on NVMe, neutralizing CPU/Logic bottlenecks on heavy queries:
+| Workload Tier (Baseline) | Count | Time Saved | Speedup | Rationale |
+| :--- | :---: | :---: | :---: | :--- |
+| **Heavy (> 100s)** | 3 | **+400.8s** | **2.23x** | Drastic reduction of algorithmic/logic overhead (e.g., hash/merge join switches). |
+| **Medium (10s - 100s)** | 46 | **+319.9s** | **1.37x** | Efficient optimization of join structures easing CPU cache pressure. |
+| **Fast (< 10s)** | 64 | +7.6s | 1.05x | Micro-scale queries where native plan is already near-optimal. |
+
+#### **Risk-Benefit Distribution (Justifying HALO-P)**
+| Predicted Risk | Count | Net Time Saved | Strategic Significance |
+| :--- | :---: | :---: | :--- |
+| **GREEN / YELLOW** | 16 | 329.7s | Low-hanging fruit; guaranteed gains. |
+| **ORANGE (High Risk)** | **86** | **+390.4s** | **HALO-P Breakthrough**: Conformal bounds permitted safe execution of high-risk plans to unlock maximum speedup. |
+| **SAFE (NATIVE)** | 11 | 8.1s | Defensive fallbacks successfully prevented regressions. |
+
 ### 11.2 TPC-H Benchmark - TBD
 
 ---
