@@ -93,6 +93,14 @@ A 3-layer MLP with **Batch Normalization** and **Spectral Normalization** (for O
 | **Directional Acc** | 79.0% | **81.6%** | Better understanding of physics. |
 | **Risk Recall ($\delta>0.5$)** | 73.6% | **91.2%** | **Provable Safety Guarantee**. |
 
+<p align="center">
+  <img src="assets/fig1_hw_pair_accuracy.png" alt="Figure 1: Model Accuracy Across HW Pairs" width="800">
+</p>
+
+<p align="center">
+  <img src="assets/fig3_feature_importance.png" alt="Figure 3: Feature Importance" width="700">
+</p>
+
 ---
 
 ## 7. Stage 4 — Conformal Safety Gating
@@ -105,6 +113,10 @@ $$ \text{Reject Hint} \iff \underbrace{\mu + \lambda_{cal} \cdot \sigma}_{\text{
 
 - **$\lambda_{cal}$**: Nonconformity score ensuring **90% coverage guarantee**.
 - **Result**: Naturally favors **BKA (hint02)** over volatile **NL joins (hint01)** on SATA, as BKA exhibit tighter confidence intervals.
+
+<p align="center">
+  <img src="assets/fig2_conformal_calibration.png" alt="Figure 2: Conformal Calibration" width="800">
+</p>
 
 ---
 
@@ -138,6 +150,11 @@ python3 generate_hinted_queries.py
 - **Summary**: `halo/results/hinted_queries_xeon_v4/recommendation_summary.json`
 
 ---
+
+<p align="center">
+  <img src="assets/fig4_e2e_speedup.png" alt="Figure 4: End-to-End Speedup" width="800">
+</p>
+
 ---
 
 ## 10. Evaluation (Xeon SATA Benchmark Deep-Dive)
@@ -168,6 +185,14 @@ HALO v4 demonstrates a "Strategic Focus" on critical maintenance:
 | **GREEN / YELLOW** | 5 | 298.3s | Low-hanging fruit; guaranteed gains. |
 | **ORANGE (High Risk)** | **91** | **+1,059.4s** | **HALO-P Breakthrough**: 76% of total gains came from executing bounded risks. |
 | **SAFE (NATIVE)** | 17 | 25.6s | Successful defensive fallbacks to native execution. |
+
+<p align="center">
+  <img src="assets/fig5_risk_tier_distribution.png" alt="Figure 5: Risk Tier Distribution" width="800">
+</p>
+
+<p align="center">
+  <img src="assets/fig8_query_waterfall.png" alt="Figure 8: Top Query Waterfall" width="800">
+</p>
 
 ---
 
@@ -259,6 +284,10 @@ On NVMe, the efficiency of joins and index access becomes the dominant factor. H
 #### **Discussion: Hardware-Aware Strategy Shift**
 In the **SATA** environment, TPC-H showed a modest 6% improvement because the high I/O latency forced HALO to use conservative `SAFE` fallbacks. 
 In the **NVMe** environment, however, the **conformal risk boundaries expanded**. HALO correctly calculated that the performance margin of algorithmic joins (Hash Join, Fixed Order) significantly outweighed the disk latency risk, shifting from 10% hinted queries (SATA) to **72% hinted queries (NVMe)** with a resulting 23% net gain.
+
+<p align="center">
+  <img src="assets/fig6_iops_sensitivity.png" alt="Figure 6: IOPS Sensitivity" width="700">
+</p>
 
 ## 11.3 Case Study: CP-Aware OOD Detection on Unseen Workload (STATS)
 
