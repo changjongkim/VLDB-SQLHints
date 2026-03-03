@@ -217,9 +217,9 @@ A critical requirement for HALO in production is **model transparency**: operato
 </p>
 
 > 📌 **Interpretation**: This 4-panel evaluation proves the superiority of the Probabilistic $\sigma$-MLP in Zero-Shot Hardware Transfer.
-> - **(a) Transfer Accuracy**: The red dots (High Confidence predictions where the model asserts low $\sigma$) tightly bound the perfect diagonal. It proves the model can accurately predict execution time changes solely from hardware specs when it is certain.
+> - **(a) Transfer Accuracy**: The full dataset is plotted as a blue density map, showing overall robust prediction. The **red dots** (High Confidence predictions where the model asserts low $\sigma$) tightly bound the perfect diagonal. It proves the model can accurately predict execution time changes solely from hardware specs when it asserts certainty.
 > - **(b) Residuals Distribution**: The prediction errors (residuals) are heavily peaked at $0$ (RMSE=1.022), demonstrating that the vast majority of operator regressions and speedups are captured with negligible error.
-> - **(c) Is Uncertainty a Valid Sensor?**: This represents a critical proof for the model's safety guarantee. The Measured Mean Absolute Error (MAE) scales almost perfectly with the Predicted $\sigma$ (Ideal Sensor line). This validates that the model's self-reported uncertainty ($\sigma$) is a **perfect proxy for actual error**, proving that HALO can mathematically trust $\sigma$ for safety-gating (only accepting recommendations where $\sigma$ is low).
+> - **(c) Predicted Uncertainty vs Actual Error**: This represents a critical proof for the model's safety guarantee. The Measured Avg Error (MAE) scales almost perfectly with the Predicted $\sigma$ (Perfect Correlation line). This validates that the model's self-reported uncertainty ($\sigma$) is a **perfect proxy for actual error**, proving that HALO can mathematically trust $\sigma$ for safety-gating (only accepting recommendations where $\sigma$ is low).
 > - **(d) Direction Accuracy**: Even on completely unseen target hardware pairs (LOGO-CV), the model achieves high directional accuracy (e.g., A_NVMe $\rightarrow$ B_NVMe at 84.1%). It successfully learns and generalizes the physical consequences of CPU/IO upgrades and downgrades without executing a single query on the target.
 
 ### σ-Model Feature Importance

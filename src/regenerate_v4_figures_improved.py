@@ -58,22 +58,32 @@ def fig_sigma_evaluation(df):
     fig, axes = plt.subplots(2, 2, figsize=(16, 14))
     fig.suptitle('HALO v4: Zero-Shot Hardware Transfer Evaluation', fontsize=22, fontweight='bold', y=0.98)
 
-    # (a) Hexbin Density Plot to avoid clutter
+    # (a) Hexbin Density Plot to avoid clutter - Fixed visibility
     ax = axes[0, 0]
     r_all = np.corrcoef(y, mu)[0, 1]
-    hb = ax.hexbin(y, mu, gridsize=50, cmap='Blues', mincnt=1, alpha=0.3)
+    
+    # Plot standard points as small faint blue dots
+    ax.scatter(y, mu, color='royalblue', s=1, alpha=0.1, zorder=1)
+    # Highlight high-density areas with hexbin
+    hb = ax.hexbin(y, mu, gridsize=60, cmap='Blues', mincnt=5, zorder=2)
     
     # Highlight high-confidence points (top 20%)
     q_low = np.percentile(sigma, 20)
     mask = sigma <= q_low
     r_high = np.corrcoef(y[mask], mu[mask])[0, 1]
-    ax.scatter(y[mask], mu[mask], color='red', s=4, alpha=0.4, label=f'High Confidence (r={r_high:.3f})')
     
-    ax.plot([-5, 5], [-5, 5], 'r--', alpha=0.8, label='Perfect')
+    # Plot high confidence with bright red, high zorder
+    ax.scatter(y[mask], mu[mask], color='#d32f2f', s=8, alpha=0.7, zorder=3, 
+               label=f'High Confidence (r={r_high:.3f})')
+    
+    ax.plot([-5, 5], [-5, 5], 'r--', alpha=0.9, zorder=4, label='Perfect')
     ax.set_title(f'(a) Transfer Accuracy (All r={r_all:.3f})', fontweight='bold')
     ax.set_xlabel('Actual δ(time)'); ax.set_ylabel('Predicted μ')
-    ax.legend(loc='upper left')
-    plt.colorbar(hb, ax=ax, label='Density')
+    
+    # Force legend order
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(handles, labels, loc='upper left')
+    plt.colorbar(hb, ax=ax, label='Density (Count >= 5)')
 
     # (b) Residuals
     ax = axes[0, 1]
@@ -83,7 +93,7 @@ def fig_sigma_evaluation(df):
     ax.set_title(f'(b) Residuals Distribution (RMSE={rmse:.3f})', fontweight='bold')
     ax.set_xlabel('Actual - Predicted')
 
-    # (c) Calibration (Crucial for Reviewers)
+    # (c) Calibration (Crucial for Reviewers) - Clarified labels
     ax = axes[1, 0]
     df_s = df.sort_values('predicted_sigma')
     df_s['bin'] = pd.qcut(df_s['predicted_sigma'], 12, duplicates='drop')
@@ -91,10 +101,11 @@ def fig_sigma_evaluation(df):
         'predicted_sigma': 'mean',
         'delta_time': lambda x: np.mean(np.abs(x - df.loc[x.index, 'predicted_mu']))
     })
-    ax.plot(cal['predicted_sigma'], cal['delta_time'], 'ro-', lw=3, markersize=10, label='Measured Error')
-    ax.plot([0, 1.2], [0, 1.2], 'k--', alpha=0.5, label='Ideal (Sensor)')
-    ax.set_title('(c) Is Uncertainty a Valid Sensor?', fontweight='bold')
-    ax.set_xlabel('Predicted σ (Uncertainty)'); ax.set_ylabel('Mean Absolute Error')
+    ax.plot(cal['predicted_sigma'], cal['delta_time'], 'ro-', lw=3, markersize=10, 
+            label='Measured Avg Error (MAE)')
+    ax.plot([0, 1.2], [0, 1.2], 'k--', alpha=0.5, label='Perfect Correlation')
+    ax.set_title('(c) Predicted Uncertainty vs Actual Error', fontweight='bold')
+    ax.set_xlabel('Predicted σ (Uncertainty Bound)'); ax.set_ylabel('Measured Absolute Error')
     ax.legend()
 
     # (d) Direction Accuracy by HW Pair
