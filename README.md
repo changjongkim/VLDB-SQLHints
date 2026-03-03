@@ -127,7 +127,7 @@ A critical requirement for HALO in production is **model transparency**: operato
 ### σ-Model Performance Evaluation
 
 <p align="center">
-  <img src="assets/fig_sigma_evaluation.png" alt="σ-Model v3 Evaluation: Predicted vs Actual" width="900">
+  <img src="assets/fig_sigma_evaluation.png" alt="σ-Model v4 Evaluation: 4-Panel LOGO-CV (R²=-0.089, r=0.393, DirAcc=72.5%)" width="900">
 </p>
 
 ### σ-Model Feature Importance
@@ -148,7 +148,7 @@ A critical requirement for HALO in production is **model transparency**: operato
   <img src="assets/fig_explain_accuracy_operator.png" alt="High-Risk Detection Metrics by Operator Type" width="800">
 </p>
 
-> 📌 **Interpretation**: TABLE_SCAN and FILTER operators achieve ≥0.85 Precision, confirming these I/O-heavy operators are well-modeled. NL_INNER_JOIN shows moderate precision (0.55) with lower recall, reflecting its inherent plan volatility.
+> 📌 **Interpretation**: SORT and AGGREGATE operators achieve the highest F1 scores (≥0.85), reflecting predictable resource profiles. NL_INNER_JOIN dominates total sample count (41,906 samples, 22,965 risky) with moderate recall, reflecting its inherent plan volatility across hardware transitions. NL_SEMIJOIN and NL_ANTIJOIN show the highest risk rates (>60%), confirming JOIN operators are the primary driver of cross-hardware regression.
 
 ### Classification Accuracy by Environment Pair
 
@@ -156,7 +156,7 @@ A critical requirement for HALO in production is **model transparency**: operato
   <img src="assets/fig_explain_accuracy_env.png" alt="Classification Metrics by Hardware Environment Pair" width="800">
 </p>
 
-> 📌 **Interpretation**: Cross-CPU transfers (A→B) consistently achieve 65–75% accuracy, while same-CPU storage transfers (A_NVMe→A_SATA, B_NVMe→B_SATA) show lower metrics due to the subtlety of storage-only degradation.
+> 📌 **Interpretation**: A_NVMe→B_NVMe achieves the best direction accuracy (84.1%), while A_NVMe→B_SATA shows the hardest case (58.7%) where both CPU and storage change simultaneously. Same-server storage transitions (A_NVMe→A_SATA: 71.1%, B_NVMe→B_SATA: 73.6%) show moderate difficulty. Mean σ strongly correlates with RMSE — the model correctly assigns higher uncertainty to harder transitions (A_NVMe→B_SATA: σ=1.073).
 
 ### HALO-R Decision Logic Visualization
 
@@ -164,7 +164,7 @@ A critical requirement for HALO in production is **model transparency**: operato
   <img src="assets/fig_explain_decision_logic.png" alt="HALO-R Decision Logic: σ Threshold for RECOMMEND vs NATIVE" width="800">
 </p>
 
-> 📌 **Key Insight**: All RECOMMEND decisions cluster at σ ≈ 0 (left of the threshold), while NATIVE decisions span the full σ range. This confirms the model applies a **strict safety-first policy**: only recommending hints when uncertainty is near-zero.
+> 📌 **Key Insight**: With calibrated λ=1.957, RECOMMEND decisions (2,884 safe vs 277 regress) concentrate in the low-σ, low-μ region. Safety rate monotonically decreases from 100% (σ<0.24) to 83% (σ>0.87), confirming σ is a reliable safety signal. The model correctly routes 45,149 NATIVE decisions to fallback, achieving a conservative safety-first policy.
 
 ### Safety Fallback Trigger Analysis
 
@@ -172,7 +172,7 @@ A critical requirement for HALO in production is **model transparency**: operato
   <img src="assets/fig_explain_risky_operators.png" alt="Operators Most Frequently Triggering Safety Fallbacks" width="700">
 </p>
 
-> 📌 **Why NL_INNER_JOIN dominates**: Nested-loop joins are the most hardware-sensitive operator type. Their execution cost is directly proportional to clock speed and cache hierarchy, making them the primary trigger for HALO's safety fallback mechanism during cross-hardware transfer.
+> 📌 **Why NL_INNER_JOIN dominates**: With 41,906 total samples and a fallback rate near 95%, nested-loop joins are the most hardware-sensitive operator. NL_SEMIJOIN (62.2% actual risk) and NL_ANTIJOIN (60.6% actual risk) also show extreme sensitivity. In contrast, TEMP_TABLE_SCAN and SORT have low actual risk rates (<11%) but high fallback rates, showing the model errs on the side of caution for these operators.
 
 ### Overall Confusion Matrix
 
