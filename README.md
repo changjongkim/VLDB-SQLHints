@@ -432,22 +432,6 @@ The 100% NATIVE fallback for the 146 STATS queries was a deliberate mathematical
 
 ---
 
-## 11.4 Robustness on Zero-Shot Target Hardware: HALO vs. Bao-like Baseline
-
-The fundamental danger of learning-based query optimizers (like Bao or Balsa) is their tendency to overfit to the hardware they were trained on. When evaluated on a **Zero-Shot Target Environment** (a hardware pair completely unseen during training), traditional optimizers greedily select hints based on purely mean-predicted performance ($\mu$), ignoring real-world uncertainty.
-
-As evidenced below, this "exploratory" behavior leads to catastrophic real-world results when transferring across different hardware specifications.
-
-<p align="center">
-  <img src="assets/fig_eval_bao_comparison.png" alt="Bao vs HALO Regression Comparison" width="900">
-</p>
-
-> 📌 **Quantitative Proof of Safety (Train → Test Transfer Analysis)**: 
-> 1. **The Inevitability of Broken Transfers (a)**: As shown in the 4x4 transfer matrix, a traditional greedy policy (Bao-like) completely breaks down when moving from a Training Environment to an Unseen Test Environment. It wrongly assumes high confidence, resulting in catastrophic **Regression Rates between 68.9% and 88.5%** across all cross-hardware permutations (The Red Zone).
-> 2. **The Power of the Safety Gate (b)**: HALO v4 completely neutralizes this risk. By utilizing its conformal uncertainty bound ($\sigma$), HALO recognizes its own ignorance on unfamiliar hardware transitions. When uncertainty is too high, it safely triggers a `NATIVE` fallback, resulting in a strictly guaranteed **0.0% Regression Rate** (The Green Zone) across every single test environment.
-
----
-
 ## 12. Citation
 
 ```text
