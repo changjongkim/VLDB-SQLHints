@@ -181,6 +181,25 @@ A single-pass O(n) bottom-up traversal computes **7 structural features** per op
   <img src="assets/fig3_feature_importance.png" alt="Figure 3: Feature Importance" width="700">
 </p>
 
+### 6.1 Empirical Evidence: HALO-R vs HALO-P Policy Trade-Off
+
+The two policies share the **same trained $\sigma$-MLP model** but differ in their decision threshold — the DBA selects the mode based on operational risk tolerance:
+
+<p align="center">
+  <img src="assets/fig_policy_comparison.png" alt="HALO Policy Comparison: Coverage vs Safety Pareto" width="1000">
+</p>
+
+> 📌 **Interpretation (LOGO-CV = Completely Unseen Hardware)**:
+> 
+> This experiment evaluates both policies under the **hardest possible condition**: Leave-One-Group-Out CV, where the target hardware pair is *entirely excluded* from training. This simulates true zero-shot deployment.
+> 
+> **(a) Pareto Frontier**: As the safety threshold increases (green → red), more queries receive recommendations (Coverage ↑) but safety degrades (Safety ↓). HALO-R operates at the conservative end (★), HALO-P at the moderate point (◆), and a Bao-like greedy policy (✕) at the dangerous extreme.
+> 
+> **(b-c) Per-Pair Breakdown**: On most hardware transitions, HALO-R achieves **100% Safety** — every recommendation it makes is correct. HALO-P recommends ~3× more queries but accepts some risk (~80-87% safety on most pairs).
+> 
+> **Why is Coverage low?** Because LOGO-CV is an *extreme* OOD scenario. **Low coverage is not a weakness — it is the safety guarantee working correctly.** The model recognizes "I have never seen this hardware transition" and honestly refuses to recommend. In real deployment (e.g., Xeon target with A/B training data), partial hardware overlap gives the model enough confidence to achieve high coverage while maintaining safety (see Section 10).
+
+
 ---
 
 ## 6.5 Model Explainability & Diagnostics
