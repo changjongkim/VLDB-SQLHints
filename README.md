@@ -35,14 +35,35 @@ Database optimizer hints (e.g., `/*+ SET_VAR(optimizer_switch=...) */`) can dram
 
 Unlike traditional cost models or plan-based predictors, HALO v4 introduces the following novelties designed for **statistically rigorous cross-hardware transfer learning**:
 
-1. **Zero-Shot Risk Pattern Dictionary (Fixing Data Leakage)**
-   V3 used query-specific history, which "leaked" the answer. V4 uses an **Offline Pattern Dictionary** bucketed by [Operator, Selectivity, Data Size, HW Transition]. This allows HALO to predict risks for **never-before-seen queries** on unseen hardware without identity-based bias.
-2. **Lightweight Bottom-Up Message Passing (Tree Context)**
-   Previous tabular models ignored tree structure. V4 uses a **Post-order Traversal Aggregator** to propagate bottleneck signals (e.g., I/O stalls) from leaf nodes up to parents, capturing pipeline dependencies without GNN overhead.
-3. **Hardware-Operator Vector Alignment**
-   Replaces 26 manual cross-terms with principled **Alignment Scores**. By modeling Operator Demand ($\vec{v}_{op}$) and Hardware Supply ($\vec{v}_{hw}$) in a shared latent space, HALO captures nonlinear interactions via inner-product and cosine similarity.
-4. **Probabilistic MLP with Conformal Prediction**
-   Replaces heuristic RF ensembles with a **Neural Network outputting Gaussian parameters (μ, σ)**. Combined with **Conformal Prediction**, HALO provides a **Provable Safety Guarantee**: catching 90%+ of regressions with mathematical coverage bounds.
+1. **Zero-Shot Risk Pattern Dictionary (Eliminating Data Leakage)**
+   v3 relied on query-specific history features (`has_worst_case`, `worst_regression_ratio`), which leaked target-environment answers into training. v4 replaces these with an **Offline Pattern Dictionary** keyed by physical operator profile: `(op_type, selectivity_bin, data_size_bin, hw_transition_type)`. This dictionary is compiled once from training data (`RiskPatternDictionary.compile_from_training_data()`) and provides 3 zero-shot features: `pattern_risk_prob`, `pattern_expected_penalty`, `pattern_confidence`. Any new query on any unseen hardware can be mapped to its nearest bucket — no query ID is ever stored or looked up.
+
+2. **Lightweight Bottom-Up Message Passing (Tree Context, O(n) Single-Pass)**
+   Flat tabular models ignore the execution plan tree structure. v4 implements a **Post-order Traversal Aggregator** (`propagate_tree_features()` in `tree_propagation.py`) that computes 7 structural context features per operator in a single O(n) pass:
+   - `child_max_io_bottleneck`: Worst I/O risk score in the descendant subtree
+   - `subtree_cumulative_cost`, `subtree_total_work`: Aggregated branch cost signals
+   - `subtree_max_depth`: Depth of deepest leaf below the operator
+   - `is_pipeline_breaker`: Flags blocking operators (SORT, HASH_JOIN, MATERIALIZE) that must consume all child output
+   - `child_selectivity_risk`: Maximum cardinality estimation error (Q-error) in subtree
+   - `self_io_risk`: Per-operator I/O risk score combining scan type, data volume, and access pattern
+
+3. **Hardware-Operator Vector Alignment (Replacing 26 Manual Cross-Terms)**
+   Instead of manually specifying interactions like `scan × iops` or `join × cpu_clock`, v4 constructs two matched vectors:
+   - **Operator Demand Vector** $\vec{v}_{op}$ (13-dim): Encodes I/O, memory, CPU, and data volume demand from operator attributes
+   - **Hardware Supply Vector** $\vec{v}_{hw}$ (13-dim): Encodes the resource supply change (ratio) along matching dimensions
+   
+   Three principled interaction features are computed (`compute_vector_alignment_features()`):
+   - `dot_product_alignment`: Inner product measuring cumulative demand-supply pressure
+   - `cosine_alignment`: Cosine similarity measuring directional match between demand and supply change
+   - `demand_supply_mismatch`: L2 norm of demand weighted by hardware downgrade magnitude (large when operator demands what hardware lacks)
+
+4. **Probabilistic MLP with Dual Uncertainty + Conformal Safety Bound**
+   Replaces the v3 heuristic dual-head (Regressor + Classifier) with a **single probabilistic neural network** (`HALOProbabilisticMLP`) that outputs Gaussian parameters $(\mu, \log\sigma)$ for each operator's time delta:
+   - **Architecture**: `Input(66) → [Linear(256) → BN → ReLU → Dropout(0.1)] × 3 → Linear(2) → [μ, σ]`
+   - **Loss**: Gaussian NLL with **asymmetric risk weighting (2×)** — penalizes under-prediction of regressions more heavily
+   - **Spectral Normalization**: Applied to the last hidden layer (SNGP-inspired) to constrain Lipschitz constant for OOD detection
+   - **Dual Uncertainty**: Aleatoric (network $\sigma$ output) + Epistemic (MC-Dropout variance over T=30 forward passes)
+   - **Conformal Prediction**: Calibrates $\lambda_{cal}$ on held-out LOGO-CV folds such that $P(\delta_{true} \leq \mu + \lambda \cdot \sigma) \geq 90\%$ (calibrated $\lambda = 2.146$)
 
 ---
 
@@ -50,65 +71,107 @@ Unlike traditional cost models or plan-based predictors, HALO v4 introduces the 
 
 | Previous Work | Primary Goal | Handling of HW Changes | Handling of Safety | Key Difference in HALO v4 |
 | :--- | :--- | :--- | :--- | :--- |
-| **BAO** | Hint steering | Requires retraining/adaptation | Thompson sampling (Online) | **Zero-Shot**: No retraining needed. |
-| **FASTgres** | Contextual hints | Separate models per context | Direct accuracy fit | **Generalization**: Unified model explains *why* it fails. |
-| **Kepler** | PQO Robustness | Implicit robustness | SNGP Uncertainty (Query-level) | **Operator-level Structural Context**: Structural propagation of stalls. |
-| **Eraser** | Regression Mitigation| Generalization focus | Search restriction | **Physical Safety**: Focuses on IOPS/Clock-induced tail risks. |
+| **BAO** | Hint steering | Requires retraining/adaptation | Thompson sampling (Online) | **Zero-Shot**: No retraining needed. HW specs alone drive prediction. |
+| **FASTgres** | Contextual hints | Separate models per context | Direct accuracy fit | **Unified Model**: Single model generalizes across all HW pairs. |
+| **Kepler** | PQO Robustness | Implicit robustness | SNGP Uncertainty (Query-level) | **Operator-level Structural Context**: Tree propagation captures pipeline stalls. |
+| **Eraser** | Regression Mitigation| Generalization focus | Search restriction | **Physical Safety**: Conformal bounds on IOPS/Clock-induced tail risks. |
 
 ---
 
 ## 4. Core Architecture
 
-HALO operates as a 5-stage pipeline:
+HALO operates as a 5-stage pipeline from raw EXPLAIN ANALYZE trees to safe SQL hint files:
 
 ```
-┌─────────────┐    ┌──────────────┐    ┌───────────────┐    ┌────────────────┐    ┌──────────────┐
-│ Stage 1      │    │ Stage 2       │    │ Stage 3        │    │ Stage 4         │    │ Stage 5       │
-│ Tree Parsing │───>│ Structural    │───>│ Probabilistic  │───>│ Conformal       │───>│ SQL           │
-│ & Aligning   │    │ Propagation   │    │ σ MLP Model    │    │ Safety Gating   │    │ Generation    │
-│              │    │               │    │                │    │                │    │               │
-│ Exact Match  │    │ Post-Order    │    │ Gaussian (μ,σ) │    │ δ_upper =      │    │ Hinted .sql   │
-│ + Pattern RD │    │ Aggregate     │    │ MC-Dropout     │    │ μ + λ·σ        │    │ files ready   │
-└─────────────┘    └──────────────┘    └───────────────┘    └────────────────┘    └──────────────┘
+┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
+│  Phase 1          │    │  Phase 2          │    │  Phase 3          │    │  Phase 4          │    │  Phase 5          │
+│  Feature Eng.     │───>│  Tree Propagation │───>│  Vector Alignment │───>│  Probabilistic    │───>│  Policy &         │
+│                   │    │                   │    │  + Risk Dict      │    │  σ-MLP + Conformal│    │  SQL Generation   │
+│                   │    │                   │    │                   │    │                   │    │                   │
+│  66 features:     │    │  Post-order O(n)  │    │  v_op · v_hw      │    │  (μ, log_σ) head  │    │  HALO-R: Safety   │
+│  op/hw/card/work  │    │  7 tree context   │    │  3 alignment +    │    │  MC-Dropout(T=30) │    │  HALO-P: Perf     │
+│  metadata         │    │  features         │    │  3 pattern risk   │    │  Conformal λ=2.15 │    │  → Hinted .sql    │
+└──────────────────┘    └──────────────────┘    └──────────────────┘    └──────────────────┘    └──────────────────┘
 ```
 
 ---
 
+## 5. Feature Engineering Pipeline (Phases 1–3)
 
-## 5. Phase 1 & 2 — Structural Feature Engineering
+### Phase 1: Base Operator & Hardware Features
+Each operator-pair sample (`engineer_features_v4()`) combines:
+- **15 operator type one-hots** + 4 semantic groups (`is_join`, `is_scan`, `is_index_op`, `is_agg_sort`)
+- **6 cardinality features** (log-scale actual/estimated rows, loops, cost)
+- **3 estimation quality** features (Q-error, selectivity, rows_per_loop)
+- **13 hardware ratio features** (IOPS, storage speed, CPU clock/core/thread, L3 cache, RAM, buffer pool ratios + binary downgrade flags)
+- **5 workload metadata** features (table rows, size, indexes, dataset GB, buffer fit)
 
-### Zero-Shot Pattern Dictionary (Phase 1)
-To eliminate data leakage, v4 uses a global risk dictionary. It stores the probability of regression and expected penalty for physical profiles:
-- **Key**: `(op_type, selectivity_bin, data_size_bin, hw_transition_type)`
-- **Benefit**: Even for a new query, we can query the dictionary: "How does a HASH_JOIN with 0.1% selectivity usually behave on an IOPS-downgraded server?"
+### Phase 2: Post-Order Tree Propagation (`tree_propagation.py`)
+A single-pass O(n) bottom-up traversal computes **7 structural features** per operator:
 
-### Post-order Message Passing (Phase 2)
-Captures **Pipeline Stalls** without GNNs:
-1. `child_max_io_bottleneck`: The worst I/O risk in the descendant subtree.
-2. `is_pipeline_breaker`: Flags operators (like HASH_JOIN) that must wait for child scans to finish.
-3. `subtree_cumulative_cost`: Aggregated estimation cost of the branch.
+| Feature | Signal | Why It Matters |
+| :--- | :--- | :--- |
+| `child_max_io_bottleneck` | Max I/O risk in subtree | Detects hidden I/O stalls below this node |
+| `subtree_cumulative_cost` | Total optimizer cost below | Captures branch complexity |
+| `subtree_total_work` | Total actual work below | Captures actual execution pressure |
+| `subtree_max_depth` | Deepest leaf distance | Correlates with pipeline depth |
+| `is_pipeline_breaker` | Blocking op flag | SORT, HASH_JOIN, MATERIALIZE must consume all children |
+| `child_selectivity_risk` | Max Q-error in subtree | Flags unreliable optimizer estimates |
+| `self_io_risk` | Per-operator I/O risk | Combines scan type + data volume + access pattern |
+
+### Phase 3: Vector Alignment + Risk Dictionary
+**Vector Alignment** (`compute_vector_alignment_features()`):
+- Constructs 13-dimensional Operator Demand ($\vec{v}_{op}$) and Hardware Supply ($\vec{v}_{hw}$) vectors with matched dimensions (I/O → IOPS, Memory → RAM, CPU → Clock)
+- Computes `dot_product_alignment`, `cosine_alignment`, `demand_supply_mismatch` (3 features replacing 26 manual cross-terms)
+
+**Risk Pattern Dictionary** (`risk_pattern_dictionary.py`):
+- Keys: `(op_type, selectivity_bin, data_size_bin, hw_transition_type)` — purely physical, no query ID
+- Outputs: `pattern_risk_prob`, `pattern_expected_penalty`, `pattern_confidence` (3 features)
+- HW transition classified as: `storage_downgrade`, `compute_downgrade`, `both_downgrade`, `both_upgrade`, `mixed_transition`, `same_hw`
+
+**Total: 66 engineered features per operator-pair sample.**
 
 ---
 
-## 6. Phase 3 & 4 — Probabilistic Neural Model
+## 6. Probabilistic Model & Decision Policy (Phases 4–5)
 
-### Vector Alignment (Phase 3)
-Instead of 26 manual cross-terms like `scan_x_iops`, v4 computes the **Alignment Score** between the Operator's Demand Vector ($\vec{v}_{op}$) and the Hardware's Supply Delta ($\vec{v}_{hw}$).
-- **Dot Product**: Measures cumulative pressure.
-- **Cosine Similarity**: Measures if the hardware change matches the operator's bottleneck type.
+### Phase 4: Probabilistic σ-MLP (`sigma_model_v4.py`)
 
-### Probabilistic MLP (Phase 4)
-A 3-layer MLP with **Batch Normalization** and **Spectral Normalization** (for OOD detection).
-- **Loss**: Gaussian NLL + Asymmetric Risk Weighting (Penalizes missed regressions 3x more).
-- **Uncertainty**: Aleatoric (Network output) + Epistemic (MC-Dropout variance).
+| Component | Implementation |
+| :--- | :--- |
+| **Architecture** | `Linear(66→256) → BN → ReLU → Dropout(0.1)` × 3 layers `→ [μ_head, log_σ_head]` |
+| **Output** | $\mu$ (predicted $\delta$ time), $\sigma = e^{\log\sigma}$ (aleatoric uncertainty) |
+| **Loss** | Gaussian NLL: $\frac{1}{2}[\log\sigma^2 + (y-\mu)^2/\sigma^2]$ with **2× asymmetric penalty** on under-predicted regressions |
+| **Spectral Norm** | Applied to last hidden `Linear(128→64)` layer (SNGP-inspired Lipschitz constraint for OOD) |
+| **MC-Dropout** | T=30 forward passes with Dropout ON → Total $\sigma = \sqrt{E[\sigma^2_{aleatoric}] + Var[\mu_{epistemic}]}$ |
+| **Conformal Cal.** | Nonconformity score $s_i = (y_i - \mu_i)/\sigma_i$, then $\lambda = Q_{1-\alpha}(s_1,...,s_n)$ with $\alpha=0.10$ |
+| **Training** | LOGO-CV (Leave-One-Group-Out by HW pair), AdamW (lr=1e-3, wd=1e-4), CosineAnnealing, 100 epochs per fold |
+| **Sample Weighting** | Environment-balanced × Risk-weighted (2× for $|\delta|>0.5$, additional 3× for $\delta>0.8$) |
 
-### Performance Comparison: v3 vs. v4
+### Phase 5: HALO Decision Policies (`halo_framework.py`)
 
-| Metric | v3 (Heuristic Baseline) | v4 (Statistically Rigorous) | Academic Significance |
+**HALO-R (Robust / Safety-First)**:
+1. For each candidate hint, diff operators between baseline and hinted plans
+2. Run tree propagation → engineer v4 features → MC-Dropout inference → get $(\mu, \sigma)$ per operator  
+3. Compute conformal upper bound: $\delta_{upper} = \mu + \lambda_{cal} \cdot \sigma$ (90% coverage guarantee)
+4. Flag HIGH_RISK if $\delta_{upper} >$ adaptive threshold per op_type
+5. Compute `expected_gain = source_speedup × exp(-penalty)` where penalty scales with total risk score
+6. If best candidate has HIGH_RISK operators, search for a safer alternative with gain > 1.05
+7. If no safe candidate exists → **NATIVE fallback** (guaranteed zero regression)
+
+**HALO-P (Performance / Aggressive)**:
+- Same pipeline but with **50% lower penalty factor** (0.02 vs 0.04) and **1% gain threshold** (vs 5%)
+- Trusts source-environment gains more aggressively for environments with high hardware alignment
+
+### Performance Comparison: v3 → v4
+
+| Metric | v3 (Heuristic Dual-Head) | v4 (Probabilistic + Conformal) | Significance |
 |---|---|---|---|
-| **R² Score** | 0.513 | **0.275** | **Honest Accuracy**: Leakage removed. |
-| **Directional Acc** | 79.0% | **81.6%** | Better understanding of physics. |
-| **Risk Recall ($\delta>0.5$)** | 73.6% | **91.2%** | **Provable Safety Guarantee**. |
+| **R² Score** | 0.513 | **0.275** | Honest: Data leakage removed, harder LOGO-CV |
+| **Direction Accuracy** | 79.0% | **81.6%** | Improved physical understanding despite no leakage |
+| **Features** | ~85 (with 5 leaked + 26 cross-terms) | **66** (clean, principled) | Compact, zero-shot capable |
+| **Safety Mechanism** | Heuristic threshold | **Conformal Bound** ($\lambda=2.146$) | Finite-sample coverage guarantee |
+| **Uncertainty** | None (point prediction) | **Aleatoric + Epistemic** | Dual uncertainty enables OOD detection |
 
 <p align="center">
   <img src="assets/fig1_hw_pair_accuracy.png" alt="Figure 1: Model Accuracy Across HW Pairs" width="800">
