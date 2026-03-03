@@ -432,6 +432,23 @@ The 100% NATIVE fallback for the 146 STATS queries was a deliberate mathematical
 
 ---
 
+## 11.4 Robustness on Zero-Shot Target Hardware: HALO vs. Bao-like Baseline
+
+The fundamental danger of learning-based query optimizers (like Bao or Balsa) is their tendency to overfit to the hardware they were trained on. When evaluated on a **Zero-Shot Target Environment** (a hardware pair completely unseen during training), traditional optimizers greedily select hints based on purely mean-predicted performance ($\mu$), ignoring real-world uncertainty.
+
+As evidenced below, this "exploratory" behavior leads to catastrophic real-world results when transferring across different hardware specifications.
+
+<p align="center">
+  <img src="assets/fig_eval_bao_comparison.png" alt="Bao vs HALO Regression Comparison" width="900">
+</p>
+
+> 📌 **Quantitative Proof of Safety**: 
+> 1. **The Danger of Greed (a)**: A traditional Bao-like policy creates severe performance disasters on unseen hardware. Without an uncertainty monitor, it assumes its predictions are confident, resulting in **631 query regressions**, with 520 of those queries becoming >50% slower than doing nothing at all.
+> 2. **Truncating the Thick Tail (b)**: Looking at the performance density, the Bao-like policy stretches far to the right into the "Regression Zone" (Red line), producing a catastrophic "thick tail" of slowdowns. 
+> 3. **The Power of the Safety Gate**: HALO v4 utilizes its $\sigma$ predictions via the Conformal Safety Gate to recognize its own ignorance on unfamiliar hardware. By triggering a `NATIVE` fallback when uncertainty is too high, HALO successfully neutralizes the regression risks to **0 incidents**, strictly bounding performance to the safe left side of the distribution.
+
+---
+
 ## 12. Citation
 
 ```text
