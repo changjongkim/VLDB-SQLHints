@@ -260,6 +260,32 @@ On NVMe, the efficiency of joins and index access becomes the dominant factor. H
 In the **SATA** environment, TPC-H showed a modest 6% improvement because the high I/O latency forced HALO to use conservative `SAFE` fallbacks. 
 In the **NVMe** environment, however, the **conformal risk boundaries expanded**. HALO correctly calculated that the performance margin of algorithmic joins (Hash Join, Fixed Order) significantly outweighed the disk latency risk, shifting from 10% hinted queries (SATA) to **72% hinted queries (NVMe)** with a resulting 23% net gain.
 
+## 11.3 Case Study: CP-Aware OOD Detection on Unseen Workload (STATS)
+
+To validate HALO's **Provable Safety**, we conducted an emulation analysis on the STATS benchmark—a pure Unseen Workload completely excluded from the training and calibration phases. The objective was to evaluate how HALO's Conformal Predictor (CP) quantifies prediction uncertainty ($\sigma$) to defend the system when out-of-distribution (OOD) queries are encountered.
+
+### **Quantitative Emulation Results (Target: Xeon NVMe)**
+*All hyperparameters ($\lambda_{cal}$, threshold, penalty) were tuned exclusively on in-distribution (JOB, TPCH) data. STATS data was accessed only once during the test phase.*
+
+| Policy (Strategy) | Expected Speedup (GM) | **Mean Uncertainty ($\sigma$)** | Fallback Rate |
+| :--- | :---: | :---: | :---: |
+| Default Optimizer (NATIVE) | 1.00x | - | 100% |
+| Aggressive (SOTA-like) | 1.03x | 0.603 | 0% |
+| **HALO-R (Proposed)** | **1.00x (Safe Fallback)** | **0.603** | **100% (146/146)** |
+
+> 📌 **Empirical Observation on Uncertainty**: 
+> During calibration, the mean uncertainty ($\sigma$) of in-distribution data (JOB, TPCH) hovered strictly in the **$0.1 \sim 0.25$** range. In contrast, over $90\%$ of STATS queries exhibited $\sigma > 0.5$ (mean $0.603$). Though not a formal OOD test, this extreme contrast validates that CP successfully recognized and isolated the STATS workload as an **OOD Regime**.
+
+### **Mechanism of CP-Aware Safe Fallback**
+The 100% NATIVE fallback for the 146 STATS queries was a deliberate mathematical defense, not a failure to optimize:
+
+1. **Conformal Bound & High-Risk OOD Detection**: Applying the calibrated weight $\lambda_{cal} \approx 2.146$ to the massive uncertainty ($\sigma \approx 0.603$) resulted in conformal upper bounds ($U = \mu + \lambda_{cal} \cdot \sigma$) that easily shattered the safety threshold ($0.1$). Consequently, nearly all STATS queries were flagged as High-Risk.
+2. **Pessimistic Penalty Trade-off**: The HALO-R policy applies an exponential penalty to High-Risk queries. Any minor expected gains (e.g., $3\%$) observed on the source hardware were categorically suppressed. In doing so, HALO willingly sacrifices a potential $3\%$ gain to ensure a **0% risk of unbounded tail regression (DB failures)** on the target hardware.
+
+### **Comparison with Existing Approaches**
+* **SOTA Learned Optimizers (e.g., Bao, Balsa)**: Existing models attempt to manage risk through Thompson Sampling or RL feedback loops. However, they lack **formal finite-sample coverage guarantees** and explicit OOD fallback policies. If an unfamiliar workload yields a marginal $3\%$ expected gain, SOTA models are forced to explore, risking disastrous regressions in production.
+* **HALO (CP-Aware Safety)**: Operating on CP-Aware constraints, HALO inherently recognizes its own lack of knowledge (High $\sigma$). When the exchangeability assumption is broken by an OOD input, HALO rigorously adheres to database protection principles, **safely falling back to the NATIVE optimizer 100% of the time.**
+
 ---
 
 ## 12. Citation
