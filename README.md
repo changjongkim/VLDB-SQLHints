@@ -13,6 +13,22 @@ Database optimizer hints (e.g., `/*+ SET_VAR(optimizer_switch=...) */`) can dram
 
 **HALO solves this** by predicting, at the **individual operator level**, whether a hint will remain safe when transferred from one hardware environment to another — before ever executing it on the target.
 
+### The Hint Portability Problem (HPP)
+
+<p align="center">
+  <img src="assets/fig_motivation_hpp.png" alt="Hint Portability Problem: 23.7% of hints lose their effect across environments" width="900">
+</p>
+
+> 📌 **Key Finding**: 23.7% of hint-query pairs lose their optimization effect when transferred across hardware environments. The scatter plot (right) shows how speedup achieved in Environment 1 often fails to transfer to Environment 2.
+
+### CPU Architecture Sensitivity
+
+<p align="center">
+  <img src="assets/fig_motivation_cpu_sensitivity.png" alt="CPU Architecture Sensitivity: Operator-level performance variation" width="800">
+</p>
+
+> 📌 **Operator-Level Variance**: NL_INNER_JOIN, HASH_JOIN, TABLE_SCAN, and INDEX_LOOKUP show extreme log-ratio spreads (±15x) across Server (EPYC) vs Desktop (i9), proving that hint safety cannot be assumed portable.
+
 ---
 
 ## 2. Novelty & Key Contributions (v4 Evolution)
@@ -58,6 +74,7 @@ HALO operates as a 5-stage pipeline:
 
 ---
 
+
 ## 5. Phase 1 & 2 — Structural Feature Engineering
 
 ### Zero-Shot Pattern Dictionary (Phase 1)
@@ -99,6 +116,68 @@ A 3-layer MLP with **Batch Normalization** and **Spectral Normalization** (for O
 
 <p align="center">
   <img src="assets/fig3_feature_importance.png" alt="Figure 3: Feature Importance" width="700">
+</p>
+
+---
+
+## 6.5 Model Explainability & Diagnostics
+
+A critical requirement for HALO in production is **model transparency**: operators and DBAs must understand *why* the model makes each recommendation. This section presents diagnostic evidence across multiple dimensions.
+
+### σ-Model Performance Evaluation
+
+<p align="center">
+  <img src="assets/fig_sigma_evaluation.png" alt="σ-Model v3 Evaluation: Predicted vs Actual" width="900">
+</p>
+
+### σ-Model Feature Importance
+
+<p align="center">
+  <img src="assets/fig_sigma_feature_importance.png" alt="σ Feature Importance: What drives uncertainty estimation" width="800">
+</p>
+
+### σ Density vs Accuracy
+
+<p align="center">
+  <img src="assets/fig_sigma_density.png" alt="σ Density-Accuracy Relationship" width="900">
+</p>
+
+### High-Risk Detection by Operator Type
+
+<p align="center">
+  <img src="assets/fig_explain_accuracy_operator.png" alt="High-Risk Detection Metrics by Operator Type" width="800">
+</p>
+
+> 📌 **Interpretation**: TABLE_SCAN and FILTER operators achieve ≥0.85 Precision, confirming these I/O-heavy operators are well-modeled. NL_INNER_JOIN shows moderate precision (0.55) with lower recall, reflecting its inherent plan volatility.
+
+### Classification Accuracy by Environment Pair
+
+<p align="center">
+  <img src="assets/fig_explain_accuracy_env.png" alt="Classification Metrics by Hardware Environment Pair" width="800">
+</p>
+
+> 📌 **Interpretation**: Cross-CPU transfers (A→B) consistently achieve 65–75% accuracy, while same-CPU storage transfers (A_NVMe→A_SATA, B_NVMe→B_SATA) show lower metrics due to the subtlety of storage-only degradation.
+
+### HALO-R Decision Logic Visualization
+
+<p align="center">
+  <img src="assets/fig_explain_decision_logic.png" alt="HALO-R Decision Logic: σ Threshold for RECOMMEND vs NATIVE" width="800">
+</p>
+
+> 📌 **Key Insight**: All RECOMMEND decisions cluster at σ ≈ 0 (left of the threshold), while NATIVE decisions span the full σ range. This confirms the model applies a **strict safety-first policy**: only recommending hints when uncertainty is near-zero.
+
+### Safety Fallback Trigger Analysis
+
+<p align="center">
+  <img src="assets/fig_explain_risky_operators.png" alt="Operators Most Frequently Triggering Safety Fallbacks" width="700">
+</p>
+
+> 📌 **Why NL_INNER_JOIN dominates**: Nested-loop joins are the most hardware-sensitive operator type. Their execution cost is directly proportional to clock speed and cache hierarchy, making them the primary trigger for HALO's safety fallback mechanism during cross-hardware transfer.
+
+### Overall Confusion Matrix
+
+<p align="center">
+  <img src="assets/fig_explain_confusion_matrix.png" alt="Overall Confusion Matrix" width="500">
 </p>
 
 ---
@@ -224,6 +303,38 @@ The model effectively targets "Mega" queries where SATA latency is most catastro
 ### 10.3 Statistical & Causal Justification
 - **Conformal Boundary Integrity**: Our empirical results align with the calibrated bound $\lambda_{cal} = 2.146$, ensuring that even 91 `ORANGE` risks were managed within a statistically safe performance envelope.
 - **Hardware-Induced Regression Avoidance**: In late-stage queries like `q2` and `q22`, the model predicted high volatility due to SATA throughput limits and correctly fell back to **NATIVE**, preventing potential 10x regressions seen in traditional cost models.
+
+### 10.4 Cross-Hardware Transfer Evaluation (A/B Environments)
+
+Beyond the Xeon target server, HALO was evaluated on all pairwise hardware transfers between the A (Desktop) and B (Server) environments.
+
+#### Home-Turf Performance (Train = Test Environment)
+
+<p align="center">
+  <img src="assets/fig_eval_home_turf.png" alt="Home-Turf Performance: HALO matches or exceeds BAO-style on all 4 environments" width="900">
+</p>
+
+> 📌 HALO achieves near-optimal speedup (1.25x–1.36x) on home-turf, matching BAO-style while using a **single unified model** instead of per-environment training.
+
+#### Cross-Hardware Transfer Heatmap
+
+<p align="center">
+  <img src="assets/fig_eval_cross_hw_transfer.png" alt="Cross-Hardware Transfer: BAO vs HALO vs Optimal" width="900">
+</p>
+
+> 📌 HALO maintains competitive speedup across all 12 cross-environment pairs while **reducing regression count by 50%** compared to BAO-style.
+
+#### Regression Comparison (BAO vs HALO)
+
+<p align="center">
+  <img src="assets/fig_eval_regressions.png" alt="Cross-Environment Regressions: BAO 18 vs HALO 9 (50% reduction)" width="800">
+</p>
+
+#### Complete Evaluation Summary
+
+<p align="center">
+  <img src="assets/fig_eval_grand_summary.png" alt="HALO Scheme: Complete Evaluation Summary" width="900">
+</p>
 
 ---
 
