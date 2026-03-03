@@ -276,6 +276,10 @@ To validate HALO's **Provable Safety**, we conducted an emulation analysis on th
 > 📌 **Empirical Observation on Uncertainty**: 
 > During calibration, the mean uncertainty ($\sigma$) of in-distribution data (JOB, TPCH) hovered strictly in the **$0.1 \sim 0.25$** range. In contrast, over $90\%$ of STATS queries exhibited $\sigma > 0.5$ (mean $0.603$). Though not a formal OOD test, this extreme contrast validates that CP successfully recognized and isolated the STATS workload as an **OOD Regime**.
 
+<p align="center">
+  <img src="assets/ood_sigma_shift.png" alt="OOD Uncertainty Shift" width="800">
+</p>
+
 ### **Mechanism of CP-Aware Safe Fallback**
 The 100% NATIVE fallback for the 146 STATS queries was a deliberate mathematical defense, not a failure to optimize:
 
