@@ -553,7 +553,68 @@ A common criticism of learned optimizers (especially GNN/Tree-LSTM based) is the
 ---
 
 
-## 12. Citation
+
+---
+
+## 12. Cloud SQL 실측 결과 (GCP Cloud SQL)
+
+GCP Cloud SQL (MySQL 8.0) 환경에서 **HALO v4**의 성능 개선 효과를 실측한 결과입니다. 특히 클라우드 네이티브 기능인 **Data Cache(로컬 SSD 활용)**와의 상호 작용 및 힌트 최적화의 효과를 분석했습니다.
+
+### 12.1 Cloud 실험 환경 구성
+
+| 항목 | 상세 사양 |
+| :--- | :--- |
+| **Instance Type** | GCP Cloud SQL for MySQL (Custom) |
+| **Compute** | 8 vCPU, 64 GB RAM |
+| **Storage** | 100 GB Persistent Disk |
+| **Data Cache** | **활성 (Local SSD 기반 100k IOPS 예상)** |
+| **Database** | MySQL 8.0.36 |
+| **Workload** | JOB (Join Order Benchmark) - 113 Queries |
+
+---
+
+### 12.2 실험 결과 (DataCache Enabled)
+
+Data Cache가 활성화된 상태에서의 베이스라인 성능입니다. 하드웨어 가속이 적용된 상태를 기준으로 합니다.
+
+| Metric | Baseline (DataCache ON) | 비고 |
+| :--- | :---: | :--- |
+| **Total Execution Time** | **798.30s** | 하드웨어 로컬 SSD 캐싱 효과 적용 |
+| **JOB Completion** | 113/113 | 전 쿼리 성공 |
+
+---
+
+### 12.3 실험 결과 2 (DataCache Disabled & HALO Hint 효과)
+
+하드웨어 캐시(DataCache)가 없는 환경에서 **HALO 힌트**만으로 얼마만큼의 성능을 복구하거나 개선할 수 있는지 분석했습니다.
+
+| 분석 지표 | Baseline (No Cache) | **HALO Hint (No Cache)** | **개선 효과** |
+| :--- | :---: | :---: | :---: |
+| **전체 실행 시간** | 993.47s | **808.61s** | **1.23x Speedup** |
+| **시간 단축 (Total)** | - | **184.86s 감소** | **18.6% 개선** |
+
+> 📌 **핵심 발견**: HALO v4의 힌트 최적화만으로도 **하드웨어 캐시(DataCache)를 적용한 성능(798s)에 근접하는 수치(808s)**를 달성했습니다. 이는 소프트웨어 레벨의 쿼리 최적화가 클라우드 비용이 발생하는 고성능 스토리지 옵션을 일부 대체하거나 상호 보완할 수 있음을 입증합니다.
+
+#### **HALO 힌트 주요 개선 쿼리 (JOB)**
+
+| Query | Baseline (NoCache) | HALO Hint (NoCache) | Speedup |
+| :--- | :---: | :---: | :---: |
+| **2a.sql** | 9.69s | 3.94s | **2.46x** |
+| **3a.sql** | 6.54s | 2.87s | **2.28x** |
+| **3c.sql** | 9.76s | 5.03s | **1.94x** |
+| **6f.sql** | 51.76s | 27.04s | **1.91x** |
+| **2b.sql** | 7.06s | 3.87s | **1.83x** |
+
+---
+
+### 12.4 TPC-H Benchmark 분석 (SF30)
+
+- **상태**: 진행 중 (TBD)
+- **목적**: 대용량 스캔 및 집계 쿼리에서의 DataCache와 HALO 힌트 시너지 확인
+
+---
+
+## 13. Citation
 
 ```text
 HALO v4: Safe-by-Design Learned Optimizer with Probabilistic Generalization 
